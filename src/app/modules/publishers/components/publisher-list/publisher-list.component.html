@@ -1,0 +1,14 @@
+<mat-accordion [multi]="true">
+  <mat-expansion-panel *ngFor="let publisher of publishers$ | async">
+    <mat-expansion-panel-header>
+      {{publisher.name}} - Campaigns Count({{publisher.campaigns.length}})
+    </mat-expansion-panel-header>
+    <p>Phone: {{publisher.phone}}</p>
+    <p>Email: {{publisher.email}}</p>
+    <p>Address: {{publisher.address}}</p>
+    <mat-action-row>
+      <button mat-button color="primary">EDIT</button>
+      <button mat-button color="warn" (click)="onDelete(publisher._id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,11 @@
+.nav-btn {
+  box-shadow: none !important;
+}
+
+.nav-btn:hover {
+  background: #4052cd;
+}
+
+mat-icon:hover {
+  cursor: pointer;
+}

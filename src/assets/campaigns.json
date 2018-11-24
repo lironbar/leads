@@ -1,0 +1,34 @@
+[
+  {
+    "_id": 1,
+    "name": "Harel - Test 1",
+    "companyName": "Harel",
+    "phone": "03-9519999",
+    "email": "harel@gmail.com",
+    "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+  },
+  {
+    "_id": 2,
+    "name": "Harel - Test 2",
+    "companyName": "Harel",
+    "phone": "03-9519999",
+    "email": "harel@gmail.com",
+    "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+  },
+  {
+    "_id": 3,
+    "name": "Harel - Test 3",
+    "companyName": "Harel",
+    "phone": "03-9519999",
+    "email": "harel@gmail.com",
+    "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+  },
+  {
+    "_id": 4,
+    "name": "Harel - Test 4",
+    "companyName": "Harel",
+    "phone": "03-9519999",
+    "email": "harel@gmail.com",
+    "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+  }
+]

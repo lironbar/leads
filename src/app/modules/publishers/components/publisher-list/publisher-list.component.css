@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  margin-top: 20px;
+}
+
+/*mat-grid-tile {*/
+  /*background: black;*/
+/*}*/
+
+mat-grid-tile img{
+  max-width:100%;
+  max-height:100%;
+}
