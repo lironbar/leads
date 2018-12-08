@@ -59,6 +59,24 @@ module.exports.findOne = (req, res, next) => {
     });
 };
 
+module.exports.findOneCampaigns = (req, res, next) => {
+    Publisher.findOne({ _id: req.params.id })
+        .populate('campaigns')
+        .exec((findError, foundDoc) => {
+            if (findError) {
+                console.warn('publisher.findPublisherCampaigns', findError);
+                switch (findError.code) {
+                    default:
+                        res.status(500);
+                        return res.send('Something went wrong!');
+                }
+            }
+            res.status(200);
+            res.json(foundDoc.campaigns);
+            next();
+        });
+};
+
 module.exports.update = (req, res, next) => {
     Publisher.updateOne({ _id: req.params.id }, req.body, (updateError) => {
         if (updateError) {

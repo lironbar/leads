@@ -15,10 +15,16 @@ const PublisherSchema = new Schema({
     contact: { type: String },
     // private-held-company id
     phc: { type: String, required: true },
-    // list of campaigns associated with the publisher
-    campaigns: [{ type: Schema.Types.ObjectId, ref: 'campaign' }],
     updated: { type: Number, default: Date.now, select: false }
 });
+
+// campaigns associated with the publisher
+PublisherSchema.virtual('campaigns', {
+    ref: 'campaign',
+    localField: '_id',
+    foreignField: 'publisher',
+    justOne: false
+})
 
 PublisherSchema.post('remove', { document: true }, (removedDoc) => {
     // remove campaigns associated with the publisher

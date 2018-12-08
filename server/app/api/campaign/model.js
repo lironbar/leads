@@ -34,11 +34,12 @@ const CampaignSchema = new Schema({
     demands: { type: [String] },
     // a list of tips for the affiliates
     marketingStrategies: { type: [String] },
+    // the publisher who owns this campaign
+    publisher: { type: Schema.Types.ObjectId, required: true },
     // affiliates providing leads for the campaign
     affiliates: { type: [Schema.Types.ObjectId], ref: 'affiliate' },
     // api to use when sending leads for this campaign
     interface: { type: Schema.Types.ObjectId, ref: 'interface' },
-    publisher: { type: Schema.Types.ObjectId, ref: 'publisher' },
     updated: { type: Number, default: Date.now, select: false }
 });
 
