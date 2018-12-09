@@ -32,7 +32,7 @@ PublisherSchema.virtual('campaigns', {
 
 PublisherSchema.post('remove', { document: true }, (removedDoc) => {
     // remove campaigns associated with the publisher
-    Campaign.deleteMany({ publisher: removedDoc._id }, (deleteError) => {
+    Campaign.deleteMany({ publisherId: removedDoc._id }, (deleteError) => {
         if (deleteError) {
             console.error('campaign.deleteMany', deleteError);
         }
