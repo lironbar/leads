@@ -22,7 +22,7 @@ const PublisherSchema = new Schema({
 PublisherSchema.virtual('campaigns', {
     ref: 'campaign',
     localField: '_id',
-    foreignField: 'publisherId',
+    foreignField: 'publisher',
     justOne: false
 })
 
