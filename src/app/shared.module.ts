@@ -1,60 +1,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import { CdkTableModule } from '@angular/cdk/table';
-import { FormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {CdkTableModule} from '@angular/cdk/table';
+import {FormsModule} from '@angular/forms';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
-import { CampaignListComponent } from './modules/campaigns/components/campaign-list/campaign-list.component';
-import { CampaignCreateButtonComponent } from './modules/campaigns/components/campaign-create-button/campaign-create-button.component';
-import {CreateCampaignDialogComponent } from './modules/campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
+import {CampaignListComponent} from './modules/campaigns/components/campaign-list/campaign-list.component';
+import {CampaignPanelsComponent} from './modules/campaigns/components/campaign-panels/campaign-panels.component';
+import {CampaignCreateButtonComponent} from './modules/campaigns/components/campaign-create-button/campaign-create-button.component';
+import {CreateCampaignDialogComponent} from './modules/campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
 
-import {MatAutocompleteModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatStepperModule,
-  MatDialogModule
-} from '@angular/material';
-import {ConfirmDialogComponent} from './modules/commons/components/dialogs/confirm-dialog/confirm-dialog.component';
-
-@NgModule({
-  declarations: [
-    CampaignListComponent,
-    CampaignCreateButtonComponent,
-    CreateCampaignDialogComponent,
-    ConfirmDialogComponent
-  ],
-  imports: [
-    CommonModule,
-    CdkTableModule,
-    FormsModule,
-    FlexLayoutModule,
-
+import {
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -86,49 +41,98 @@ import {ConfirmDialogComponent} from './modules/commons/components/dialogs/confi
     MatTooltipModule,
     MatStepperModule,
     MatDialogModule
-  ],
-  exports: [
-    CommonModule,
-    CdkTableModule,
-    FormsModule,
-    FlexLayoutModule,
+} from '@angular/material';
+import {ConfirmDialogComponent} from './modules/commons/components/dialogs/confirm-dialog/confirm-dialog.component';
 
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatDatepickerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatStepperModule,
-    CampaignListComponent,
-    CampaignCreateButtonComponent,
-    CreateCampaignDialogComponent
-  ],
-  providers: [],
-  entryComponents: [ConfirmDialogComponent, CreateCampaignDialogComponent]
+@NgModule({
+    declarations: [
+        CampaignListComponent,
+        CampaignPanelsComponent,
+        CampaignCreateButtonComponent,
+        CreateCampaignDialogComponent,
+        ConfirmDialogComponent
+    ],
+    imports: [
+        CommonModule,
+        CdkTableModule,
+        FormsModule,
+        FlexLayoutModule,
+
+        MatAutocompleteModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatDatepickerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatRadioModule,
+        MatRippleModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatTableModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatStepperModule,
+        MatDialogModule
+    ],
+    exports: [
+        CommonModule,
+        CdkTableModule,
+        FormsModule,
+        FlexLayoutModule,
+
+        MatAutocompleteModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatDatepickerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatRadioModule,
+        MatRippleModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatTableModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatStepperModule,
+        CampaignListComponent,
+        CampaignPanelsComponent,
+        CampaignCreateButtonComponent,
+        CreateCampaignDialogComponent
+    ],
+    providers: [],
+    entryComponents: [ConfirmDialogComponent, CreateCampaignDialogComponent]
 })
 export class SharedModule {
 }
