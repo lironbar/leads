@@ -8,7 +8,7 @@ const PublisherSchema = new Schema({
     email: {
         type: String,
         validate: (value) => {
-            return new RegExp('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/').test(value);
+            return new RegExp('.+\@.+\..+').test(value);
         }
     },
     address: { type: String },
@@ -16,13 +16,17 @@ const PublisherSchema = new Schema({
     // private-held-company id
     phc: { type: String, required: true },
     updated: { type: Number, default: Date.now, select: false }
-});
+}, {
+        toJSON: {
+            virtuals: true
+        }
+    });
 
 // campaigns associated with the publisher
 PublisherSchema.virtual('campaigns', {
     ref: 'campaign',
     localField: '_id',
-    foreignField: 'publisher',
+    foreignField: 'publisherId',
     justOne: false
 })
 

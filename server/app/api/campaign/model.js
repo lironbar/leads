@@ -9,7 +9,8 @@ const CampaignSchema = new Schema({
     imageUrl: {
         type: String,
         validate: (value) => {
-            return new RegExp('[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)').test(value);
+            return new RegExp('(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})', 'gi')
+                .test(value);
         }
     },
     // price for each lead sent
@@ -27,7 +28,7 @@ const CampaignSchema = new Schema({
     email: {
         type: String,
         validate: (value) => {
-            return new RegExp('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/').test(value);
+            return new RegExp('.+\@.+\..+').test(value);
         }
     },
     // a list of demands for the affiliates
@@ -35,7 +36,7 @@ const CampaignSchema = new Schema({
     // a list of tips for the affiliates
     marketingStrategies: { type: [String] },
     // the publisher who owns this campaign
-    publisher: { type: Schema.Types.ObjectId, required: true },
+    publisherId: { type: Schema.Types.ObjectId, required: true },
     // affiliates providing leads for the campaign
     affiliates: { type: [Schema.Types.ObjectId], ref: 'affiliate' },
     // api to use when sending leads for this campaign

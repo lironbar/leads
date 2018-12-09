@@ -4,9 +4,8 @@ module.exports.save = (req, res, next) => {
     new Affiliate(req.body).save((saveError, savedDoc) => {
         if (saveError) {
             console.warn('affiliate.save', saveError);
-            switch (saveError.code) {
-                // schema validation
-                case 11000:
+            switch (saveError.name) {
+                case 'ValidationError':
                     res.status(400);
                     return res.send(saveError.message);
                 default:
@@ -63,9 +62,8 @@ module.exports.update = (req, res, next) => {
     Affiliate.updateOne({ _id: req.params.id }, req.body, (updateError) => {
         if (updateError) {
             console.warn('affiliate.update', updateError);
-            switch (updateError.code) {
-                // schema validation
-                case 11000:
+            switch (updateError.name) {
+                case 'ValidationError':
                     res.status(400);
                     return res.send(updateError.message);
                 default:

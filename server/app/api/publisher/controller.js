@@ -4,9 +4,8 @@ module.exports.save = (req, res, next) => {
     new Publisher(req.body).save((saveError, savedDoc) => {
         if (saveError) {
             console.warn('publisher.save', saveError);
-            switch (saveError.code) {
-                // schema validation
-                case 11000:
+            switch (saveError.name) {
+                case 'ValidationError':
                     res.status(400);
                     return res.send(saveError.message);
                 default:
@@ -22,10 +21,11 @@ module.exports.save = (req, res, next) => {
 module.exports.find = (req, res, next) => {
     const skip = Number(req.query.skip), limit = (Math.min(req.query.limit, 2000) + 1);
     Publisher.find().skip(skip).limit(limit)
+        .populate('campaigns', '_id')
         .exec((findError, foundDocs) => {
             if (findError) {
                 console.warn('publisher.find', findError);
-                switch (findError.code) {
+                switch (findError.name) {
                     default:
                         res.status(500);
                         return res.send('Something went wrong!');
@@ -44,19 +44,21 @@ module.exports.find = (req, res, next) => {
 };
 
 module.exports.findOne = (req, res, next) => {
-    Publisher.findOne({ _id: req.params.id }, (findOneError, foundDoc) => {
-        if (findOneError) {
-            console.warn('publisher.findOne', findOneError);
-            switch (findOneError.code) {
-                default:
-                    res.status(500);
-                    return res.send('Something went wrong!');
+    Publisher.findOne({ _id: req.params.id })
+        .populate('campaigns', '_id')
+        .exec((findOneError, foundDoc) => {
+            if (findOneError) {
+                console.warn('publisher.findOne', findOneError);
+                switch (findOneError.name) {
+                    default:
+                        res.status(500);
+                        return res.send('Something went wrong!');
+                }
             }
-        }
-        res.status(200);
-        res.json(foundDoc);
-        next();
-    });
+            res.status(200);
+            res.json(foundDoc);
+            next();
+        });
 };
 
 module.exports.findOneCampaigns = (req, res, next) => {
@@ -81,9 +83,8 @@ module.exports.update = (req, res, next) => {
     Publisher.updateOne({ _id: req.params.id }, req.body, (updateError) => {
         if (updateError) {
             console.warn('publisher.update', updateError);
-            switch (updateError.code) {
-                // schema validation
-                case 11000:
+            switch (updateError.name) {
+                case 'ValidationError':
                     res.status(400);
                     return res.send(updateError.message);
                 default:
@@ -112,7 +113,7 @@ module.exports.deleteOne = (req, res, next) => {
             res.end();
             return next();
         }
-        foundDoc.remove((removeError, removedDoc) => {
+        foundDoc.remove((removeError) => {
             if (removeError) {
                 console.warn('publisher.remove', removeError);
                 switch (removeError.code) {
