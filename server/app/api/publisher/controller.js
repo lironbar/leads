@@ -72,7 +72,7 @@ module.exports.findOneCampaigns = (req, res, next) => {
                 }
             }
             res.status(200);
-            res.json(foundDoc.campaigns);
+            res.json(foundDoc ? foundDoc.campaigns : []);
             next();
         });
 };
