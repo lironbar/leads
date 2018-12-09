@@ -17,7 +17,7 @@ export class CreatePublisherDialogComponent {
     this.dialogRef.close();
   }
 
-  public onAddCampaign(form: NgForm) {
+  public onCreatePublisher(form: NgForm) {
     if (form.valid) {
       const publisher: Publisher = {
         name: form.value.name,

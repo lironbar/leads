@@ -3,7 +3,7 @@
   margin-top: 20px;
 }
 
-.test {
+.campaign-img {
   height: 150px; /* adjust as needed */
   object-fit: contain;
   /*object-fit: cover; !*this makes de image in src fit to the size of specified below*!*/

@@ -17,14 +17,17 @@ export class CreateCampaignDialogComponent {
     this.dialogRef.close();
   }
 
-  public onAddCampaign(form: NgForm) {
+  public onCreateCampaign(form: NgForm) {
     if (form.valid) {
       const campaign: Campaign = {
         name: form.value.name,
         description: form.value.description,
-        imageUrl: form.value.imageUrl,
         price: form.value.price,
-        score: form.value.score
+        hedgePercentage: form.value.hedgePercentage,
+        maxLeads: form.value.maxLeads,
+        maxDailyLeads: form.value.maxDailyLeads,
+        marketingText: form.value.marketingText,
+        imageUrl: form.value.imageUrl
       };
       this.dialogRef.close(campaign);
     }

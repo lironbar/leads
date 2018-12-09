@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import { MatDialog } from '@angular/material';
+import {Observable} from 'rxjs';
+import {Campaign} from '../../campaign.model';
+import {CampaignService} from '../../campaign.service';
 
 
 @Component({
@@ -8,7 +10,12 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./campaigns-view.component.css']
 })
 
-export class CampaignsViewComponent {
-  constructor(public dialog: MatDialog) {}
+export class CampaignsViewComponent implements OnInit {
+  campaigns$: Observable<Campaign[]>;
 
+  constructor(public campaignService: CampaignService) {}
+
+  ngOnInit() {
+    this.campaigns$ = this.campaignService.getCampaigns();
+  }
 }

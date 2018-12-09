@@ -9,3 +9,8 @@
 mat-icon:hover {
   cursor: pointer;
 }
+
+#app-logo {
+  height: 45px;
+  border-radius: 55px;
+}

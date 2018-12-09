@@ -5,8 +5,8 @@ import { CampaignsViewComponent } from './components/campaigns-view/campaigns-vi
 
 
 const routes: Routes = [
-  {path: '', component: CampaignsViewComponent}
-  // { path: 'campaigns/:id', component: campaignDetailsComponent},
+  {path: '', component: CampaignsViewComponent},
+  // { path: 'campaigns/:id', component: campaignDetailsComponent}
 ];
 
 @NgModule({

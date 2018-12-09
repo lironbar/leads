@@ -1,10 +1,14 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-import {
-  MatAutocompleteModule,
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { CampaignListComponent } from './modules/campaigns/components/campaign-list/campaign-list.component';
+import { CampaignCreateButtonComponent } from './modules/campaigns/components/campaign-create-button/campaign-create-button.component';
+import {CreateCampaignDialogComponent } from './modules/campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
+
+import {MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
@@ -33,16 +37,24 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatStepperModule
+  MatStepperModule,
+  MatDialogModule
 } from '@angular/material';
-
+import {ConfirmDialogComponent} from './modules/commons/components/dialogs/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
+  declarations: [
+    CampaignListComponent,
+    CampaignCreateButtonComponent,
+    CreateCampaignDialogComponent,
+    ConfirmDialogComponent
+  ],
   imports: [
     CommonModule,
     CdkTableModule,
-    FlexLayoutModule,
     FormsModule,
+    FlexLayoutModule,
+
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -72,14 +84,15 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ],
-  declarations: [],
   exports: [
     CommonModule,
     CdkTableModule,
-    FlexLayoutModule,
     FormsModule,
+    FlexLayoutModule,
+
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -109,9 +122,13 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+    CampaignListComponent,
+    CampaignCreateButtonComponent,
+    CreateCampaignDialogComponent
   ],
-  providers: []
+  providers: [],
+  entryComponents: [ConfirmDialogComponent, CreateCampaignDialogComponent]
 })
 export class SharedModule {
 }

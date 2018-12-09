@@ -1,46 +1,43 @@
+<div fxLayout="column" class="full-height">
 
-<!--<mat-grid-list cols="2" rowHeight="2:1">-->
-  <!--<mat-grid-tile *ngFor="let campaign of campaigns$ | async">-->
-    <!--<img [alt]="campaign.name" src="{{campaign.imageUrl}}">-->
-    <!--<mat-grid-tile-footer>-->
-      <!--<h3 mat-line>{{campaign.name}}</h3>-->
-      <!--&lt;!&ndash; <a mat-line routerLink="/recepie/{{recipie.id}}">{{recipie.name}}</a> &ndash;&gt;-->
-      <!--<span mat-line>{{campaign.description}}</span>-->
-      <!--&lt;!&ndash;<i class="material-icons md-24 margin-right-10 clickable"&ndash;&gt;-->
-         <!--&lt;!&ndash;routerLink="/star/{{star.id}}">art_track&ndash;&gt;-->
-      <!--&lt;!&ndash;</i>&ndash;&gt;-->
-      <!--<i class="material-icons md-21" (click)="onDelete(campaign._id)">Delete</i>-->
-    <!--</mat-grid-tile-footer>-->
-  <!--</mat-grid-tile>-->
-<!--</mat-grid-list>-->
+  <div fxLayout="row" *ngIf="(campaigns$ | async)?.length>0">
+    <mat-card *ngFor="let campaign of campaigns$ | async"
+              fxFlex="33" class="margin-10">
+      <mat-card-header>
+        <img mat-card-avatar class="example-header-image" src="http://www.news1.co.il/uploadimages/NEW-350582301616669.jpg" alt="Image of Publisher">
+        <!--<div mat-card-avatar class="example-header-image"></div>-->
+        <mat-card-title>{{campaign.name}}</mat-card-title>
+        <mat-card-subtitle>
+          <span class="margin-right-10">Price: {{campaign.price}}</span>
+          <span>Score: {{campaign.score}}</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image class="campaign-img" src="{{campaign.imageUrl || defaultImageUrl}}" alt="Photo of a campaign">
+      <!--<app-campaign-image-url [(imageUrl)]="campaign.imageUrl"></app-campaign-image-url>-->
+      <!--<img mat-card-image src="{{campaign.imageUrl}}" alt="Image of a campaign">-->
+      <mat-card-content>
+        <!--<span class="mat-caption">{{campaign.description}}</span>-->
+      </mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex></span>
+        <button mat-button color="warn" (click)="onDelete(campaign._id)">Delete</button>
+        <!--<button mat-button>SHARE</button>-->
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
-<div fxLayout="row"  class="full-height">
-
-
-  <mat-card fxFlex="33" *ngFor="let campaign of campaigns$ | async">
-    <mat-card-header>
-      <img mat-card-avatar class="example-header-image" src="http://www.news1.co.il/uploadimages/NEW-350582301616669.jpg" alt="Image of Publisher">
-      <!--<div mat-card-avatar class="example-header-image"></div>-->
-      <mat-card-title>{{campaign.name}}</mat-card-title>
-      <mat-card-subtitle>
-        <span class="margin-right-10">Price: {{campaign.price}}</span>
-        <span>Score: {{campaign.score}}</span>
-      </mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image class="test" src="{{campaign.imageUrl || defaultImageUrl}}" alt="Photo of a Shiba Inu">
-    <!--<app-campaign-image-url [(imageUrl)]="campaign.imageUrl"></app-campaign-image-url>-->
-    <!--<img mat-card-image src="{{campaign.imageUrl}}" alt="Image of a campaign">-->
-    <mat-card-content>
-      <span class="mat-caption">{{campaign.description}}</span>
-    </mat-card-content>
-    <mat-card-actions fxLayout="row" fxLayoutAlign="start center">
-      <span fxFlex></span>
-      <button mat-button color="warn" (click)="onDelete(campaign._id)">Delete</button>
-      <!--<button mat-button>SHARE</button>-->
-    </mat-card-actions>
-  </mat-card>
+  <div fxFlex fxLayout="row" fxLayoutAlign="center center" *ngIf="(campaigns$ | async)?.length==0">
+    No Campaigns Found
+  </div>
 
 </div>
+
+
+
+
+
+
+
 
 
 
@@ -59,3 +56,23 @@
     <!--</mat-action-row>-->
   <!--</mat-expansion-panel>-->
 <!--</mat-accordion>-->
+
+
+
+
+
+
+<!--<mat-grid-list cols="2" rowHeight="2:1">-->
+<!--<mat-grid-tile *ngFor="let campaign of campaigns$ | async">-->
+<!--<img [alt]="campaign.name" src="{{campaign.imageUrl}}">-->
+<!--<mat-grid-tile-footer>-->
+<!--<h3 mat-line>{{campaign.name}}</h3>-->
+<!--&lt;!&ndash; <a mat-line routerLink="/recepie/{{recipie.id}}">{{recipie.name}}</a> &ndash;&gt;-->
+<!--<span mat-line>{{campaign.description}}</span>-->
+<!--&lt;!&ndash;<i class="material-icons md-24 margin-right-10 clickable"&ndash;&gt;-->
+<!--&lt;!&ndash;routerLink="/star/{{star.id}}">art_track&ndash;&gt;-->
+<!--&lt;!&ndash;</i>&ndash;&gt;-->
+<!--<i class="material-icons md-21" (click)="onDelete(campaign._id)">Delete</i>-->
+<!--</mat-grid-tile-footer>-->
+<!--</mat-grid-tile>-->
+<!--</mat-grid-list>-->

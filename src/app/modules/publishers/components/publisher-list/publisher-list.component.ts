@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PublisherService } from '../../publisher.service';
+import { MatAccordion } from '@angular/material';
 
 @Component({
   selector: 'app-publisher-list',
