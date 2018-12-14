@@ -1,13 +1,22 @@
 <form (submit)="onCreatePublisher(publisherForm)" #publisherForm="ngForm">
   <h1 mat-dialog-title>Create Publisher</h1>
   <div mat-dialog-content>
-    <mat-form-field>
-      <input matInput placeholder="Name"
-             title="publisher name" type="text"
-             #name="ngModel"
-             ngModel name="name" required>
-      <mat-error *ngIf="name.invalid">*This field is required.</mat-error>
-    </mat-form-field>
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Name"
+               title="publisher name" type="text"
+               #name="ngModel"
+               ngModel name="name" required>
+        <mat-error *ngIf="name.invalid">*This field is required.</mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="PHC"
+               title="publisher phc" type="text"
+               #phc="ngModel"
+               ngModel name="phc" required>
+        <mat-error *ngIf="phc.invalid">*This field is required.</mat-error>
+      </mat-form-field>
+    </div>
     <mat-form-field>
       <input matInput placeholder="Phone"
              title="publisher phone" type="text"

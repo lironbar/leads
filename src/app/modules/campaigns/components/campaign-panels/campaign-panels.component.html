@@ -1,16 +1,17 @@
 <!--<div fxLayout="column" class="full-height">-->
     <!--campaign-panels.component-->
 <!--</div>-->
-<!--<mat-accordion [multi]="true">-->
-    <!--<mat-expansion-panel *ngFor="let campaign of campaigns$ | async">-->
-        <!--<mat-expansion-panel-header>-->
-            <!--{{campaign.name}}-->
-        <!--</mat-expansion-panel-header>-->
-        <!--<p>Description: {{campaign.description}}</p>-->
-        <!--<p>Score: {{campaign.score}}</p>-->
-        <!--<mat-action-row>-->
-            <!--<button mat-button color="primary">EDIT</button>-->
-            <!--<button mat-button color="warn" (click)="onDelete(campaign._id)">DELETE</button>-->
-        <!--</mat-action-row>-->
-    <!--</mat-expansion-panel>-->
-<!--</mat-accordion>-->
+<mat-accordion [multi]="true">
+    <mat-expansion-panel *ngFor="let campaign of campaigns$ | async">
+        <mat-expansion-panel-header>
+            {{campaign.name}}
+        </mat-expansion-panel-header>
+        <p>Description: {{campaign.description}}</p>
+        <p>Price: {{campaign.price}}</p>
+        <p>Max Leads: {{campaign.maxLeads}}</p>
+        <mat-action-row>
+            <button mat-button color="primary">EDIT</button>
+            <button mat-button color="warn" (click)="onDelete(campaign._id)">DELETE</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>

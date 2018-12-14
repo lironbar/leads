@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import { PublisherService } from '../../publisher.service';
 import { MatDialog } from '@angular/material';
 import { CreatePublisherDialogComponent } from '../dialogs/create-publisher-dialog/create-publisher-dialog.component';
@@ -10,7 +10,7 @@ import { CreatePublisherDialogComponent } from '../dialogs/create-publisher-dial
 })
 
 export class PublisherCreateButtonComponent {
-
+    @Output() create: EventEmitter<any> = new EventEmitter();
   constructor(public publisherService: PublisherService, public dialog: MatDialog) {}
 
   onCreate() {
@@ -18,7 +18,7 @@ export class PublisherCreateButtonComponent {
 
     dialogRef.afterClosed().subscribe(publisher => {
       if (publisher) {
-        this.publisherService.create(publisher);
+          this.create.emit(publisher);
       }
     });
   }

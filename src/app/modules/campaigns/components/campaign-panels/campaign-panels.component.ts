@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Campaign} from '../../campaign.model';
 import {Observable} from 'rxjs';
 
@@ -10,5 +10,11 @@ import {Observable} from 'rxjs';
 
 export class CampaignPanelsComponent implements OnInit {
     @Input() campaigns$: Observable<Campaign[]>;
+    @Output() delete: EventEmitter<any> = new EventEmitter();
     ngOnInit() {}
+
+
+    onDelete(id) {
+        this.delete.emit(id);
+    }
 }

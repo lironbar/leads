@@ -2,7 +2,7 @@
 
   <div fxLayout="row" fxLayoutAlign="start center" class="padding-5">
     <span fxFlex></span>
-    <app-publisher-create-button></app-publisher-create-button>
+    <app-publisher-create-button (create)="onCreatePublisher($event)"></app-publisher-create-button>
   </div>
 
   <app-publishers-table [(publishers$)]="publishers$"></app-publishers-table>

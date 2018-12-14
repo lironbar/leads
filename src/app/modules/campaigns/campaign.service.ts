@@ -2,8 +2,6 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Campaign} from './campaign.model';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {HttpParams} from '@angular/common/http';
-import {map} from 'rxjs/operators';
 
 @Injectable()
 export class CampaignService {
@@ -31,43 +29,13 @@ export class CampaignService {
     return this._campaigns.asObservable();
   }
 
-  // create(campaign: Campaign) {
-  //   this.http.post<Campaign>(`${this.apiRoot}/campaign`, campaign)
-  //     .subscribe(
-  //       newCampaign => {
-  //         const campaigns = this._campaigns.getValue();
-  //         campaigns.push(newCampaign);
-  //         this._campaigns.next(campaigns);
-  //       },
-  //       error => {
-  //
-  //       }
-  //     );
-  // }
-
   create(publisherId: string, campaign: Campaign) {
-    const params = new HttpParams().set('orderBy', publisherId);
-    return this.http.post<Campaign>(`${this.apiRoot}/campaign`, campaign, {params})
+    campaign.publisherId = publisherId;
+    return this.http.post<Campaign>(`${this.apiRoot}/campaign`, campaign);
   }
 
   delete(id: string) {
-    return this.http.delete<Campaign>(`${this.apiRoot}/campaign/${id}`)
-      .subscribe(
-        deletedCampaign => {
-          const campaigns = this._campaigns.getValue();
-          campaigns.filter(function(campaign) {
-            return campaign._id !== id;
-          });
-          this._campaigns.next(campaigns);
-        },
-        error => {
-
-        }
-      );
-  }
-
-  handleError(action: string, error: any) {
-    console.log('Error Catch!');
+    return this.http.delete<Campaign>(`${this.apiRoot}/campaign/${id}`);
   }
 
 }

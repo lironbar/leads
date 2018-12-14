@@ -7,8 +7,11 @@
         <div fxLayout="row" fxLayoutAlign="start center">
             <h3>{{publisher._id}}</h3>
         </div>
-        <app-campaign-list fxFlex [(campaigns$)]="campaigns$"></app-campaign-list>
-        <app-campaign-panels fxFlex [(campaigns$)]="campaigns$"></app-campaign-panels>
+        <!--<app-campaign-list fxFlex [(campaigns$)]="campaigns$"></app-campaign-list>-->
+        <app-campaign-panels fxFlex
+                             [(campaigns$)]="campaigns$" (delete)="OnDeleteCampaign($event)">
+
+        </app-campaign-panels>
     </div>
 </div>
 
