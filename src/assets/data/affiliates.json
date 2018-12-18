@@ -1,0 +1,57 @@
+[
+  {
+    "_id": 1,
+    "name": "Affiliate #1",
+    "phone": "03-9519999",
+    "email": "harel1@gmail.com",
+    "address": "Tel Aviv",
+    "campaigns": []
+  },
+  {
+    "_id": 2,
+    "name": "Affiliate #2",
+    "phone": "03-9519999",
+    "email": "harel2@gmail.com",
+    "address": "Tel Aviv",
+    "campaigns": []
+  },
+  {
+    "_id": 3,
+    "name": "Affiliate #3",
+    "phone": "03-9519999",
+    "email": "harel3@gmail.com",
+    "address": "Rishon Lezion",
+    "campaigns": [
+      {
+        "_id": "1",
+        "name": "Harel - Test 1",
+        "description": "description description description",
+        "price": "100",
+        "hedgePercentage": "20",
+        "maxLeads": "200",
+        "maxDailyLeads": "10",
+        "marketingText": "marketingText marketingText marketingText",
+        "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+      },
+      {
+        "_id": 2,
+        "name": "Harel - Test 2",
+        "description": "description description description",
+        "price": "80",
+        "hedgePercentage": "18",
+        "maxLeads": "70",
+        "maxDailyLeads": "5",
+        "marketingText": "marketingText marketingText marketingText",
+        "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+      }
+    ]
+  },
+  {
+    "_id": 4,
+    "name": "Affiliate #4",
+    "phone": "03-9519999",
+    "email": "harel4@gmail.com",
+    "address": "Haifa",
+    "campaigns": []
+  }
+]

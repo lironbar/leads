@@ -8,9 +8,9 @@ app-header {
 }
 
 
-main {
-  margin-top: 80px !important;
-  width: 90%;
-  margin: auto;
+.main {
+  margin-top: 65px !important;
+  width: 100%;
 }
+
 

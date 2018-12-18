@@ -1,0 +1,15 @@
+<div fxLayout="column" class="full-height">
+  <div fxLayout="row" fxLayoutAlign="start center" class="app-toolbar">
+    <span fxFlex></span>
+    <app-affiliate-create-button (create)="onCreateAffiliate($event)"></app-affiliate-create-button>
+  </div>
+
+  <app-affiliates-table *ngIf="affiliates$ | async; let affiliates; else loading"
+                        [(affiliates)]="affiliates">
+
+  </app-affiliates-table>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

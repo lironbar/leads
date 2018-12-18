@@ -1,0 +1,68 @@
+[
+  {
+    "_id": "1",
+    "name": "Campagin #1",
+    "description": "description description description",
+    "price": "100",
+    "hedgePercentage": "20",
+    "maxLeads": "200",
+    "maxDailyLeads": "10",
+    "marketingText": "marketingText marketingText marketingText",
+    "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+  },
+  {
+    "_id": 2,
+    "name": "Campagin #2",
+    "description": "description description description",
+    "price": "80",
+    "hedgePercentage": "18",
+    "maxLeads": "70",
+    "maxDailyLeads": "5",
+    "marketingText": "marketingText marketingText marketingText",
+    "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+  },
+  {
+    "_id": "3",
+    "name": "Campagin #3",
+    "description": "description description description",
+    "price": "100",
+    "hedgePercentage": "20",
+    "maxLeads": "200",
+    "maxDailyLeads": "10",
+    "marketingText": "marketingText marketingText marketingText",
+    "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+  },
+  {
+    "_id": 4,
+    "name": "Campagin #4",
+    "description": "description description description",
+    "price": "80",
+    "hedgePercentage": "18",
+    "maxLeads": "70",
+    "maxDailyLeads": "5",
+    "marketingText": "marketingText marketingText marketingText",
+    "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+  },
+  {
+    "_id": "5",
+    "name": "Campagin #5",
+    "description": "description description description",
+    "price": "100",
+    "hedgePercentage": "20",
+    "maxLeads": "200",
+    "maxDailyLeads": "10",
+    "marketingText": "marketingText marketingText marketingText",
+    "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+  },
+  {
+    "_id": 6,
+    "name": "Campagin #6",
+    "description": "description description description",
+    "price": "80",
+    "hedgePercentage": "18",
+    "maxLeads": "70",
+    "maxDailyLeads": "5",
+    "marketingText": "marketingText marketingText marketingText",
+    "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+  }
+]

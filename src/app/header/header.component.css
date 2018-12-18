@@ -1,16 +1,15 @@
-.nav-btn {
-  box-shadow: none !important;
-}
-
-.nav-btn:hover {
-  background: #4052cd;
-}
-
 mat-icon:hover {
   cursor: pointer;
 }
 
-#app-logo {
-  height: 45px;
-  border-radius: 55px;
+.logo {
+  height: 20px;
 }
+
+/*.nav-btn {*/
+  /*box-shadow: none !important;*/
+/*}*/
+
+/*.nav-btn:hover {*/
+  /*background: #4052cd;*/
+/*}*/

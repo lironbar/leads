@@ -9,12 +9,12 @@ import {Observable} from 'rxjs';
 })
 
 export class CampaignPanelsComponent implements OnInit {
-    @Input() campaigns$: Observable<Campaign[]>;
+    @Input() campaigns: Campaign[];
     @Output() delete: EventEmitter<any> = new EventEmitter();
     ngOnInit() {}
 
 
-    onDelete(id) {
-        this.delete.emit(id);
+    onDelete(campaign: Campaign) {
+        this.delete.emit(campaign);
     }
 }

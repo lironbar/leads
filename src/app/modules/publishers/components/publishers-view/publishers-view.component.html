@@ -1,10 +1,16 @@
 <div fxLayout="column" class="full-height">
+    <div fxLayout="row" fxLayoutAlign="start center" class="app-toolbar">
+        <span fxFlex></span>
+        <app-publisher-create-button (create)="onCreatePublisher($event)"></app-publisher-create-button>
+    </div>
 
-  <div fxLayout="row" fxLayoutAlign="start center" class="padding-5">
-    <span fxFlex></span>
-    <app-publisher-create-button (create)="onCreatePublisher($event)"></app-publisher-create-button>
-  </div>
+    <app-publishers-table *ngIf="publishers$ | async; let publishers; else loading"
+                          [(publishers)]="publishers"
+                          (delete)="onDeletePublisher($event)">
 
-  <app-publishers-table [(publishers$)]="publishers$"></app-publishers-table>
+    </app-publishers-table>
 
+    <ng-template #loading>
+        <app-loader></app-loader>
+    </ng-template>
 </div>

@@ -1,12 +1,8 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row fxLayout="row">
-    <!--<img id="app-logo" src="http://ovibees.com/wp-content/uploads/2017/10/logo-leaders.png"/>-->
-    <button class="nav-btn" mat-raised-button color="primary" routerLink="/publishers">Publishers</button>
-    <button class="nav-btn" mat-raised-button color="primary" routerLink="/campaigns">Campaigns</button>
-    <!--<a id="logo" routerLink="/publishers">Publishers</a>-->
-    <!--<a id="campaign" routerLink="/campaigns">Campaigns</a>-->
-    <span fxFlex></span>
-    <mat-icon>person</mat-icon>
-    <!--<i class="material-icons md-24">cloud</i>-->
-  </mat-toolbar-row>
+    <mat-toolbar-row fxLayout="row">
+        <img src="/assets/images/logo.png" alt="Logo" class="logo">
+        <span fxFlex></span>
+        <mat-icon class="margin-right-10" matBadge="4" matBadgeColor="accent">notifications_active</mat-icon>
+        <mat-icon>portrait</mat-icon>
+    </mat-toolbar-row>
 </mat-toolbar>

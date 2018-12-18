@@ -8,6 +8,7 @@ import {CampaignListComponent} from './modules/campaigns/components/campaign-lis
 import {CampaignPanelsComponent} from './modules/campaigns/components/campaign-panels/campaign-panels.component';
 import {CampaignCreateButtonComponent} from './modules/campaigns/components/campaign-create-button/campaign-create-button.component';
 import {CreateCampaignDialogComponent} from './modules/campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
+import { LoaderComponent } from './modules/commons/components/loader/loader.component';
 
 import {
     MatAutocompleteModule,
@@ -43,6 +44,7 @@ import {
     MatDialogModule
 } from '@angular/material';
 import {ConfirmDialogComponent} from './modules/commons/components/dialogs/confirm-dialog/confirm-dialog.component';
+import {EmptyStateComponent} from './modules/commons/components/empty-state/empty-state.component';
 
 @NgModule({
     declarations: [
@@ -50,7 +52,9 @@ import {ConfirmDialogComponent} from './modules/commons/components/dialogs/confi
         CampaignPanelsComponent,
         CampaignCreateButtonComponent,
         CreateCampaignDialogComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        EmptyStateComponent,
+        LoaderComponent
     ],
     imports: [
         CommonModule,
@@ -129,7 +133,9 @@ import {ConfirmDialogComponent} from './modules/commons/components/dialogs/confi
         CampaignListComponent,
         CampaignPanelsComponent,
         CampaignCreateButtonComponent,
-        CreateCampaignDialogComponent
+        CreateCampaignDialogComponent,
+        EmptyStateComponent,
+        LoaderComponent
     ],
     providers: [],
     entryComponents: [ConfirmDialogComponent, CreateCampaignDialogComponent]

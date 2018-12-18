@@ -1,56 +1,121 @@
-<table mat-table [dataSource]="publishers$" class="mat-elevation-z8">
+<div fxLayout="column" class="full-height" *ngIf="publishers.length; else empty_state">
+    <table mat-table [dataSource]="publishers" class="mat-elevation-z8">
 
-  <!-- Index Column -->
-  <ng-container matColumnDef="index">
-    <th mat-header-cell *matHeaderCellDef>No.</th>
-    <td mat-cell *matCellDef="let publisher; let i = index;"> {{i + 1}} </td>
-  </ng-container>
+        <!-- Index Column -->
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef>No.</th>
+            <td mat-cell *matCellDef="let publisher; let i = index;"> {{i + 1}}</td>
+        </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let publisher">
-      <a mat-button [routerLink]="['/publishers', publisher._id]">{{publisher.name}}</a>
-    </td>
-  </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let publisher">
+                <a mat-button [routerLink]="['/publishers', publisher._id]">{{publisher.name}}</a>
+            </td>
+        </ng-container>
 
-  <!-- Phone Column -->
-  <ng-container matColumnDef="phone">
-    <th mat-header-cell *matHeaderCellDef>Phone</th>
-    <td mat-cell *matCellDef="let publisher"> {{publisher.phone}} </td>
-  </ng-container>
+        <!-- Phone Column -->
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef>Phone</th>
+            <td mat-cell *matCellDef="let publisher"> {{publisher.phone}}</td>
+        </ng-container>
 
-  <!-- Email Column -->
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef>Email</th>
-    <td mat-cell *matCellDef="let publisher"> {{publisher.email}} </td>
-  </ng-container>
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let publisher"> {{publisher.email}}</td>
+        </ng-container>
 
-  <!-- Address Column -->
-  <ng-container matColumnDef="address">
-    <th mat-header-cell *matHeaderCellDef>Address</th>
-    <td mat-cell *matCellDef="let publisher"> {{publisher.address}} </td>
-  </ng-container>
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef>Address</th>
+            <td mat-cell *matCellDef="let publisher"> {{publisher.address}}</td>
+        </ng-container>
 
-  <!-- Campaigns Column -->
-  <ng-container matColumnDef="campaigns">
-    <th mat-header-cell *matHeaderCellDef>Campaigns</th>
-    <td mat-cell *matCellDef="let publisher">  </td>
-  </ng-container>
+        <!-- Campaigns Column -->
+        <ng-container matColumnDef="campaigns">
+            <th mat-header-cell *matHeaderCellDef>Campaigns</th>
+            <td mat-cell *matCellDef="let publisher">{{publisher.campaigns.length}}</td>
+        </ng-container>
 
-  <!-- Actions Column -->
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let publisher">
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <span fxFlex></span>
-        <button mat-icon-button color="warn" (click)="onRemove(publisher)">
-          <mat-icon aria-label="Remove Publisher">clear</mat-icon>
-        </button>
-      </div>
-    </td>
-  </ng-container>
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let publisher">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <span fxFlex></span>
+                    <button mat-icon-button color="warn" (click)="onRemove(publisher)">
+                        <mat-icon aria-label="Remove Publisher">clear</mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<ng-template #empty_state>
+    <app-empty-state text="No Publishers Found"
+                     src="/assets/empty_states/empty_state_publishers.png"></app-empty-state>
+</ng-template>
+
+
+<!--<table mat-table [dataSource]="publishers" class="mat-elevation-z8">-->
+
+<!--&lt;!&ndash; Index Column &ndash;&gt;-->
+<!--<ng-container matColumnDef="index">-->
+<!--<th mat-header-cell *matHeaderCellDef>No.</th>-->
+<!--<td mat-cell *matCellDef="let publisher; let i = index;"> {{i + 1}} </td>-->
+<!--</ng-container>-->
+
+<!--&lt;!&ndash; Name Column &ndash;&gt;-->
+<!--<ng-container matColumnDef="name">-->
+<!--<th mat-header-cell *matHeaderCellDef>Name</th>-->
+<!--<td mat-cell *matCellDef="let publisher">-->
+<!--<a mat-button [routerLink]="['/publishers', publisher._id]">{{publisher.name}}</a>-->
+<!--</td>-->
+<!--</ng-container>-->
+
+<!--&lt;!&ndash; Phone Column &ndash;&gt;-->
+<!--<ng-container matColumnDef="phone">-->
+<!--<th mat-header-cell *matHeaderCellDef>Phone</th>-->
+<!--<td mat-cell *matCellDef="let publisher"> {{publisher.phone}} </td>-->
+<!--</ng-container>-->
+
+<!--&lt;!&ndash; Email Column &ndash;&gt;-->
+<!--<ng-container matColumnDef="email">-->
+<!--<th mat-header-cell *matHeaderCellDef>Email</th>-->
+<!--<td mat-cell *matCellDef="let publisher"> {{publisher.email}} </td>-->
+<!--</ng-container>-->
+
+<!--&lt;!&ndash; Address Column &ndash;&gt;-->
+<!--<ng-container matColumnDef="address">-->
+<!--<th mat-header-cell *matHeaderCellDef>Address</th>-->
+<!--<td mat-cell *matCellDef="let publisher"> {{publisher.address}} </td>-->
+<!--</ng-container>-->
+
+<!--&lt;!&ndash; Campaigns Column &ndash;&gt;-->
+<!--<ng-container matColumnDef="campaigns">-->
+<!--<th mat-header-cell *matHeaderCellDef>Campaigns</th>-->
+<!--<td mat-cell *matCellDef="let publisher">{{publisher.campaigns.length}}</td>-->
+<!--</ng-container>-->
+
+<!--&lt;!&ndash; Actions Column &ndash;&gt;-->
+<!--<ng-container matColumnDef="actions">-->
+<!--<th mat-header-cell *matHeaderCellDef></th>-->
+<!--<td mat-cell *matCellDef="let publisher">-->
+<!--<div fxLayout="row" fxLayoutAlign="start center">-->
+<!--<span fxFlex></span>-->
+<!--<button mat-icon-button color="warn" (click)="onRemove(publisher)">-->
+<!--<mat-icon aria-label="Remove Publisher">clear</mat-icon>-->
+<!--</button>-->
+<!--</div>-->
+<!--</td>-->
+<!--</ng-container>-->
+
+<!--<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+<!--</table>-->

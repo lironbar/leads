@@ -13,6 +13,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   overflow: auto;
 }
 
+.app-toolbar {
+  padding: 5px;
+  min-height: 50px;
+}
+
 /*  Padding  */
 
 .padding-5 {
@@ -147,4 +152,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .margin-bottom-20 {
   margin-bottom: 20px;
+}
+
+.font-opacity-3 {
+  opacity: 0.3;
+}
+.font-opacity-5 {
+  opacity: 0.5;
+}
+.font-opacity-8 {
+  opacity: 0.8;
 }

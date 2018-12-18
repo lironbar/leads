@@ -1,11 +1,36 @@
 <div fxLayout="column" class="full-height">
+    <app-header class="app-navbar"></app-header>
 
-  <app-header class="app-navbar"></app-header>
-
-  <main fxFlex>
-
-    <router-outlet></router-outlet>
-
-  </main>
-
+    <mat-sidenav-container fxFlex fxLayout="column" class="main">
+        <mat-sidenav class="padding-5" #sidenavright position="{{sidNavPosition}}" mode="side" opened>
+            <mat-nav-list>
+                <button fxFlex
+                        class="nav-btn" mat-icon-button color="primary"
+                        matTooltip="Publishers"
+                        [matTooltipPosition]="tooltipDirection"
+                        routerLink="/publishers">
+                    <mat-icon class="margin-right-5">person_pin</mat-icon>
+                </button>
+            </mat-nav-list>
+            <mat-nav-list>
+                <button fxFlex
+                        class="nav-btn" mat-icon-button color="primary"
+                        matTooltip="Affiliates"
+                        [matTooltipPosition]="tooltipDirection"
+                        routerLink="/affiliates">
+                    <mat-icon class="margin-right-5">group</mat-icon>
+                </button>
+            </mat-nav-list>
+            <mat-nav-list>
+                <button fxFlex
+                        class="nav-btn" mat-icon-button color="primary"
+                        matTooltip="Campaigns"
+                        [matTooltipPosition]="tooltipDirection"
+                        routerLink="/campaigns">
+                    <mat-icon class="margin-right-5">ballot</mat-icon>
+                </button>
+            </mat-nav-list>
+        </mat-sidenav>
+        <router-outlet fxFlex></router-outlet>
+    </mat-sidenav-container>
 </div>

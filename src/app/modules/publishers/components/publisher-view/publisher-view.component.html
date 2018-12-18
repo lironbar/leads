@@ -1,26 +1,23 @@
-<div fxLayout="column" class="full-height">
-    <div fxLayout="row" fxLayoutAlign="start center">
-        <span fxFlex></span>
-        <app-campaign-create-button (create)="onCreateCampaign($event)"></app-campaign-create-button>
-    </div>
-    <div fxFlex fxLayout="column" *ngIf="publisher$ | async; let publisher">
-        <div fxLayout="row" fxLayoutAlign="start center">
-            <h3>{{publisher._id}}</h3>
-        </div>
-        <!--<app-campaign-list fxFlex [(campaigns$)]="campaigns$"></app-campaign-list>-->
-        <app-campaign-panels fxFlex
-                             [(campaigns$)]="campaigns$" (delete)="OnDeleteCampaign($event)">
+<div fxLayout="row" class="full-height" *ngIf="publisher$ | async; let publisher">
 
+    <app-publisher-info-bar fxFlex="30" [(publisher)]="publisher">
+
+    </app-publisher-info-bar>
+
+    <div fxFlex fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="start center" class="app-toolbar">
+            <span fxFlex></span>
+            <app-campaign-create-button (create)="onCreateCampaign($event)"></app-campaign-create-button>
+        </div>
+        <app-campaign-panels fxFlex *ngIf="campaigns$ | async as campagins; else loading"
+                             [(campaigns)]="campagins"
+                             (delete)="OnDeleteCampaign($event)">
         </app-campaign-panels>
+
+        <ng-template #loading>
+            <app-loader></app-loader>
+        </ng-template>
     </div>
 </div>
-
-
-<!--<div *ngIf="favBook$ | async as book; else loading">-->
-<!--Id: {{book.id}}, Name: {{book.name}}, Category: {{book.category}}-->
-<!--</div>-->
-<!--<ng-template #loading>-->
-<!--<img src="assets/images/loading.gif">-->
-<!--</ng-template> -->
 
 

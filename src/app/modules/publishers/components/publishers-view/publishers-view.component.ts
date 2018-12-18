@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Publisher} from '../../publisher.model';
 import {PublisherService} from '../../publisher.service';
+import {ConfirmDialogComponent} from '../../../commons/components/dialogs/confirm-dialog/confirm-dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
     selector: 'app-publishers-view',
@@ -12,7 +14,7 @@ import {PublisherService} from '../../publisher.service';
 export class PublishersViewComponent implements OnInit {
     publishers$: Observable<Publisher[]>;
 
-    constructor(public publisherService: PublisherService) {
+    constructor(public publisherService: PublisherService, public dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -22,4 +24,20 @@ export class PublishersViewComponent implements OnInit {
     onCreatePublisher(publisher) {
         this.publisherService.create(publisher);
     }
-}
+
+    onDeletePublisher(publisher) {
+        const confirmDialogData = {
+            header: 'Delete Publisher',
+            text: 'Are you sure you want to delete this publisher?'
+        };
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: confirmDialogData});
+        dialogRef.afterClosed().subscribe(confirm => {
+            if (confirm) {
+                this.publisherService.delete(publisher._id);
+            } else {
+                console.log('The dialog was closed');
+            }
+        });
+    }
+
+    }

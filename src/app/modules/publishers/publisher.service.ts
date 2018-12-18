@@ -18,7 +18,7 @@ export class PublisherService {
   getAll(forceRefresh?: boolean) {
     // If the Subject was NOT subscribed before OR if forceRefresh is requested
     if (!this._publishers.observers.length || forceRefresh) {
-      // const fakeData = 'http://localhost:4200/assets/publishers.json';
+      // const fakeData = 'http://localhost:4200/assets/data/publishers.json';
       const apiUrl = `${this.apiRoot}/publisher`;
       this.http.get<any>(apiUrl).subscribe(
         publishers => {

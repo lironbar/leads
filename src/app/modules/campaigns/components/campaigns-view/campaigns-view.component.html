@@ -1,8 +1,14 @@
 <div fxLayout="column" class="full-height">
-  <div fxLayout="row" fxLayoutAlign="start center" class="padding-5">
+  <div fxLayout="row" fxLayoutAlign="start center" class="app-toolbar">
     <span fxFlex></span>
     <app-campaign-create-button></app-campaign-create-button>
   </div>
 
-  <app-campaign-list fxFlex [(campaigns$)]="campaigns$"></app-campaign-list>
+  <app-campaign-list fxFlex *ngIf="campaigns$ | async; let campaigns; else loading;"
+                     [(campaigns)]="campaigns"
+                     (delete)="onDeleteCampaign($event)"></app-campaign-list>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
 </div>

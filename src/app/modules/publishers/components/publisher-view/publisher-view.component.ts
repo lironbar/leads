@@ -8,6 +8,7 @@ import {Campaign} from '../../../campaigns/campaign.model';
 import {CampaignService} from '../../../campaigns/campaign.service';
 import {ConfirmDialogComponent} from '../../../commons/components/dialogs/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -18,7 +19,7 @@ import {MatDialog} from '@angular/material';
 
 export class PublisherViewComponent implements OnInit {
     constructor(public publisherService: PublisherService, public campaignService: CampaignService,
-                public dialog: MatDialog, private route: ActivatedRoute) {
+                public dialog: MatDialog, private route: ActivatedRoute, public snackBar: MatSnackBar) {
     }
 
     publisherId: string;
@@ -30,9 +31,9 @@ export class PublisherViewComponent implements OnInit {
             this.publisherId = params['id'];
             this.publisher$ = this.publisherService.getPublisherById(this.publisherId);
             this.publisherService.getPublisherCampaigns(this.publisherId)
-                .subscribe(campaigns => this.campaigns$.next(campaigns));
-
-            // this.campaigns$ = this.publisherService.getPublisherCampaigns(this.publisherId);
+                .subscribe(campaigns => {
+                    this.campaigns$.next(campaigns);
+                });
         });
 
         // this.campaigns$ = this.publisher$.pipe(
@@ -49,7 +50,7 @@ export class PublisherViewComponent implements OnInit {
             });
     }
 
-    OnDeleteCampaign(id) {
+    OnDeleteCampaign(campaign) {
         const confirmDialogData = {
             header: 'Delete Campaign',
             text: 'Are you sure you want to delete this campaign?'
@@ -57,10 +58,10 @@ export class PublisherViewComponent implements OnInit {
         const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: confirmDialogData});
         dialogRef.afterClosed().subscribe(confirm => {
             if (confirm) {
-                this.campaignService.delete(id).subscribe(deletedCampaign => {
+                this.campaignService.delete(campaign._id).subscribe(deletedCampaign => {
                     let campaigns = this.campaigns$.getValue();
-                    campaigns = campaigns.filter(function(campaign) {
-                        return campaign._id !== id;
+                    campaigns = campaigns.filter(function(c) {
+                        return c._id !== campaign._id;
                     });
                     this.campaigns$.next(campaigns);
                 });

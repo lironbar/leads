@@ -1,0 +1,11 @@
+{
+  "_id": "1",
+  "name": "Campagin #1",
+  "description": "description description description",
+  "price": "100",
+  "hedgePercentage": "20",
+  "maxLeads": "200",
+  "maxDailyLeads": "10",
+  "marketingText": "marketingText marketingText marketingText",
+  "imageUrl": "https://www.harel-group.co.il/PublishingImages/logo/harel_logo_solid_colord_No_Slogen.jpg"
+}
