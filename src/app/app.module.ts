@@ -41,14 +41,20 @@ import {FormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
+import {LoginViewComponent} from './core/login/components/login-view.component';
+import {PagesComponent} from './pages/pages.component';
 
+import { AuthenticationService } from './core/authentication/authentication.service';
+import { AuthGuard } from './core/auth-guard/auth-guard.service';
 import {CampaignService} from './modules/campaigns/campaign.service';
 import {PublisherService} from './modules/publishers/publisher.service';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent
+        HeaderComponent,
+        LoginViewComponent,
+        PagesComponent
     ],
     imports: [
         FlexLayoutModule,
@@ -93,7 +99,7 @@ import {PublisherService} from './modules/publishers/publisher.service';
     ],
     exports: [FlexLayoutModule],
     // Services
-    providers: [CampaignService, PublisherService],
+    providers: [CampaignService, PublisherService, AuthenticationService, AuthGuard],
     bootstrap: [AppComponent],
     entryComponents: []
 })

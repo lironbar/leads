@@ -1,0 +1,57 @@
+<div fxLayout="row" class="full-height">
+
+    <div fxFlex="40" [ngStyle]="{background: 'url(/assets/images/login-background01.png)'}">
+
+    </div>
+
+    <div fxFlex fxLayout="column" class="sign-up-container overflow-auto">
+        <form fxFlex (submit)="onSignUp(signupForm)" #signupForm="ngForm">
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <h1 mat-dialog-title id="title">Create User</h1>
+                <!--<div fxLayout="row" fxLayoutAlign="space-around center">-->
+                    <!--<button mat-fab color="primary">-->
+                        <!--<mat-icon>testt</mat-icon>-->
+                    <!--</button>-->
+                    <!--<button mat-fab color="primary">Primary</button>-->
+                    <!--<button mat-fab color="primary">Primary</button>-->
+                <!--</div>-->
+            </div>
+            <div mat-dialog-content fxFlexAlign="center">
+                <div fxLayout="row">
+                    <!--<mat-icon class="field-icon">account_circle</mat-icon>-->
+                    <mat-form-field fxFlex>
+                        <input matInput placeholder="Name"
+                               title="User Name" type="text"
+                               #name="ngModel"
+                               ngModel name="name" required>
+                        <mat-error *ngIf="name.invalid">*This field is required.</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row">
+                    <!--<mat-icon class="field-icon">email</mat-icon>-->
+                    <mat-form-field fxFlex>
+                        <input matInput placeholder="Email"
+                               title="User Email" type="text"
+                               #email="ngModel"
+                               ngModel name="email" required>
+                        <mat-error *ngIf="email.invalid">*This field is required.</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row">
+                    <!--<mat-icon class="field-icon">lock</mat-icon>-->
+                    <mat-form-field fxFlex>
+                        <input matInput placeholder="Password"
+                               title="User Password" type="password"
+                               #password="ngModel"
+                               ngModel name="password" required>
+                        <mat-error *ngIf="password.invalid">*This field is required.</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">
+                <button fxFlex="30" mat-button mat-raised-button color="primary" type="submit">Create</button>
+            </div>
+        </form>
+    </div>
+
+</div>

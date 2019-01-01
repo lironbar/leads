@@ -1,0 +1,12 @@
+h1 {
+color: #8ad6d4;
+    /*color: #ffffff;*/
+}
+
+.sign-up-container {
+    padding: 120px;
+}
+
+mat-dialog-actions button{
+    color: #8ad6d4;
+}

@@ -18,7 +18,7 @@ export class AffiliateService {
             const fakeData = 'http://localhost:4200/assets/data/affiliates.json';
             const fakeEmptyData = 'http://localhost:4200/assets/data/affiliates_empty.json';
             const apiUrl = `${this.apiRoot}/affiliates`;
-            this.http.get<any>(fakeData).subscribe(
+            this.http.get<any>(fakeEmptyData).subscribe(
                 affiliates => {
                     this._affiliates.next(affiliates);
                 },
