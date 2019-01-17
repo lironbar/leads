@@ -12,12 +12,11 @@ import {Publisher} from '../../publisher.model';
 })
 
 export class PublishersTableComponent {
-    @Input() publishers: Publisher[];
+    @Input() publishers$: Observable<Publisher[]>;
     @Output() delete: EventEmitter<any> = new EventEmitter();
     displayedColumns: string[] = ['index', 'name', 'phone', 'address', 'campaigns', 'actions'];
 
-    constructor(public publisherService: PublisherService, public dialog: MatDialog) {
-    }
+    constructor(public dialog: MatDialog) {}
 
     onRemove(publisher) {
         this.delete.emit(publisher);

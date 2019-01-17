@@ -1,57 +1,260 @@
-<div fxLayout="row" class="full-height">
+<!--<div fxLayout="row" class="full-height">-->
 
-    <div fxFlex="40" [ngStyle]="{background: 'url(/assets/images/login-background01.png)'}">
+    <!--<div fxFlex="40" [ngStyle]="{background: 'url(/assets/images/login-background02.jpg)'}" class="login-img-container">-->
 
-    </div>
+    <!--</div>-->
 
-    <div fxFlex fxLayout="column" class="sign-up-container overflow-auto">
-        <form fxFlex (submit)="onSignUp(signupForm)" #signupForm="ngForm">
-            <div fxLayout="column" fxLayoutAlign="center center">
-                <h1 mat-dialog-title id="title">Create User</h1>
-                <!--<div fxLayout="row" fxLayoutAlign="space-around center">-->
-                    <!--<button mat-fab color="primary">-->
-                        <!--<mat-icon>testt</mat-icon>-->
-                    <!--</button>-->
-                    <!--<button mat-fab color="primary">Primary</button>-->
-                    <!--<button mat-fab color="primary">Primary</button>-->
+
+    <!--<div fxFlex fxLayout="column" class="sign-up-container overflow-auto">-->
+        <!--<div class="testbox">-->
+            <!--<h1>{{'Registration'}}</h1>-->
+
+            <!--<form (submit)="onSignUp(signupForm)" #signupForm="ngForm">-->
+                <!--<mat-divider></mat-divider>-->
+                <!--<div fxLayout="row" fxLayoutAlign="center center" class="padding-10">-->
+                    <!--<div fxFlex fxLayout="row" fxLayoutAlign="center center">-->
+                        <!--<input type="radio" value="publisher" id="publisher" name="type" [ngModel]="type" required/>-->
+                        <!--<label for="publisher" class="radio">Publisher</label>-->
+                    <!--</div>-->
+                    <!--<div fxFlex fxLayout="row" fxLayoutAlign="center center">-->
+                        <!--<input type="radio" value="affiliate" id="affiliate" name="type" [ngModel]="type" required/>-->
+                        <!--<label for="affiliate" class="radio">Affiliate</label>-->
+                    <!--</div>-->
                 <!--</div>-->
-            </div>
-            <div mat-dialog-content fxFlexAlign="center">
-                <div fxLayout="row">
-                    <!--<mat-icon class="field-icon">account_circle</mat-icon>-->
-                    <mat-form-field fxFlex>
-                        <input matInput placeholder="Name"
-                               title="User Name" type="text"
-                               #name="ngModel"
-                               ngModel name="name" required>
-                        <mat-error *ngIf="name.invalid">*This field is required.</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayout="row">
-                    <!--<mat-icon class="field-icon">email</mat-icon>-->
-                    <mat-form-field fxFlex>
-                        <input matInput placeholder="Email"
-                               title="User Email" type="text"
-                               #email="ngModel"
-                               ngModel name="email" required>
-                        <mat-error *ngIf="email.invalid">*This field is required.</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayout="row">
-                    <!--<mat-icon class="field-icon">lock</mat-icon>-->
-                    <mat-form-field fxFlex>
-                        <input matInput placeholder="Password"
-                               title="User Password" type="password"
-                               #password="ngModel"
-                               ngModel name="password" required>
-                        <mat-error *ngIf="password.invalid">*This field is required.</mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">
-                <button fxFlex="30" mat-button mat-raised-button color="primary" type="submit">Create</button>
-            </div>
-        </form>
+                <!--<mat-divider></mat-divider>-->
+                <!--<div fxLayout="column" class="margin-bottom-20">-->
+                    <!--<div fxFlex>-->
+                        <!--<label for="icon-name">-->
+                            <!--<mat-icon class="icon field-icon">account_circle</mat-icon>-->
+                        <!--</label>-->
+                        <!--<input type="text" id="icon-name"-->
+                               <!--name="name"-->
+                               <!--#name="ngModel"-->
+                               <!--ngModel-->
+                               <!--placeholder="Name" required/>-->
+                    <!--</div>-->
+                    <!--<mat-error *ngIf="submitted && name.invalid">*This field is required.</mat-error>-->
+
+                    <!--<div fxFlex>-->
+                        <!--<label for="icon-mail">-->
+                            <!--<mat-icon class="icon field-icon">mail</mat-icon>-->
+                        <!--</label>-->
+                        <!--<input type="text" id="icon-mail"-->
+                               <!--name="email"-->
+                               <!--#email="ngModel"-->
+                               <!--ngModel-->
+                               <!--placeholder="Email" required/>-->
+                    <!--</div>-->
+                    <!--<mat-error *ngIf="submitted && email.invalid">*This field is required.</mat-error>-->
+
+                    <!--<div fxFlex>-->
+                        <!--<label for="icon-password">-->
+                            <!--<mat-icon class="icon field-icon">lock</mat-icon>-->
+                        <!--</label>-->
+                        <!--<input type="text" id="icon-password"-->
+                               <!--name="password"-->
+                               <!--#password="ngModel"-->
+                               <!--ngModel-->
+                               <!--placeholder="Password" required/>-->
+                    <!--</div>-->
+                    <!--<mat-error *ngIf="submitted && password.invalid">*This field is required.</mat-error>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;<label class="icon-mail" for="icon-mail"><mat-icon class="icon field-icon">account_circle</mat-icon></label>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input type="text" name="name" id="icon-mail" placeholder="Email" required/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<label for="icon-name"><mat-icon class="icon field-icon">account_circle</mat-icon></label>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input type="text" name="name" id="icon-name" placeholder="Name" required/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<label for="icon-password"><mat-icon class="icon field-icon">account_circle</mat-icon></label>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input type="password" name="name" id="icon-password" placeholder="Password" required/>&ndash;&gt;-->
+                <!--<div mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">-->
+                    <!--<button fxFlex mat-button mat-raised-button color="primary" type="submit">Register</button>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;<a href="#" class="button">Register</a>&ndash;&gt;-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+
+
+
+
+    <!--&lt;!&ndash;<div fxFlex fxLayout="column" class="sign-up-container overflow-auto">&ndash;&gt;-->
+        <!--&lt;!&ndash;<form fxFlex (submit)="onSignUp(signupForm)" #signupForm="ngForm">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div fxLayout="column" fxLayoutAlign="center center">&ndash;&gt;-->
+                <!--&lt;!&ndash;<h1 mat-dialog-title id="title">Create User</h1>&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<div fxLayout="row" fxLayoutAlign="space-around center">&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<button mat-fab color="primary">&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;<mat-icon>testt</mat-icon>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;</button>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<button mat-fab color="primary">Primary</button>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<button mat-fab color="primary">Primary</button>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div mat-dialog-content fxFlexAlign="center">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div fxLayout="row">&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<mat-icon class="field-icon">account_circle</mat-icon>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;<mat-form-field fxFlex>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input matInput placeholder="Name"&ndash;&gt;-->
+                               <!--&lt;!&ndash;title="User Name" type="text"&ndash;&gt;-->
+                               <!--&lt;!&ndash;#name="ngModel"&ndash;&gt;-->
+                               <!--&lt;!&ndash;ngModel name="name" required>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<mat-error *ngIf="name.invalid">*This field is required.</mat-error>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div fxLayout="row">&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<mat-icon class="field-icon">email</mat-icon>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;<mat-form-field fxFlex>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input matInput placeholder="Email"&ndash;&gt;-->
+                               <!--&lt;!&ndash;title="User Email" type="text"&ndash;&gt;-->
+                               <!--&lt;!&ndash;#email="ngModel"&ndash;&gt;-->
+                               <!--&lt;!&ndash;ngModel name="email" required>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<mat-error *ngIf="email.invalid">*This field is required.</mat-error>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div fxLayout="row">&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<mat-icon class="field-icon">lock</mat-icon>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;<mat-form-field fxFlex>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input matInput placeholder="Password"&ndash;&gt;-->
+                               <!--&lt;!&ndash;title="User Password" type="password"&ndash;&gt;-->
+                               <!--&lt;!&ndash;#password="ngModel"&ndash;&gt;-->
+                               <!--&lt;!&ndash;ngModel name="password" required>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<mat-error *ngIf="password.invalid">*This field is required.</mat-error>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">&ndash;&gt;-->
+                <!--&lt;!&ndash;<button fxFlex="30" mat-button mat-raised-button color="primary" type="submit">Create</button>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</form>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div fxLayout="column" class="full-height overflow-auto login-img-container" [ngStyle]="{background: 'url(/assets/images/login-background01.png)'}">
+
+    <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="toolbar">
+        <img src="/assets/images/logo.png" alt="Logo" class="logo">
+        <span fxFlex></span>
+        <button mat-button (click)="setViewType('signIn')" *ngIf="viewType === 'signUp'">{{'Sign In'}}</button>
+        <button mat-button (click)="setViewType('signUp')" *ngIf="viewType === 'signIn'">{{'Sign Up'}}</button>
     </div>
 
+    <mat-card class="form-container" *ngIf="viewType === 'signUp'">
+        <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+            <mat-card-title fxFlex>{{'Registration'}}</mat-card-title>
+        </mat-card-header>
+        <form (submit)="onSignUp(signupForm)" #signupForm="ngForm">
+        <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+        <mat-card-content class="overflow-auto">
+                <mat-divider></mat-divider>
+                <div fxLayout="row" fxLayoutAlign="center center" class="padding-10">
+                    <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+                        <input type="radio" value="PUBLISHER" id="publisher" name="type" [ngModel]="type" required/>
+                        <label for="publisher" class="radio">Publisher</label>
+                    </div>
+                    <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+                        <input type="radio" value="AFFILIATE" id="affiliate" name="type" [ngModel]="type" required/>
+                        <label for="affiliate" class="radio">Affiliate</label>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div fxLayout="column" class="margin-bottom-20">
+                    <div fxFlex>
+                        <label for="icon-name">
+                            <mat-icon class="icon field-icon">account_circle</mat-icon>
+                        </label>
+                        <input type="text" id="icon-name"
+                               name="name"
+                               #name="ngModel"
+                               ngModel
+                               placeholder="Name" required/>
+                    </div>
+                    <mat-error *ngIf="submitted && name.invalid">*This field is required.</mat-error>
+
+                    <div fxFlex>
+                        <label for="icon-mail">
+                            <mat-icon class="icon field-icon">mail</mat-icon>
+                        </label>
+                        <input type="text" id="icon-mail"
+                               name="email"
+                               #email="ngModel"
+                               ngModel
+                               placeholder="Email" required/>
+                    </div>
+                    <mat-error *ngIf="submitted && email.invalid">*This field is required.</mat-error>
+
+                    <div fxFlex>
+                        <label for="icon-password">
+                            <mat-icon class="icon field-icon">lock</mat-icon>
+                        </label>
+                        <input type="password" id="icon-password"
+                               name="password"
+                               #password="ngModel"
+                               ngModel
+                               placeholder="Password" required/>
+                    </div>
+                    <mat-error *ngIf="submitted && password.invalid">*This field is required.</mat-error>
+                </div>
+        </mat-card-content>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+            <button fxFlex class="button" type="submit">Register</button>
+        </mat-card-actions>
+        </form>
+    </mat-card>
+
+    <mat-card class="form-container" *ngIf="viewType === 'signIn'">
+        <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+            <mat-card-title fxFlex>{{'Sign In'}}</mat-card-title>
+        </mat-card-header>
+        <form (submit)="onSignIn(signInForm)" #signInForm="ngForm">
+            <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+            <mat-card-content class="overflow-auto">
+                <div fxLayout="column" class="margin-bottom-20">
+                    <div fxFlex>
+                        <label for="sign-in-mail">
+                            <mat-icon class="icon field-icon">mail</mat-icon>
+                        </label>
+                        <input type="text" id="sign-in-mail"
+                               name="email"
+                               #email="ngModel"
+                               ngModel
+                               placeholder="Email" required/>
+                    </div>
+                    <mat-error *ngIf="submitted && email.invalid">*This field is required.</mat-error>
+
+                    <div fxFlex>
+                        <label for="sign-in-password">
+                            <mat-icon class="icon field-icon">lock</mat-icon>
+                        </label>
+                        <input type="password" id="sign-in-password"
+                               name="password"
+                               #password="ngModel"
+                               ngModel
+                               placeholder="Password" required/>
+                    </div>
+                    <mat-error *ngIf="submitted && password.invalid">*This field is required.</mat-error>
+                </div>
+            </mat-card-content>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+                <button fxFlex class="button" type="submit">Submit</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
 </div>

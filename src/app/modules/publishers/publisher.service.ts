@@ -2,7 +2,6 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Publisher} from './publisher.model';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Campaign} from '../campaigns/campaign.model';
 
 @Injectable()
 export class PublisherService {
@@ -12,8 +11,7 @@ export class PublisherService {
 
   private _publisher: Observable<Publisher> = new Observable<Publisher>();
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getAll(forceRefresh?: boolean) {
     // If the Subject was NOT subscribed before OR if forceRefresh is requested

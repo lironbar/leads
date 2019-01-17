@@ -10,13 +10,9 @@
             <!--<app-campaign-create-button (create)="onCreateCampaign($event)"></app-campaign-create-button>-->
         </div>
         <div fxFlex fxLayout="column">
-            <app-campaign-panels fxFlex *ngIf="campaigns$ | async as campagins; else loading"
+            <app-campaign-panels fxFlex *ngIf="campaigns$ | async as campagins;"
                                  [(campaigns)]="campagins">
             </app-campaign-panels>
-
-            <ng-template #loading>
-                <app-loader></app-loader>
-            </ng-template>
         </div>
     </div>
 </div>

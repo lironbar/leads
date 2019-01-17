@@ -18,7 +18,7 @@ export class PublishersViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.publishers$ = this.publisherService.getAll();
+        this.publishers$ = this.publisherService.getAll(true);
     }
 
     onCreatePublisher(publisher) {

@@ -4,11 +4,7 @@
     <app-campaign-create-button></app-campaign-create-button>
   </div>
 
-  <app-campaign-list fxFlex *ngIf="campaigns$ | async; let campaigns; else loading;"
+  <app-campaign-list fxFlex *ngIf="campaigns$ | async; let campaigns;"
                      [(campaigns)]="campaigns"
                      (delete)="onDeleteCampaign($event)"></app-campaign-list>
-
-  <ng-template #loading>
-    <app-loader></app-loader>
-  </ng-template>
 </div>

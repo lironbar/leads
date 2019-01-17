@@ -4,13 +4,9 @@
         <app-publisher-create-button (create)="onCreatePublisher($event)"></app-publisher-create-button>
     </div>
 
-    <app-publishers-table *ngIf="publishers$ | async; let publishers; else loading"
-                          [(publishers)]="publishers"
+    <app-publishers-table fxFlex [(publishers$)]="publishers$"
                           (delete)="onDeletePublisher($event)">
 
     </app-publishers-table>
 
-    <ng-template #loading>
-        <app-loader></app-loader>
-    </ng-template>
 </div>

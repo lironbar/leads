@@ -9,14 +9,10 @@
             <span fxFlex></span>
             <app-campaign-create-button (create)="onCreateCampaign($event)"></app-campaign-create-button>
         </div>
-        <app-campaign-panels fxFlex *ngIf="campaigns$ | async as campagins; else loading"
+        <app-campaign-panels fxFlex *ngIf="campaigns$ | async as campagins;"
                              [(campaigns)]="campagins"
                              (delete)="OnDeleteCampaign($event)">
         </app-campaign-panels>
-
-        <ng-template #loading>
-            <app-loader></app-loader>
-        </ng-template>
     </div>
 </div>
 

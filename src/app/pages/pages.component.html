@@ -1,36 +1,41 @@
 <div fxLayout="column" class="full-height">
-    <app-header class="app-navbar"></app-header>
+    <app-header></app-header>
 
     <mat-sidenav-container fxFlex fxLayout="column" class="main">
         <mat-sidenav class="padding-5" #sidenavright position="{{sidNavPosition}}" mode="side" opened>
             <mat-nav-list>
                 <button fxFlex
+                        *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
                         class="nav-btn" mat-icon-button color="primary"
                         matTooltip="Publishers"
                         [matTooltipPosition]="tooltipDirection"
-                        routerLink="/pages/publishers">
+                        routerLink="/publishers">
                     <mat-icon class="margin-right-5">person_pin</mat-icon>
                 </button>
             </mat-nav-list>
             <mat-nav-list>
                 <button fxFlex
+                        *ngxPermissionsOnly="['ADMIN', 'AFFILIATE']"
                         class="nav-btn" mat-icon-button color="primary"
                         matTooltip="Affiliates"
                         [matTooltipPosition]="tooltipDirection"
-                        routerLink="/pages/affiliates">
+                        routerLink="/affiliates">
                     <mat-icon class="margin-right-5">group</mat-icon>
                 </button>
             </mat-nav-list>
             <mat-nav-list>
                 <button fxFlex
+                        *ngxPermissionsOnly="['ADMIN', 'AFFILIATE']"
                         class="nav-btn" mat-icon-button color="primary"
                         matTooltip="Campaigns"
                         [matTooltipPosition]="tooltipDirection"
-                        routerLink="/pages/campaigns">
+                        routerLink="/campaigns">
                     <mat-icon class="margin-right-5">ballot</mat-icon>
                 </button>
             </mat-nav-list>
         </mat-sidenav>
         <router-outlet fxFlex></router-outlet>
     </mat-sidenav-container>
+
+    <app-loader></app-loader>
 </div>

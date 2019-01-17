@@ -4,12 +4,9 @@
     <app-affiliate-create-button (create)="onCreateAffiliate($event)"></app-affiliate-create-button>
   </div>
 
-  <app-affiliates-table *ngIf="affiliates$ | async; let affiliates; else loading"
+  <app-affiliates-table *ngIf="affiliates$ | async; let affiliates;"
                         [(affiliates)]="affiliates">
 
   </app-affiliates-table>
 
-  <ng-template #loading>
-    <app-loader></app-loader>
-  </ng-template>
 </div>

@@ -17,8 +17,8 @@ export class AffiliateService {
         if (!this._affiliates.observers.length || forceRefresh) {
             const fakeData = 'http://localhost:4200/assets/data/affiliates.json';
             const fakeEmptyData = 'http://localhost:4200/assets/data/affiliates_empty.json';
-            const apiUrl = `${this.apiRoot}/affiliates`;
-            this.http.get<any>(fakeEmptyData).subscribe(
+            const apiUrl = `${this.apiRoot}/affiliate`;
+            this.http.get<any>(apiUrl).subscribe(
                 affiliates => {
                     this._affiliates.next(affiliates);
                 },
@@ -35,13 +35,13 @@ export class AffiliateService {
     getAffiliateById(affiliateId) {
         const fakeData = 'http://localhost:4200/assets/data/affiliate.json';
         const apiUrl = `${this.apiRoot}/affiliate/${affiliateId}`;
-        return this.http.get<any>(fakeData);
+        return this.http.get<any>(apiUrl);
     }
 
     getAffiliateCampaigns(affiliateId) {
         const fakeData = 'http://localhost:4200/assets/data/campaigns.json';
         const apiUrl = `${this.apiRoot}/affiliate/${affiliateId}/campaigns`;
-        return this.http.get<any>(fakeData);
+        return this.http.get<any>(apiUrl);
     }
 
     create(affiliate: Affiliate) {

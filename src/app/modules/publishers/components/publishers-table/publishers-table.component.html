@@ -1,5 +1,5 @@
-<div fxLayout="column" class="full-height" *ngIf="publishers.length; else empty_state">
-    <table mat-table [dataSource]="publishers" class="mat-elevation-z8">
+<div fxLayout="column" class="full-height" *ngIf="(publishers$ | async)?.length; else empty_state">
+    <table mat-table [dataSource]="publishers$" class="mat-elevation-z8">
 
         <!-- Index Column -->
         <ng-container matColumnDef="index">

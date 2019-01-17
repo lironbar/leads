@@ -8,7 +8,6 @@ import {CampaignListComponent} from './modules/campaigns/components/campaign-lis
 import {CampaignPanelsComponent} from './modules/campaigns/components/campaign-panels/campaign-panels.component';
 import {CampaignCreateButtonComponent} from './modules/campaigns/components/campaign-create-button/campaign-create-button.component';
 import {CreateCampaignDialogComponent} from './modules/campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
-import { LoaderComponent } from './modules/commons/components/loader/loader.component';
 
 import {
     MatAutocompleteModule,
@@ -53,8 +52,7 @@ import {EmptyStateComponent} from './modules/commons/components/empty-state/empt
         CampaignCreateButtonComponent,
         CreateCampaignDialogComponent,
         ConfirmDialogComponent,
-        EmptyStateComponent,
-        LoaderComponent
+        EmptyStateComponent
     ],
     imports: [
         CommonModule,
@@ -134,8 +132,7 @@ import {EmptyStateComponent} from './modules/commons/components/empty-state/empt
         CampaignPanelsComponent,
         CampaignCreateButtonComponent,
         CreateCampaignDialogComponent,
-        EmptyStateComponent,
-        LoaderComponent
+        EmptyStateComponent
     ],
     providers: [],
     entryComponents: [ConfirmDialogComponent, CreateCampaignDialogComponent]
