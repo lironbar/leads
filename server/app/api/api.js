@@ -1,8 +1,10 @@
-const { port, env } = global.App.Config;
+const {port, env} = global.App.Config;
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const api = express();
+const UserModel = require('./user/model.js');
+const UserCtrl = require('./user/controller');
 
 // CORS
 if (env === 'dev') {
@@ -18,7 +20,47 @@ if (env === 'dev') {
 api.use(bodyParser.json());
 api.use(cookieParser());
 
+// registration
+api.post('/register', UserCtrl.save);
+
+// login
+api.post('/login', (req, res, next) => {
+    UserModel.countDocuments({email: req.body.username, password: req.body.password}, (countError, count) => {
+        if (countError) {
+            req.status(500);
+            return req.end();
+        }
+        if (count) {
+            res.cookie('session', Date.now(), {
+                maxAge: 1000 * 60 * 60, // would expire after 60 minutes
+                httpOnly: true, // The cookie only accessible by the web server
+            });
+            res.status(200);
+            res.end();
+        } else {
+            res.status(400);
+            res.end();
+        }
+    });
+});
+
+api.post('/logout', (req, res, next) => {
+    res.clearCookie('session');
+    res.status(200);
+    res.end();
+});
+
+// auth
+api.use((req, res, next) => {
+    if (req.cookies.session) {
+        return next();
+    }
+    res.status(401);
+    res.end();
+});
+
 // routing
+api.use('/user', require('./user/router.js'));
 api.use('/publisher', require('./publisher/router.js'));
 api.use('/campaign', require('./campaign/router.js'));
 api.use('/affiliate', require('./affiliate/router.js'));

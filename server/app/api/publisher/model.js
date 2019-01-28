@@ -28,7 +28,7 @@ PublisherSchema.virtual('campaigns', {
     localField: '_id',
     foreignField: 'publisherId',
     justOne: false
-})
+});
 
 PublisherSchema.post('remove', { document: true }, (removedDoc) => {
     // remove campaigns associated with the publisher
