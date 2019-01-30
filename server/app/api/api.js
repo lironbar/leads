@@ -33,12 +33,12 @@ api.post('/login', (req, res, next) => {
     UserModel
         .find({ email: req.body.username, password: req.body.password })
         .limit(1)
-        .exec((findError, foundDoc) => {
+        .exec((findError, foundDocs) => {
             if (findError) {
                 req.status(500);
                 return req.end();
             }
-            const userDoc = foundDoc[0];
+            const userDoc = foundDocs[0];
             if (userDoc) {
                 res.cookie('session', Date.now(), {
                     maxAge: 1000 * 60 * 60, // would expire after 60 minutes
@@ -53,6 +53,7 @@ api.post('/login', (req, res, next) => {
         });
 });
 
+// logout
 api.post('/logout', (req, res, next) => {
     res.clearCookie('session');
     res.status(200);
@@ -61,7 +62,7 @@ api.post('/logout', (req, res, next) => {
 
 // auth
 api.use((req, res, next) => {
-    if (req.cookies.session) {
+    if (env === 'dev' || req.cookies.session) {
         return next();
     }
     res.status(401);
