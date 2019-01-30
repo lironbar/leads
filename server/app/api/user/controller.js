@@ -1,6 +1,7 @@
 const User = require('./model.js');
 
 module.exports.save = (req, res, next) => {
+    req.body.roles = [req.body.type];
     new User(req.body).save((saveError, savedDoc) => {
         if (saveError) {
             console.warn('user.save', saveError);

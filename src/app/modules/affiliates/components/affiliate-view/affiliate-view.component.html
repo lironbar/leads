@@ -5,10 +5,10 @@
     </app-affiliate-info-bar>
 
     <div fxFlex fxLayout="column">
-        <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
-            <span fxFlex></span>
+        <!--<div fxFlex="none" fxLayout="row" fxLayoutAlign="start center">-->
+            <!--<span fxFlex></span>-->
             <!--<app-campaign-create-button (create)="onCreateCampaign($event)"></app-campaign-create-button>-->
-        </div>
+        <!--</div>-->
         <div fxFlex fxLayout="column">
             <app-campaign-panels fxFlex *ngIf="campaigns$ | async as campagins;"
                                  [(campaigns)]="campagins">

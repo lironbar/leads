@@ -34,7 +34,7 @@ export class LoginViewComponent {
                 password: form.value.password,
                 type: form.value.type
             };
-            this.authenticationService.signUp(user, false)
+            this.authenticationService.signUp(user)
                 .subscribe(responseUser => {
                     this._navigateToRouter(responseUser.type);
                 });

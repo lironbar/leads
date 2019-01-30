@@ -6,6 +6,7 @@ import {PagesComponent} from './pages/pages.component';
 import {NgxPermissionsGuard} from 'ngx-permissions';
 import {PageForbiddenComponent} from './core/error-pages/components/page-forbidden/page-forbidden.component';
 import {PageNotFoundComponent} from './core/error-pages/components/page-not-found/page-not-found.component';
+import {PageServerErrorComponent} from './core/error-pages/components/page-server-error/page-server-error.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginViewComponent},
@@ -52,6 +53,7 @@ const routes: Routes = [
     },
     {path: '403', component: PageNotFoundComponent},
     {path: '404', component: PageForbiddenComponent},
+    {path: '500', component: PageServerErrorComponent},
     {path: '**', redirectTo: '/403'}
 ];
 

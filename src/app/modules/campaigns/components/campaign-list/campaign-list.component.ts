@@ -21,4 +21,8 @@ export class CampaignListComponent {
         this.delete.emit(campaign);
     }
 
+    onJoinCampaign(campaign: Campaign) {
+        debugger;
+    }
+
 }

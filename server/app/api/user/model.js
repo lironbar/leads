@@ -10,6 +10,8 @@ const UserSchema = new Schema({
             return new RegExp('.+\@.+\..+').test(value);
         }
     },
+    type: {type: String, required: true},
+    roles: {type: Array},
     updated: {type: Number, default: Date.now, select: false}
 });
 

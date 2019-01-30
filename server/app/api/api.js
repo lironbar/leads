@@ -51,13 +51,14 @@ api.post('/logout', (req, res, next) => {
 });
 
 // auth
-api.use((req, res, next) => {
-    if (req.cookies.session) {
-        return next();
-    }
-    res.status(401);
-    res.end();
-});
+// api.use((req, res, next) => {
+//     console.log(req);
+//     if (req.cookies.session) {
+//         return next();
+//     }
+//     res.status(401);
+//     res.end();
+// });
 
 // routing
 api.use('/user', require('./user/router.js'));

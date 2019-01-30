@@ -48,6 +48,7 @@ import {LoaderComponent} from './modules/commons/components/loader/loader.compon
 
 import {PageForbiddenComponent} from './core/error-pages/components/page-forbidden/page-forbidden.component';
 import {PageNotFoundComponent} from './core/error-pages/components/page-not-found/page-not-found.component';
+import {PageServerErrorComponent} from './core/error-pages/components/page-server-error/page-server-error.component';
 
 import {AuthenticationService} from './core/authentication/authentication.service';
 import {LoaderService} from './modules/commons/services/loader.service';
@@ -66,7 +67,8 @@ import { LoaderInterceptorService} from './core/Interceptoers/httpconfig.interce
         PagesComponent,
         LoaderComponent,
         PageForbiddenComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        PageServerErrorComponent
     ],
     imports: [
         FlexLayoutModule,

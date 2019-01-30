@@ -1,31 +1,35 @@
-<div fxLayout="row wrap" class="full-height" *ngIf="campaigns.length; else empty_state">
-    <mat-card *ngFor="let campaign of campaigns" fxFlex="33">
-        <mat-card-header>
-            <img mat-card-avatar class="example-header-image"
-                 src="http://www.news1.co.il/uploadimages/NEW-350582301616669.jpg" alt="Image of Publisher">
-            <!--<div mat-card-avatar class="example-header-image"></div>-->
-            <mat-card-title>{{campaign.name}}</mat-card-title>
-            <mat-card-subtitle>
-                <span class="margin-right-10">Price: {{campaign.price}}</span>
-                <span>Score: {{campaign.score}}</span>
-            </mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image class="campaign-img" src="{{campaign.imageUrl || defaultImageUrl}}"
-             alt="Photo of a campaign">
-        <!--<app-campaign-image-url [(imageUrl)]="campaign.imageUrl"></app-campaign-image-url>-->
-        <!--<img mat-card-image src="{{campaign.imageUrl}}" alt="Image of a campaign">-->
-        <mat-card-content>
-            <!--<span class="mat-caption">{{campaign.description}}</span>-->
-        </mat-card-content>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="start center">
-            <span fxFlex></span>
-            <button mat-button color="warn" (click)="onDelete(campaign)">Delete</button>
-            <!--<button mat-button>SHARE</button>-->
-        </mat-card-actions>
-    </mat-card>
+<div fxLayout="column" class="full-height">
+    <div fxFlex fxLayout="row wrap" class="overflow-auto" *ngIf="campaigns.length; else empty_state">
+        <mat-card *ngFor="let campaign of campaigns" fxFlex="33">
+            <mat-card-header>
+                <img mat-card-avatar class="example-header-image"
+                     src="http://www.news1.co.il/uploadimages/NEW-350582301616669.jpg" alt="Image of Publisher">
+                <!--<div mat-card-avatar class="example-header-image"></div>-->
+                <mat-card-title>{{campaign.name}}</mat-card-title>
+                <mat-card-subtitle>
+                    <span class="margin-right-10">Price: {{campaign.price}}</span>
+                    <span>Score: {{campaign.score}}</span>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image class="campaign-img" src="{{campaign.imageUrl || defaultImageUrl}}"
+                 alt="Photo of a campaign">
+            <!--<app-campaign-image-url [(imageUrl)]="campaign.imageUrl"></app-campaign-image-url>-->
+            <!--<img mat-card-image src="{{campaign.imageUrl}}" alt="Image of a campaign">-->
+            <mat-card-content>
+                <!--<span class="mat-caption">{{campaign.description}}</span>-->
+            </mat-card-content>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="start center">
+                <span fxFlex></span>
+                <button mat-button color="warn" (click)="onDelete(campaign)">Delete</button>
+                <button mat-button color="primary" (click)="onJoinCampaign(campaign)">Join</button>
+                <!--<button mat-button>SHARE</button>-->
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <ng-template #empty_state>
+        <app-empty-state text="No Campaigns Found"
+                         src="/assets/empty_states/empty_state_campaigns.png"></app-empty-state>
+    </ng-template>
 </div>
 
-<ng-template #empty_state>
-    <app-empty-state text="No Campaigns Found"
-                     src="/assets/empty_states/empty_state_campaigns.png"></app-empty-state>
-</ng-template>

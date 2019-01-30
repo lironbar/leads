@@ -1,11 +1,12 @@
 import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Affiliate} from './affiliate.model';
+import {Constants} from '../commons/constants';
 
 @Injectable()
 export class AffiliateService {
-    private apiRoot = 'http://localhost:8080';
+    private BASE_URL = Constants.BASE_URL;
     private _affiliates: BehaviorSubject<Affiliate[]> = new BehaviorSubject([]);
     public readonly affiliates: Observable<Affiliate[]> = this._affiliates.asObservable();
 
@@ -17,7 +18,7 @@ export class AffiliateService {
         if (!this._affiliates.observers.length || forceRefresh) {
             const fakeData = 'http://localhost:4200/assets/data/affiliates.json';
             const fakeEmptyData = 'http://localhost:4200/assets/data/affiliates_empty.json';
-            const apiUrl = `${this.apiRoot}/affiliate`;
+            const apiUrl = `${this.BASE_URL}/affiliate`;
             this.http.get<any>(apiUrl).subscribe(
                 affiliates => {
                     this._affiliates.next(affiliates);
@@ -34,18 +35,19 @@ export class AffiliateService {
 
     getAffiliateById(affiliateId) {
         const fakeData = 'http://localhost:4200/assets/data/affiliate.json';
-        const apiUrl = `${this.apiRoot}/affiliate/${affiliateId}`;
+        const apiUrl = `${this.BASE_URL}/affiliate/${affiliateId}`;
         return this.http.get<any>(apiUrl);
     }
 
-    getAffiliateCampaigns(affiliateId) {
+    getAffiliateCampaigns(affiliateId, hasJoined?) {
         const fakeData = 'http://localhost:4200/assets/data/campaigns.json';
-        const apiUrl = `${this.apiRoot}/affiliate/${affiliateId}/campaigns`;
-        return this.http.get<any>(apiUrl);
+        const apiUrl = `${this.BASE_URL}/affiliate/${affiliateId}/campaigns`;
+        const params = new HttpParams().set('joined', hasJoined);
+        return this.http.get<any>(apiUrl, {params: params});
     }
 
     create(affiliate: Affiliate) {
-        const apiUrl = `${this.apiRoot}/affiliate`;
+        const apiUrl = `${this.BASE_URL}/affiliate`;
         this.http.post<Affiliate>(apiUrl, affiliate).subscribe(
             newAffiliate => {
                 const affiliates = this._affiliates.getValue();
@@ -59,7 +61,7 @@ export class AffiliateService {
     }
 
     delete(id: string) {
-        const apiUrl = `${this.apiRoot}/affiliate/${id}`;
+        const apiUrl = `${this.BASE_URL}/affiliate/${id}`;
         return this.http.delete<Affiliate>(apiUrl).subscribe(
             deletedAffiliate => {
                 const affiliates = this._affiliates.getValue().filter(function (a) {

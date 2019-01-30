@@ -3,12 +3,16 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } fr
 import { Observable, pipe } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LoaderService} from '../../modules/commons/services/loader.service';
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LoaderInterceptorService implements HttpInterceptor {
-    constructor(private loaderService: LoaderService) { }
+    constructor(
+        private loaderService: LoaderService,
+        private router: Router
+    ) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.showLoader();
         return next.handle(req).pipe(tap((event: HttpEvent<any>) => {
@@ -17,7 +21,17 @@ export class LoaderInterceptorService implements HttpInterceptor {
                 }
             },
             (err: any) => {
-                this.onEnd();
+                this.hideLoader();
+
+                if (err.status === 403) {
+                    this.navigateTo('403');
+                }
+                if (err.status === 404) {
+                    this.navigateTo('404');
+                }
+                if (err.status === 500) {
+                    this.navigateTo('500');
+                }
             }));
     }
     private onEnd(): void {
@@ -28,5 +42,8 @@ export class LoaderInterceptorService implements HttpInterceptor {
     }
     private hideLoader(): void {
         this.loaderService.hide();
+    }
+    private navigateTo(path) {
+        this.router.navigate([path]);
     }
 }

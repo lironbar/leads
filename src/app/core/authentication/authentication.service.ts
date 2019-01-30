@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import {map} from 'rxjs/operators';
 import { User } from '../user/user.model';
+import { Constants } from '../../modules/commons/constants';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+    private BASE_URL = Constants.BASE_URL;
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
@@ -21,40 +24,29 @@ export class AuthenticationService {
         return this.currentUserSubject.value.roles;
     }
 
-    signUp(user: User, isAdminTestFlag: Boolean) {
-        user.token = '123124124asdasfasf123sa';
-        user.roles = isAdminTestFlag ? ['ADMIN'] : [user.type];
-        if (user && user.token) {
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-            return this.currentUser;
-        }
+    signUp(user: User) {
+        return this.http.post<User>(`${this.BASE_URL}/register`, user)
+            .pipe(
+                map(createdUser => {
+                    // user.token = '123124124asdasfasf123sa';
+                    localStorage.setItem('currentUser', JSON.stringify(createdUser));
+                    this.currentUserSubject.next(createdUser);
+                    return this.currentUserSubject.value;
+                })
+            );
     }
 
-    login(email: string, password: string) {
-        // const fakeData = 'http://localhost:4200/assets/data/user.json';
-        // return this.http.get<any>(fakeData)
-        // // return this.http.post<any>(`/users/authenticate`, { username, password })
-        //     .pipe(map(user => {
-        //         if (user && user.token) {
-        //             localStorage.setItem('currentUser', JSON.stringify(user));
-        //             this.currentUserSubject.next(user);
-        //             this.router.navigate(['/publishers']);
-        //         }
-        //         return user;
-        //     }));
-
-        const user = {
-            email: email,
-            password: password,
-            token: '123124124asdasfasf123sa',
-            roles: ['ADMIN']
-        };
-        if (user && user.token) {
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-            return this.currentUser;
-        }
+    login(username: string, password: string) {
+        return this.http.post<User>(`${this.BASE_URL}/login`, {username: username, password: password})
+            .pipe(
+                map(userResponse => {
+                    // if (user && user.token) {
+                    // }
+                        localStorage.setItem('currentUser', JSON.stringify(userResponse));
+                        this.currentUserSubject.next(userResponse);
+                        return userResponse;
+                })
+            );
     }
 
     logout() {
