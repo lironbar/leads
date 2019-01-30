@@ -1,5 +1,5 @@
 import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Affiliate} from './affiliate.model';
 import {Constants} from '../commons/constants';
@@ -42,7 +42,6 @@ export class AffiliateService {
     getAffiliateCampaigns(affiliateId, hasJoined?) {
         const fakeData = 'http://localhost:4200/assets/data/campaigns.json';
         const apiUrl = `${this.BASE_URL}/affiliate/${affiliateId}/campaigns`;
-        const params = new HttpParams().set('joined', hasJoined);
         return this.http.get<any>(apiUrl, {params: params});
     }
 

@@ -19,7 +19,9 @@ export class CampaignsViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.campaignService.getCampaigns().subscribe(campaigns => this.campaigns$.next(campaigns));
+        // this.campaignService.getCampaigns().subscribe(campaigns => this.campaigns$.next(campaigns));
+        this.campaignService.getCampaignsByAffiliateId('someId', false)
+            .subscribe(campaigns => this.campaigns$.next(campaigns));
     }
 
     onDeleteCampaign(campaign: Campaign) {
