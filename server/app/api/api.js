@@ -16,6 +16,11 @@ if (env === 'dev') {
     });
 }
 
+// allow OPTIONS requests
+api.options('/*', (req, res, next) => {
+    res.send(200);
+});
+
 // parsing middlewares
 api.use(bodyParser.json());
 api.use(cookieParser());
