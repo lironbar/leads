@@ -38,13 +38,14 @@ api.post('/login', (req, res, next) => {
                 req.status(500);
                 return req.end();
             }
-            if (foundDoc) {
+            const userDoc = foundDoc[0];
+            if (userDoc) {
                 res.cookie('session', Date.now(), {
                     maxAge: 1000 * 60 * 60, // would expire after 60 minutes
                     httpOnly: true, // The cookie only accessible by the web server
                 });
                 res.status(200);
-                res.json(foundDoc);
+                res.json(userDoc);
             } else {
                 res.status(400);
                 res.end();
