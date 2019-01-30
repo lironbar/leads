@@ -39,10 +39,10 @@ export class AffiliateService {
         return this.http.get<any>(apiUrl);
     }
 
-    getAffiliateCampaigns(affiliateId, hasJoined?) {
+    getAffiliateCampaigns(affiliateId) {
         const fakeData = 'http://localhost:4200/assets/data/campaigns.json';
         const apiUrl = `${this.BASE_URL}/affiliate/${affiliateId}/campaigns`;
-        return this.http.get<any>(apiUrl, {params: params});
+        return this.http.get<any>(apiUrl);
     }
 
     create(affiliate: Affiliate) {
