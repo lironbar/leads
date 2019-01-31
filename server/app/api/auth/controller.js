@@ -4,8 +4,8 @@ const User = require('../user/model.js');
 module.exports.login = (req, res, next) => {
     User
         .find({ email: req.body.username, password: req.body.password })
-        .populate('members.affiliates')
-        .populate('members.publishers')
+        //.populate('members.affiliates')
+        //.populate('members.publishers')
         .limit(1)
         .exec((findError, foundDocs) => {
             if (findError) {
