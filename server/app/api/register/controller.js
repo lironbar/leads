@@ -1,5 +1,6 @@
 const { join } = require('path');
 const User = require('../user/model.js');
+const userCtrl = require('../user/controller.js');
 
 module.exports.register = (req, res, next) => {
     const memberRolesSet = new Set(['PUBLISHER', 'AFFILIATE']);
@@ -49,8 +50,8 @@ module.exports.register = (req, res, next) => {
                             return res.send('Something went wrong!');
                     }
                 }
-                res.status(200);
-                res.json(updatedUserDoc);
+                req.params.id = updatedUserDoc._id;
+                userCtrl.findOne(req, res, next);
             });
         });
     });
