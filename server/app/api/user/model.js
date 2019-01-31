@@ -10,9 +10,16 @@ const UserSchema = new Schema({
             return new RegExp('.+\@.+\..+').test(value);
         }
     },
-    roles: { type: [{ type: String, enum: ['ADMIN', 'PUBLISHER', 'AFFILIATE'] }] },
+    phone: { type: String, required: true },
+    members: {
+        publishers: { type: [{ type: Schema.Types.ObjectId, ref: 'publisher' }] },
+        affiliates: { type: [{ type: Schema.Types.ObjectId, ref: 'affiliate' }] }
+    },
+    superadmin: { type: Boolean, default: false, select: false },
     updated: { type: Number, default: Date.now, select: false }
 });
+
+// TODO: disable members on user deactivation
 
 const User = mongoose.model('user', UserSchema);
 

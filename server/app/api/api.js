@@ -3,8 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const api = express();
-const UserModel = require('./user/model.js');
-const UserCtrl = require('./user/controller');
 
 // CORS
 if (env === 'dev') {
@@ -26,48 +24,10 @@ api.use(bodyParser.json());
 api.use(cookieParser());
 
 // registration
-api.post('/register', UserCtrl.save);
-
-// login
-api.post('/login', (req, res, next) => {
-    UserModel
-        .find({ email: req.body.username, password: req.body.password })
-        .limit(1)
-        .exec((findError, foundDocs) => {
-            if (findError) {
-                req.status(500);
-                return req.end();
-            }
-            const userDoc = foundDocs[0];
-            if (userDoc) {
-                res.cookie('session', Date.now(), {
-                    maxAge: 1000 * 60 * 60, // would expire after 60 minutes
-                    httpOnly: true, // The cookie only accessible by the web server
-                });
-                res.status(200);
-                res.json(userDoc);
-            } else {
-                res.status(400);
-                res.end();
-            }
-        });
-});
-
-// logout
-api.post('/logout', (req, res, next) => {
-    res.clearCookie('session');
-    res.status(200);
-    res.end();
-});
+api.use('/register', require('./register/router.js'));
 
 // auth
-api.use((req, res, next) => {
-    if (env === 'dev' || req.cookies.session) {
-        return next();
-    }
-    res.status(401);
-    res.end();
-});
+api.use('/', require('./auth/router.js'));
 
 // routing
 api.use('/user', require('./user/router.js'));
