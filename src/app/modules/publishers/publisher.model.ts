@@ -6,7 +6,7 @@ export interface Publisher {
   contact?: string;
   phone: string;
   email: string;
-  address: string;
+  address?: string;
   phc: string;
   campaignIds?: Campaign[];
 }

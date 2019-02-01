@@ -4,6 +4,7 @@ import {Campaign} from '../../campaign.model';
 import {CampaignService} from '../../campaign.service';
 import {ConfirmDialogComponent} from '../../../commons/components/dialogs/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material';
+// import {AffiliateService} from '../../../affiliates/affiliates.service';
 
 
 @Component({
@@ -15,13 +16,19 @@ import {MatDialog} from '@angular/material';
 export class CampaignsViewComponent implements OnInit {
     campaigns$: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
 
-    constructor(public campaignService: CampaignService, public dialog: MatDialog) {
+    constructor(
+        public campaignService: CampaignService,
+        public dialog: MatDialog) {
     }
 
     ngOnInit() {
         // this.campaignService.getCampaigns().subscribe(campaigns => this.campaigns$.next(campaigns));
         this.campaignService.getCampaignsByAffiliateId('someId', false)
             .subscribe(campaigns => this.campaigns$.next(campaigns));
+    }
+
+    onJoinCampaign(campaign: Campaign) {
+        debugger;
     }
 
     onDeleteCampaign(campaign: Campaign) {

@@ -6,5 +6,6 @@
 
   <app-campaign-list fxFlex *ngIf="campaigns$ | async; let campaigns;"
                      [(campaigns)]="campaigns"
+                     (join)="onJoinCampaign($event)"
                      (delete)="onDeleteCampaign($event)"></app-campaign-list>
 </div>

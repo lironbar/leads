@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './core/auth-guard/auth-guard.service';
 import {LoginViewComponent} from './core/login/components/login-view.component';
+import {RegisterViewComponent} from './core/register/components/register-view.component';
 import {PagesComponent} from './pages/pages.component';
 import {NgxPermissionsGuard} from 'ngx-permissions';
 import {PageForbiddenComponent} from './core/error-pages/components/page-forbidden/page-forbidden.component';
@@ -9,7 +10,8 @@ import {PageNotFoundComponent} from './core/error-pages/components/page-not-foun
 import {PageServerErrorComponent} from './core/error-pages/components/page-server-error/page-server-error.component';
 
 const routes: Routes = [
-    {path: 'login', component: LoginViewComponent},
+    {path: 'sign-in', component: LoginViewComponent},
+    {path: 'register', component: RegisterViewComponent},
     {
         path: '',
         component: PagesComponent,

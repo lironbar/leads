@@ -24,11 +24,16 @@ export class AuthenticationService {
         return this.currentUserSubject.value.roles;
     }
 
-    signUp(user: User) {
-        return this.http.post<User>(`${this.BASE_URL}/register`, user)
+    public get currentUserRole() {
+        return this.currentUserSubject.value.currentRole;
+    }
+
+    register(user: User, type: string) {
+        return this.http.post<User>(`${this.BASE_URL}/register/${type}`, user)
             .pipe(
                 map(createdUser => {
                     // user.token = '123124124asdasfasf123sa';
+                    createdUser.currentRole = createdUser.members.publishers.length ? 'PUBLISHER' : 'AFFILIATE';
                     localStorage.setItem('currentUser', JSON.stringify(createdUser));
                     this.currentUserSubject.next(createdUser);
                     return this.currentUserSubject.value;
@@ -42,9 +47,10 @@ export class AuthenticationService {
                 map(userResponse => {
                     // if (user && user.token) {
                     // }
-                        localStorage.setItem('currentUser', JSON.stringify(userResponse));
-                        this.currentUserSubject.next(userResponse);
-                        return userResponse;
+                    userResponse.currentRole = userResponse.members.publishers.length ? 'PUBLISHER' : 'AFFILIATE';
+                    localStorage.setItem('currentUser', JSON.stringify(userResponse));
+                    this.currentUserSubject.next(userResponse);
+                    return userResponse;
                 })
             );
     }

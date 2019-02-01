@@ -1,0 +1,128 @@
+<div fxLayout="column" class="full-height overflow-auto login-img-container" [ngStyle]="{background: 'url(/assets/images/register-background.jpeg)'}">
+
+    <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="toolbar">
+        <img src="/assets/images/logo.png" alt="Logo" class="logo">
+        <span fxFlex></span>
+        <button mat-button routerLink="/sign-in">{{'Sign In'}}</button>
+    </div>
+
+    <mat-card class="form-container">
+        <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+            <mat-card-title fxFlex>{{'Register'}}</mat-card-title>
+        </mat-card-header>
+        <div fxLayout="row" fxLayoutAlign="center center" class="padding-10">
+            <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+                <input type="radio" value="affiliate" id="affiliate" name="type" [(ngModel)]="type" required/>
+                <label for="affiliate" class="radio">Affiliate</label>
+            </div>
+            <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+                <input type="radio" value="publisher" id="publisher" name="type" [(ngModel)]="type" required/>
+                <label for="publisher" class="radio">Publisher</label>
+            </div>
+        </div>
+        <form (submit)="onRegister(registerForm)" #registerForm="ngForm">
+            <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+            <mat-card-content class="overflow-auto">
+                <mat-divider></mat-divider>
+                <div fxLayout="column" class="margin-bottom-20">
+
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex fxLayout="column" class="margin-5">
+                            <div fxFlex>
+                                <label for="icon-name">
+                                    <mat-icon class="icon field-icon">account_circle</mat-icon>
+                                </label>
+                                <input type="text" id="icon-name"
+                                       name="name"
+                                       #name="ngModel"
+                                       ngModel
+                                       placeholder="Name" required/>
+                            </div>
+                            <mat-error *ngIf="submitted && name.invalid">*This field is required.</mat-error>
+                        </div>
+
+                        <div fxFlex fxLayout="column" class="margin-5">
+                            <div fxFlex>
+                                <label for="icon-mail">
+                                    <mat-icon class="icon field-icon">mail</mat-icon>
+                                </label>
+                                <input type="text" id="icon-mail"
+                                       name="email"
+                                       #email="ngModel"
+                                       ngModel
+                                       placeholder="Email" required/>
+                            </div>
+                            <mat-error *ngIf="submitted && email.invalid">*This field is required.</mat-error>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="start center">
+
+                        <div fxFlex fxLayout="column" class="margin-5">
+                            <div fxFlex>
+                                <label for="icon-phone">
+                                    <mat-icon class="icon field-icon">phone</mat-icon>
+                                </label>
+                                <input type="text" id="icon-phone"
+                                       name="phone"
+                                       #phone="ngModel"
+                                       ngModel
+                                       placeholder="Phone" required/>
+                            </div>
+                            <mat-error *ngIf="submitted && phone.invalid">*This field is required.</mat-error>
+                        </div>
+
+                        <div fxFlex fxLayout="column" class="margin-5">
+                            <div fxFlex>
+                                <label for="icon-password">
+                                    <mat-icon class="icon field-icon">lock</mat-icon>
+                                </label>
+                                <input type="password" id="icon-password"
+                                       name="password"
+                                       #password="ngModel"
+                                       ngModel
+                                       placeholder="Password" required/>
+                            </div>
+                            <mat-error *ngIf="submitted && password.invalid">*This field is required.</mat-error>
+                        </div>
+
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="type === 'publisher'">
+                        <div fxFlex fxLayout="column" class="margin-5">
+                            <div fxFlex>
+                                <label for="phc">
+                                    <mat-icon class="icon field-icon">work</mat-icon>
+                                </label>
+                                <input type="text" id="phc"
+                                       name="phc"
+                                       #phc="ngModel"
+                                       ngModel
+                                       placeholder="PHC" required/>
+                            </div>
+                            <mat-error *ngIf="submitted && phc.invalid">*This field is required.</mat-error>
+                        </div>
+
+                        <div fxFlex fxLayout="column" class="margin-5">
+                            <div fxFlex>
+                                <label for="contact">
+                                    <mat-icon class="icon field-icon">perm_contact_calendar</mat-icon>
+                                </label>
+                                <input type="text" id="contact"
+                                       name="contact"
+                                       #contact="ngModel"
+                                       ngModel
+                                       placeholder="contact"/>
+                            </div>
+                            <mat-error *ngIf="submitted && contact.invalid">*This field is required.</mat-error>
+                        </div>
+                    </div>
+
+                </div>
+            </mat-card-content>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+                <button fxFlex class="button" type="submit">Register</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

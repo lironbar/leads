@@ -147,80 +147,14 @@
 
 
 
-<div fxLayout="column" class="full-height overflow-auto login-img-container" [ngStyle]="{background: 'url(/assets/images/login-background01.png)'}">
+<div fxLayout="column" class="full-height overflow-auto login-img-container" [ngStyle]="{background: 'url(/assets/images/register-background.jpeg)'}">
 
     <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="toolbar">
         <img src="/assets/images/logo.png" alt="Logo" class="logo">
         <span fxFlex></span>
-        <button mat-button (click)="setViewType('signIn')" *ngIf="viewType === 'signUp'">{{'Sign In'}}</button>
-        <button mat-button (click)="setViewType('signUp')" *ngIf="viewType === 'signIn'">{{'Sign Up'}}</button>
+        <button mat-button routerLink="/register">{{'Register'}}</button>
     </div>
-
-    <mat-card class="form-container" *ngIf="viewType === 'signUp'">
-        <mat-card-header fxLayout="row" fxLayoutAlign="center center">
-            <mat-card-title fxFlex>{{'Registration'}}</mat-card-title>
-        </mat-card-header>
-        <form (submit)="onSignUp(signupForm)" #signupForm="ngForm">
-        <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
-        <mat-card-content class="overflow-auto">
-                <mat-divider></mat-divider>
-                <div fxLayout="row" fxLayoutAlign="center center" class="padding-10">
-                    <div fxFlex fxLayout="row" fxLayoutAlign="center center">
-                        <input type="radio" value="PUBLISHER" id="publisher" name="type" [ngModel]="type" required/>
-                        <!--[ngModel]="type?.value""-->
-                        <label for="publisher" class="radio">Publisher</label>
-                    </div>
-                    <div fxFlex fxLayout="row" fxLayoutAlign="center center">
-                        <input type="radio" value="AFFILIATE" id="affiliate" name="type" [ngModel]="type" required/>
-                        <label for="affiliate" class="radio">Affiliate</label>
-                    </div>
-                </div>
-                <mat-divider></mat-divider>
-                <div fxLayout="column" class="margin-bottom-20">
-                    <div fxFlex>
-                        <label for="icon-name">
-                            <mat-icon class="icon field-icon">account_circle</mat-icon>
-                        </label>
-                        <input type="text" id="icon-name"
-                               name="name"
-                               #name="ngModel"
-                               ngModel
-                               placeholder="Name" required/>
-                    </div>
-                    <mat-error *ngIf="submitted && name.invalid">*This field is required.</mat-error>
-
-                    <div fxFlex>
-                        <label for="icon-mail">
-                            <mat-icon class="icon field-icon">mail</mat-icon>
-                        </label>
-                        <input type="text" id="icon-mail"
-                               name="email"
-                               #email="ngModel"
-                               ngModel
-                               placeholder="Email" required/>
-                    </div>
-                    <mat-error *ngIf="submitted && email.invalid">*This field is required.</mat-error>
-
-                    <div fxFlex>
-                        <label for="icon-password">
-                            <mat-icon class="icon field-icon">lock</mat-icon>
-                        </label>
-                        <input type="password" id="icon-password"
-                               name="password"
-                               #password="ngModel"
-                               ngModel
-                               placeholder="Password" required/>
-                    </div>
-                    <mat-error *ngIf="submitted && password.invalid">*This field is required.</mat-error>
-                </div>
-        </mat-card-content>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-            <button fxFlex class="button" type="submit">Register</button>
-        </mat-card-actions>
-        </form>
-    </mat-card>
-
-    <mat-card class="form-container" *ngIf="viewType === 'signIn'">
+    <mat-card class="form-container">
         <mat-card-header fxLayout="row" fxLayoutAlign="center center">
             <mat-card-title fxFlex>{{'Sign In'}}</mat-card-title>
         </mat-card-header>

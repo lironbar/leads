@@ -3,7 +3,16 @@
         <img src="/assets/images/logo.png" alt="Logo" class="logo">
         <span fxFlex></span>
         <mat-icon class="margin-right-10" matBadge="4" matBadgeColor="accent">notifications_active</mat-icon>
-        <mat-icon>portrait</mat-icon>
+        <!--<mat-icon>portrait</mat-icon>-->
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>portrait</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngFor="let role of roles" (click)="onChangeRole(role)">
+                <mat-icon>{{role.icon}}</mat-icon>
+                <span>{{role.value | titlecase}}</span>
+            </button>
+        </mat-menu>
         <button mat-button (click)="onLogOut()">{{'Log Out'}}</button>
     </mat-toolbar-row>
 </mat-toolbar>

@@ -43,6 +43,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {LoginViewComponent} from './core/login/components/login-view.component';
+import {RegisterViewComponent} from './core/register/components/register-view.component';
 import {PagesComponent} from './pages/pages.component';
 import {LoaderComponent} from './modules/commons/components/loader/loader.component';
 
@@ -64,6 +65,7 @@ import { LoaderInterceptorService} from './core/Interceptoers/httpconfig.interce
         AppComponent,
         HeaderComponent,
         LoginViewComponent,
+        RegisterViewComponent,
         PagesComponent,
         LoaderComponent,
         PageForbiddenComponent,

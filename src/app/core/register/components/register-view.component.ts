@@ -5,37 +5,40 @@ import {AuthenticationService} from '../../authentication/authentication.service
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'app-login-view',
-    templateUrl: './login-view.component.html',
-    styleUrls: ['./login-view.component.css']
+    selector: 'app-register-view',
+    templateUrl: './register-view.component.html',
+    styleUrls: ['./register-view.component.css']
 })
 
-export class LoginViewComponent {
+export class RegisterViewComponent {
 
     submitted = false;
+    type = 'affiliate';
     // @ViewChild('signupForm') public signupForm: NgForm;
     constructor(
         public authenticationService: AuthenticationService,
         private router: Router
     ) {}
 
-    onSignIn(form) {
+
+
+    onRegister(form) {
         this.submitted = true;
         if (form.valid) {
-            this.authenticationService.login(form.value.email, form.value.password)
+            const user: User = {
+                name: form.value.name,
+                phone: form.value.phone,
+                email: form.value.email,
+                password: form.value.password,
+                phc: form.value.phc,
+                contact: form.value.contact
+                // type: form.value.type
+            };
+            this.authenticationService.register(user, this.type)
                 .subscribe(responseUser => {
-                    // this._navigateToRouter(responseUser.type);
                     const path = responseUser.members['publishers'].length ? 'publishers' : 'campaigns';
                     this.router.navigate([path]);
                 });
         }
-    }
-
-    _navigateToRouter(type) {
-        // const path = `/${type === 'PUBLISHER' ? 'publishers' : 'affiliates'}`;
-
-
-        // const path = `/${type === 'AFFILIATE' ? 'campaigns' : 'publishers'}`;
-        // this.router.navigate([path]);
     }
 }
