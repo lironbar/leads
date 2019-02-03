@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {User} from '../../user/user.model';
 import {NgForm} from '@angular/forms';
 import {AuthenticationService} from '../../authentication/authentication.service';
+import {SnackBarService} from '../../../modules/commons/services/snack-bar.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -17,6 +18,7 @@ export class RegisterViewComponent {
     // @ViewChild('signupForm') public signupForm: NgForm;
     constructor(
         public authenticationService: AuthenticationService,
+        public snackBar: SnackBarService,
         private router: Router
     ) {}
 
@@ -35,10 +37,16 @@ export class RegisterViewComponent {
                 // type: form.value.type
             };
             this.authenticationService.register(user, this.type)
-                .subscribe(responseUser => {
-                    const path = responseUser.members['publishers'].length ? 'publishers' : 'campaigns';
-                    this.router.navigate([path]);
-                });
+                .subscribe(
+                    responseUser => {
+                        const path = responseUser.members['publishers'].length ? 'publishers' : 'campaigns';
+                        this.router.navigate([path]);
+                    },
+                    error => {
+                        console.error('Failed to register', error);
+                        this.snackBar.error('Failed to register');
+                    }
+                );
         }
     }
 }

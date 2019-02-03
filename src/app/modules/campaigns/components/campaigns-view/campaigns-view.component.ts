@@ -4,6 +4,7 @@ import {Campaign} from '../../campaign.model';
 import {CampaignService} from '../../campaign.service';
 import {ConfirmDialogComponent} from '../../../commons/components/dialogs/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material';
+import {SnackBarService} from '../../../commons/services/snack-bar.service';
 // import {AffiliateService} from '../../../affiliates/affiliates.service';
 
 
@@ -18,6 +19,7 @@ export class CampaignsViewComponent implements OnInit {
 
     constructor(
         public campaignService: CampaignService,
+        private snackBar: SnackBarService,
         public dialog: MatDialog) {
     }
 
@@ -39,13 +41,21 @@ export class CampaignsViewComponent implements OnInit {
         const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: confirmDialogData});
         dialogRef.afterClosed().subscribe(confirm => {
             if (confirm) {
-                this.campaignService.delete(campaign._id).subscribe(deletedCampaign => {
-                    let campaigns = this.campaigns$.getValue();
-                    campaigns = campaigns.filter(function(c) {
-                        return c._id !== campaign._id;
-                    });
-                    this.campaigns$.next(campaigns);
-                })
+                this.campaignService.delete(campaign._id)
+                    .subscribe(
+                        deletedCampaign => {
+                            let campaigns = this.campaigns$.getValue();
+                            campaigns = campaigns.filter(function (c) {
+                                return c._id !== campaign._id;
+                            });
+                            this.campaigns$.next(campaigns);
+                            this.snackBar.success('Campaign have been successfully deleted');
+                        },
+                        error => {
+                            console.error('Failed to delete campaign', error);
+                            this.snackBar.error('Failed to delete campaign');
+                        }
+                    );
             } else {
                 console.log('The dialog was closed');
             }

@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {CdkTableModule} from '@angular/cdk/table';
 import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 import {CampaignListComponent} from './modules/campaigns/components/campaign-list/campaign-list.component';
 import {CampaignPanelsComponent} from './modules/campaigns/components/campaign-panels/campaign-panels.component';
@@ -132,7 +133,8 @@ import {EmptyStateComponent} from './modules/commons/components/empty-state/empt
         CampaignPanelsComponent,
         CampaignCreateButtonComponent,
         CreateCampaignDialogComponent,
-        EmptyStateComponent
+        EmptyStateComponent,
+        NgxPermissionsModule
     ],
     providers: [],
     entryComponents: [ConfirmDialogComponent, CreateCampaignDialogComponent]

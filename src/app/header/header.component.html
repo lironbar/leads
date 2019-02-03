@@ -12,7 +12,7 @@
                 <mat-icon>{{role.icon}}</mat-icon>
                 <span>{{role.value | titlecase}}</span>
             </button>
+            <button mat-menu-item (click)="onSignOut()">{{'Sign Out'}}</button>
         </mat-menu>
-        <button mat-button (click)="onLogOut()">{{'Log Out'}}</button>
     </mat-toolbar-row>
 </mat-toolbar>

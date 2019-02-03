@@ -1,7 +1,7 @@
 <div fxLayout="column" class="full-height">
   <div fxLayout="row" fxLayoutAlign="start center" class="app-toolbar">
     <span fxFlex></span>
-    <app-campaign-create-button></app-campaign-create-button>
+    <app-campaign-create-button *ngxPermissionsOnly="['ADMIN']"></app-campaign-create-button>
   </div>
 
   <app-campaign-list fxFlex *ngIf="campaigns$ | async; let campaigns;"

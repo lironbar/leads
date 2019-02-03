@@ -3,6 +3,7 @@ import {User} from '../../user/user.model';
 import {NgForm} from '@angular/forms';
 import {AuthenticationService} from '../../authentication/authentication.service';
 import {Router} from '@angular/router';
+import {SnackBarService} from '../../../modules/commons/services/snack-bar.service';
 
 @Component({
     selector: 'app-login-view',
@@ -13,29 +14,29 @@ import {Router} from '@angular/router';
 export class LoginViewComponent {
 
     submitted = false;
+
     // @ViewChild('signupForm') public signupForm: NgForm;
     constructor(
         public authenticationService: AuthenticationService,
+        private snackBar: SnackBarService,
         private router: Router
-    ) {}
+    ) {
+    }
 
     onSignIn(form) {
         this.submitted = true;
         if (form.valid) {
             this.authenticationService.login(form.value.email, form.value.password)
-                .subscribe(responseUser => {
-                    // this._navigateToRouter(responseUser.type);
-                    const path = responseUser.members['publishers'].length ? 'publishers' : 'campaigns';
-                    this.router.navigate([path]);
-                });
+                .subscribe(
+                    responseUser => {
+                        const path = responseUser.members['publishers'].length ? 'publishers' : 'campaigns';
+                        this.router.navigate([path]);
+                    },
+                    error => {
+                        console.error('Failed to sign in', error);
+                        this.snackBar.error('Failed to sign in');
+                    }
+                );
         }
-    }
-
-    _navigateToRouter(type) {
-        // const path = `/${type === 'PUBLISHER' ? 'publishers' : 'affiliates'}`;
-
-
-        // const path = `/${type === 'AFFILIATE' ? 'campaigns' : 'publishers'}`;
-        // this.router.navigate([path]);
     }
 }

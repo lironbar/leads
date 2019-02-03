@@ -38,11 +38,16 @@ export class HeaderComponent implements OnInit {
         this.permissionsService.flushPermissions();
         this.permissionsService.loadPermissions([selectedRole.roleValue]);
     }
-    onLogOut() {
+    onSignOut() {
         this.authenticationService.logout()
-            .subscribe(onSuccess => {
-                this.permissionsService.flushPermissions();
-                this.router.navigate(['/login']);
-            });
+            .subscribe(
+                data => {
+                        this.permissionsService.flushPermissions();
+                        this.router.navigate(['/sign-in']);
+                },
+                error => {
+                   console.error(error);
+                }
+            );
     }
 }

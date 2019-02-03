@@ -53,6 +53,7 @@ import {PageServerErrorComponent} from './core/error-pages/components/page-serve
 
 import {AuthenticationService} from './core/authentication/authentication.service';
 import {LoaderService} from './modules/commons/services/loader.service';
+import {SnackBarService} from './modules/commons/services/snack-bar.service';
 import { AuthGuard } from './core/auth-guard/auth-guard.service';
 import {CampaignService} from './modules/campaigns/campaign.service';
 import {PublisherService} from './modules/publishers/publisher.service';
@@ -121,7 +122,7 @@ import { LoaderInterceptorService} from './core/Interceptoers/httpconfig.interce
             provide: HTTP_INTERCEPTORS,
             useClass: LoaderInterceptorService,
             multi: true
-        }, CampaignService, PublisherService, AuthenticationService, LoaderService, AuthGuard
+        }, CampaignService, PublisherService, AuthenticationService, LoaderService, SnackBarService, AuthGuard
     ],
     bootstrap: [AppComponent],
     entryComponents: []
