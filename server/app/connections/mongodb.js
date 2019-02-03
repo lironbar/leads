@@ -5,6 +5,7 @@ mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('bufferCommands', false);
+mongoose.set('useFindAndModify', false);
 
 module.exports.boot = () => {
     const connection = mongoose.connection;

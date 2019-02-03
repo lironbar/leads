@@ -44,23 +44,35 @@ module.exports.find = (req, res, next) => {
 };
 
 module.exports.findOne = (req, res, next) => {
-    User.findOne({_id: req.params.id}, (findOneError, foundDoc) => {
-        if (findOneError) {
-            console.warn('user.findOne', findOneError);
-            switch (findOneError.code) {
-                default:
-                    res.status(500);
-                    return res.send('Something went wrong!');
+    User.findOne({ _id: req.params.id })
+        .select('+isAdmin') // force selection of isAdmin field
+        .populate('members.affiliates members.publishers')
+        .exec((findOneError, foundDoc) => {
+            if (findOneError) {
+                console.warn('user.findOne', findOneError);
+                switch (findOneError.code) {
+                    default:
+                        res.status(500);
+                        return res.send('Something went wrong!');
+                }
             }
-        }
-        res.status(200);
-        res.json(foundDoc);
-        next();
-    });
+            let userObj;
+            if (foundDoc) {
+                // cast document to object
+                userObj = foundDoc.toObject();
+                // remove isAdmin field for non-admins
+                if (!userObj.isAdmin) {
+                    delete userObj.isAdmin;
+                }
+            }
+            res.status(200);
+            res.json(userObj);
+            next();
+        });
 };
 
 module.exports.update = (req, res, next) => {
-    User.updateOne({_id: req.params.id}, req.body, (updateError) => {
+    User.updateOne({ _id: req.params.id }, req.body, (updateError) => {
         if (updateError) {
             console.warn('user.update', updateError);
             switch (updateError.name) {
@@ -79,7 +91,7 @@ module.exports.update = (req, res, next) => {
 };
 
 module.exports.deleteOne = (req, res, next) => {
-    User.deleteOne({_id: req.params.id}, (deleteOneError) => {
+    User.deleteOne({ _id: req.params.id }, (deleteOneError) => {
         if (deleteOneError) {
             console.warn('user.deleteOne', deleteOneError);
             switch (deleteOneError.code) {
