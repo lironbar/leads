@@ -9,9 +9,11 @@ module.exports.register = (req, res, next) => {
         // defaults to AFFILIATE
         memberRole = 'AFFILIATE';
     }
+    // define member and set default name
+    const member = Object.assign({}, req.body, { name: `${req.body.name} ${memberRole.toLowerCase()}` });
     // create publisher/affiliate by memberRole
     const MemberModel = require(join('..', memberRole.toLowerCase(), 'model.js'));
-    new MemberModel(req.body).save((saveMemberError, savedMemberDoc) => {
+    new MemberModel(member).save((saveMemberError, savedMemberDoc) => {
         if (saveMemberError) {
             console.warn('register.save.member', saveMemberError);
             switch (saveMemberError.name) {
