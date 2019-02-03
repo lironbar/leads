@@ -29,8 +29,12 @@ export class LoginViewComponent {
             this.authenticationService.login(form.value.email, form.value.password)
                 .subscribe(
                     responseUser => {
-                        const path = responseUser.members['publishers'].length ? 'publishers' : 'campaigns';
-                        this.router.navigate([path]);
+                        const isPublisher = responseUser.members['publishers'].length > 0;
+                        const path = responseUser.isAdmin || isPublisher ? 'publishers' : 'campaigns';
+                        const commands = isPublisher ? [path, responseUser.members['publishers'][0]] : [path];
+                        this.router.navigate(commands);
+
+                        // this.router.navigate([path]);
                     },
                     error => {
                         console.error('Failed to sign in', error);

@@ -9,6 +9,7 @@ export interface User {
     phone?: any;
     phc?: string;
     contact?: string;
-    currentRole?: string;
+    currentRole?: any;
     roles?: any[];
+    isAdmin?: boolean;
 }

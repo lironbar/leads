@@ -20,9 +20,9 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    public get currentUserRoles() {
-        return this.currentUserSubject.value.roles;
-    }
+    // public get currentUserRoles() {
+    //     return this.currentUserSubject.value.roles;
+    // }
 
     public get currentUserRole() {
         return this.currentUserSubject.value.currentRole;
@@ -33,7 +33,7 @@ export class AuthenticationService {
             .pipe(
                 map(createdUser => {
                     // user.token = '123124124asdasfasf123sa';
-                    createdUser.currentRole = createdUser.members.publishers.length ? 'PUBLISHER' : 'AFFILIATE';
+                    createdUser.currentRole = this._getCurrentRole(createdUser);
                     localStorage.setItem('currentUser', JSON.stringify(createdUser));
                     this.currentUserSubject.next(createdUser);
                     return this.currentUserSubject.value;
@@ -47,7 +47,7 @@ export class AuthenticationService {
                 map(userResponse => {
                     // if (user && user.token) {
                     // }
-                    userResponse.currentRole = userResponse.members.publishers.length ? 'PUBLISHER' : 'AFFILIATE';
+                    userResponse.currentRole = this._getCurrentRole(userResponse);
                     localStorage.setItem('currentUser', JSON.stringify(userResponse));
                     this.currentUserSubject.next(userResponse);
                     return userResponse;
@@ -60,5 +60,11 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
         return this.currentUser;
+    }
+    _getCurrentRole(user) {
+        return {
+            data: user.members.affiliates.length ? user.members.affiliates[0] : user.members.publishers[0],
+            type: user.isAdmin ? 'ADMIN' : (user.members.affiliates.length ? 'AFFILIATE' : 'PUBLISHER')
+        };
     }
 }

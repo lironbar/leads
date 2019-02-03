@@ -39,8 +39,12 @@ export class RegisterViewComponent {
             this.authenticationService.register(user, this.type)
                 .subscribe(
                     responseUser => {
-                        const path = responseUser.members['publishers'].length ? 'publishers' : 'campaigns';
-                        this.router.navigate([path]);
+                        // const path = responseUser.members['publishers'].length ? 'publishers' : 'campaigns';
+                        // this.router.navigate([path]);
+                        const isPublisher = responseUser.members['publishers'].length > 0;
+                        const path = responseUser.isAdmin || isPublisher ? 'publishers' : 'campaigns';
+                        const id = isPublisher ? responseUser.members['publishers'][0] : undefined;
+                        this.router.navigate([path, id]);
                     },
                     error => {
                         console.error('Failed to register', error);

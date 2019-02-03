@@ -8,6 +8,7 @@ import {PublishersTableComponent} from './components/publishers-table/publishers
 import {PublisherCreateButtonComponent} from './components/publisher-create-button/publisher-create-button.component';
 import {PublisherViewComponent} from './components/publisher-view/publisher-view.component';
 import {PublisherInfoBarComponent} from './components/publisher-info-bar/publisher-info-bar.component';
+import {PublisherReportsViewComponent} from './components/publisher-reports-view/publisher-reports-view.component';
 
 import {CreatePublisherDialogComponent} from './components/dialogs/create-publisher-dialog/create-publisher-dialog.component';
 
@@ -19,7 +20,8 @@ import {CreatePublisherDialogComponent} from './components/dialogs/create-publis
         CreatePublisherDialogComponent,
         PublisherCreateButtonComponent,
         PublisherViewComponent,
-        PublisherInfoBarComponent
+        PublisherInfoBarComponent,
+        PublisherReportsViewComponent
     ],
     imports: [
         SharedModule,

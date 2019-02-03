@@ -12,4 +12,8 @@ app-header {
     width: 100%;
 }
 
+mat-sidenav {
+    min-width: 45px;
+}
+
 
