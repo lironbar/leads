@@ -15,7 +15,7 @@ const UserSchema = new Schema({
         publishers: { type: [{ type: Schema.Types.ObjectId, ref: 'publisher' }] },
         affiliates: { type: [{ type: Schema.Types.ObjectId, ref: 'affiliate' }] }
     },
-    superadmin: { type: Boolean, default: false, select: false },
+    isAdmin: { type: Boolean, default: false, select: false },
     updated: { type: Number, default: Date.now, select: false }
 });
 
