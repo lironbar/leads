@@ -9,6 +9,8 @@ import {CampaignService} from '../../../campaigns/campaign.service';
 import {ConfirmDialogComponent} from '../../../commons/components/dialogs/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material';
 import {MatSnackBar} from '@angular/material';
+import {AuthenticationService} from '../../../../core/authentication/authentication.service';
+import {User} from '../../../../core/user/user.model';
 
 
 @Component({
@@ -18,15 +20,21 @@ import {MatSnackBar} from '@angular/material';
 })
 
 export class PublisherViewComponent implements OnInit {
-    constructor(public publisherService: PublisherService, public campaignService: CampaignService,
-                public dialog: MatDialog, private route: ActivatedRoute, public snackBar: MatSnackBar) {
+    constructor(public publisherService: PublisherService,
+                public campaignService: CampaignService,
+                public dialog: MatDialog,
+                private route: ActivatedRoute,
+                private UserService: AuthenticationService,
+                public snackBar: MatSnackBar) {
     }
 
     publisherId: string;
     publisher$: Observable<Publisher>;
     campaigns$: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
+    user: User;
 
     ngOnInit() {
+        this.user = this.UserService.currentUserValue;
         this.route.params.subscribe((params: Params) => {
             this.publisherId = params['id'];
             this.publisher$ = this.publisherService.getPublisherById(this.publisherId);

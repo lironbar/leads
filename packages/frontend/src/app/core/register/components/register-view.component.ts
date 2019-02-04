@@ -41,10 +41,18 @@ export class RegisterViewComponent {
                     responseUser => {
                         // const path = responseUser.members['publishers'].length ? 'publishers' : 'campaigns';
                         // this.router.navigate([path]);
+                        // const isPublisher = responseUser.members['publishers'].length > 0;
+                        // const path = responseUser.isAdmin || isPublisher ? 'publishers' : 'campaigns';
+                        // const id = isPublisher ? responseUser.members['publishers'][0]._id : undefined;
+                        // debugger;
+                        // this.router.navigate([path, id]);
+
+
                         const isPublisher = responseUser.members['publishers'].length > 0;
                         const path = responseUser.isAdmin || isPublisher ? 'publishers' : 'campaigns';
-                        const id = isPublisher ? responseUser.members['publishers'][0] : undefined;
-                        this.router.navigate([path, id]);
+                        const commands = isPublisher ? [path, responseUser.members['publishers'][0]._id] : [path];
+                        this.router.navigate(commands);
+
                     },
                     error => {
                         console.error('Failed to register', error);

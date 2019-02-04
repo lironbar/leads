@@ -1,20 +1,28 @@
 <mat-card fxLayout="column" class="full-height" *ngIf="publisher">
     <div fxFlex class="overflow-auto">
-        <span class="mat-title">{{publisher.name}}</span>
+        <span class="mat-title">{{user.name}}</span>
         <!--Email-->
         <div fxLayout="row" fxLayoutAlign="start center" class="margin-5">
             <mat-icon class="margin-right-5">email</mat-icon>
-            <span class="mat-body-2">{{publisher.email || 'No Email'}}</span>
+            <span class="mat-body-2">{{user.email || 'No Email'}}</span>
         </div>
         <!--Phone-->
         <div fxLayout="row" fxLayoutAlign="start center" class="margin-5">
             <mat-icon class="margin-right-5">phone</mat-icon>
-            <span class="mat-body-2">{{publisher.phone || 'No Email'}}</span>
+            <span class="mat-body-2">{{user.phone || 'No Email'}}</span>
         </div>
         <!--Address-->
         <div fxLayout="row" fxLayoutAlign="start center" class="margin-5">
             <mat-icon class="margin-right-5">place</mat-icon>
-            <span class="mat-body-2">{{publisher.address || 'No Email'}}</span>
+            <span class="mat-body-2">{{publisher.contact || 'No Contact Name'}}</span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" class="margin-5">
+            <mat-icon class="margin-right-5">place</mat-icon>
+            <span class="mat-body-2">{{publisher.phc || 'No PHC'}}</span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" class="margin-5">
+            <mat-icon class="margin-right-5">place</mat-icon>
+            <span class="mat-body-2">{{publisher.address || 'No Address'}}</span>
         </div>
     </div>
 </mat-card>

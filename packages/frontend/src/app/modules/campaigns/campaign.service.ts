@@ -7,6 +7,7 @@ import {Constants} from '../commons/constants';
 @Injectable()
 export class CampaignService {
     private BASE_URL = Constants.BASE_URL;
+    private apiUrl = `${this.BASE_URL}/campaign`;
     private _campaigns: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
     public readonly campaigns: Observable<Campaign[]> = this._campaigns.asObservable();
 
@@ -29,6 +30,11 @@ export class CampaignService {
         campaign.publisherId = publisherId;
         const apiUrl = `${this.BASE_URL}/campaign`;
         return this.http.post<Campaign>(apiUrl, campaign);
+    }
+
+    join(campaignId: string, affiliateId: string) {
+        const path = `${this.apiUrl}/${campaignId}`;
+        return this.http.post<Campaign>(path, {affiliateId: affiliateId});
     }
 
     delete(id: string) {

@@ -5,6 +5,8 @@ import {CampaignService} from '../../campaign.service';
 import {ConfirmDialogComponent} from '../../../commons/components/dialogs/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material';
 import {SnackBarService} from '../../../commons/services/snack-bar.service';
+import {UsersService} from '../../../users/services/users.service';
+import {User} from '../../../../core/user/user.model';
 // import {AffiliateService} from '../../../affiliates/affiliates.service';
 
 
@@ -16,8 +18,10 @@ import {SnackBarService} from '../../../commons/services/snack-bar.service';
 
 export class CampaignsViewComponent implements OnInit {
     campaigns$: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
+    affiliateId: string;
 
     constructor(
+        public userService: UsersService,
         public campaignService: CampaignService,
         private snackBar: SnackBarService,
         public dialog: MatDialog) {
@@ -25,12 +29,17 @@ export class CampaignsViewComponent implements OnInit {
 
     ngOnInit() {
         // this.campaignService.getCampaigns().subscribe(campaigns => this.campaigns$.next(campaigns));
-        this.campaignService.getCampaignsByAffiliateId('someId', false)
+        const user: User = this.userService.currentUserValue;
+        this.affiliateId = user.currentRole.data._id;
+        this.campaignService.getCampaignsByAffiliateId(this.affiliateId, false)
             .subscribe(campaigns => this.campaigns$.next(campaigns));
     }
 
     onJoinCampaign(campaign: Campaign) {
-        debugger;
+        this.campaignService.join(campaign._id, this.affiliateId)
+            .subscribe(response => {
+
+            });
     }
 
     onDeleteCampaign(campaign: Campaign) {

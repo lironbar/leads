@@ -31,7 +31,7 @@ export class LoginViewComponent {
                     responseUser => {
                         const isPublisher = responseUser.members['publishers'].length > 0;
                         const path = responseUser.isAdmin || isPublisher ? 'publishers' : 'campaigns';
-                        const commands = isPublisher ? [path, responseUser.members['publishers'][0]] : [path];
+                        const commands = isPublisher ? [path, responseUser.members['publishers'][0]._id] : [path];
                         this.router.navigate(commands);
 
                         // this.router.navigate([path]);
