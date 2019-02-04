@@ -31,7 +31,7 @@ export class CampaignsViewComponent implements OnInit {
         // this.campaignService.getCampaigns().subscribe(campaigns => this.campaigns$.next(campaigns));
         const user: User = this.userService.currentUserValue;
         this.affiliateId = user.currentRole.data._id;
-        this.campaignService.getCampaignsByAffiliateId(this.affiliateId, false)
+        this.campaignService.getUnassignedCampaigns(this.affiliateId)
             .subscribe(campaigns => this.campaigns$.next(campaigns));
     }
 

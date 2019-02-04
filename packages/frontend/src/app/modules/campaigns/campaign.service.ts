@@ -11,19 +11,15 @@ export class CampaignService {
     private _campaigns: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
     public readonly campaigns: Observable<Campaign[]> = this._campaigns.asObservable();
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 
     getCampaigns() {
         const apiUrl = `${this.BASE_URL}/campaign`;
-        return this.http.get<any>(apiUrl);
+        return this.http.get<any>(this.apiUrl);
     }
-    getCampaignsByAffiliateId(affiliateId: string, hasJoined) {
-        const apiUrl = `${this.BASE_URL}/campaign`;
-        let params = new HttpParams();
-        params = params.append('affiliateId', affiliateId);
-        params = params.append('joined', hasJoined);
-        return this.http.get<any>(apiUrl, {params: params});
+    getUnassignedCampaigns(affiliateId: string) {
+        const apiUrl = `${this.BASE_URL}/campaign/unassigned/${affiliateId}`;
+        return this.http.get<any>(apiUrl);
     }
 
     create(publisherId: string, campaign: Campaign) {
@@ -33,7 +29,7 @@ export class CampaignService {
     }
 
     join(campaignId: string, affiliateId: string) {
-        const path = `${this.apiUrl}/${campaignId}`;
+        const path = `${this.apiUrl}/${campaignId}/join`;
         return this.http.post<Campaign>(path, {affiliateId: affiliateId});
     }
 

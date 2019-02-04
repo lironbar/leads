@@ -2,10 +2,12 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Publisher} from './publisher.model';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {Constants} from '../commons/constants';
 
 @Injectable()
 export class PublisherService {
-  private apiRoot = 'http://localhost:8080';
+    private apiRoot = Constants.BASE_URL;
+  // private apiRoot = 'http://localhost:8080';
   private _publishers: BehaviorSubject<Publisher[]> = new BehaviorSubject([]);
   public readonly publishers: Observable<Publisher[]> = this._publishers.asObservable();
 
