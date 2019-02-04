@@ -1,5 +1,7 @@
 FROM node:latest AS base
 
+RUN npm install --global @angular/cli
+
 COPY . /var/leads-frontend/
 
 WORKDIR /var/leads-frontend/
