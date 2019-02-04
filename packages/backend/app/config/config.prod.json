@@ -1,0 +1,14 @@
+{
+    "port": 8080,
+    "mongo": {
+        "url": "mongodb://192.168.1.106:27017/leads",
+        "options": {
+            "poolSize": 4,
+            "autoReconnect": true,
+            "reconnectTries": 10,
+            "reconnectInterval": 2000,
+            "connectTimeoutMS": 1500,
+            "socketTimeoutMS": 45000
+        }
+    }
+}
