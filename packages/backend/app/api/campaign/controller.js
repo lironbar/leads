@@ -19,7 +19,7 @@ module.exports.save = (req, res, next) => {
 };
 
 module.exports.join = (req, res, next) => {
-    const affiliateId = req.query.affiliateId;
+    const affiliateId = req.body.affiliateId;
     if (affiliateId) {
         Campaign
             .updateOne({ _id: req.params.id, affiliates: { $nin: [affiliateId] } }, { $push: { affiliates: affiliateId } })
