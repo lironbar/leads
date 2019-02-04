@@ -3,6 +3,8 @@ const controller = require('./controller.js');
 
 router.post('/', controller.save);
 
+router.post('/:id/join', controller.join);
+
 router.get('/', controller.find);
 
 router.get('/:id', controller.findOne);

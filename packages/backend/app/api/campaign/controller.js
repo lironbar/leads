@@ -18,6 +18,37 @@ module.exports.save = (req, res, next) => {
     });
 };
 
+module.exports.join = (req, res, next) => {
+    const affiliateId = req.query.affiliateId;
+    if (affiliateId) {
+        Campaign
+            .updateOne({ _id: req.params.id, affiliates: { $nin: [affiliateId] } }, { $push: { affiliates: affiliateId } })
+            .exec((updateError, updateResults) => {
+                if (updateError) {
+                    console.warn('campaign.join.update', updateError);
+                    switch (updateError.name) {
+                        case 'ValidationError':
+                            res.status(400);
+                            return res.send(updateError.message);
+                        default:
+                            res.status(500);
+                            return res.send('Something went wrong!');
+                    }
+                }
+                const updated = Boolean(updateResults.n);
+                if (updated) {
+                    this.findOne(req, res, next);
+                } else {
+                    res.status(400);
+                    res.end();
+                }
+            });
+    } else {
+        res.status(400);
+        res.end();
+    }
+};
+
 module.exports.find = (req, res, next) => {
     const skip = Number(req.query.skip || 0), limit = (Math.min(req.query.limit, 2000) + 1);
     Campaign.find().skip(skip).limit(limit)
@@ -44,7 +75,6 @@ module.exports.find = (req, res, next) => {
 
 module.exports.findOne = (req, res, next) => {
     Campaign.findOne({ _id: req.params.id })
-        .populate('publisher')
         .exec((findOneError, foundDoc) => {
             if (findOneError) {
                 console.warn('campaign.findOne', findOneError);
