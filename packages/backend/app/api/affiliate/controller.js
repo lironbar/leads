@@ -52,8 +52,14 @@ module.exports.findOne = (req, res, next) => {
                     return res.send('Something went wrong!');
             }
         }
-        res.status(200);
-        res.json(foundDoc);
+        if (foundDoc) {
+            res.status(200);
+            res.json(foundDoc);
+            next();
+        } else {
+            res.status(404);
+            res.end();
+        }
         next();
     });
 };

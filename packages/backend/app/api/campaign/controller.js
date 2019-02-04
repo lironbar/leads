@@ -90,6 +90,29 @@ module.exports.findOne = (req, res, next) => {
         });
 };
 
+module.exports.findUnassigned = (req, res, next) => {
+    const affiliateId = req.params.affiliateId;
+    if (affiliateId) {
+        Campaign.find({ affiliates: { $nin: [affiliateId] } })
+            .exec((findError, foundDocs) => {
+                if (findError) {
+                    console.warn('campaign.findUnassigned', findError);
+                    switch (findError.code) {
+                        default:
+                            res.status(500);
+                            return res.send('Something went wrong!');
+                    }
+                }
+                res.status(200);
+                res.json(foundDocs);
+                next();
+            });
+    } else {
+        res.status(400);
+        res.end();
+    }
+};
+
 module.exports.update = (req, res, next) => {
     Campaign.updateOne({ _id: req.params.id }, req.body, (updateError) => {
         if (updateError) {

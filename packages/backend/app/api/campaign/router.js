@@ -9,6 +9,8 @@ router.get('/', controller.find);
 
 router.get('/:id', controller.findOne);
 
+router.get('/unassigned/:affiliateId', controller.findUnassigned)
+
 router.put('/:id', controller.update);
 
 router.delete('/:id', controller.deleteOne);

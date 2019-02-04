@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const Campaign = require('../campaign/model.js');
 
 const PublisherSchema = new Schema({
+    name: { type: String, required: true },
     contact: { type: String },
     // private-held-company id
     phc: { type: String, required: true },
