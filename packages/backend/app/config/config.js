@@ -3,10 +3,13 @@ const config = require('./config.json');
 // define env
 config.env = (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'production' ? 'prod' : 'dev');
 
-// load production overrides
-if (config.env === 'prod') {
-    console.debug('loading prodction config');
-    Object.assign(config, require('./config.prod.json'));
-}
+// extra config files
+config.configOverrides = (process.env.CONFIG_OVERRIDES || '').split(';');
+
+// load config overrides
+config.configOverrides.forEach((override) => {
+    console.debug('loading config override', override);
+    Object.assign(config, require(`./config.${override}.json`));
+});
 
 module.exports = config;
