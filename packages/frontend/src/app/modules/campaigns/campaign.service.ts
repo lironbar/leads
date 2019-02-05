@@ -14,18 +14,16 @@ export class CampaignService {
     constructor(private http: HttpClient) {}
 
     getCampaigns() {
-        const apiUrl = `${this.BASE_URL}/campaign`;
         return this.http.get<any>(this.apiUrl);
     }
     getUnassignedCampaigns(affiliateId: string) {
-        const apiUrl = `${this.BASE_URL}/campaign/unassigned/${affiliateId}`;
+        const apiUrl = `${this.apiUrl}/unassigned/${affiliateId}`;
         return this.http.get<any>(apiUrl);
     }
 
     create(publisherId: string, campaign: Campaign) {
         campaign.publisherId = publisherId;
-        const apiUrl = `${this.BASE_URL}/campaign`;
-        return this.http.post<Campaign>(apiUrl, campaign);
+        return this.http.post<Campaign>(this.apiUrl, campaign);
     }
 
     join(campaignId: string, affiliateId: string) {
@@ -39,7 +37,7 @@ export class CampaignService {
     }
 
     delete(id: string) {
-        const apiUrl = `${this.BASE_URL}/campaign/${id}`;
+        const apiUrl = `${this.apiUrl}/${id}`;
         return this.http.delete<Campaign>(apiUrl);
     }
 

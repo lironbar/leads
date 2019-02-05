@@ -6,7 +6,7 @@ import {Constants} from '../commons/constants';
 
 @Injectable()
 export class PublisherService {
-    private apiRoot = Constants.BASE_URL;
+    private BASE_URL = Constants.BASE_URL;
   // private apiRoot = 'http://localhost:8080';
   private _publishers: BehaviorSubject<Publisher[]> = new BehaviorSubject([]);
   public readonly publishers: Observable<Publisher[]> = this._publishers.asObservable();
@@ -19,7 +19,7 @@ export class PublisherService {
     // If the Subject was NOT subscribed before OR if forceRefresh is requested
     if (!this._publishers.observers.length || forceRefresh) {
       // const fakeData = 'http://localhost:4200/assets/data/publishers.json';
-      const apiUrl = `${this.apiRoot}/publisher`;
+      const apiUrl = `${this.BASE_URL}/publisher`;
       this.http.get<any>(apiUrl).subscribe(
         publishers => {
           this._publishers.next(publishers);
@@ -35,22 +35,22 @@ export class PublisherService {
   }
 
   getPublisherById(publisherId) {
-    const apiUrl = `${this.apiRoot}/publisher/${publisherId}`;
+    const apiUrl = `${this.BASE_URL}/publisher/${publisherId}`;
     return this.http.get<any>(apiUrl);
   }
 
   getPublisherCampaigns(publisherId) {
-    const apiUrl = `${this.apiRoot}/publisher/${publisherId}/campaigns`;
+    const apiUrl = `${this.BASE_URL}/publisher/${publisherId}/campaigns`;
     return this.http.get<any>(apiUrl);
   }
 
   // createCampaignToPublisher(publisherId, campaign) {
-  //   const apiUrl = `${this.apiRoot}/publisher/${publisherId}/campaigns`;
+  //   const apiUrl = `${this.BASE_URL}/publisher/${publisherId}/campaigns`;
   //   return this.http.post<Campaign>(apiUrl, campaign);
   // }
 
   create(publisher: Publisher) {
-    this.http.post<Publisher>(`${this.apiRoot}/publisher`, publisher)
+    this.http.post<Publisher>(`${this.BASE_URL}/publisher`, publisher)
       .subscribe(
         newPublisher => {
           const publishers = this._publishers.getValue();
@@ -64,7 +64,7 @@ export class PublisherService {
   }
 
   delete(id: string) {
-    return this.http.delete<Publisher>(`${this.apiRoot}/publisher/${id}`)
+    return this.http.delete<Publisher>(`${this.BASE_URL}/publisher/${id}`)
       .subscribe(
         deletedPublisher => {
           const publishers = this._publishers.getValue();
