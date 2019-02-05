@@ -1,15 +1,15 @@
-FROM node:latest AS base
-
-RUN npm install --global @angular/cli
-
-COPY . /var/leads-frontend/
+FROM node:latest AS setup
 
 WORKDIR /var/leads-frontend/
 
+COPY package.json package-lock.json ./
+
 RUN npm ci
 
-ENTRYPOINT ["ng"]
+COPY . ./
 
-CMD ["serve"]
+RUN npm run build
 
-EXPOSE 4200
+FROM nginx:latest AS serve
+
+COPY --from="setup" /var/leads-frontend/dist/mean-app /var/leads-frontend/
