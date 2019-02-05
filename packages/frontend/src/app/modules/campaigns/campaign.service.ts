@@ -33,6 +33,11 @@ export class CampaignService {
         return this.http.post<Campaign>(path, {affiliateId: affiliateId});
     }
 
+    leave(campaignId: string, affiliateId: string) {
+        const path = `${this.apiUrl}/${campaignId}/leave`;
+        return this.http.post<Campaign>(path, {affiliateId: affiliateId});
+    }
+
     delete(id: string) {
         const apiUrl = `${this.BASE_URL}/campaign/${id}`;
         return this.http.delete<Campaign>(apiUrl);

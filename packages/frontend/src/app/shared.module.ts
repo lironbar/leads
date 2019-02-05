@@ -91,7 +91,8 @@ import {EmptyStateComponent} from './modules/commons/components/empty-state/empt
         MatToolbarModule,
         MatTooltipModule,
         MatStepperModule,
-        MatDialogModule
+        MatDialogModule,
+        NgxPermissionsModule
     ],
     exports: [
         CommonModule,

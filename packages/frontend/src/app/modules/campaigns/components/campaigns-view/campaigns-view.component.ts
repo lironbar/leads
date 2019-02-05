@@ -38,7 +38,8 @@ export class CampaignsViewComponent implements OnInit {
     onJoinCampaign(campaign: Campaign) {
         this.campaignService.join(campaign._id, this.affiliateId)
             .subscribe(response => {
-
+                let campaigns = this.campaigns$.getValue().filter(c => c._id !== campaign._id);
+                this.campaigns$.next(campaigns);
             });
     }
 

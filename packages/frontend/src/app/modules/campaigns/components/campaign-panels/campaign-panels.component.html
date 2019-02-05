@@ -10,8 +10,15 @@
                 <p>Price: {{campaign.price}}</p>
                 <p>Max Leads: {{campaign.maxLeads}}</p>
                 <mat-action-row>
-                    <button mat-button color="primary">EDIT</button>
-                    <button mat-button color="warn" (click)="onDelete(campaign)">DELETE</button>
+                    <button mat-button
+                            *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
+                            color="primary">EDIT</button>
+                    <button mat-button
+                            *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
+                            color="warn" (click)="onDelete(campaign)">DELETE</button>
+                    <button mat-button
+                            *ngxPermissionsOnly="['AFFILIATE']"
+                            color="warn" (click)="onLeave(campaign)">LEAVE</button>
                 </mat-action-row>
             </mat-expansion-panel>
         </mat-accordion>

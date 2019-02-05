@@ -43,10 +43,6 @@ export class PublisherViewComponent implements OnInit {
                     this.campaigns$.next(campaigns);
                 });
         });
-
-        // this.campaigns$ = this.publisher$.pipe(
-        //   map(publisher => publisher.campaigns)
-        // );
     }
 
     onCreateCampaign(campaign: Campaign) {
@@ -67,14 +63,13 @@ export class PublisherViewComponent implements OnInit {
         dialogRef.afterClosed().subscribe(confirm => {
             if (confirm) {
                 this.campaignService.delete(campaign._id).subscribe(deletedCampaign => {
-                    let campaigns = this.campaigns$.getValue();
-                    campaigns = campaigns.filter(function(c) {
+                    const campaigns = this.campaigns$.getValue().filter(function(c) {
                         return c._id !== campaign._id;
                     });
                     this.campaigns$.next(campaigns);
                 });
             } else {
-                console.log('The dialog was closed');
+                console.log('Dialog Closed');
             }
         });
     }

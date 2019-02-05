@@ -53,8 +53,8 @@ const routes: Routes = [
             {path: '', redirectTo: '/publishers', pathMatch: 'full'},
         ]
     },
-    {path: '403', component: PageNotFoundComponent},
-    {path: '404', component: PageForbiddenComponent},
+    {path: '403', component: PageForbiddenComponent},
+    {path: '404', component: PageNotFoundComponent},
     {path: '500', component: PageServerErrorComponent},
     // {path: '**', redirectTo: '/403'}
 ];

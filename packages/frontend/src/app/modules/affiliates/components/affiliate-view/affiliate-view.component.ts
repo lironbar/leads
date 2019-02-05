@@ -7,6 +7,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Campaign} from '../../../campaigns/campaign.model';
 import {User} from '../../../../core/user/user.model';
 import {AuthenticationService} from '../../../../core/authentication/authentication.service';
+import {CampaignService} from '../../../campaigns/campaign.service';
 
 @Component({
     selector: 'app-affiliate-view',
@@ -21,6 +22,7 @@ export class AffiliateViewComponent implements OnInit {
     user: User;
     constructor(
         public affiliateService: AffiliateService,
+        public campaignService: CampaignService,
         public userService: AuthenticationService,
         public dialog: MatDialog,
         private route: ActivatedRoute) {}
@@ -33,6 +35,14 @@ export class AffiliateViewComponent implements OnInit {
             this.affiliateService.getAffiliateCampaigns(this.affiliateId)
                 .subscribe(campaigns => this.campaigns$.next(campaigns));
         });
+    }
+
+    onLeaveCampaign(campaign) {
+        this.campaignService.leave(campaign._id, this.affiliateId)
+            .subscribe(response => {
+                let campaigns = this.campaigns$.getValue().filter(c => c._id !== campaign._id);
+                this.campaigns$.next(campaigns);
+            });
     }
 }
 
