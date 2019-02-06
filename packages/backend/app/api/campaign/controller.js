@@ -52,10 +52,8 @@ module.exports.join = (req, res, next) => {
 module.exports.leave = (req, res, next) => {
     const affiliateId = req.body.affiliateId;
     if (affiliateId) {
-        // TODO: don't require mongoose from here
-        const mongoose = require('mongoose');
         Campaign
-            .findOne({ _id: req.params.id }, { $pull: { affiliates: new mongoose.Types.ObjectId(affiliateId) } })
+            .updateOne({ _id: req.params.id }, { $pull: { affiliates: affiliateId } })
             .exec((updateError, updateResults) => {
                 if (updateError) {
                     console.warn('campaign.leave.update', updateError);
