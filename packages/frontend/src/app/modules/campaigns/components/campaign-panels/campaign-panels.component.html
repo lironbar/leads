@@ -6,20 +6,47 @@
                     <span class="mat-body-2 margin-right-5">{{i + 1}}.</span>
                     <span class="mat-body-2 opacity-8  ">{{campaign.name}}</span>
                 </mat-expansion-panel-header>
-                <p>Description: {{campaign.description}}</p>
-                <p>Price: {{campaign.price}}</p>
-                <p>Max Leads: {{campaign.maxLeads}}</p>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <img fxFlex [src]="campaign.imageUrl" id="campaign-image"/>
+                    <div fxFlex class="padding-10">
+                        <p>Description: {{campaign.description}}</p>
+                        <p>Price: {{campaign.price}}</p>
+                        <p>Hedge Percentage: {{campaign.hedgePercentage}}</p>
+                        <p>Max Leads: {{campaign.maxLeads}}</p>
+                        <p>Max Daily Leads: {{campaign.maxDailyLeads}}</p>
+                        <p>Marketing Text: {{campaign.marketingText}}</p>
+                    </div>
+                </div>
                 <mat-action-row>
-                    <button mat-button
-                            *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
-                            color="primary">EDIT</button>
-                    <button mat-button
-                            *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
-                            color="warn" (click)="onDelete(campaign)">DELETE</button>
-                    <button mat-button
-                            *ngxPermissionsOnly="['AFFILIATE']"
-                            color="warn" (click)="onLeave(campaign)">LEAVE</button>
+                    <div *ngIf="!isAffiliateActions">
+                        <button mat-button
+                                *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
+                                color="primary" (click)="onEdit(campaign)">{{'EDIT'}}</button>
+                        <button mat-button
+                                *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
+                                color="warn" (click)="onDelete(campaign)">{{'DELETE'}}</button>
+                    </div>
+                    <div *ngIf="isAffiliateActions">
+                        <button mat-button
+                                *ngxPermissionsOnly="['ADMIN','AFFILIATE']"
+                                color="warn" (click)="onLeave(campaign)">{{'LEAVE'}}</button>
+                    </div>
                 </mat-action-row>
+
+                <!--<mat-action-row *ngIf="joinEnabled">-->
+                    <!--<button mat-button-->
+                            <!--*ngxPermissionsOnly="['ADMIN','AFFILIATE']"-->
+                            <!--color="warn" (click)="onLeave(campaign)">{{'LEAVE'}}</button>-->
+                <!--</mat-action-row>-->
+
+                <!--<mat-action-row *ngIf="!joinEnabled">-->
+                    <!--<button mat-button-->
+                            <!--*ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"-->
+                            <!--color="primary" (click)="onEdit(campaign)">{{'EDIT'}}</button>-->
+                    <!--<button mat-button-->
+                            <!--*ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"-->
+                            <!--color="warn" (click)="onDelete(campaign)">{{'DELETE'}}</button>-->
+                <!--</mat-action-row>-->
             </mat-expansion-panel>
         </mat-accordion>
     </div>

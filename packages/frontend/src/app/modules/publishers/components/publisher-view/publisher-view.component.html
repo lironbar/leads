@@ -1,6 +1,6 @@
 <div fxLayout="row" class="full-height" *ngIf="publisher$ | async; let publisher">
 
-    <app-publisher-info-bar fxFlex="30" [(publisher)]="publisher" [(user)]="user">
+    <app-publisher-info-bar fxFlex="30" [(publisher)]="publisher">
 
     </app-publisher-info-bar>
 
@@ -11,6 +11,7 @@
         </div>
         <app-campaign-panels fxFlex *ngIf="campaigns$ | async as campagins;"
                              [(campaigns)]="campagins"
+                             (edit)="onEditCampaign($event)"
                              (delete)="OnDeleteCampaign($event)">
         </app-campaign-panels>
     </div>

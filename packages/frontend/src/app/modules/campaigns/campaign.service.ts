@@ -26,6 +26,15 @@ export class CampaignService {
         return this.http.post<Campaign>(this.apiUrl, campaign);
     }
 
+    edit(campaign: Campaign) {
+        return this.http.put<Campaign>(`${this.apiUrl}/${campaign._id}`, campaign);
+    }
+
+    delete(id: string) {
+        const apiUrl = `${this.apiUrl}/${id}`;
+        return this.http.delete<Campaign>(apiUrl);
+    }
+
     join(campaignId: string, affiliateId: string) {
         const path = `${this.apiUrl}/${campaignId}/join`;
         return this.http.post<Campaign>(path, {affiliateId: affiliateId});
@@ -34,11 +43,6 @@ export class CampaignService {
     leave(campaignId: string, affiliateId: string) {
         const path = `${this.apiUrl}/${campaignId}/leave`;
         return this.http.post<Campaign>(path, {affiliateId: affiliateId});
-    }
-
-    delete(id: string) {
-        const apiUrl = `${this.apiUrl}/${id}`;
-        return this.http.delete<Campaign>(apiUrl);
     }
 
 }

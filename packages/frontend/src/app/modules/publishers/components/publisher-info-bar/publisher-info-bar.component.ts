@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Publisher} from '../../publisher.model';
-import {User} from '../../../../core/user/user.model';
 
 @Component({
     selector: 'app-publisher-info-bar',
@@ -9,6 +8,5 @@ import {User} from '../../../../core/user/user.model';
 })
 
 export class PublisherInfoBarComponent {
-    @Input() user: User;
     @Input() publisher: Publisher;
 }

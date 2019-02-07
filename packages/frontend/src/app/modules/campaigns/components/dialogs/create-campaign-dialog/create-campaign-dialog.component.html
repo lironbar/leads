@@ -9,7 +9,7 @@
         <input matInput placeholder="Name"
                title="campaign name" type="text"
                #name="ngModel"
-               ngModel name="name" required>
+               [(ngModel)]="campaign.name" name="name" required>
         <mat-error *ngIf="name.invalid">*This field is required.</mat-error>
       </mat-form-field>
 
@@ -18,7 +18,7 @@
         <input matInput placeholder="Description"
                title="campaign description" type="text"
                #description="ngModel"
-               ngModel name="description" required>
+               [(ngModel)]="campaign.description" name="description" required>
         <mat-error *ngIf="description.invalid">*This field is required.</mat-error>
       </mat-form-field>
     </div>
@@ -31,7 +31,7 @@
         <input matInput placeholder="Price"
                title="Price" type="number"
                #price="ngModel"
-               ngModel name="price" required>
+               [(ngModel)]="campaign.price" name="price" required>
         <mat-error *ngIf="price.invalid">*This field is required.</mat-error>
       </mat-form-field>
 
@@ -40,7 +40,7 @@
         <input matInput placeholder="Hedge Percentage"
                title="hedgePercentage" type="number"
                #hedgePercentage="ngModel"
-               ngModel name="hedgePercentage" required>
+               [(ngModel)]="campaign.hedgePercentage" name="hedgePercentage" required>
         <mat-error *ngIf="hedgePercentage.invalid">*This field is required.</mat-error>
       </mat-form-field>
 
@@ -54,7 +54,7 @@
         <input matInput placeholder="Max Leads"
                title="maxLeads" type="number"
                #maxLeads="ngModel"
-               ngModel name="maxLeads" required>
+               [(ngModel)]="campaign.maxLeads" name="maxLeads" required>
         <mat-error *ngIf="maxLeads.invalid">*This field is required.</mat-error>
       </mat-form-field>
 
@@ -63,7 +63,7 @@
         <input matInput placeholder="Max Daily Leads"
                title="maxDailyLeads" type="number"
                #maxDailyLeads="ngModel"
-               ngModel name="maxDailyLeads" required>
+               [(ngModel)]="campaign.maxDailyLeads" name="maxDailyLeads" required>
         <mat-error *ngIf="maxDailyLeads.invalid">*This field is required.</mat-error>
       </mat-form-field>
 
@@ -76,7 +76,7 @@
         <input matInput placeholder="Marketing Text"
                title="marketingText" type="text"
                #marketingText="ngModel"
-               ngModel name="marketingText" required>
+               [(ngModel)]="campaign.marketingText" name="marketingText" required>
         <mat-error *ngIf="marketingText.invalid">*This field is required.</mat-error>
       </mat-form-field>
     </div>
@@ -89,7 +89,7 @@
         <input matInput placeholder="Image Url"
                title="imageUrl" type="text"
                #imageUrl="ngModel"
-               ngModel name="imageUrl" required>
+               [(ngModel)]="campaign.imageUrl" name="imageUrl" required>
         <mat-error *ngIf="imageUrl.invalid">*This field is required.</mat-error>
       </mat-form-field>
     </div>
@@ -97,7 +97,7 @@
 
   <div mat-dialog-actions fxLayout="row">
     <span fxFlex></span>
-    <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-button mat-raised-button color="primary" type="submit">Create</button>
+    <button mat-button (click)="onCancel()">{{'Cancel'}}</button>
+    <button mat-button mat-raised-button color="primary" type="submit">{{'Submit'}}</button>
   </div>
 </form>

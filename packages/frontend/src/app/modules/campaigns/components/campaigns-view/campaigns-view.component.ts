@@ -7,7 +7,6 @@ import {MatDialog} from '@angular/material';
 import {SnackBarService} from '../../../commons/services/snack-bar.service';
 import {UsersService} from '../../../users/services/users.service';
 import {User} from '../../../../core/user/user.model';
-// import {AffiliateService} from '../../../affiliates/affiliates.service';
 
 
 @Component({
@@ -28,19 +27,34 @@ export class CampaignsViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.campaignService.getCampaigns().subscribe(campaigns => this.campaigns$.next(campaigns));
         const user: User = this.userService.currentUserValue;
-        this.affiliateId = user.currentRole.data._id;
-        this.campaignService.getUnassignedCampaigns(this.affiliateId)
-            .subscribe(campaigns => this.campaigns$.next(campaigns));
+
+        if (user.currentRole.type === 'ADMIN') {
+            this.campaignService.getCampaigns()
+                .subscribe(
+                    campaigns => this.campaigns$.next(campaigns),
+                    error => this._onError('Failed to get campaigns', error)
+                );
+        } else {
+            this.affiliateId = user.currentRole.data._id;
+            this.campaignService.getUnassignedCampaigns(this.affiliateId)
+                .subscribe(
+                    campaigns => this.campaigns$.next(campaigns),
+                    error => this._onError('Failed to get campaigns', error)
+                );
+        }
     }
 
     onJoinCampaign(campaign: Campaign) {
         this.campaignService.join(campaign._id, this.affiliateId)
-            .subscribe(response => {
-                let campaigns = this.campaigns$.getValue().filter(c => c._id !== campaign._id);
-                this.campaigns$.next(campaigns);
-            });
+            .subscribe(
+                response => {
+                    let campaigns = this.campaigns$.getValue().filter(c => c._id !== campaign._id);
+                    this.campaigns$.next(campaigns);
+                    this.snackBar.success('Joined campaign successfully');
+                },
+                error => this._onError('Failed to join campaign', error)
+            );
     }
 
     onDeleteCampaign(campaign: Campaign) {
@@ -61,14 +75,16 @@ export class CampaignsViewComponent implements OnInit {
                             this.campaigns$.next(campaigns);
                             this.snackBar.success('Campaign have been successfully deleted');
                         },
-                        error => {
-                            console.error('Failed to delete campaign', error);
-                            this.snackBar.error('Failed to delete campaign');
-                        }
+                        error => this._onError('Failed to delete campaign', error)
                     );
             } else {
-                console.log('The dialog was closed');
+                console.log('Dialog Closed');
             }
         });
+    }
+
+    _onError(message, error) {
+        console.error(message, error);
+        this.snackBar.error(message);
     }
 }

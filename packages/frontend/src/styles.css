@@ -236,7 +236,43 @@ body {
     opacity: 0.8;
 }
 
+.weight-100 {
+    font-weight: 100;
+}
+
+.weight-200 {
+    font-weight: 200;
+}
+
+.weight-300 {
+    font-weight: 300;
+}
+
+.weight-400 {
+    font-weight: 400;
+}
+
+.weight-500 {
+    font-weight: 500;
+}
+
 .field-icon {
     vertical-align: middle;
     padding: 16px
+}
+
+.avatar-small {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-large {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.3);
 }

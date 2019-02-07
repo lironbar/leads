@@ -8,7 +8,7 @@ import {CreateAffiliateDialogComponent} from './components/dialogs/create-affili
 import {AffiliatesTableComponent} from './components/affiliates-table/affiliates-table.component';
 import {AffiliateViewComponent} from './components/affiliate-view/affiliate-view.component';
 import {AffiliateInfoBarComponent} from './components/affiliate-info-bar/affiliate-info-bar.component';
-import {AffiliateReportsViewComponent} from './affiliate-reports-view/affiliate-reports-view.component';
+import {AffiliateReportsViewComponent} from './components/affiliate-reports-view/affiliate-reports-view.component';
 
 // import {CreatePublisherDialogComponent} from './components/dialogs/create-publisher-dialog/create-publisher-dialog.component';
 

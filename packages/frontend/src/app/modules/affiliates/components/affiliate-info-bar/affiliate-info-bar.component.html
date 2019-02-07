@@ -1,19 +1,29 @@
 <mat-card fxLayout="column" class="full-height" *ngIf="affiliate">
-    <span class="mat-title">{{user.name}}</span>
-    <!--Email-->
-    <div fxLayout="row" fxLayoutAlign="start center" class="margin-5">
-        <mat-icon class="margin-right-5">email</mat-icon>
-        <span class="mat-body-2">{{user.email || 'No Email'}}</span>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <img class="avatar-large" src="/assets/empty_states/empty_state_affiliates.png"/>
     </div>
-    <!--Phone-->
-    <div fxLayout="row" fxLayoutAlign="start center" class="margin-5">
-        <mat-icon class="margin-right-5">phone</mat-icon>
-        <span class="mat-body-2">{{user.phone || 'No Email'}}</span>
+    <div fxLayout="row" fxLayoutAlign="center center" class="padding-10">
+        <span fxFlex="none" class="mat-title weight-300">{{affiliate.name}}</span>
     </div>
-    <!--Address-->
-    <div fxLayout="row" fxLayoutAlign="start center" class="margin-5">
-        <mat-icon class="margin-right-5">place</mat-icon>
-        <span class="mat-body-2">{{affiliate.address || 'No Email'}}</span>
+    <div fxFlex fxLayout="column" fxLayoutAlign="start start" class="overflow-auto">
+
+        <!--Affiliate / User Info-->
+        <div fxLayout="column" class="padding-right-20 padding-left-20">
+            <!--Email-->
+            <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">
+                <mat-icon matTooltip="Email" class="margin-right-5">email</mat-icon>
+                <span class="mat-body-1">{{affiliate.email || 'No Email'}}</span>
+            </div>
+            <!--Phone-->
+            <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">
+                <mat-icon matTooltip="Phone" class="margin-right-5">phone</mat-icon>
+                <span class="mat-body-1">{{affiliate.phone || 'No Phone'}}</span>
+            </div>
+            <!--Address-->
+            <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">
+                <mat-icon matTooltip="Address" class="margin-right-5">place</mat-icon>
+                <span class="mat-body-1">{{affiliate.address || 'No Address'}}</span>
+            </div>
+        </div>
     </div>
 </mat-card>
-
