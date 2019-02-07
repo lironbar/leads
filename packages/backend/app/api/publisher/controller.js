@@ -1,4 +1,5 @@
 const Publisher = require('./model.js');
+const User = require('../user/model.js');
 
 module.exports.save = (req, res, next) => {
     new Publisher(req.body).save((saveError, savedDoc) => {
@@ -55,9 +56,31 @@ module.exports.findOne = (req, res, next) => {
                         return res.send('Something went wrong!');
                 }
             }
-            res.status(200);
-            res.json(foundDoc);
-            next();
+            if (foundDoc) {
+                /**
+             * TODO: Refactor this
+             * find the user this publisher belongs to
+             * and append to the response
+             */
+                User.findOne({ 'members.publishers': { $in: [foundDoc._id] } }, (findOneUserError, foundUserDoc) => {
+                    if (findOneUserError) {
+                        console.warn('publisher.findOne.findOneUser', findOneUserError);
+                        switch (findOneUserError.code) {
+                            default:
+                                res.status(500);
+                                return res.send('Something went wrong!');
+                        }
+                    }
+                    const publisher = foundDoc.toObject();
+                    publisher.user = foundUserDoc.toObject();
+                    res.status(200);
+                    res.json(publisher);
+                    next();
+                })
+            } else {
+                res.status(404);
+                res.end();
+            }
         });
 };
 

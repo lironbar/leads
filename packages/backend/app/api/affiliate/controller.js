@@ -1,4 +1,5 @@
 const Affiliate = require('./model.js');
+const User = require('../user/model.js');
 
 module.exports.save = (req, res, next) => {
     new Affiliate(req.body).save((saveError, savedDoc) => {
@@ -53,14 +54,30 @@ module.exports.findOne = (req, res, next) => {
             }
         }
         if (foundDoc) {
-            res.status(200);
-            res.json(foundDoc);
-            next();
+            /**
+             * TODO: Refactor this
+             * find the user this affiliate belongs to
+             * and append to the response
+             */
+            User.findOne({ 'members.affiliates': { $in: [foundDoc._id] } }, (findOneUserError, foundUserDoc) => {
+                if (findOneUserError) {
+                    console.warn('affiliate.findOne.findOneUser', findOneUserError);
+                    switch (findOneUserError.code) {
+                        default:
+                            res.status(500);
+                            return res.send('Something went wrong!');
+                    }
+                }
+                const affiliate = foundDoc.toObject();
+                affiliate.user = foundUserDoc.toObject();
+                res.status(200);
+                res.json(affiliate);
+                next();
+            })
         } else {
             res.status(404);
             res.end();
         }
-        next();
     });
 };
 
