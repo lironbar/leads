@@ -5,6 +5,8 @@ router.post('/', controller.save);
 
 router.post('/:id/join', controller.join);
 
+router.post('/:id/leave', controller.leave);
+
 router.get('/', controller.find);
 
 router.get('/:id', controller.findOne);
