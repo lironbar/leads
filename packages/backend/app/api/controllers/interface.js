@@ -1,4 +1,4 @@
-const Interface = require('./model.js');
+const Interface = require('../../models/interface');
 
 module.exports.save = (req, res, next) => {
     new Interface(req.body).save((saveError, savedDoc) => {

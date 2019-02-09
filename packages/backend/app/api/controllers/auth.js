@@ -1,6 +1,6 @@
 const { env } = global.App.Config;
-const User = require('../user/model.js');
-const userCtrl = require('../user/controller.js');
+const User = require('../../models/user');
+const userCtrl = require('./user');
 
 module.exports.login = (req, res, next) => {
     User.findOne({ email: req.body.username, password: req.body.password })
