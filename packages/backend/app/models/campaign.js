@@ -37,11 +37,17 @@ const CampaignSchema = new Schema({
     marketingStrategies: { type: [String] },
     // the publisher who owns this campaign
     publisherId: { type: Schema.Types.ObjectId, required: true },
-    // affiliates providing leads for the campaign
-    affiliates: { type: [Schema.Types.ObjectId], ref: 'affiliate' },
     // api to use when sending leads for this campaign
-    interface: { type: Schema.Types.ObjectId, ref: 'interface' },
+    // interface: { type: Schema.Types.ObjectId, ref: 'interface' },
     updated: { type: Number, default: Date.now, select: false }
+}, { toJSON: { virtuals: true }, toObject: { virtuals: true } });
+
+// affiliates assigned to the campaign
+CampaignSchema.virtual('affiliates', {
+    ref: 'user',
+    localField: '_id',
+    foreignField: 'campaigns',
+    justOne: false,
 });
 
 const Campaign = mongoose.model('campaign', CampaignSchema);
