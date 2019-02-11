@@ -35,7 +35,6 @@ class CampaignModule extends MongooseEntity {
     static findUnassigned(affiliateIds) {
         return Campaign.find({ affiliates: { $nin: Array.isArray(affiliateIds) ? affiliateIds : [affiliateIds] } }).populate('affiliates');
     }
-
 }
 
 module.exports = CampaignModule;

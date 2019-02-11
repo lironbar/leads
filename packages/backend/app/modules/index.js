@@ -3,5 +3,6 @@ module.exports = {
     User: require('./user'),
     Campaign: require('./campaign'),
     Publisher: require('./publisher'),
-    Affiliate: require('./affiliate')
+    Affiliate: require('./affiliate'),
+    Interface: require('./interface')
 };

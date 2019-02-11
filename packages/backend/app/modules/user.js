@@ -23,7 +23,6 @@ class UserModule extends MongooseEntity {
     static findOne() {
         return User.findOne();
     }
-
 }
 
 module.exports = UserModule;

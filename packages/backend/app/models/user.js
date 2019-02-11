@@ -6,9 +6,7 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
     email: {
         type: String, unique: true, required: true,
-        validate: (value) => {
-            return new RegExp('.+\@.+\..+').test(value);
-        }
+        validate: value => new RegExp('.+\@.+\..+').test(value)
     },
     phone: { type: String, required: true },
     role: {

@@ -4,7 +4,6 @@ class MongooseEntity {
     parseError(mongooseError) {
 
     }
-
 }
 
 module.exports = MongooseEntity;

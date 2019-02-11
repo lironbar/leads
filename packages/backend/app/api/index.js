@@ -45,7 +45,7 @@ api.use('/user', routers.user);
 api.use('/affiliate', routers.affiliate);
 api.use('/publisher', routers.publisher);
 api.use('/campaign', routers.campaign);
-//api.use('/interface', require('./interface/router'));
+api.use('/interface', routers.interface);
 
 module.exports.boot = () => {
     return new Promise((resolve, reject) => {

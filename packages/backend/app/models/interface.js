@@ -1,94 +1,26 @@
-const Interface = require('./interface.js');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-module.exports.save = (req, res, next) => {
-    new Interface(req.body).save((saveError, savedDoc) => {
-        if (saveError) {
-            console.warn('interface.save', saveError);
-            switch (saveError.name) {
-                case 'ValidationError':
-                    res.status(400);
-                    return res.send(saveError.message);
-                default:
-                    res.status(500);
-                    return res.send('Something went wrong!');
-            }
-        }
-        req.params.id = savedDoc._id;
-        this.findOne(req, res, next);
-    });
-};
+const InterfaceSchema = new Schema({
+    name: { type: String, default: Date.now, required: true },
+    type: { type: String, enum: ['http', 'email'], required: true },
+    email: {
+        type: String,
+        validate: value => new RegExp('.+\@.+\..+').test(value),
+        required: () => this.type === 'email'
+    },
+    url: {
+        type: String,
+        validate: value => new RegExp('(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})', 'gi').test(value),
+        required: () => this.type === 'http'
+    },
+    method: {
+        type: String, enum: ['GET', 'POST', 'PUT'],
+        required: () => this.type === 'http'
+    },
+    updated: { type: Number, default: Date.now, select: false }
+});
 
-module.exports.find = (req, res, next) => {
-    const skip = Number(req.query.skip || 0), limit = (Math.min(req.query.limit, 2000) + 1);
-    Interface.find().skip(skip).limit(limit)
-        .exec((findError, foundDocs) => {
-            if (findError) {
-                console.warn('interface.find', findError);
-                switch (findError.code) {
-                    default:
-                        res.status(500);
-                        return res.send('Something went wrong!');
-                }
-            }
-            if (foundDocs.length === limit) {
-                res.status(206);
-                foundDocs.pop();
-                res.json(foundDocs);
-            } else {
-                res.status(200);
-                res.json(foundDocs);
-            }
-            next();
-        });
-};
+const Interface = mongoose.model('interface', InterfaceSchema);
 
-module.exports.findOne = (req, res, next) => {
-    Interface.findOne({ _id: req.params.id }, (findOneError, foundDoc) => {
-        if (findOneError) {
-            console.warn('interface.findOne', findOneError);
-            switch (findOneError.code) {
-                default:
-                    res.status(500);
-                    return res.send('Something went wrong!');
-            }
-        }
-        res.status(200);
-        res.json(foundDoc);
-        next();
-    });
-};
-
-module.exports.update = (req, res, next) => {
-    Interface.updateOne({ _id: req.params.id }, req.body, (updateError) => {
-        if (updateError) {
-            console.warn('interface.update', updateError);
-            switch (updateError.name) {
-                case 'ValidationError':
-                    res.status(400);
-                    return res.send(updateError.message);
-                default:
-                    res.status(500);
-                    return res.send('Something went wrong!');
-            }
-        }
-        res.status(200);
-        res.end();
-        next();
-    });
-};
-
-module.exports.deleteOne = (req, res, next) => {
-    Interface.deleteOne({ _id: req.params.id }, (deleteOneError) => {
-        if (deleteOneError) {
-            console.warn('interface.deleteOne', deleteOneError);
-            switch (deleteOneError.code) {
-                default:
-                    res.status(500);
-                    return res.send('Something went wrong!');
-            }
-        }
-        res.status(200);
-        res.end();
-        next();
-    });
-};
+module.exports = Interface;

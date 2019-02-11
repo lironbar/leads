@@ -10,7 +10,6 @@ class Authentication {
     static async register(obj) {
         return User.create(obj);
     }
-
 }
 
 module.exports = Authentication;

@@ -56,7 +56,6 @@ class AffiliateModule extends UserModule {
                 .catch(reject);
         });
     }
-
 }
 
 module.exports = AffiliateModule;

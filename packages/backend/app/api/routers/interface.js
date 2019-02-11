@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { interface } = global.API.controllers;
 
-router.post('/', interface.save);
+router.post('/', interface.create);
 
 router.get('/', interface.find);
 
