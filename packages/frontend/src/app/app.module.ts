@@ -58,6 +58,8 @@ import { AuthGuard } from './core/auth-guard/auth-guard.service';
 import {CampaignService} from './modules/campaigns/campaign.service';
 import {PublisherService} from './modules/publishers/publisher.service';
 import {UsersService} from './modules/users/services/users.service';
+import {LeadService} from './modules/leads/services/lead.service';
+import {InterfaceService} from './modules/interface/interface.service';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptorService} from './core/Interceptoers/httpconfig.interceptor';
@@ -123,7 +125,7 @@ import { LoaderInterceptorService} from './core/Interceptoers/httpconfig.interce
             provide: HTTP_INTERCEPTORS,
             useClass: LoaderInterceptorService,
             multi: true
-        }, CampaignService, PublisherService, AuthenticationService, UsersService, LoaderService, SnackBarService, AuthGuard
+        }, CampaignService, PublisherService, InterfaceService,  AuthenticationService, UsersService, LeadService, LoaderService, SnackBarService, AuthGuard
     ],
     bootstrap: [AppComponent],
     entryComponents: []

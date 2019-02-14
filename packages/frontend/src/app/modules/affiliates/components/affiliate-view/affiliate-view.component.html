@@ -12,6 +12,7 @@
         <div fxFlex fxLayout="column">
             <app-campaign-panels fxFlex *ngIf="campaigns$ | async as campagins;"
                                  [(campaigns)]="campagins"
+                                 (send)="onSendLead($event)"
                                  (leave)="onLeaveCampaign($event)">
             </app-campaign-panels>
         </div>

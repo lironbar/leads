@@ -1,0 +1,42 @@
+<div fxLayout="column" class="full-height">
+    <mat-card fxFlex fxLayout="column">
+        <mat-radio-group fxLayout="row" fxLayoutAlign="center center" class="padding-20" [(ngModel)]="type">
+            <mat-radio-button class="margin-right-20" value="api">API</mat-radio-button>
+            <mat-radio-button value="email">Email</mat-radio-button>
+        </mat-radio-group>
+
+        <div fxFlex fxLayout="column" *ngIf="type === 'api'">
+            <div fxLayout="row" fxLayoutAlign="start center" class="padding-10">
+                <mat-select fxFlex="30" placeholder="Select Field" [(ngModel)]="selectedFeild" (selectionChange)="onAddProperty($event)">
+                    <mat-option *ngFor="let filed of Feilds" [value]="filed">
+                        {{filed}}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <div fxFlex fxLayout="column" class="overflow-auto" *ngIf="payload.properties.length else empty_state">
+                <div *ngFor="let property of payload.properties">
+                    <!--<span class="md-body-1 margin-right-10">{{property.key}}:</span>-->
+                    <span>Key:</span>
+                    <mat-form-field>
+                        <input matInput placeholder="Value" [(ngModel)]="property.value">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <span fxFlex></span>
+                <button mat-button color="primary" (click)="onSubmit()">SUBMIT</button>
+            </div>
+        </div>
+
+        <ng-template #empty_state>
+            <div fxLayout="row" fxLayoutAlign="center center" class="full-height">
+                <span class="md-title">No Fields Selected</span>
+            </div>
+        </ng-template>
+
+
+
+    </mat-card>
+</div>
+
+

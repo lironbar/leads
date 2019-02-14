@@ -1,35 +1,3 @@
-<!--<mat-card fxLayout="column" class="full-height" *ngIf="publisher">-->
-    <!--<div fxFlex class="overflow-auto">-->
-        <!--<span class="mat-title">{{user.name}}</span>-->
-        <!--&lt;!&ndash;Email&ndash;&gt;-->
-        <!--<div fxLayout="row" fxLayoutAlign="start center" class="margin-5">-->
-            <!--<mat-icon class="margin-right-5">email</mat-icon>-->
-            <!--<span class="mat-body-2">{{user.email || 'No Email'}}</span>-->
-        <!--</div>-->
-        <!--&lt;!&ndash;Phone&ndash;&gt;-->
-        <!--<div fxLayout="row" fxLayoutAlign="start center" class="margin-5">-->
-            <!--<mat-icon class="margin-right-5">phone</mat-icon>-->
-            <!--<span class="mat-body-2">{{user.phone || 'No Email'}}</span>-->
-        <!--</div>-->
-        <!--&lt;!&ndash;Address&ndash;&gt;-->
-        <!--<div fxLayout="row" fxLayoutAlign="start center" class="margin-5">-->
-            <!--<mat-icon class="margin-right-5">place</mat-icon>-->
-            <!--<span class="mat-body-2">{{publisher.contact || 'No Contact Name'}}</span>-->
-        <!--</div>-->
-        <!--<div fxLayout="row" fxLayoutAlign="start center" class="margin-5">-->
-            <!--<mat-icon class="margin-right-5">place</mat-icon>-->
-            <!--<span class="mat-body-2">{{publisher.phc || 'No PHC'}}</span>-->
-        <!--</div>-->
-        <!--<div fxLayout="row" fxLayoutAlign="start center" class="margin-5">-->
-            <!--<mat-icon class="margin-right-5">place</mat-icon>-->
-            <!--<span class="mat-body-2">{{publisher.address || 'No Address'}}</span>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</mat-card>-->
-
-
-
-
 <mat-card fxLayout="column" class="full-height" *ngIf="publisher">
     <div fxLayout="row" fxLayoutAlign="center center">
         <img class="avatar-large" src="/assets/empty_states/empty_state_publishers.png"/>
@@ -44,12 +12,12 @@
             <!--Email-->
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">
                 <mat-icon matTooltip="Email" class="margin-right-5">email</mat-icon>
-                <span class="mat-body-1">{{publisher.email || 'No Email'}}</span>
+                <span class="mat-body-1">{{publisher.user.email || 'No Email'}}</span>
             </div>
             <!--Phone-->
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">
                 <mat-icon matTooltip="Phone" class="margin-right-5">phone</mat-icon>
-                <span class="mat-body-1">{{publisher.phone || 'No Phone'}}</span>
+                <span class="mat-body-1">{{publisher.user.phone || 'No Phone'}}</span>
             </div>
             <!--Address-->
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">

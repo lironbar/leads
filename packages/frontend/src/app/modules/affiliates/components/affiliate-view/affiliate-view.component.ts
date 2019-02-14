@@ -6,7 +6,6 @@ import {Affiliate} from '../../affiliate.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Campaign} from '../../../campaigns/campaign.model';
 import {User} from '../../../../core/user/user.model';
-import {AuthenticationService} from '../../../../core/authentication/authentication.service';
 import {CampaignService} from '../../../campaigns/campaign.service';
 import {SnackBarService} from '../../../commons/services/snack-bar.service';
 
@@ -24,7 +23,6 @@ export class AffiliateViewComponent implements OnInit {
     constructor(
         public affiliateService: AffiliateService,
         public campaignService: CampaignService,
-        public userService: AuthenticationService,
         public dialog: MatDialog,
         public snackBar: SnackBarService,
         private route: ActivatedRoute) {}
@@ -43,7 +41,11 @@ export class AffiliateViewComponent implements OnInit {
         });
     }
 
-    onLeaveCampaign(campaign) {
+    onSendLead(campaign: Campaign) {
+
+    }
+
+    onLeaveCampaign(campaign: Campaign) {
         this.campaignService.leave(campaign._id, this.affiliateId)
             .subscribe(
                 response => {
