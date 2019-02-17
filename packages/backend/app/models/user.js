@@ -21,6 +21,12 @@ const UserSchema = new Schema({
     active: { type: Boolean, default: true, select: false }
 });
 
+UserSchema.pre('save', function (next) {
+    // capitalize role
+    this.role = this.role.toUpperCase();
+    next();
+});
+
 const User = mongoose.model('user', UserSchema);
 
 module.exports = User;
