@@ -10,11 +10,11 @@ class AffiliateModule extends UserModule {
     }
 
     static find() {
-        return Affiliate.find({ role: 'affiliate' }, { _id: 1, email: 1 }).populate('campaigns');
+        return Affiliate.find({ role: 'affiliate' }, { _id: 1, name: 1, email: 1 }).populate('campaigns');
     }
 
     static findOne(id) {
-        return Affiliate.findOne({ _id: id, role: 'affiliate' }, { _id: 1, email: 1 }).populate('campaigns');
+        return Affiliate.findOne({ _id: id, role: 'affiliate' }, { _id: 1, name: 1, email: 1 }).populate('campaigns');
     }
 
     static getCampaigns(id) {
