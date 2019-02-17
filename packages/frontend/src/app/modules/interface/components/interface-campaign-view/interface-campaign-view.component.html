@@ -10,9 +10,10 @@
         <div fxFlex fxLayout="column" *ngIf="type === 'http'">
 
             <div fxLayout="column" class="z-depth-1 padding-10">
+
                 <div fxLayout="row" fxLayoutAlign="start center">
                     <span class="md-body-2 margin-right-5">{{'URL'}}:</span>
-                    <mat-form-field fxFlex >
+                    <mat-form-field fxFlex>
                         <input matInput [(ngModel)]="interface.url">
                     </mat-form-field>
 
@@ -80,7 +81,7 @@
 
         <mat-toolbar fxLayout="row" fxLayoutAlign="start center">
             <span fxFlex></span>
-            <button mat-button (click)="onSubmit()">{{'SAVE'}}</button>
+            <button mat-button color="primary" (click)="onSubmit()">{{'SAVE'}}</button>
         </mat-toolbar>
 
     </mat-card>

@@ -9,7 +9,7 @@ import {CampaignListComponent} from './modules/campaigns/components/campaign-lis
 import {CampaignPanelsComponent} from './modules/campaigns/components/campaign-panels/campaign-panels.component';
 import {CampaignCreateButtonComponent} from './modules/campaigns/components/campaign-create-button/campaign-create-button.component';
 import {CreateCampaignDialogComponent} from './modules/campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
-
+import {SendLeadDialogComponent} from './modules/campaigns/components/dialogs/send-lead-dialog/send-lead-dialog.component';
 import {
     MatAutocompleteModule,
     MatButtonModule,
@@ -52,6 +52,7 @@ import {EmptyStateComponent} from './modules/commons/components/empty-state/empt
         CampaignPanelsComponent,
         CampaignCreateButtonComponent,
         CreateCampaignDialogComponent,
+        SendLeadDialogComponent,
         ConfirmDialogComponent,
         EmptyStateComponent
     ],
@@ -134,11 +135,12 @@ import {EmptyStateComponent} from './modules/commons/components/empty-state/empt
         CampaignPanelsComponent,
         CampaignCreateButtonComponent,
         CreateCampaignDialogComponent,
+        SendLeadDialogComponent,
         EmptyStateComponent,
         NgxPermissionsModule
     ],
     providers: [],
-    entryComponents: [ConfirmDialogComponent, CreateCampaignDialogComponent]
+    entryComponents: [ConfirmDialogComponent, CreateCampaignDialogComponent, SendLeadDialogComponent]
 })
 export class SharedModule {
 }

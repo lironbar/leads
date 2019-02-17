@@ -3,6 +3,7 @@ import {Campaign} from './campaign.model';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Constants} from '../commons/constants';
+import {Lead} from '../leads/leads.model';
 
 @Injectable()
 export class CampaignService {
@@ -43,6 +44,11 @@ export class CampaignService {
     leave(campaignId: string, affiliateId: string) {
         const path = `${this.apiUrl}/${campaignId}/leave`;
         return this.http.post<Campaign>(path, {affiliateId: affiliateId});
+    }
+
+    sendLead(campaignId: string, affiliateId: string, lead: any) {
+        const path = `${this.apiUrl}/${campaignId}/leads`;
+        return this.http.post<Campaign>(path, {affiliateId: affiliateId, lead: lead});
     }
 
 }

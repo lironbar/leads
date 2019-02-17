@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Affiliate} from '../../affiliate.model';
+import {MatDialog} from '@angular/material';
+import {CreateAffiliateDialogComponent} from '../dialogs/create-affiliate-dialog/create-affiliate-dialog.component';
 
 @Component({
     selector: 'app-affiliate-info-bar',
@@ -9,4 +11,20 @@ import {Affiliate} from '../../affiliate.model';
 
 export class AffiliateInfoBarComponent {
     @Input() affiliate: Affiliate;
+
+    constructor(
+        private dialog: MatDialog
+    ){}
+
+    public onEditInfo(affiliate: Affiliate) {
+        const affiliateCopy = {...affiliate};
+        const dialogRef = this.dialog.open(CreateAffiliateDialogComponent, {data: affiliateCopy});
+        dialogRef.afterClosed().subscribe(editedAffiliate => {
+            if (editedAffiliate) {
+
+            } else {
+                console.log('Dialog Closed');
+            }
+        })
+    }
 }

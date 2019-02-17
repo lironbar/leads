@@ -5,7 +5,9 @@
             <!--<a mat-list-item routerLink="./create"> Create </a>-->
         <!--</mat-nav-list>-->
         <mat-list *ngIf="campaigns$ | async as campaigns">
-            <mat-nav-list *ngFor="let campaign of campaigns" (click)="onCampaignClicked(campaign)" class="padding-0">
+            <h3 mat-subheader>{{'Campaigns'}}</h3>
+            <mat-nav-list *ngFor="let campaign of campaigns"
+                          (click)="onCampaignClicked(campaign)" class="padding-0">
                 <a mat-list-item
                    [ngClass]="{'selected': selectedCampaignId === campaign._id}"
                    [routerLink]="['./campaign', campaign._id]">
@@ -15,6 +17,7 @@
                         <span> {{campaign.description}} </span>
                     </p>
                 </a>
+                <mat-divider></mat-divider>
             </mat-nav-list>
         </mat-list>
     </mat-card>

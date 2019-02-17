@@ -12,7 +12,6 @@ const routes: Routes = [
         component: InterfaceViewComponent,
         children: [
             // {path: '', pathMatch: 'full', redirectTo: 'create'},
-            // {path: 'create', component: InterfaceCreateViewComponent}
             {path: 'campaign/:id', component: InterfaceCampaignViewComponent}
         ]
     },

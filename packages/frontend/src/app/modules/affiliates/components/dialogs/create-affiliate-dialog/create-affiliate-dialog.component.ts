@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Affiliate} from '../../../affiliate.model';
-import {MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {NgForm} from '@angular/forms';
 
 
@@ -11,7 +11,14 @@ import {NgForm} from '@angular/forms';
 })
 
 export class CreateAffiliateDialogComponent {
-    constructor(public dialogRef: MatDialogRef<CreateAffiliateDialogComponent>) {
+    affiliate;
+    constructor(
+        public dialogRef: MatDialogRef<CreateAffiliateDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: { affiliate: Affiliate }
+    ){}
+
+    ngOnInit() {
+        this.affiliate = this.data ? {...this.data} : {};
     }
 
     public onCancel() {
@@ -20,13 +27,15 @@ export class CreateAffiliateDialogComponent {
 
     public onCreateAffiliate(form: NgForm) {
         if (form.valid) {
-            const affiliate: Affiliate = {
-                name: form.value.name,
-                phone: form.value.phone,
-                email: form.value.email,
-                address: form.value.address
-            };
-            this.dialogRef.close(affiliate);
+            // const affiliate: Affiliate = {
+            //     name: form.value.name,
+            //     phone: form.value.phone,
+            //     email: form.value.email,
+            //     address: form.value.address
+            // };
+            // this.dialogRef.close(affiliate);
+
+            this.dialogRef.close(this.affiliate);
         }
     }
 }

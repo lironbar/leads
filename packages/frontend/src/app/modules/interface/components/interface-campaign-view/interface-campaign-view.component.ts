@@ -55,10 +55,9 @@ export class InterfaceCampaignViewComponent implements OnInit{
     }
 
     onSubmit() {
-        debugger;
         this.interfaceService.create(this.campaignId, this.interface)
             .subscribe(response => {
-                debugger;
+
             });
     }
 

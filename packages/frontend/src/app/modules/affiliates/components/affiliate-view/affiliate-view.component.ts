@@ -8,6 +8,8 @@ import {Campaign} from '../../../campaigns/campaign.model';
 import {User} from '../../../../core/user/user.model';
 import {CampaignService} from '../../../campaigns/campaign.service';
 import {SnackBarService} from '../../../commons/services/snack-bar.service';
+import {CreateCampaignDialogComponent} from '../../../campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
+import {SendLeadDialogComponent} from '../../../campaigns/components/dialogs/send-lead-dialog/send-lead-dialog.component';
 
 @Component({
     selector: 'app-affiliate-view',
@@ -42,7 +44,14 @@ export class AffiliateViewComponent implements OnInit {
     }
 
     onSendLead(campaign: Campaign) {
+        const dialogRef = this.dialog.open(SendLeadDialogComponent);
+        dialogRef.afterClosed().subscribe(lead => {
+            if (lead) {
 
+            } else {
+                console.log('Dialog Closed');
+            }
+        });
     }
 
     onLeaveCampaign(campaign: Campaign) {
