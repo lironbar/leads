@@ -3,7 +3,11 @@
         <img class="avatar-large" src="/assets/empty_states/empty_state_affiliates.png"/>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" class="padding-10">
-        <span fxFlex="none" class="mat-title weight-300">{{affiliate.name}}</span>
+        <span fxFlex="none" class="mat-title margin-0 weight-300">{{affiliate.name}}</span>
+        <button mat-icon-button matTooltip="Edit Info" class="margin-left-5"
+                (click)="onEditInfo(affiliate)">
+            <mat-icon>edit</mat-icon>
+        </button>
     </div>
     <div fxFlex fxLayout="column" fxLayoutAlign="start start" class="overflow-auto">
 
@@ -12,12 +16,12 @@
             <!--Email-->
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">
                 <mat-icon matTooltip="Email" class="margin-right-5">email</mat-icon>
-                <span class="mat-body-1">{{affiliate.email || 'No Email'}}</span>
+                <span class="mat-body-1">{{affiliate.user.email || 'No Email'}}</span>
             </div>
             <!--Phone-->
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">
                 <mat-icon matTooltip="Phone" class="margin-right-5">phone</mat-icon>
-                <span class="mat-body-1">{{affiliate.phone || 'No Phone'}}</span>
+                <span class="mat-body-1">{{affiliate.user.phone || 'No Phone'}}</span>
             </div>
             <!--Address-->
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">

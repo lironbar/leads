@@ -11,8 +11,7 @@ import {NgForm} from '@angular/forms';
 })
 
 export class CreatePublisherDialogComponent {
-    constructor(public dialogRef: MatDialogRef<CreatePublisherDialogComponent>) {
-    }
+    constructor(public dialogRef: MatDialogRef<CreatePublisherDialogComponent>) {}
 
     public onCancel() {
         this.dialogRef.close();

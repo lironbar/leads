@@ -44,7 +44,6 @@ export class RegisterViewComponent {
                         // const isPublisher = responseUser.members['publishers'].length > 0;
                         // const path = responseUser.isAdmin || isPublisher ? 'publishers' : 'campaigns';
                         // const id = isPublisher ? responseUser.members['publishers'][0]._id : undefined;
-                        // debugger;
                         // this.router.navigate([path, id]);
 
 

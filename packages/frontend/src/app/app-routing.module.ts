@@ -50,6 +50,17 @@ const routes: Routes = [
                     }
                 }
             },
+            {
+                path: 'interface',
+                loadChildren: './modules/interface/interface.module#InterfaceModule',
+                canActivate: [NgxPermissionsGuard],
+                data: {
+                    permissions: {
+                        only: ['ADMIN'],
+                        redirectTo: '/403'
+                    }
+                }
+            },
             {path: '', redirectTo: '/publishers', pathMatch: 'full'},
         ]
     },

@@ -26,7 +26,11 @@
                                 *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
                                 color="warn" (click)="onDelete(campaign)">{{'DELETE'}}</button>
                     </div>
-                    <div *ngIf="isAffiliateActions">
+                    <div *ngIf="isAffiliateActions" fxLayout="row" fxLayoutAlign="start center">
+                        <button mat-button
+                                *ngxPermissionsOnly="['ADMIN','AFFILIATE']"
+                                color="warn" (click)="onSend(campaign)">{{'Send Lead'}}</button>
+                        <span fxFlex></span>
                         <button mat-button
                                 *ngxPermissionsOnly="['ADMIN','AFFILIATE']"
                                 color="warn" (click)="onLeave(campaign)">{{'LEAVE'}}</button>

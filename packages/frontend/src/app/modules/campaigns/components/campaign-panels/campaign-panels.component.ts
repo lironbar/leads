@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class CampaignPanelsComponent implements OnInit {
     isAffiliateActions: boolean;
     @Input() campaigns: Campaign[];
+    @Output() send: EventEmitter<any> = new EventEmitter<any>();
     @Output() delete: EventEmitter<any> = new EventEmitter();
     @Output() leave: EventEmitter<any> = new EventEmitter();
     @Output() edit: EventEmitter<any> = new EventEmitter<any>();
@@ -19,6 +20,10 @@ export class CampaignPanelsComponent implements OnInit {
 
     ngOnInit() {
         this.isAffiliateActions = this.router.url.includes('affiliates');
+    }
+
+    onSend(campaign: Campaign) {
+        this.send.emit(campaign);
     }
 
     onDelete(campaign: Campaign) {

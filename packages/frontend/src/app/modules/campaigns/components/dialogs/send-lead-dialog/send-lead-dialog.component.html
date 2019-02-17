@@ -1,0 +1,42 @@
+<form (submit)="onSendLead(leadForm)" #leadForm="ngForm" class="large-dialog">
+    <!--<h1 mat-dialog-title>{{'Send Lead'}}</h1>-->
+    <div mat-dialog-content fxLayout="column">
+        <img fxFlex src="/assets/images/campaign-example.jpg" class="test"/>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="margin-right-5">account_box</mat-icon>
+            <mat-form-field>
+                <input matInput placeholder="Name" type="text"
+                       #name="ngModel" ngModel
+                       name="name" required>
+                <mat-error *ngIf="name.invalid">*This field is required.</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="margin-right-5">email</mat-icon>
+            <mat-form-field>
+                <input matInput placeholder="Email" type="text"
+                       #email="ngModel" ngModel
+                       name="email" required>
+                <mat-error *ngIf="email.invalid">*This field is required.</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="margin-right-5">phone</mat-icon>
+            <mat-form-field>
+                <input matInput placeholder="Phone" type="text"
+                       #phone="ngModel" ngModel
+                       name="phone" required>
+                <mat-error *ngIf="phone.invalid">*This field is required.</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex></span>
+        <button mat-button (click)="onCancel()">{{'Cancel'}}</button>
+        <button mat-button mat-raised-button color="primary" type="submit">{{'Send'}}</button>
+    </div>
+</form>

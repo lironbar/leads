@@ -6,9 +6,10 @@ import {Affiliate} from '../../affiliate.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Campaign} from '../../../campaigns/campaign.model';
 import {User} from '../../../../core/user/user.model';
-import {AuthenticationService} from '../../../../core/authentication/authentication.service';
 import {CampaignService} from '../../../campaigns/campaign.service';
 import {SnackBarService} from '../../../commons/services/snack-bar.service';
+import {CreateCampaignDialogComponent} from '../../../campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
+import {SendLeadDialogComponent} from '../../../campaigns/components/dialogs/send-lead-dialog/send-lead-dialog.component';
 
 @Component({
     selector: 'app-affiliate-view',
@@ -24,7 +25,6 @@ export class AffiliateViewComponent implements OnInit {
     constructor(
         public affiliateService: AffiliateService,
         public campaignService: CampaignService,
-        public userService: AuthenticationService,
         public dialog: MatDialog,
         public snackBar: SnackBarService,
         private route: ActivatedRoute) {}
@@ -43,7 +43,18 @@ export class AffiliateViewComponent implements OnInit {
         });
     }
 
-    onLeaveCampaign(campaign) {
+    onSendLead(campaign: Campaign) {
+        const dialogRef = this.dialog.open(SendLeadDialogComponent);
+        dialogRef.afterClosed().subscribe(lead => {
+            if (lead) {
+
+            } else {
+                console.log('Dialog Closed');
+            }
+        });
+    }
+
+    onLeaveCampaign(campaign: Campaign) {
         this.campaignService.leave(campaign._id, this.affiliateId)
             .subscribe(
                 response => {

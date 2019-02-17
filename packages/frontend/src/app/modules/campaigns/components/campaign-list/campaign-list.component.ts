@@ -14,6 +14,7 @@ export class CampaignListComponent {
     @Input() campaigns: Campaign[];
     @Output() delete: EventEmitter<any> = new EventEmitter();
     @Output() join: EventEmitter<any> = new EventEmitter();
+    @Output() send: EventEmitter<any> = new EventEmitter();
     defaultImageUrl = 'https://www.jensenleisurefurniture.com/wp-content/themes/jensen-leisure/media/woocommerce/product-placeholder.png';
 
     constructor(public dialog: MatDialog) {
