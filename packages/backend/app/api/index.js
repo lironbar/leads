@@ -38,7 +38,7 @@ const { routers } = global.API;
 api.use('/register', routers.register);
 
 // auth
-//api.use('/', routers.auth);
+api.use('/', routers.auth);
 
 // routing
 api.use('/user', routers.user);

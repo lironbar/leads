@@ -29,12 +29,13 @@ export class LoginViewComponent {
             this.authenticationService.login(form.value.email, form.value.password)
                 .subscribe(
                     responseUser => {
-                        const isPublisher = responseUser.members['publishers'].length > 0;
-                        const path = responseUser.isAdmin || isPublisher ? 'publishers' : 'campaigns';
-                        const commands = isPublisher ? [path, responseUser.members['publishers'][0]._id] : [path];
-                        this.router.navigate(commands);
-
-                        // this.router.navigate([path]);
+                        const userRole = responseUser.role.toLowerCase();
+                        const isAdmin = (userRole === 'admin'), isPublisher = (userRole === 'publisher');
+                        if (isAdmin || isPublisher) {
+                            this.router.navigate(['publishers', responseUser._id]);
+                        } else {
+                            this.router.navigate(['campaigns']);
+                        }
                     },
                     error => {
                         console.error('Failed to sign in', error);

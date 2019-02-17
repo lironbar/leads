@@ -47,6 +47,7 @@ export class AuthenticationService {
                 map(userResponse => {
                     // if (user && user.token) {
                     // }
+                    debugger;
                     userResponse.currentRole = this._getCurrentRole(userResponse);
                     localStorage.setItem('currentUser', JSON.stringify(userResponse));
                     this.currentUserSubject.next(userResponse);
@@ -63,8 +64,8 @@ export class AuthenticationService {
     }
     _getCurrentRole(user) {
         return {
-            data: user.members.affiliates.length ? user.members.affiliates[0] : user.members.publishers[0],
-            type: user.isAdmin ? 'ADMIN' : (user.members.affiliates.length ? 'AFFILIATE' : 'PUBLISHER')
+            data: user.role,
+            type: user.role.toUpperCase()
         };
     }
 }
