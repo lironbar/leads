@@ -10,16 +10,16 @@ class AffiliateModule extends UserModule {
     }
 
     static find() {
-        return Affiliate.find({ role: 'affiliate' }, { _id: 1, name: 1, email: 1 }).populate('campaigns');
+        return Affiliate.find({ role: 'AFFILIATE' }, { _id: 1, name: 1, email: 1, phone: 1 }).populate('campaigns');
     }
 
     static findOne(id) {
-        return Affiliate.findOne({ _id: id, role: 'affiliate' }, { _id: 1, name: 1, email: 1 }).populate('campaigns');
+        return Affiliate.findOne({ _id: id, role: 'AFFILIATE' }, { _id: 1, name: 1, email: 1, phone: 1 }).populate('campaigns');
     }
 
     static getCampaigns(id) {
         return new Promise((resolve, reject) => {
-            Affiliate.findOne({ _id: id, role: 'affiliate' }, { _id: 0, campaigns: 1 })
+            Affiliate.findOne({ _id: id, role: 'AFFILIATE' }, { _id: 0, campaigns: 1 })
                 .populate('campaigns')
                 .then(affiliate => {
                     if (!affiliate) {
@@ -33,7 +33,7 @@ class AffiliateModule extends UserModule {
 
     static joinCampaign(id, campaignId) {
         return new Promise((resolve, reject) => {
-            return Affiliate.update({ _id: id, role: 'affiliate', campaigns: { $nin: [campaignId] } }, { $push: { campaigns: campaignId } })
+            return Affiliate.update({ _id: id, role: 'AFFILIATE', campaigns: { $nin: [campaignId] } }, { $push: { campaigns: campaignId } })
                 .then(results => {
                     if (!results.nModified) {
                         throw 'Failed to join campaign';
@@ -46,7 +46,7 @@ class AffiliateModule extends UserModule {
 
     static leaveCampaign(id, campaignId) {
         return new Promise((resolve, reject) => {
-            Affiliate.update({ _id: id, role: 'affiliate' }, { $pull: { campaigns: campaignId } })
+            Affiliate.update({ _id: id, role: 'AFFILIATE' }, { $pull: { campaigns: campaignId } })
                 .then((results) => {
                     if (!results.nModified) {
                         throw 'Failed to leave campaign';

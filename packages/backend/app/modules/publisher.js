@@ -11,11 +11,11 @@ class PublisherModule extends UserModule {
     }
 
     static find() {
-        return Publisher.find({ role: 'publisher' }, { _id: 1, name: 1, email: 1 }).populate('campaigns');
+        return Publisher.find({ role: 'PUBLISHER' }, { _id: 1, name: 1, email: 1, phone: 1, phc: 1, contact: 1 }).populate('campaigns');
     }
 
     static findOne(id) {
-        return Publisher.findOne({ _id: id, role: 'publisher' }, { _id: 1, name: 1, email: 1 }).populate('campaigns');
+        return Publisher.findOne({ _id: id, role: 'PUBLISHER' }, { _id: 1, name: 1, email: 1, phone: 1, phc: 1, contact: 1 }).populate('campaigns');
     }
 
     static getCampaigns(id) {

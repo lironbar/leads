@@ -10,13 +10,13 @@ const UserSchema = new Schema({
     },
     phone: { type: String, required: true },
     role: {
-        type: { enum: ['admin', 'publisher', 'affiliate'] },
-        default: 'affiliate',
+        type: { enum: ['ADMIN', 'PUBLISHER', 'AFFILIATE'] },
+        default: 'AFFILIATE',
         required: true
     },
     campaigns: { type: [{ type: Schema.Types.ObjectId, ref: 'campaign' }] },
-    phc: { type: String, required: () => this.role === 'publisher' }, // private-held-company id
-    contact: { type: String, required: () => this.role === 'publisher' },
+    phc: { type: String, required: () => this.role === 'PUBLISHER' }, // private-held-company id
+    contact: { type: String, required: () => this.role === 'PUBLISHER' },
     updated: { type: Number, default: Date.now, select: false },
     active: { type: Boolean, default: true, select: false }
 });
