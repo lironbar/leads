@@ -27,6 +27,10 @@ class InterfaceModule extends MongooseEntity {
     static deleteOne(id) {
         return Interface.deleteOne({ _id: id });
     }
+
+    static getByCampaign(campaignId) {
+        return Interface.findOne({ campaignId: campaignId });
+    }
 }
 
 module.exports = InterfaceModule;

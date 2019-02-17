@@ -17,44 +17,38 @@ class AffiliateModule extends UserModule {
         return Affiliate.findOne({ _id: id, role: 'AFFILIATE' }, { _id: 1, name: 1, email: 1, phone: 1 }).populate('campaigns');
     }
 
-    static getCampaigns(id) {
-        return new Promise((resolve, reject) => {
-            Affiliate.findOne({ _id: id, role: 'AFFILIATE' }, { _id: 0, campaigns: 1 })
-                .populate('campaigns')
-                .then(affiliate => {
-                    if (!affiliate) {
-                        resolve(affiliate);
-                    }
-                    return resolve(affiliate.campaigns || affiliate);
-                })
-                .catch(reject);
-        });
+    static async getCampaigns(id) {
+        try {
+            const affiliate = await Affiliate.findOne({ _id: id, role: 'AFFILIATE' }, { _id: 0, campaigns: 1 }).populate('campaigns');
+            if (!affiliate) {
+                return affiliate;
+            }
+            return affiliate.campaigns;
+        } catch (err) {
+            throw err;
+        }
     }
 
-    static joinCampaign(id, campaignId) {
-        return new Promise((resolve, reject) => {
-            return Affiliate.update({ _id: id, role: 'AFFILIATE', campaigns: { $nin: [campaignId] } }, { $push: { campaigns: campaignId } })
-                .then(results => {
-                    if (!results.nModified) {
-                        throw 'Failed to join campaign';
-                    }
-                    resolve();
-                })
-                .catch(reject);
-        });
+    static async joinCampaign(id, campaignId) {
+        try {
+            const results = await Affiliate.update({ _id: id, role: 'AFFILIATE', campaigns: { $nin: [campaignId] } }, { $push: { campaigns: campaignId } });
+            if (!results.nModified) {
+                throw 'Failed to join campaign';
+            }
+        } catch (err) {
+            throw (err);
+        }
     }
 
-    static leaveCampaign(id, campaignId) {
-        return new Promise((resolve, reject) => {
-            Affiliate.update({ _id: id, role: 'AFFILIATE' }, { $pull: { campaigns: campaignId } })
-                .then((results) => {
-                    if (!results.nModified) {
-                        throw 'Failed to leave campaign';
-                    }
-                    resolve();
-                })
-                .catch(reject);
-        });
+    static async leaveCampaign(id, campaignId) {
+        try {
+            const results = await Affiliate.update({ _id: id, role: 'AFFILIATE' }, { $pull: { campaigns: campaignId } });
+            if (!results.nModified) {
+                throw 'Failed to leave campaign';
+            }
+        } catch (err) {
+            throw (err);
+        }
     }
 }
 

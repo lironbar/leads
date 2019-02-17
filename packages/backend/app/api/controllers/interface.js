@@ -14,11 +14,16 @@ module.exports.create = async (req, res, next) => {
 
 module.exports.find = async (req, res, next) => {
     try {
-        const interfaces = await Interface.find();
+        let result;
+        const campaignId = req.query.campaignId;
+        if (campaignId) {
+            result = await Interface.getByCampaign(campaignId);
+        } else {
+            result = await Interface.find();
+        }
         res.status(200);
-        res.json(interfaces);
+        res.json(result);
         next();
-
     } catch (err) {
         res.status(500);
         res.send(err);
