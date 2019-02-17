@@ -1,40 +1,37 @@
 const { Publisher } = global.App.Modules;
 
-module.exports.find = (req, res, next) => {
-    Publisher.find()
-        .then(publishers => {
-            res.status(200);
-            res.json(publishers);
-            next();
-        })
-        .catch(err => {
-            res.status(500);
-            res.send(err);
-        });
+module.exports.find = async (req, res, next) => {
+    try {
+        const publishers = await Publisher.find();
+        res.status(200);
+        res.json(publishers);
+        next();
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
 };
 
-module.exports.findOne = (req, res, next) => {
-    Publisher.findOne(req.params.id)
-        .then(publisher => {
-            res.status(200);
-            res.json(publisher);
-            next();
-        })
-        .catch(err => {
-            res.status(500);
-            res.send(err);
-        });
+module.exports.findOne = async (req, res, next) => {
+    try {
+        const publisher = await Publisher.findOne(req.params.id);
+        res.status(200);
+        res.json(publisher);
+        next();
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
 };
 
-module.exports.getCampaigns = (req, res, next) => {
-    Publisher.getCampaigns(req.params.id)
-        .then(campaigns => {
-            res.status(200);
-            res.json(campaigns);
-            next();
-        })
-        .catch(err => {
-            res.status(500);
-            res.send(err);
-        });
+module.exports.getCampaigns = async (req, res, next) => {
+    try {
+        const campaigns = await Publisher.getCampaigns(req.params.id);
+        res.status(200);
+        res.json(campaigns);
+        next();
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
 };

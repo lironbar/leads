@@ -2,29 +2,24 @@ const { env } = global.App.Config;
 const User = require('../../models/user');
 const userCtrl = require('./user');
 
-module.exports.login = (req, res, next) => {
-    User.findOne({ email: req.body.username, password: req.body.password })
-        .exec((findError, userDoc) => {
-            if (findError) {
-                console.warn('login.findUser', findError);
-                switch (findError.code) {
-                    default:
-                        res.status(500);
-                        return res.send('Something went wrong!');
-                }
-            }
-            if (userDoc) {
-                res.cookie('session', Date.now(), {
-                    maxAge: 1000 * 60 * 60, // would expire after 60 minutes
-                    httpOnly: true, // The cookie only accessible by the web server
-                });
-                req.params.id = userDoc._id;
-                userCtrl.findOne(req, res, next);
-            } else {
-                res.status(400);
-                res.end();
-            }
-        });
+module.exports.login = async (req, res, next) => {
+    try {
+        const user = await User.findOne({ email: req.body.username, password: req.body.password });
+        if (user) {
+            res.cookie('session', Date.now(), {
+                maxAge: 1000 * 60 * 60, // would expire after 60 minutes
+                httpOnly: true, // The cookie only accessible by the web server
+            });
+            req.params.id = user._id;
+            userCtrl.findOne(req, res, next);
+        } else {
+            res.status(400);
+            res.end();
+        }
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
 };
 
 module.exports.logout = (req, res, next) => {

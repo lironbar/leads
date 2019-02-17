@@ -14,19 +14,21 @@
     await require('./app/api').boot();
 
     // create super admin user
-    //const User = require('./app/api/user/model.js');
-    // const user = {
-    //     name: 'super admin',
-    //     password: '123',
-    //     email: 'admin@admin.com',
-    //     phone: '010101010',
-    //     isAdmin: true,
-    // };
-    // User.findOneAndUpdate({ name: user.name }, user, { upsert: true }, (upsertError) => {
-    //     if (upsertError) {
-    //         return console.error('boot.createSuperAdmin', upsertError);
-    //     }
-    //     console.log('boot.createSuperAdmin', 'login:', user.email, user.password);
-    // });
+    if (global.App.Config.env === 'dev') {
+        const User = require('./app/models/user.js');
+        const user = {
+            name: 'super admin',
+            password: '123',
+            email: 'admin@test.com',
+            phone: '010101010',
+            role: 'ADMIN'
+        };
+        User.findOneAndUpdate({ name: user.name }, user, { upsert: true }, (upsertError) => {
+            if (upsertError) {
+                return console.error('boot.createSuperAdmin', upsertError);
+            }
+            console.log('boot.createSuperAdmin', 'login:', user.email, user.password);
+        });
+    }
 
 })();

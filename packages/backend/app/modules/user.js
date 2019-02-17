@@ -20,8 +20,8 @@ class UserModule extends MongooseEntity {
         return User.find();
     }
 
-    static findOne() {
-        return User.findOne();
+    static findOne(id) {
+        return User.findOne({ _id: id });
     }
 }
 

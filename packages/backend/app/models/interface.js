@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const InterfaceSchema = new Schema({
-    name: { type: String, default: Date.now, required: true },
     type: { type: String, enum: ['http', 'email'], required: true },
     email: {
         type: String,
@@ -18,6 +17,11 @@ const InterfaceSchema = new Schema({
         type: String, enum: ['GET', 'POST', 'PUT'],
         required: () => this.type === 'http'
     },
+    properties: {
+        type: Object,
+        required: () => this.type === 'http'
+    },
+    campaignId: { type: Schema.Types.ObjectId, required: true },
     updated: { type: Number, default: Date.now, select: false }
 });
 
