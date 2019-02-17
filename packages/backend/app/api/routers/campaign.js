@@ -13,6 +13,8 @@ router.delete('/:id', campaign.deleteOne);
 
 router.get('/unassigned/:affiliateId', campaign.findUnassigned)
 
+router.post('/:id/leads', campaign.sendLead);
+
 
 router.post('/:id/join', affiliate.joinCampaign);
 
