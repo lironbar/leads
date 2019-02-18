@@ -8,11 +8,11 @@
             <mat-icon>portrait</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let role of roles" (click)="onChangeRole(role)">
-                <mat-icon>{{role.icon}}</mat-icon>
-                <span>{{role.value | titlecase}}</span>
-            </button>
-            <mat-divider></mat-divider>
+            <!--<button mat-menu-item *ngFor="let role of roles" (click)="onChangeRole(role)">-->
+                <!--<mat-icon>{{role.icon}}</mat-icon>-->
+                <!--<span>{{role.value | titlecase}}</span>-->
+            <!--</button>-->
+            <!--<mat-divider></mat-divider>-->
             <button mat-menu-item (click)="onSignOut()">{{'Sign Out'}}</button>
         </mat-menu>
     </mat-toolbar-row>

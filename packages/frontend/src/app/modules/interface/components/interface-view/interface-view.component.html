@@ -1,9 +1,7 @@
 <div fxLayout="row" class="full-height">
 
+    <!--Campaign List-->
     <mat-card fxFlex="25" fxLayout="column" class="overflow-auto padding-0">
-        <!--<mat-nav-list>-->
-            <!--<a mat-list-item routerLink="./create"> Create </a>-->
-        <!--</mat-nav-list>-->
         <mat-list *ngIf="campaigns$ | async as campaigns">
             <h3 mat-subheader>{{'Campaigns'}}</h3>
             <mat-nav-list *ngFor="let campaign of campaigns"
@@ -22,6 +20,7 @@
         </mat-list>
     </mat-card>
 
+    <!--Interface View-->
     <div fxFlex>
         <router-outlet></router-outlet>
     </div>

@@ -46,10 +46,10 @@ export class RegisterViewComponent {
                         // const id = isPublisher ? responseUser.members['publishers'][0]._id : undefined;
                         // this.router.navigate([path, id]);
 
-
-                        const isPublisher = responseUser.members['publishers'].length > 0;
-                        const path = responseUser.isAdmin || isPublisher ? 'publishers' : 'campaigns';
-                        const commands = isPublisher ? [path, responseUser.members['publishers'][0]._id] : [path];
+                        const role = responseUser.role;
+                        // const isPublisher = responseUser.members['publishers'].length > 0;
+                        const path = responseUser.isAdmin || role === 'PUBLISHER' ? 'publishers' : 'campaigns';
+                        const commands = role === 'PUBLISHER' ? [path, responseUser._id] : [path];
                         this.router.navigate(commands);
 
                     },

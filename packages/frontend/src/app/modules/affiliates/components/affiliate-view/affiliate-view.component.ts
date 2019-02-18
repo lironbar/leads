@@ -10,6 +10,7 @@ import {CampaignService} from '../../../campaigns/campaign.service';
 import {SnackBarService} from '../../../commons/services/snack-bar.service';
 import {CreateCampaignDialogComponent} from '../../../campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
 import {SendLeadDialogComponent} from '../../../campaigns/components/dialogs/send-lead-dialog/send-lead-dialog.component';
+import { InterfaceService } from '../../../interface/interface.service';
 
 @Component({
     selector: 'app-affiliate-view',
@@ -25,6 +26,7 @@ export class AffiliateViewComponent implements OnInit {
     constructor(
         public affiliateService: AffiliateService,
         public campaignService: CampaignService,
+        public interfaceService: InterfaceService,
         public dialog: MatDialog,
         public snackBar: SnackBarService,
         private route: ActivatedRoute) {}
@@ -43,15 +45,31 @@ export class AffiliateViewComponent implements OnInit {
         });
     }
 
-    onSendLead(campaign: Campaign) {
-        const dialogRef = this.dialog.open(SendLeadDialogComponent);
-        dialogRef.afterClosed().subscribe(lead => {
-            if (lead) {
+    onAffiliateChange(affiliate) {
+        this.affiliate$ = this.affiliateService.update(affiliate._id, affiliate);
+    }
 
-            } else {
-                console.log('Dialog Closed');
-            }
-        });
+    onSendLead(campaign: Campaign) {
+        this.interfaceService.getByCampaign(campaign._id)
+            .subscribe(
+                campaignInterface => {
+                    const dialogRef = this.dialog.open(SendLeadDialogComponent, {data: campaignInterface.properties});
+                    dialogRef.afterClosed().subscribe(lead => {
+                        if (lead) {
+                            this.campaignService.sendLead(campaign._id, this.affiliateId, lead)
+                                .subscribe(
+                                    response => {
+                                        this.snackBar.success('Lead sent successfully');
+                                    },
+                                    error => this._onError('Failed to get campaigns', error)
+                                )
+                        } else {
+                            console.log('Dialog Closed');
+                        }
+                    });
+                },
+                error => this._onError('Failed to get interface', error)
+            )
     }
 
     onLeaveCampaign(campaign: Campaign) {
@@ -60,7 +78,7 @@ export class AffiliateViewComponent implements OnInit {
                 response => {
                     let campaigns = this.campaigns$.getValue().filter(c => c._id !== campaign._id);
                     this.campaigns$.next(campaigns);
-                    this.snackBar.success('Joined campaign successfully');
+                    this.snackBar.success('Left campaign successfully');
                 },
                 error => this._onError('Failed to leave campaign', error)
             );

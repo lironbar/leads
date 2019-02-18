@@ -29,14 +29,14 @@ export class CampaignsViewComponent implements OnInit {
     ngOnInit() {
         const user: User = this.userService.currentUserValue;
 
-        if (user.currentRole.type === 'ADMIN') {
+        if (user.role === 'ADMIN') {
             this.campaignService.getCampaigns()
                 .subscribe(
                     campaigns => this.campaigns$.next(campaigns),
                     error => this._onError('Failed to get campaigns', error)
                 );
         } else {
-            this.affiliateId = user.currentRole.data._id;
+            this.affiliateId = user._id;
             this.campaignService.getUnassignedCampaigns(this.affiliateId)
                 .subscribe(
                     campaigns => this.campaigns$.next(campaigns),

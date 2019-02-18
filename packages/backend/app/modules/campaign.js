@@ -76,8 +76,16 @@ class CampaignModule extends MongooseEntity {
         return Campaign.find({ publisherId }).populate('affiliates');
     }
 
-    static findUnassigned(affiliateIds) {
-        return Campaign.find({ affiliates: { $nin: Array.isArray(affiliateIds) ? affiliateIds : [affiliateIds] } }).populate('affiliates');
+    static async findUnassigned(affiliateId) {
+        try{
+            const campaigns = await Campaign.find().populate('affiliates');
+            return campaigns.filter(campaign=>{
+                const affiliates = campaign.affiliates.map(a=>a._id.toString());
+                return affiliates.indexOf(affiliateId) === -1;
+            });
+        }catch(err) {
+            throw err;
+        }
     }
 
     static async sendLead(campaignId, leadRequest) {

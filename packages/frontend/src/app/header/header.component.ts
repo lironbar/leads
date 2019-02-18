@@ -30,9 +30,9 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.authenticationService.currentUserValue;
-        this.roles = this.rolesConstants.filter(r => {
-           return this.user.members[r.value] && this.user.members[r.value].length > 0;
-        });
+        // this.roles = this.rolesConstants.filter(r => {
+        //    return this.user.members[r.value] && this.user.members[r.value].length > 0;
+        // });
     }
     onChangeRole(selectedRole) {
         this.permissionsService.flushPermissions();

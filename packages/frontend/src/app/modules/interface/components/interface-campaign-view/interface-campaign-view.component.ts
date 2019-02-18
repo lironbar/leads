@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {InterfaceService} from '../../interface.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Interface} from '../../interface.model';
+import {SnackBarService} from '../../../commons/services/snack-bar.service';
 
 @Component({
     selector: 'app-interface-campaign-view',
@@ -18,47 +19,92 @@ export class InterfaceCampaignViewComponent implements OnInit{
 
     constructor(
         private route: ActivatedRoute,
-        public interfaceService: InterfaceService
+        public interfaceService: InterfaceService,
+        private snackBar: SnackBarService
     ) {}
 
     ngOnInit() {
+        this.methods = ['POST', 'GET'];
+        this.type = 'http';
+        this.field = {};
         this.route.params.subscribe((params: Params) => {
             this.campaignId = params['id'];
-            this.type = 'http';
-            this.methods = ['POST', 'GET'];
-            this.interface = {
-                method: 'POST',
-                properties: []
-            };
-            this.field = {};
+            this.interfaceService.getByCampaign(this.campaignId)
+                .subscribe(interfaceData => {
+                    // debugger;
+                    this.interface = interfaceData || this._getEmptyInterface();
+                })
         })
     }
 
-    onTypeChange() {
+    public onTypeChange() {
         if (this.type === 'http') {
-            this.interface = {
-                method: 'POST',
-                properties: []
-            }
+            this.interface = this._getEmptyInterface();
         } else {
-            this.interface = {};
+            this.interface = {
+                type: 'email'
+            };
         }
     }
 
-    onAddField(field) {
+    public onAddField(field) {
         this.interface.properties.push(field);
         this.field = {}
     }
 
-    onRemoveField(index) {
+    public onRemoveField(index) {
         this.interface.properties.splice(index, 1);
     }
 
-    onSubmit() {
-        this.interfaceService.create(this.campaignId, this.interface)
-            .subscribe(response => {
+    public onCreate() {
+        if (!this.interface.campaignId) {
+            this.interface.campaignId = this.campaignId;
+        }
+        this.interfaceService.create(this.interface)
+            .subscribe(
+            createdInterface => {
+                // const campaigns = this.campaigns$.getValue();
+                // this.campaigns$.next(campaigns);
+                this.interface._id = createdInterface._id;
+                this.snackBar.success('Interface have been successfully created');
+            },
+            error => this._onError('Failed to create interface', error)
 
-            });
+        );
+    }
+
+    public onUpdate() {
+        if (!this.interface.campaignId) {
+            this.interface.campaignId = this.campaignId;
+        }
+        this.interfaceService.update(this.interface._id, this.interface)
+            .subscribe(
+                updatedInterface => {
+                    this.snackBar.success('Interface have been successfully updated');
+                },
+                error => this._onError('Failed to update interface', error)
+
+            );
+    }
+
+    public onDelete() {
+        this.interfaceService.delete(this.interface._id)
+            .subscribe(
+                response  => {
+                    this.interface = this._getEmptyInterface();
+                    this.snackBar.success('Interface have been successfully deleted');
+                },
+                error => this._onError('Failed to update interface', error)
+            )
+    }
+
+    private _onError(message, error) {
+        console.error(message, error);
+        this.snackBar.error(message);
+    }
+
+    private _getEmptyInterface() {
+        return {method: 'POST', properties: [], type: 'http'};
     }
 
 }

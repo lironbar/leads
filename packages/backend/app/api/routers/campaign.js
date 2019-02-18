@@ -11,7 +11,7 @@ router.put('/:id', campaign.update);
 
 router.delete('/:id', campaign.deleteOne);
 
-router.get('/unassigned/:affiliateId', campaign.findUnassigned)
+router.get('/unassigned/:affiliateId', campaign.findUnassigned);
 
 router.post('/:id/leads', campaign.sendLead);
 

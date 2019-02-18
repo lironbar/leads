@@ -25,7 +25,7 @@ export class AuthenticationService {
     // }
 
     public get currentUserRole() {
-        return this.currentUserSubject.value.currentRole;
+        return this.currentUserSubject.value.role;
     }
 
     register(user: User, type: string) {
@@ -33,7 +33,8 @@ export class AuthenticationService {
             .pipe(
                 map(createdUser => {
                     // user.token = '123124124asdasfasf123sa';
-                    createdUser.currentRole = this._getCurrentRole(createdUser);
+                    // createdUser.currentRole = this._getCurrentRole(createdUser);
+                    createdUser.role = createdUser.role.toUpperCase();
                     localStorage.setItem('currentUser', JSON.stringify(createdUser));
                     this.currentUserSubject.next(createdUser);
                     return this.currentUserSubject.value;
@@ -47,8 +48,8 @@ export class AuthenticationService {
                 map(userResponse => {
                     // if (user && user.token) {
                     // }
-                    debugger;
-                    userResponse.currentRole = this._getCurrentRole(userResponse);
+                    userResponse.role = userResponse.role.toUpperCase();
+                    // userResponse.currentRole = this._getCurrentRole(userResponse);
                     localStorage.setItem('currentUser', JSON.stringify(userResponse));
                     this.currentUserSubject.next(userResponse);
                     return userResponse;
@@ -62,10 +63,10 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
         return this.currentUser;
     }
-    _getCurrentRole(user) {
-        return {
-            data: user.role,
-            type: user.role.toUpperCase()
-        };
-    }
+    // _getCurrentRole(user) {
+    //     return {
+    //         data: user.role,
+    //         type: user.role.toUpperCase()
+    //     };
+    // }
 }

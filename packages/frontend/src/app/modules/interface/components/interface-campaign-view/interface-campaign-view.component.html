@@ -1,10 +1,10 @@
 <div fxLayout="column" class="full-height">
-    <mat-card fxFlex fxLayout="column" class="padding-0">
+    <mat-card fxFlex fxLayout="column" class="padding-0" *ngIf="interface; else empty_state">
         <mat-radio-group fxLayout="row" fxLayoutAlign="space-around center"
                          (change)="onTypeChange()"
                          class="padding-5" [(ngModel)]="type">
             <mat-radio-button color="primary" value="http">API</mat-radio-button>
-            <mat-radio-button color="primary" value="email">Email</mat-radio-button>
+            <!--<mat-radio-button color="primary" value="email">Email</mat-radio-button>-->
         </mat-radio-group>
 
         <div fxFlex fxLayout="column" *ngIf="type === 'http'">
@@ -17,9 +17,8 @@
                         <input matInput [(ngModel)]="interface.url">
                     </mat-form-field>
 
-                    <span class="md-body-2 margin-left-20 margin-right-5">{{'Method'}}:</span>
                     <mat-form-field>
-                        <mat-select [(ngModel)]="interface.method">
+                        <mat-select [(ngModel)]="interface.method" placeholder="Method">
                             <mat-option *ngFor="let method of methods" [value]="method">
                                 {{method}}
                             </mat-option>
@@ -28,14 +27,12 @@
                 </div>
 
                 <div fxLayout="row" fxLayoutAlign="start center">
-                    <span class="md-body-2 margin-right-5">{{'Field Name'}}:</span>
                     <mat-form-field >
-                        <input matInput [(ngModel)]="field.name">
+                        <input matInput [(ngModel)]="field.name" placeholder="Field Name">
                     </mat-form-field>
 
-                    <span class="md-body-2 margin-left-10 margin-right-5">{{'Default Value'}}:</span>
                     <mat-form-field >
-                        <input matInput [(ngModel)]="field.defaultValue">
+                        <input matInput [(ngModel)]="field.defaultValue" placeholder="Default Value">
                     </mat-form-field>
 
                     <span fxFlex></span>
@@ -80,9 +77,16 @@
         </div>
 
         <mat-toolbar fxLayout="row" fxLayoutAlign="start center">
+            <button mat-button color="warn" (click)="onDelete()" *ngIf="interface._id">{{'DELETE'}}</button>
             <span fxFlex></span>
-            <button mat-button color="primary" (click)="onSubmit()">{{'SAVE'}}</button>
+            <button mat-button color="primary" (click)="onUpdate()" *ngIf="interface._id">{{'UPDATE'}}</button>
+            <button mat-button color="primary" (click)="onCreate()" *ngIf="!interface._id">{{'CREATE'}}</button>
         </mat-toolbar>
 
     </mat-card>
+
+    <ng-template #empty_state>
+        <app-empty-state text="No Interface Found"
+                         src="/assets/empty_states/empty_state_interface.png"></app-empty-state>
+    </ng-template>
 </div>

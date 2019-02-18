@@ -10,6 +10,6 @@ export interface User {
     phc?: string;
     contact?: string;
     currentRole?: any;
-    role?: String;
+    role?: string;
     isAdmin?: boolean;
 }

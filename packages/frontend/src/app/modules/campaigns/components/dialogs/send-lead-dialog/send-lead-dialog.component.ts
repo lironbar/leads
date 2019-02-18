@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {NgForm} from '@angular/forms';
+import {Campaign} from '../../../campaign.model';
 
 @Component({
     selector: 'app-send-lead-dialog',
@@ -8,10 +9,15 @@ import {NgForm} from '@angular/forms';
     styleUrls: ['./send-lead-dialog.component.css']
 })
 
-export class SendLeadDialogComponent {
+export class SendLeadDialogComponent implements OnInit{
     lead = {};
 
-    constructor(public dialogRef: MatDialogRef<SendLeadDialogComponent>) {}
+    constructor(
+        public dialogRef: MatDialogRef<SendLeadDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public properties: { properties: any[] }
+    ) {}
+
+    ngOnInit() {}
 
     public onCancel() {
         this.dialogRef.close();
@@ -19,12 +25,7 @@ export class SendLeadDialogComponent {
 
     public onSendLead(form: NgForm) {
         if (form.valid) {
-            const lead = {
-                name: form.value.name,
-                email: form.value.email,
-                phone: form.value.phone
-            }
-            this.dialogRef.close(lead);
+            this.dialogRef.close(this.lead);
         }
     }
 }

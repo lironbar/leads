@@ -29,9 +29,11 @@ export class LoginViewComponent {
             this.authenticationService.login(form.value.email, form.value.password)
                 .subscribe(
                     responseUser => {
-                        const userRole = responseUser.role.toLowerCase();
-                        const isAdmin = (userRole === 'admin'), isPublisher = (userRole === 'publisher');
-                        if (isAdmin || isPublisher) {
+                        const userRole = responseUser.role;
+                        if (userRole === 'ADMIN') {
+                            this.router.navigate(['publishers']);
+                        }
+                        else if (userRole === 'PUBLISHER') {
                             this.router.navigate(['publishers', responseUser._id]);
                         } else {
                             this.router.navigate(['campaigns']);

@@ -59,6 +59,11 @@ export class AffiliateService {
         );
     }
 
+    update(id: string, affiliate) {
+        const apiUrl = `${this.BASE_URL}/affiliate/${id}`;
+        return this.http.put<Affiliate>(apiUrl, affiliate);
+    }
+
     delete(id: string) {
         const apiUrl = `${this.BASE_URL}/affiliate/${id}`;
         return this.http.delete<Affiliate>(apiUrl).subscribe(

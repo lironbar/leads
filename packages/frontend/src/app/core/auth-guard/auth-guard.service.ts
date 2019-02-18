@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
         if (currentUser) {
             // Load Permissions by the user roles.
             // const role = currentUser.members.publishers.length ? 'PUBLISHER' : 'AFFILIATE';
-            this.permissionsService.loadPermissions([currentUser.currentRole.type]);
+            this.permissionsService.loadPermissions([currentUser.role]);
             // this.permissionsService.loadPermissions(currentUser.roles);
             return true;
         }

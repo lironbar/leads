@@ -8,11 +8,11 @@ import {AuthenticationService} from '../core/authentication/authentication.servi
 })
 
 export class PagesComponent implements OnInit {
-    currentUserRole;
+    currentUser;
     sidNavPosition = 'start'; // start/end
     tooltipDirection = 'after'; // 'after', 'before', 'above', 'below', 'left', 'right'
     constructor(public authenticationService: AuthenticationService) {}
     ngOnInit() {
-        this.currentUserRole = this.authenticationService.currentUserRole;
+        this.currentUser = this.authenticationService.currentUserValue;
     }
 }
