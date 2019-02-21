@@ -1,5 +1,5 @@
 <form (submit)="onCreateAffiliate(affiliateForm)" #affiliateForm="ngForm">
-  <h1 mat-dialog-title>Create Affiliate</h1>
+  <h1 mat-dialog-title>{{type === 'edit' ? 'Edit Affiliate' : 'Create Affiliate'}}</h1>
   <div mat-dialog-content>
     <mat-form-field>
       <input matInput placeholder="Name"
@@ -36,7 +36,7 @@
   </div>
   <div mat-dialog-actions fxLayout="row">
     <span fxFlex></span>
-    <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-button mat-raised-button color="primary" type="submit">Create</button>
+    <button mat-button (click)="onCancel()">{{'CANCEL'}}</button>
+    <button mat-button mat-raised-button color="primary" type="submit">{{type === 'edit' ? 'UPDATE' : 'CREATE'}}</button>
   </div>
 </form>

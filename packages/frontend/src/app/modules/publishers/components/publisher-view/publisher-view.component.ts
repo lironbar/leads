@@ -44,6 +44,10 @@ export class PublisherViewComponent implements OnInit {
         });
     }
 
+    onPublisherChange(publisher) {
+        this.publisher$ = this.publisherService.update(publisher._id, publisher);
+    }
+
     onCreateCampaign(campaign: Campaign) {
         this.campaignService.create(this.publisherId, campaign)
             .subscribe(

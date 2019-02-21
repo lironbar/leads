@@ -63,6 +63,11 @@ export class PublisherService {
       );
   }
 
+  update(id: string, publisher: Publisher) {
+      const apiUrl = `${this.BASE_URL}/publisher/${id}`;
+      return this.http.put<Publisher>(apiUrl, publisher);
+  }
+
   delete(id: string) {
     return this.http.delete<Publisher>(`${this.BASE_URL}/publisher/${id}`)
       .subscribe(

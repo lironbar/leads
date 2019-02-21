@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import {InterfaceService} from '../../interface.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Interface} from '../../interface.model';
@@ -7,7 +8,20 @@ import {SnackBarService} from '../../../commons/services/snack-bar.service';
 @Component({
     selector: 'app-interface-campaign-view',
     templateUrl: './interface-campaign-view.component.html',
-    styleUrls: ['./interface-campaign-view.component.css']
+    styleUrls: ['./interface-campaign-view.component.css'],
+    animations: [
+        trigger('fadeElementIn', [
+            state('close', style({
+                opacity: 0,
+                backgroundColor: 'yellow'
+            })),
+            state('open', style({
+                opacity: 1,
+                backgroundColor: 'green'
+            })),
+            transition('close <=> open', animate(3000)),
+        ])
+    ]
 })
 
 export class InterfaceCampaignViewComponent implements OnInit{
@@ -25,26 +39,28 @@ export class InterfaceCampaignViewComponent implements OnInit{
 
     ngOnInit() {
         this.methods = ['POST', 'GET'];
-        this.type = 'http';
         this.field = {};
         this.route.params.subscribe((params: Params) => {
             this.campaignId = params['id'];
             this.interfaceService.getByCampaign(this.campaignId)
                 .subscribe(interfaceData => {
                     // debugger;
-                    this.interface = interfaceData || this._getEmptyInterface();
+                    this.type = interfaceData && interfaceData.type ? interfaceData.type : 'http';
+                    this.interface = this._getInterface(interfaceData || {}, this.type);
                 })
         })
     }
 
-    public onTypeChange() {
-        if (this.type === 'http') {
-            this.interface = this._getEmptyInterface();
-        } else {
-            this.interface = {
-                type: 'email'
-            };
-        }
+    public onTypeChange(type) {
+        this.interface.type = type;
+        // this.interface = this._getInterface(this.interface, this.type);
+        // if (this.type === 'http') {
+        //     this.interface = this._getInterface(this.interface, this.type);
+        // } else {
+        //     this.interface = {
+        //         type: 'email'
+        //     };
+        // }
     }
 
     public onAddField(field) {
@@ -91,7 +107,7 @@ export class InterfaceCampaignViewComponent implements OnInit{
         this.interfaceService.delete(this.interface._id)
             .subscribe(
                 response  => {
-                    this.interface = this._getEmptyInterface();
+                    this.interface = this._getInterface({}, this.type);
                     this.snackBar.success('Interface have been successfully deleted');
                 },
                 error => this._onError('Failed to update interface', error)
@@ -103,8 +119,16 @@ export class InterfaceCampaignViewComponent implements OnInit{
         this.snackBar.error(message);
     }
 
-    private _getEmptyInterface() {
-        return {method: 'POST', properties: [], type: 'http'};
+    private _getInterface(interfaceData, type: string) {
+        return {
+            _id: interfaceData._id,
+            campaignId: interfaceData.campaignId,
+            type: type,
+            url: interfaceData.url,
+            method: interfaceData.method || 'POST',
+            email: interfaceData.email,
+            properties: interfaceData.properties || []
+        };
     }
 
 }

@@ -1,19 +1,19 @@
 <form (submit)="onCreatePublisher(publisherForm)" #publisherForm="ngForm">
-  <h1 mat-dialog-title>{{'Create Publisher'}}</h1>
+  <h1 mat-dialog-title>{{type === 'edit' ? 'Edit Publisher' : 'Create Publisher'}}</h1>
   <div mat-dialog-content>
     <div fxLayout="row">
       <mat-form-field fxFlex>
         <input matInput placeholder="Name"
                title="publisher name" type="text"
                #name="ngModel"
-               ngModel name="name" required>
+               [(ngModel)]="publisher.name" name="name" required>
         <mat-error *ngIf="name.invalid">*This field is required.</mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
         <input matInput placeholder="PHC"
                title="publisher phc" type="text"
                #phc="ngModel"
-               ngModel name="phc" required>
+               [(ngModel)]="publisher.phc" name="phc" required>
         <mat-error *ngIf="phc.invalid">*This field is required.</mat-error>
       </mat-form-field>
     </div>
@@ -21,7 +21,7 @@
       <input matInput placeholder="Phone"
              title="publisher phone" type="text"
              #phone="ngModel"
-             ngModel name="phone" required>
+             [(ngModel)]="publisher.phone" name="phone" required>
       <mat-error *ngIf="phone.invalid">*This field is required.</mat-error>
     </mat-form-field>
     <div fxLayout="row" fxLayoutAlign="start center">
@@ -29,7 +29,7 @@
         <input matInput placeholder="Email"
                title="publisher email" type="email"
                #email="ngModel"
-               ngModel name="email" required>
+               [(ngModel)]="publisher.email" name="email" required>
         <mat-error *ngIf="email.invalid">*This field is required.</mat-error>
       </mat-form-field>
     </div>
@@ -38,14 +38,14 @@
         <input matInput placeholder="Address"
                title="publisher address" type="text"
                #address="ngModel"
-               ngModel name="address" required>
+               [(ngModel)]="publisher.address" name="address" required>
         <mat-error *ngIf="address.invalid">*This field is required.</mat-error>
       </mat-form-field>
     </div>
   </div>
   <div mat-dialog-actions fxLayout="row">
     <span fxFlex></span>
-    <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-button mat-raised-button color="primary" type="submit">Create</button>
+    <button mat-button (click)="onCancel()">{{'CANCEL'}}</button>
+    <button mat-button mat-raised-button color="primary" type="submit">{{type === 'edit' ? 'UPDATE' : 'CREATE'}}</button>
   </div>
 </form>

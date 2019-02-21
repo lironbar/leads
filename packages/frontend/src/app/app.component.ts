@@ -3,6 +3,7 @@ import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {AuthenticationService} from './core/authentication/authentication.service';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
     selector: 'app-root',
