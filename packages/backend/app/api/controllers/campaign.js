@@ -1,4 +1,4 @@
-const { Campaign } = global.App.Modules;
+const { Campaign, Lead } = global.App.Modules;
 
 module.exports.create = async (req, res, next) => {
     try {
@@ -74,7 +74,7 @@ module.exports.findUnassigned = async (req, res, next) => {
 
 module.exports.sendLead = async (req, res, next) => {
     try {
-        const result = await Campaign.sendLead(req.params.id, req.body);
+        const result = await Lead.send(req.params.id, req.body);
         res.status(200);
         res.json(result);
         next();
