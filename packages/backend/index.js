@@ -6,6 +6,9 @@
     // load config
     global.App.Config = require('./app/config');
 
+    // load utilities
+    global.App.Utils = require('./app/utils');
+
     // load modules
     global.App.Modules = require('./app/modules');
 

@@ -1,7 +1,5 @@
-const http = require('http');
-const url = require('url');
-
 const Interface = require('./interface');
+const { http } = global.App.Utils;
 
 class Lead {
     static async send(campaignId, leadRequest) {
@@ -17,34 +15,22 @@ class Lead {
             // calculations
 
             // send the lead
-            const _interface = await Interface.getByCampaign(campaignId);
-            switch (_interface.type) {
+            const iface = await Interface.getByCampaign(campaignId);
+            switch (iface.type) {
                 case 'http':
-                    const data = JSON.stringify(leadRequest.lead);
-                    const options = Object.assign({
-                        method: _interface.type,
+                    const lead = JSON.stringify(leadRequest.lead);
+                    const options = {
+                        method: iface.method,
                         headers: {
                             'Content-Type': 'application/json',
-                            'Content-Length': data.length
+                            'Content-Length': lead.length
                         }
-                    }, url.parse(_interface.url));
+                    };
+                    const response = await http.request(iface.url, options, lead);
 
-                    const req = http.request(options, (res) => {
-                        console.log(`statusCode: ${res.statusCode}`)
+                    console.log(response);
 
-                        res.on('data', (d) => {
-                            process.stdout.write(d)
-                        })
-                    })
-
-                    req.on('error', (error) => {
-                        console.error(error)
-                    })
-
-                    req.write(data)
-                    req.end()
                     break;
-                case 'email':
             }
 
             // post lead send
