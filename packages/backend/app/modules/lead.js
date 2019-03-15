@@ -2,7 +2,7 @@ const Lead = require('../models/lead');
 const Interface = require('./interface');
 const Campaign = require('./campaign');
 const MongooseEntity = require('./mongoose-entity');
-const { http, date } = global.App.Utils;
+const { http, email, date } = global.App.Utils;
 
 class LeadModule extends MongooseEntity {
 
@@ -28,15 +28,25 @@ class LeadModule extends MongooseEntity {
             // create lead
             let lead = await new Lead({ payload, price: campaign.price, interfaceId: iface._id, affiliateId, campaignId }).save();
 
+            // prepare payload
+            payload = JSON.stringify(payload);
+
             // send the lead
             switch (iface.type) {
                 case 'http':
-                    payload = JSON.stringify(payload);
                     const options = { headers: { 'Content-Type': 'application/json', 'Content-Length': payload.length } };
                     const { statusCode, statusMessage } = await http.request(iface.url, options, payload);
                     if (statusCode >= 200 && statusCode <= 399) {
                         const { nModified } = await Lead.updateOne({ _id: lead._id }, { sent: true, response: { statusCode, statusMessage } });
                         return statusMessage;
+                    } else {
+                        throw 'Failed to send lead';
+                    }
+                case 'email':
+                    const { response, messageId, messageSize, accepted, rejected } = await email.send(iface.email, `New lead for campaign ${campaign.name}`, payload);
+                    if (response.startsWith('250')) {
+                        const { nModified } = await Lead.updateOne({ _id: lead._id }, { sent: true, response: { response, messageId, messageSize, accepted, rejected } });
+                        return response;
                     } else {
                         throw 'Failed to send lead';
                     }
