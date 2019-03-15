@@ -1,44 +1,50 @@
+const Lead = require('../models/lead');
 const Interface = require('./interface');
-const { http } = global.App.Utils;
+const Campaign = require('./campaign');
+const MongooseEntity = require('./mongoose-entity');
+const { http, date } = global.App.Utils;
 
-class Lead {
-    static async send(campaignId, leadRequest) {
+class LeadModule extends MongooseEntity {
+
+    constructor() { super(); }
+
+    static async send(campaignId, { affiliateId, lead: payload }) {
         try {
-            // const campaign = await Campaign.findOne({ _id: campaignId });
-            // const affiliate = await Affiliate.findOne(leadRequest.affiliateId);
-
-            // keep only known interface properties
-
-            // save lead as sent=false
-            // lead = new Lead(leadObj);
-
-            // calculations
-
-            // send the lead
             const iface = await Interface.getByCampaign(campaignId);
-            switch (iface.type) {
-                case 'http':
-                    const lead = JSON.stringify(leadRequest.lead);
-                    const options = {
-                        method: iface.method,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Content-Length': lead.length
-                        }
-                    };
-                    const response = await http.request(iface.url, options, lead);
+            const campaign = await Campaign.findOne({ _id: campaignId });
 
-                    console.log(response);
-
-                    break;
+            // validate max leads
+            const sentLeadsCount = await Lead.estimatedDocumentCount({ sent: true, campaignId });
+            if (sentLeadsCount >= campaign.maxLeads) {
+                throw 'Max leads for campaign';
             }
 
-            // post lead send
+            // validate daily max leads
+            const dailySentLeadsCount = await Lead.estimatedDocumentCount({ sent: true, campaignId, timestamp: { $gt: date.startOfDay() } });
+            if (dailySentLeadsCount >= campaign.maxDailyLeads) {
+                throw 'Max daily leads for campaign';
+            }
 
+            // create lead
+            let lead = await new Lead({ payload, price: campaign.price, interfaceId: iface._id, affiliateId, campaignId }).save();
+
+            // send the lead
+            switch (iface.type) {
+                case 'http':
+                    payload = JSON.stringify(payload);
+                    const options = { headers: { 'Content-Type': 'application/json', 'Content-Length': payload.length } };
+                    const { statusCode, statusMessage } = await http.request(iface.url, options, payload);
+                    if (statusCode >= 200 && statusCode <= 399) {
+                        const { nModified } = await Lead.updateOne({ _id: lead._id }, { sent: true, response: { statusCode, statusMessage } });
+                        return statusMessage;
+                    } else {
+                        throw 'Failed to send lead';
+                    }
+            }
         } catch (err) {
-            debugger;
+            throw err;
         }
     }
 }
 
-module.exports = Lead;
+module.exports = LeadModule;
