@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const LeadSchema = new Schema({
-    sent: { type: Boolean, default: false },
-    timestamp: { type: Number, required: () => this.sent === true },
+    success: { type: Boolean, default: false },
+    timestamp: { type: Number, required: () => this.success === true },
     payload: { type: Object, required: true },
-    response: { type: Object, required: () => this.sent === true },
+    response: { type: Object },
     price: { type: Number, required: true },
     interfaceId: { type: Schema.Types.ObjectId, required: true },
     affiliateId: { type: Schema.Types.ObjectId, required: true },
