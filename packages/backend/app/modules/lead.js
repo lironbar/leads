@@ -25,7 +25,7 @@ class LeadModule extends MongooseEntity {
         }
 
         // create lead
-        let lead = await new Lead({ payload, price: campaign.price, interfaceId: iface._id, affiliateId, campaignId }).save();
+        const lead = await new Lead({ payload, price: campaign.price, interfaceId: iface._id, affiliateId, campaignId }).save();
 
         // send the lead
         let success = false, message = "", results = {};
@@ -37,7 +37,7 @@ class LeadModule extends MongooseEntity {
 
                 success = (statusCode >= 200 && statusCode <= 399);
                 message = statusMessage;
-                results = { statusCode, statusMessage }
+                results = { statusCode, statusMessage };
             case 'email':
                 const text = Object.keys(payload).map(k => `${k}: ${payload[k]}`).join('\n');
                 const { response, messageId, messageSize, accepted, rejected } = await email.send(iface.email, `New lead for campaign ${campaign.name}`, text);
