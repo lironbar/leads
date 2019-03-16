@@ -15,6 +15,9 @@ export class LoaderInterceptorService implements HttpInterceptor {
     ) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.showLoader();
+        req = req.clone({
+            withCredentials: true
+        });
         return next.handle(req).pipe(tap((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     this.onEnd();
