@@ -33,11 +33,12 @@ class LeadModule extends MongooseEntity {
             case 'http':
                 payload = JSON.stringify(payload);
                 const options = { headers: { 'Content-Type': 'application/json', 'Content-Length': payload.length } };
-                const { statusCode, statusMessage } = await http.request(iface.url, options, data);
+                const { statusCode, statusMessage } = await http.request(iface.url, options, payload);
 
                 success = (statusCode >= 200 && statusCode <= 399);
                 message = statusMessage;
                 results = { statusCode, statusMessage };
+                break;
             case 'email':
                 const text = Object.keys(payload).map(k => `${k}: ${payload[k]}`).join('\n');
                 const { response, messageId, messageSize, accepted, rejected } = await email.send(iface.email, `New lead for campaign ${campaign.name}`, text);
@@ -45,6 +46,7 @@ class LeadModule extends MongooseEntity {
                 success = response.startsWith('250');
                 message = response;
                 results = { response, messageId, messageSize, accepted, rejected };
+                break;
         }
 
         // handle results
