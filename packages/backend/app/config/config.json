@@ -6,13 +6,14 @@
         "allowedHeaders": "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
     },
     "session": {
-        "cookie": {
-            "name": "sid",
-            "secure": false,
-            "httpOnly": false,
-            "domain": ".leads.com"
-        },
+        "name": "app.sid",
         "secret": "abc123",
+        "cookie": {
+            "path": "/",
+            "httpOnly": true,
+            "secure": false,
+            "maxAge": null
+        },
         "resave": false,
         "saveUninitialized": true
     },

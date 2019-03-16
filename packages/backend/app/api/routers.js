@@ -6,7 +6,7 @@ module.exports = {
         const router = express.Router();
         router.post('/login', auth.login);
         router.post('/logout', auth.logout);
-        router.use('/', auth.verify);
+        router.use('/', auth.isLoggedIn);
         return router;
     },
     user: () => {

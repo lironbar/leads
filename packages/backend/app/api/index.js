@@ -24,10 +24,12 @@ api.options('/*', (req, res, next) => {
     res.end();
 });
 
-// parsing middlewares
+// session
+api.use(expressSession(session));
+
+// parsers
 api.use(bodyParser.json());
 api.use(cookieParser());
-api.use('/', expressSession(session));
 
 const { routers } = global.API;
 
@@ -35,7 +37,7 @@ const { routers } = global.API;
 api.use('/register', routers.register());
 
 // auth
-api.use('/', routers.auth());
+api.use(routers.auth());
 
 // routing
 api.use('/user', routers.user());
