@@ -1,10 +1,10 @@
 const { env } = global.App.Config;
-const User = require('../../models/user');
+const { User } = global.App.Components;
 const userCtrl = require('./user');
 
 module.exports.login = async (req, res, next) => {
     try {
-        const user = await User.findOne({ email: req.body.username, password: req.body.password });
+        const user = await User.Model.findOne({ email: req.body.username, password: req.body.password });
         if (user) {
             res.cookie('session', Date.now(), {
                 maxAge: 1000 * 60 * 60, // would expire after 60 minutes

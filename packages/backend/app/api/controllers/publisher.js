@@ -1,4 +1,4 @@
-const { Publisher } = global.App.Modules;
+const { Publisher } = global.App.Components;
 
 module.exports.find = async (req, res, next) => {
     try {

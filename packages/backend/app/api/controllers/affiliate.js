@@ -1,4 +1,4 @@
-const { Affiliate } = global.App.Modules;
+const { Affiliate } = global.App.Components;
 
 module.exports.find = async (req, res, next) => {
     try {

@@ -1,4 +1,4 @@
-const { Auth } = global.App.Modules;
+const { Auth } = global.App.Components;
 
 module.exports.register = async (req, res) => {
     try {

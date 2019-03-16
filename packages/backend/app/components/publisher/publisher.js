@@ -1,26 +1,28 @@
-const UserModule = require('./user');
-const CampaignModule = require('./campaign');
+const User = require('../user/user');
+const Campaign = require('../campaign/campaign');
 
 // bind to User model
-const Publisher = UserModule.Model;
-class PublisherModule extends UserModule {
-    constructor() { }
+const Publisher = User.Model;
+class PublisherModule extends User.constructor {
+
+    constructor() { super(Publisher); }
 
     static get Name() {
         return 'Publisher';
     }
 
-    static find() {
+    find() {
         return Publisher.find({ role: 'PUBLISHER' }, { _id: 1, name: 1, email: 1, phone: 1, phc: 1, contact: 1 }).populate('campaigns');
     }
 
-    static findOne(id) {
+    findOne(id) {
         return Publisher.findOne({ _id: id, role: 'PUBLISHER' }, { _id: 1, name: 1, email: 1, phone: 1, phc: 1, contact: 1 }).populate('campaigns');
     }
 
-    static getCampaigns(id) {
-        return CampaignModule.getPublisherCampaigns(id);
+    getCampaigns(id) {
+        return Campaign.getPublisherCampaigns(id);
     }
 }
 
-module.exports = PublisherModule;
+const instace = new PublisherModule();
+module.exports = instace;

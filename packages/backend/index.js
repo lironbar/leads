@@ -9,8 +9,8 @@
     // load utilities
     global.App.Utils = require('./app/utils');
 
-    // load modules
-    global.App.Modules = require('./app/modules');
+    // load components
+    global.App.Components = require('./app/components');
 
     // boot application
     await require('./app/connections').boot();
@@ -18,7 +18,7 @@
 
     // create super admin user
     if (global.App.Config.env === 'dev') {
-        const User = require('./app/models/user.js');
+        const { User } = global.App.Components;
         const user = {
             name: 'super admin',
             password: '123',
@@ -26,7 +26,7 @@
             phone: '010101010',
             role: 'ADMIN'
         };
-        User.findOneAndUpdate({ name: user.name }, user, { upsert: true }, (upsertError) => {
+        User.Model.findOneAndUpdate({ name: user.name }, user, { upsert: true }, (upsertError) => {
             if (upsertError) {
                 return console.error('boot.createSuperAdmin', upsertError);
             }

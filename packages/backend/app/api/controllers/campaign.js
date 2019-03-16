@@ -1,4 +1,4 @@
-const { Campaign, Lead } = global.App.Modules;
+const { Campaign, Lead } = global.App.Components;
 
 module.exports.create = async (req, res, next) => {
     try {

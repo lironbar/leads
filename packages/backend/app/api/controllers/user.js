@@ -1,4 +1,4 @@
-const { User } = global.App.Modules;
+const { User } = global.App.Components;
 
 module.exports.create = async (req, res, next) => {
     try {

@@ -1,31 +1,51 @@
-const Lead = require('../models/lead');
-const Interface = require('./interface');
-const Campaign = require('./campaign');
-const MongooseEntity = require('./mongoose-entity');
+const Lead = require('./model');
 const { http, email, date } = global.App.Utils;
+const Interface = require('../interface/interface');
+const Campaign = require('../campaign/campaign');
+const MongooseEntity = require('../mongoose-entity/mongoose-entity');
 
 class LeadModule extends MongooseEntity {
 
-    constructor() { super(); }
+    constructor() { super(Lead); }
 
-    static async send(campaignId, { affiliateId, lead: payload }) {
+    static get Name() {
+        return 'Lead';
+    }
+
+    async get({ success: success = true, campaignId, publisherIds, affiliateIds }) {
+        const lookup = { success };
+        if (publisherIds) {
+            lookup.publisherId = { $in: publisherIds };
+        }
+        if (affiliateIds) {
+            lookup.affiliateId = { $in: affiliateIds };
+        }
+        if (campaignId) {
+            lookup.campaign = campaignId;
+            return this.findOneAndPopulate(lookup, null, 'campaign');
+        } else {
+            return this.findAndPopulate(lookup, null, 'campaign');
+        }
+    }
+
+    async send(campaignId, { affiliateId, lead: payload }) {
         const iface = await Interface.getByCampaign(campaignId);
         const campaign = await Campaign.findOne({ _id: campaignId });
 
         // validate max leads
-        const sentLeadsCount = await Lead.estimatedDocumentCount({ success: true, campaignId });
+        const sentLeadsCount = await this.estimatedDocumentCount({ success: true, campaignId });
         if (sentLeadsCount >= campaign.maxLeads) {
             throw 'max leads for campaign';
         }
 
         // validate daily max leads
-        const dailySentLeadsCount = await Lead.estimatedDocumentCount({ success: true, campaignId, timestamp: { $gt: date.startOfDay() } });
+        const dailySentLeadsCount = await this.estimatedDocumentCount({ success: true, campaignId, timestamp: { $gt: date.startOfDay() } });
         if (dailySentLeadsCount >= campaign.maxDailyLeads) {
             throw 'max daily leads for campaign';
         }
 
         // create lead
-        const lead = await new Lead({ payload, price: campaign.price, interfaceId: iface._id, affiliateId, campaignId }).save();
+        const lead = await this.create({ payload, price: campaign.price, interfaceId: iface._id, affiliateId, campaign: campaignId });
 
         // send the lead
         let success = false, message = "", results = {};
@@ -50,7 +70,7 @@ class LeadModule extends MongooseEntity {
         }
 
         // handle results
-        await Lead.updateOne({ _id: lead._id }, { success, response: results, timestamp: Date.now() });
+        await this.updateOne({ _id: lead._id }, { success, response: results, timestamp: Date.now() });
         if (success) {
             return message;
         }
@@ -58,4 +78,5 @@ class LeadModule extends MongooseEntity {
     }
 }
 
-module.exports = LeadModule;
+const instance = new LeadModule();
+module.exports = instance;

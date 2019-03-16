@@ -42,9 +42,10 @@ api.use('/', routers.auth);
 
 // routing
 api.use('/user', routers.user);
+api.use('/lead', routers.lead);
+api.use('/campaign', routers.campaign);
 api.use('/affiliate', routers.affiliate);
 api.use('/publisher', routers.publisher);
-api.use('/campaign', routers.campaign);
 api.use('/interface', routers.interface);
 
 module.exports.boot = () => {

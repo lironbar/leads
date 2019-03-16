@@ -1,23 +1,24 @@
-const UserModule = require('./user');
+const User = require('../user/user');
 
 // bind to User model
-const Affiliate = UserModule.Model;
-class AffiliateModule extends UserModule {
-    constructor() { }
+const Affiliate = User.Model;
+class AffiliateModule extends User.constructor {
+
+    constructor() { super(Affiliate); }
 
     static get Name() {
         return 'Affiliate';
     }
 
-    static find() {
+    find() {
         return Affiliate.find({ role: 'AFFILIATE' }, { _id: 1, name: 1, email: 1, phone: 1 }).populate('campaigns');
     }
 
-    static findOne(id) {
+    findOne(id) {
         return Affiliate.findOne({ _id: id, role: 'AFFILIATE' }, { _id: 1, name: 1, email: 1, phone: 1 }).populate('campaigns');
     }
 
-    static async getCampaigns(id) {
+    async getCampaigns(id) {
         try {
             const affiliate = await Affiliate.findOne({ _id: id, role: 'AFFILIATE' }, { _id: 0, campaigns: 1 }).populate('campaigns');
             if (!affiliate) {
@@ -29,7 +30,7 @@ class AffiliateModule extends UserModule {
         }
     }
 
-    static async joinCampaign(id, campaignId) {
+    async joinCampaign(id, campaignId) {
         try {
             const results = await Affiliate.update({ _id: id, role: 'AFFILIATE', campaigns: { $nin: [campaignId] } }, { $push: { campaigns: campaignId } });
             if (!results.nModified) {
@@ -40,7 +41,7 @@ class AffiliateModule extends UserModule {
         }
     }
 
-    static async leaveCampaign(id, campaignId) {
+    async leaveCampaign(id, campaignId) {
         try {
             const results = await Affiliate.update({ _id: id, role: 'AFFILIATE' }, { $pull: { campaigns: campaignId } });
             if (!results.nModified) {
@@ -52,4 +53,5 @@ class AffiliateModule extends UserModule {
     }
 }
 
-module.exports = AffiliateModule;
+const instance = new AffiliateModule();
+module.exports = instance;

@@ -1,38 +1,39 @@
-const Campaign = require('../models/campaign');
-const MongooseEntity = require('./mongoose-entity');
+const Campaign = require('./model');
+const MongooseEntity = require('../mongoose-entity/mongoose-entity');
 
 class CampaignModule extends MongooseEntity {
-    constructor() { }
+
+    constructor() { super(Campaign); }
 
     static get Name() {
         return 'Campaign';
     }
 
-    static create(obj) {
+    create(obj) {
         return new Campaign(obj).save();
     }
 
-    static find() {
+    find() {
         return Campaign.find().populate('affiliates');
     }
 
-    static findOne(id) {
+    findOne(id) {
         return Campaign.findOne({ _id: id }).populate('affiliates');
     }
 
-    static updateOne(id, obj) {
+    updateOne(id, obj) {
         return Campaign.updateOne({ _id: id }, obj, { new: true });
     }
 
-    static deleteOne(id) {
+    deleteOne(id) {
         return Campaign.deleteOne({ _id: id });
     }
 
-    static getPublisherCampaigns(publisherId) {
+    getPublisherCampaigns(publisherId) {
         return Campaign.find({ publisherId }).populate('affiliates');
     }
 
-    static async findUnassigned(affiliateId) {
+    async findUnassigned(affiliateId) {
         try {
             const campaigns = await Campaign.find().populate('affiliates');
             return campaigns.filter(campaign => {
@@ -46,4 +47,5 @@ class CampaignModule extends MongooseEntity {
 
 }
 
-module.exports = CampaignModule;
+const instance = new CampaignModule();
+module.exports = instance;

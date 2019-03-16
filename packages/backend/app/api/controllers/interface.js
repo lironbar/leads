@@ -1,4 +1,4 @@
-const { Interface } = global.App.Modules;
+const { Interface } = global.App.Components;
 
 module.exports.create = async (req, res, next) => {
     try {

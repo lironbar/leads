@@ -1,36 +1,38 @@
-const Interface = require('../models/interface');
-const MongooseEntity = require('./mongoose-entity');
+const Interface = require('./model');
+const MongooseEntity = require('../mongoose-entity/mongoose-entity');
 
 class InterfaceModule extends MongooseEntity {
-    constructor() { }
+
+    constructor() { super(Interface); }
 
     static get Name() {
         return 'Interface';
     }
 
-    static create(obj) {
+    create(obj) {
         return new Interface(obj).save();
     }
 
-    static find() {
+    find() {
         return Interface.find();
     }
 
-    static findOne(id) {
+    findOne(id) {
         return Interface.findOne({ _id: id });
     }
 
-    static updateOne(id, obj) {
+    updateOne(id, obj) {
         return Interface.updateOne({ _id: id }, obj, { new: true });
     }
 
-    static deleteOne(id) {
+    deleteOne(id) {
         return Interface.deleteOne({ _id: id });
     }
 
-    static getByCampaign(campaignId) {
-        return Interface.findOne({ campaignId: campaignId });
+    getByCampaign(campaignId) {
+        return Interface.findOne({ campaignId });
     }
 }
 
-module.exports = InterfaceModule;
+const instance = new InterfaceModule();
+module.exports = instance;
