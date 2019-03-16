@@ -1,5 +1,13 @@
 {
     "port": 8080,
+    "session": {
+        "cookie": {
+            "domain": ".leads.com"
+        },
+        "secret": "abc123",
+        "resave": false,
+        "saveUninitialized": false
+    },
     "mongo": {
         "url": "mongodb://localhost:27017/leads",
         "options": {

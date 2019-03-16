@@ -71,15 +71,3 @@ module.exports.findUnassigned = async (req, res, next) => {
         res.send(err);
     }
 };
-
-module.exports.sendLead = async (req, res, next) => {
-    try {
-        const result = await Lead.send(req.params.id, req.body);
-        res.status(200);
-        res.json(result);
-        next();
-    } catch (err) {
-        res.status(500);
-        res.send(err);
-    }
-};

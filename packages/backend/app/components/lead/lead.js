@@ -45,7 +45,14 @@ class LeadModule extends MongooseEntity {
         }
 
         // create lead
-        const lead = await this.create({ payload, price: campaign.price, interfaceId: iface._id, affiliateId, campaign: campaignId });
+        const lead = await this.create({
+            payload,
+            price: campaign.price,
+            interfaceId: iface._id,
+            affiliateId,
+            publisherId: campaign.publisherId,
+            campaign: campaignId
+        });
 
         // send the lead
         let success = false, message = "", results = {};
