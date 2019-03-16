@@ -1,7 +1,9 @@
-const { port, env } = global.App.Config;
+const { port, env, session, cors: corsOpt } = global.App.Config;
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const expressSession = require('express-session');
 const api = express();
 
 // init API on global
@@ -14,14 +16,7 @@ global.API.controllers = require('./controllers');
 global.API.routers = require('./routers');
 
 // CORS
-if (env === 'dev') {
-    api.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-    });
-}
+api.use(cors(corsOpt));
 
 // allow OPTIONS requests
 api.options('/*', (req, res, next) => {
@@ -32,6 +27,7 @@ api.options('/*', (req, res, next) => {
 // parsing middlewares
 api.use(bodyParser.json());
 api.use(cookieParser());
+api.use('/', expressSession(session));
 
 const { routers } = global.API;
 

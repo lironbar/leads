@@ -1,12 +1,20 @@
 {
     "port": 8080,
+    "cors": {
+        "origin": true,
+        "credentials": true,
+        "allowedHeaders": "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
+    },
     "session": {
         "cookie": {
+            "name": "sid",
+            "secure": false,
+            "httpOnly": false,
             "domain": ".leads.com"
         },
         "secret": "abc123",
         "resave": false,
-        "saveUninitialized": false
+        "saveUninitialized": true
     },
     "mongo": {
         "url": "mongodb://localhost:27017/leads",
