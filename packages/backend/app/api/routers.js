@@ -1,12 +1,9 @@
 const express = require('express');
-const expressSession = require('express-session');
-const { session } = global.App.Config;
 const { auth, user, campaign, register, interface, affiliate, publisher, lead } = global.API.controllers;
 
 module.exports = {
     auth: () => {
         const router = express.Router();
-        router.use('/', expressSession(session));
         router.post('/login', auth.login);
         router.post('/logout', auth.logout);
         router.use('/', auth.verify);
