@@ -1,3 +1,50 @@
-<div fxLayout="column" class="full-height">
-    Publisher Reports View
+<div fxLayout="row" class="full-height">
+    <div fxFlex fxLayout="column" class="overflow-auto">
+        <mat-accordion fxFlex [multi]="true">
+            <mat-expansion-panel *ngFor="let lead of leads; index as i">
+                <mat-expansion-panel-header>
+                    <span class="mat-body-2 margin-right-5">{{i + 1}}.</span>
+                    <span class="mat-body-2 opacity-8  ">Campaign Name {{i + 1}}</span>
+                </mat-expansion-panel-header>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <img *ngIf="lead.campaign" fxFlex [src]="lead.campaign.imageUrl" id="campaign-image"/>
+                    <div fxFlex class="padding-10">
+                        <p>Price: {{lead.price}}</p>
+                        <p>More Data: ....</p>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div fxFlex="40" fxLayout="column" fxLayoutAlign="center center">
+
+        <img style="height: 200px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAABU1BMVEX///9ipu/mbX4jxZb3z1w9YISBk6k1W4HQ199AZIj3zlj757X41XTmanzys7v2/vwAwY00yp/M8ORdpfKTs8HwzWPnlJ72+PgrVX3GzdNno+RmgZ3n6u4uwpbZ6+Xf5/HlYnXA0c3z7d7k4tzw4OL3zU9YldfranjnhZLJfpx2oOHk5OTv7+/PYnG7iYnmcoKFyYToz2O71PKGufJ2xIPS5PrUXnDV2dhEuZXksbifgaxalM+yusLKfZvCe4aRybeExLK6gIdnxqjF1unVhpFfpImreXmMt+lKro3KZXLEeIajhH6lyfOyz8Z4ybCp0sQAS3C/oqfLkZjWx8iyZXyaYnt/X3pcWHZjc40hT3l2jcXZpazVcomwfqTpxMmOhrnOdI5byqny1IGbxfT635eyxNrm2rv99ub546X06tCv0PeIlIPyvsXBbHOTjIB1ooimk6h5JTktAAAHTElEQVR4nO3d61fTSBgG8LSpC1uIFtkarK0BFYokWAGhCKIIFXAFUboXLywKeMVld///TzuTpqXNZDIzAZqZ8D7HT3DkdH7O+yRpQtU0CAQCgUAgEAgEAoFAIBAIBAKBQCAxxbSt2enpo6Oj3j6c77dum3G/pK7GrE4fzhQKqVRqcHDwl/xoNpvJ9/cffOq7KA7m5xl38alGkEEGJ+smc/Dla9wv8JxjWqvrJ8vvMPCSHc0ihuRuB3N2c6YTgDRwGfq/fU+owup6wQ8QaIDnIn/wPe6Xew6xZsj10wywQubgVtwv+YxjbRJDEGrgjsSnJNWjOR00BQyDTGa0/0tiasE6TFEJwgwy2cynhAzEKn0TMAyQQv5L3C//DGJuhgmwDFArfFN+Hqz1cAKWAVJQfR6sGQYB2yCTVfsoSTspEDJApaAwghVyPBAwyGSnbsa9lKixQg8IIvvgwcDVuBcTLRyDwNcHU/d1fV/JnWByEXAcF/KIQNcHnLgXJB6TdVDkNMhOPdDd7Kt3nnDER8A8R2oS6PqyagizfALsc+X7TQK9tB33osRS5CsDlkE7AaoEpXrRPOScBMZ141Q7ga6vqNSLq7wCoQZtXdBITqFpKBbOwqBzEBqVUI17adzhPSaEGgQQ6PpLVaahyC9AN/B3gbcRRuJeHGf4C5FuQHRBcyPYca+OK5ZAG1DfW88HE+ilLSXOlDZFCIINArugkWUVNgLf5WKoQQiBrlcV2AjTIm0QaEDrAm8jyH9o4LxkDjGgdkEjA7b0G8ES2wakQegg4GzRN4Jzm0wX194M43YC04BJgM6TqBuhL9/vS/6gm4v3IkhAPIMR2gVu5qvUjdCXJdLfzcU30ns6Aw4CvbQdYkD0awwGIpcKpAF7EHCeUFtRDgPmfaUwAz4CfYU6DFIYiFw1EwY8g4AzPyK1gcCbJ4QBL4Gub9POl6UwmI5uwE+Q26YVghQGomcHbc9ochPg6ybKMMhg4HDeWCENRAjopSiDQTGqgRCBPlClFIIMBoLXzS0DxmUSkZuUQpDBYDaagdguQKUotYHw6QE2ECXABsGFoK6BKIHkBsIEyECYQM+NJM1AmCBxBhP/lS66wcRS+bEwgtx9INqJE3fLaePe/EU2wARpcQQ0C7bZFpUNCneNNI6xJjYOuafH4235WyoDsXPlxi5wEQQ74XhuzjjJZakMiiJvpZ0QpNPlpyLjMH88Odn6q2nJDESundsJBDth47nEBgKPHhQ6CFDu8Y/Ds+eTaXkNjqLtAsFO+DEpswHv+4kkgUgnvJiT2aCX7+BIDIJQJ5TWpN4HfHfegwm4ETaOpTbgKsUJ79QoAOEpTyf8Oym3wSrbIKgLWp3AUYylfzrqQD4Dh2lAGwTucZjvrAP5DJg3XcMJeBA2JqMZOCNkzsfgc7gBvQtaS2J1wo+5aAZXB0r+5K6ci4EZenQM64Jmyr+GIpSedxIIGBA/67wMwm458hCwxuHZnPQGYe+nsbqAC2FNAQP6tWOB2QUnCNRx2PCPgowG1I0wscS3C3DonfDCvw2kNKCcL/N1QQuBcgG18thPIKVB8Lkibxe0VhbYCaXtmhoGQedJogSUTtivqmJgnXIQvLWR1w6lLbvmJ5DUgHgsKQpBUCe8tO3anCIGvo8AKQgcETpW5+uEUhUZEMdXSQ06j4/iXUBB2LZt+5oyBu3TEG0QvPW1X0At22oZmK1pOA1Bx5sqK2gSHFMhg9aHoUTtgtYKm+MwMGLjO60qGXiVEL0LfAi5LUTgaGoZuPca2G+ZcCC4nfDEJVDNACGIXCbRM4w6ARPghxJVMzCPzoQAFeO9ZY9AOQNNu3z6SXANFh55BAoamA+NM1AoLyw+8ggUNNC0vcppEYzdD2PIwHvoSEUDrT5+OoTyxw9jyKD53JWSBtod8ipHhODuuzFkcL3509Q00Jz3kUvBSC+M4RRUN8DzkI6iYKSX3rkEqQQYaPb7CK1g7HqbIJUIA82s7whuhXLlL28TpBJigFqhXhOohXLZExhLJchAM536ToVnMyCq3Q6B5Bhgher7WoWxGwyj8nFhsUMgSQauwt7DWmWY4mAYw5Xaw9d+gWQZYAW7Wt/bGTeG8dPW7cs3ysb4zl69al9f9AkkzUBzGVDqr3eujVcaSVd2f/v9jz/f2G6QAXGXKmkGGmZwMESxiP84va9eDQ319Ay9wV9znOvkkyxJNNAaDI73D/+2x80b08G/kxLwrGtCDXC8X8Wxhy7h9NxofPViGXgpggEYaGCAAwZggAMGYIADBmCAAwZggAMGYIADBmCAAwZggAMGYIADBqRBatCfVJvBMJE2g1Ei+dY3r+o5IrIamBaZk4+BukPm5DOzvt4i0/rmlZtkurZGVnwGFzJgAAY4YAAGOJ7BpRu9XY80/71N0+DSz93OkBX32ptpGXQ9YAAGYAAGEhp4zyN1P2+lMXB+ii3FuNcOgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAuUv4H11e61ahL+scAAAAASUVORK5CYII="/>
+        Soon...
+        <!--<div style="display: block">-->
+        <!--<canvas mdbChart-->
+        <!--[chartType]="chartType"-->
+        <!--[datasets]="chartDatasets"-->
+        <!--[labels]="chartLabels"-->
+        <!--[colors]="chartColors"-->
+        <!--[options]="chartOptions"-->
+        <!--[legend]="true"-->
+        <!--(chartHover)="chartHovered($event)"-->
+        <!--(chartClick)="chartClicked($event)">-->
+        <!--</canvas>-->
+        <!--</div>-->
+
+
+
+        <!--<div style="display: block">-->
+        <!--<canvas baseChart-->
+        <!--[chartType]="'line'"-->
+        <!--[datasets]="chartData"-->
+        <!--[labels]="chartLabels"-->
+        <!--[options]="chartOptions"-->
+        <!--[legend]="true"-->
+        <!--(chartClick)="onChartClick($event)">-->
+        <!--</canvas>-->
+        <!--</div>-->
+
+    </div>
 </div>

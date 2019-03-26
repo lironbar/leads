@@ -11,6 +11,7 @@ import {SnackBarService} from '../../../commons/services/snack-bar.service';
 import {CreateCampaignDialogComponent} from '../../../campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
 import {SendLeadDialogComponent} from '../../../campaigns/components/dialogs/send-lead-dialog/send-lead-dialog.component';
 import { InterfaceService } from '../../../interface/interface.service';
+import {LeadService} from '../../../leads/services/lead.service';
 
 @Component({
     selector: 'app-affiliate-view',
@@ -27,6 +28,7 @@ export class AffiliateViewComponent implements OnInit {
         public affiliateService: AffiliateService,
         public campaignService: CampaignService,
         public interfaceService: InterfaceService,
+        public leadService: LeadService,
         public dialog: MatDialog,
         public snackBar: SnackBarService,
         private route: ActivatedRoute) {}
@@ -53,20 +55,25 @@ export class AffiliateViewComponent implements OnInit {
         this.interfaceService.getByCampaign(campaign._id)
             .subscribe(
                 campaignInterface => {
-                    const dialogRef = this.dialog.open(SendLeadDialogComponent, {data: campaignInterface.properties});
-                    dialogRef.afterClosed().subscribe(lead => {
-                        if (lead) {
-                            this.campaignService.sendLead(campaign._id, this.affiliateId, lead)
-                                .subscribe(
-                                    response => {
-                                        this.snackBar.success('Lead sent successfully');
-                                    },
-                                    error => this._onError('Failed to get campaigns', error)
-                                )
-                        } else {
-                            console.log('Dialog Closed');
-                        }
-                    });
+                    if (campaignInterface) {
+                        const dialogRef = this.dialog.open(SendLeadDialogComponent, {data: campaignInterface.properties});
+                        dialogRef.afterClosed().subscribe(lead => {
+                            if (lead) {
+                                this.leadService.sendLead(campaign._id, this.affiliateId, lead)
+                                // this.campaignService.sendLead(campaign._id, this.affiliateId, lead)
+                                    .subscribe(
+                                        response => {
+                                            this.snackBar.success('Lead sent successfully');
+                                        },
+                                        error => this._onError('Failed to get campaigns', error)
+                                    )
+                            } else {
+                                console.log('Dialog Closed');
+                            }
+                        });
+                    } else {
+                        this._onError('No interface found', 'need to create one')
+                    }
                 },
                 error => this._onError('Failed to get interface', error)
             )

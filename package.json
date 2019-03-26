@@ -10,5 +10,9 @@
     "fe": "cd ./packages/frontend/ && npm start",
     "be": "cd ./packages/backend/ && npm start",
     "start": "lerna run start"
+  },
+  "dependencies": {
+    "angular-google-charts": "^0.1.3",
+    "ng2-charts": "^2.0.3"
   }
 }

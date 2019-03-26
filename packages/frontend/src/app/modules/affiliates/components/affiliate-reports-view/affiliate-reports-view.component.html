@@ -1,3 +1,84 @@
-<div fxLayout="column" class="full-height">
-    Affiliate Reports View
+<div fxLayout="row" class="full-height">
+    <div fxFlex fxLayout="column" class="overflow-auto">
+        <mat-accordion fxFlex [multi]="true">
+            <mat-expansion-panel *ngFor="let lead of leads; index as i">
+                <mat-expansion-panel-header>
+                    <span class="mat-body-2 margin-right-5">{{i + 1}}.</span>
+                    <span class="mat-body-2 opacity-8  ">Campaign Name {{i + 1}}</span>
+                </mat-expansion-panel-header>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <img *ngIf="lead.campaign" fxFlex [src]="lead.campaign.imageUrl" id="campaign-image"/>
+                    <div fxFlex class="padding-10">
+                        <p>Price: {{lead.price}}</p>
+                        <p>More Data: ....</p>
+                    </div>
+                </div>
+                <mat-action-row>
+                    <div *ngIf="!isAffiliateActions">
+                        <button mat-button
+                                *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
+                                color="primary" (click)="onEdit(campaign)">{{'EDIT'}}</button>
+                        <button mat-button
+                                *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
+                                color="warn" (click)="onDelete(campaign)">{{'DELETE'}}</button>
+                    </div>
+                    <div *ngIf="isAffiliateActions" fxLayout="row" fxLayoutAlign="start center">
+                        <button mat-button
+                                *ngxPermissionsOnly="['ADMIN','AFFILIATE']"
+                                color="primary" (click)="onSend(campaign)">{{'Send Lead'}}</button>
+                        <span fxFlex></span>
+                        <button mat-button
+                                *ngxPermissionsOnly="['ADMIN','AFFILIATE']"
+                                color="warn" (click)="onLeave(campaign)">{{'LEAVE'}}</button>
+                    </div>
+                </mat-action-row>
+
+                <!--<mat-action-row *ngIf="joinEnabled">-->
+                <!--<button mat-button-->
+                <!--*ngxPermissionsOnly="['ADMIN','AFFILIATE']"-->
+                <!--color="warn" (click)="onLeave(campaign)">{{'LEAVE'}}</button>-->
+                <!--</mat-action-row>-->
+
+                <!--<mat-action-row *ngIf="!joinEnabled">-->
+                <!--<button mat-button-->
+                <!--*ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"-->
+                <!--color="primary" (click)="onEdit(campaign)">{{'EDIT'}}</button>-->
+                <!--<button mat-button-->
+                <!--*ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"-->
+                <!--color="warn" (click)="onDelete(campaign)">{{'DELETE'}}</button>-->
+                <!--</mat-action-row>-->
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div fxFlex="40" fxLayout="column">
+        
+        <!--<img fxFlex src="https://www.google.com/search?q=charts&tbm=isch&tbs=rimg:CUr9ARYRl_1BZIjjBKmfYEnTbdrhSqQGuXjcTYBw08C38fefyWLH8db_1wDYFUwTIevj7uaNS1M1RYLULE2Wf7WhO1-CoSCcEqZ9gSdNt2Efhycgc4algoKhIJuFKpAa5eNxMRuI5ByhkX7f0qEglgHDTwLfx95xEnXUtRGOzFYyoSCfJYsfx1v_1ANEbOQ0vwobbmrKhIJgVTBMh6-Pu4RSPYfzh3hIAIqEglo1LUzVFgtQhEEQKXuuOtLQioSCcTZZ_1taE7X4EVxsIYJ1lKXn&tbo=u&sa=X&ved=2ahUKEwiJ8Nfrn4fhAhX4DGMBHTn-DH4Q9C96BAgBEBs&biw=1280&bih=647&dpr=1#imgrc=iQR3ltry1VzwPM:">-->
+
+        <!--<div style="display: block">-->
+            <!--<canvas mdbChart-->
+                    <!--[chartType]="chartType"-->
+                    <!--[datasets]="chartDatasets"-->
+                    <!--[labels]="chartLabels"-->
+                    <!--[colors]="chartColors"-->
+                    <!--[options]="chartOptions"-->
+                    <!--[legend]="true"-->
+                    <!--(chartHover)="chartHovered($event)"-->
+                    <!--(chartClick)="chartClicked($event)">-->
+            <!--</canvas>-->
+        <!--</div>-->
+
+
+
+        <!--<div style="display: block">-->
+            <!--<canvas baseChart-->
+                    <!--[chartType]="'line'"-->
+                    <!--[datasets]="chartData"-->
+                    <!--[labels]="chartLabels"-->
+                    <!--[options]="chartOptions"-->
+                    <!--[legend]="true"-->
+                    <!--(chartClick)="onChartClick($event)">-->
+            <!--</canvas>-->
+        <!--</div>-->
+
+    </div>
 </div>

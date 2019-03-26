@@ -46,9 +46,9 @@ export class CampaignService {
         return this.http.post<Campaign>(path, {affiliateId: affiliateId});
     }
 
-    sendLead(campaignId: string, affiliateId: string, lead: any) {
-        const path = `${this.apiUrl}/${campaignId}/leads`;
-        return this.http.post<Campaign>(path, {affiliateId: affiliateId, lead: lead});
-    }
+    // sendLead(campaignId: string, affiliateId: string, lead: any) {
+    //     const path = `${this.apiUrl}/${campaignId}/leads`;
+    //     return this.http.post<Campaign>(path, {affiliateId: affiliateId, lead: lead});
+    // }
 
 }
