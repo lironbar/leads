@@ -9,17 +9,6 @@ class UserModule extends MongooseEntity {
         return 'User';
     }
 
-    create(obj) {
-        return new User(obj).save();
-    }
-
-    find() {
-        return User.find();
-    }
-
-    findOne(id) {
-        return User.findOne({ _id: id });
-    }
 }
 
 const instace = new UserModule();

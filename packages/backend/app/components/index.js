@@ -1,5 +1,4 @@
 module.exports = {
-    Auth: require('./auth/auth'),
     User: require('./user/user'),
     Lead: require('./lead/lead'),
     Campaign: require('./campaign/campaign'),
