@@ -8,8 +8,8 @@ module.exports.login = async (req, res, next) => {
         if (user) {
             req.params.id = user._id;
             req.session.user = user;
-            req.session.save();
-            userCtrl.findOne(req, res, next);
+            res.status(200);
+            res.json(user);
         } else {
             res.status(400);
             res.end();
@@ -27,7 +27,7 @@ module.exports.logout = (req, res, next) => {
     next();
 };
 
-module.exports.verify = (req, res, next) => {
+module.exports.isLoggedIn = (req, res, next) => {
     if (req.session && req.session.user) {
         next();
     } else {
