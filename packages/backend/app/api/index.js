@@ -1,4 +1,4 @@
-const { port, env, session, cors: corsOpt } = global.App.Config;
+const { port, session, sessionStore, cors: corsOpt } = global.App.Config;
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -25,6 +25,19 @@ api.options('/*', (req, res, next) => {
 });
 
 // session
+if (sessionStore) {
+    switch (sessionStore.name) {
+        case 'session-file-store':
+            const FileStore = require('session-file-store')(expressSession);
+            const options = { ...sessionStore.options, path: `${__dirname}/.sessions`, logFn: _ => { } }
+            session.store = new FileStore(options);
+            console.info(`using "${sessionStore.name}" session store`);
+            break;
+        default:
+            console.warn('unknown session store', sessionStore);
+            break;
+    }
+}
 api.use(expressSession(session));
 
 // parsers

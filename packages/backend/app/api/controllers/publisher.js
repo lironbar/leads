@@ -5,7 +5,6 @@ module.exports.find = async (req, res) => {
         const publishers = await Publisher.find();
         res.status(200);
         res.json(publishers);
-        
     } catch (err) {
         res.status(500);
         res.send(err);
@@ -17,7 +16,6 @@ module.exports.findOne = async (req, res) => {
         const publisher = await Publisher.findOne(req.params.id);
         res.status(200);
         res.json(publisher);
-        
     } catch (err) {
         res.status(500);
         res.send(err);
@@ -29,7 +27,6 @@ module.exports.getCampaigns = async (req, res) => {
         const campaigns = await Publisher.getCampaigns(req.params.id);
         res.status(200);
         res.json(campaigns);
-        
     } catch (err) {
         res.status(500);
         res.send(err);

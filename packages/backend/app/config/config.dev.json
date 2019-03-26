@@ -1,0 +1,8 @@
+{
+    "sessionStore": {
+        "name": "session-file-store",
+        "options": {
+            "path": "/packages/backend/.sessions"
+        }
+    }
+}

@@ -12,8 +12,14 @@ class LeadModule extends MongooseEntity {
         return 'Lead';
     }
 
-    async get({ success: success = true, campaignId, publisherIds, affiliateIds }) {
-        const lookup = { success };
+    async findByParams({ leadId, campaignId, publisherIds, affiliateIds, success }) {
+        const lookup = {};
+        if (leadId) {
+            lookup._id = leadId;
+        }
+        if (success === true) {
+            lookup.success = true;
+        }
         if (publisherIds) {
             lookup.publisherId = { $in: publisherIds };
         }
@@ -22,10 +28,8 @@ class LeadModule extends MongooseEntity {
         }
         if (campaignId) {
             lookup.campaign = campaignId;
-            return this.findOneAndPopulate(lookup, null, 'campaign');
-        } else {
-            return this.findAndPopulate(lookup, null, 'campaign');
         }
+        return super.findAndPopulate(lookup, null, 'campaign');
     }
 
     async send(campaignId, { affiliateId, lead: payload }) {

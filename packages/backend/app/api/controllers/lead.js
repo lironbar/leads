@@ -1,18 +1,17 @@
 const { Lead } = global.App.Components;
 
-module.exports.send = async (req, res) => {
+module.exports.findOne = async (req, res) => {
     try {
-        const result = await Lead.send(req.params.campaignId, req.body);
+        const lead = await Lead.get(req.params);
         res.status(200);
-        res.json(result);
-        
+        res.json(lead);
     } catch (err) {
         res.status(500);
         res.send(err);
     }
 };
 
-module.exports.find = async (req, res) => {
+module.exports.findByCampaign = async (req, res) => {
     try {
         const params = { ...req.params, ...req.query };
         if (params.affiliateIds) {
@@ -21,10 +20,20 @@ module.exports.find = async (req, res) => {
         if (params.publisherIds) {
             params.publisherIds = params.publisherIds.split(',');
         }
-        const leads = await Lead.get(params);
+        const leads = await Lead.findByParams(params);
         res.status(200);
         res.json(leads);
-        
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
+};
+
+module.exports.sendForCampaign = async (req, res) => {
+    try {
+        const result = await Lead.findByParams(req.params.campaignId, req.body);
+        res.status(200);
+        res.json(result);
     } catch (err) {
         res.status(500);
         res.send(err);

@@ -48,7 +48,13 @@ class MongooseEntity {
     }
 
     parseError(mongooseError) {
-        debugger;
+        switch (mongooseError.name) {
+            case 'CastError':
+                mongooseError.appError = { code: '400', message: 'invalid data' };
+                break;
+            default:
+                debugger
+        }
     }
 }
 
