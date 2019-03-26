@@ -1,18 +1,18 @@
 const { Lead } = global.App.Components;
 
-module.exports.send = async (req, res, next) => {
+module.exports.send = async (req, res) => {
     try {
         const result = await Lead.send(req.params.campaignId, req.body);
         res.status(200);
         res.json(result);
-        next();
+        
     } catch (err) {
         res.status(500);
         res.send(err);
     }
 };
 
-module.exports.find = async (req, res, next) => {
+module.exports.find = async (req, res) => {
     try {
         const params = { ...req.params, ...req.query };
         if (params.affiliateIds) {
@@ -24,7 +24,7 @@ module.exports.find = async (req, res, next) => {
         const leads = await Lead.get(params);
         res.status(200);
         res.json(leads);
-        next();
+        
     } catch (err) {
         res.status(500);
         res.send(err);
