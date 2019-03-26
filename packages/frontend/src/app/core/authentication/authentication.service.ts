@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 import { User } from '../user/user.model';
 import { Constants } from '../../modules/commons/constants';
+import {NgxPermissionsService} from 'ngx-permissions';
+import {Router} from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -11,7 +13,12 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        private permissionsService: NgxPermissionsService,
+        private router: Router
+    ) {
+
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -59,9 +66,14 @@ export class AuthenticationService {
 
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(null);
-        return this.currentUser;
+        this.http.post(`${this.BASE_URL}/logout`, {})
+            .subscribe(response => {
+                localStorage.removeItem('currentUser');
+                this.permissionsService.flushPermissions();
+                this.router.navigate(['/sign-in']);
+                // this.currentUserSubject.next(null);
+                // return this.currentUser;
+            })
     }
     // _getCurrentRole(user) {
     //     return {

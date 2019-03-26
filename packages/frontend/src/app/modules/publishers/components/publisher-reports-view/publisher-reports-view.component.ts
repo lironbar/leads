@@ -12,7 +12,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 
 export class PublisherReportsViewComponent {
 
-    leads: Lead[];
+    leads: Lead[] = [];
     publisherId: string;
 
     constructor(

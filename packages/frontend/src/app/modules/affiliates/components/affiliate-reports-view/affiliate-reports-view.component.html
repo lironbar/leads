@@ -4,13 +4,13 @@
             <mat-expansion-panel *ngFor="let lead of leads; index as i">
                 <mat-expansion-panel-header>
                     <span class="mat-body-2 margin-right-5">{{i + 1}}.</span>
-                    <span class="mat-body-2 opacity-8  ">Campaign Name {{i + 1}}</span>
+                    <span class="mat-body-2 opacity-8  ">{{lead.campaign.name}}</span>
                 </mat-expansion-panel-header>
                 <div fxLayout="row" fxLayoutAlign="start center">
                     <img *ngIf="lead.campaign" fxFlex [src]="lead.campaign.imageUrl" id="campaign-image"/>
                     <div fxFlex class="padding-10">
                         <p>Price: {{lead.price}}</p>
-                        <p>More Data: ....</p>
+                        <p>{{lead.marketingText}}</p>
                     </div>
                 </div>
                 <mat-action-row>

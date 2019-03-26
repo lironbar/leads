@@ -11,7 +11,7 @@ import {Lead} from '../../../leads/leads.model';
 })
 
 export class AffiliateReportsViewComponent implements OnInit{
-    leads: Lead[];
+    leads: Lead[] = [];
     affiliateId: string;
 
     constructor(
@@ -24,10 +24,7 @@ export class AffiliateReportsViewComponent implements OnInit{
             this.affiliateId = params['id'];
             this.leadService.getLeadsByAffiliates([this.affiliateId])
                 .subscribe(
-                    leads => {
-                        this.leads = leads;
-                        debugger;
-                    },
+                    leads => this.leads = leads,
                     error => this._onError('Failed to get leads', error)
                 )
         });
@@ -37,8 +34,6 @@ export class AffiliateReportsViewComponent implements OnInit{
         console.error(message, error);
         this.snackBar.error(message);
     }
-
-
 
 
 }

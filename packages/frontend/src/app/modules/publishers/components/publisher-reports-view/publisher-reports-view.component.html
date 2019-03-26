@@ -1,6 +1,6 @@
 <div fxLayout="row" class="full-height">
     <div fxFlex fxLayout="column" class="overflow-auto">
-        <mat-accordion fxFlex [multi]="true">
+        <mat-accordion fxFlex [multi]="true" *ngIf="leads.length; else empty_state">
             <mat-expansion-panel *ngFor="let lead of leads; index as i">
                 <mat-expansion-panel-header>
                     <span class="mat-body-2 margin-right-5">{{i + 1}}.</span>
@@ -15,6 +15,10 @@
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
+        <ng-template #empty_state>
+            <app-empty-state text="No Campaigns Found"
+                             src="/assets/empty_states/empty_state_campaigns.png"></app-empty-state>
+        </ng-template>
     </div>
     <div fxFlex="40" fxLayout="column" fxLayoutAlign="center center">
 

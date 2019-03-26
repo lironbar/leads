@@ -39,15 +39,6 @@ export class HeaderComponent implements OnInit {
         this.permissionsService.loadPermissions([selectedRole.roleValue]);
     }
     onSignOut() {
-        this.authenticationService.logout()
-            .subscribe(
-                data => {
-                        this.permissionsService.flushPermissions();
-                        this.router.navigate(['/sign-in']);
-                },
-                error => {
-                   console.error(error);
-                }
-            );
+        this.authenticationService.logout();
     }
 }
