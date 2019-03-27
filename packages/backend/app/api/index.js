@@ -29,9 +29,9 @@ if (sessionStore) {
     switch (sessionStore.name) {
         case 'session-file-store':
             const FileStore = require('session-file-store')(expressSession);
-            const options = { ...sessionStore.options, path: `${__dirname}/.sessions`, logFn: _ => { } }
-            session.store = new FileStore(options);
-            console.info(`using "${sessionStore.name}" session store`);
+            const path = `${__dirname}/.sessions`;
+            session.store = new FileStore({ path, logFn: _ => { } });
+            console.info('using file session store at', path);
             break;
         default:
             console.warn('unknown session store', sessionStore);
