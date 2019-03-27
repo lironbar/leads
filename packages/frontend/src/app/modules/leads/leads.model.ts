@@ -1,6 +1,7 @@
 export interface Lead {
     _id: string;
-    success: boolean;
+    success?: boolean;
+    approved: boolean;
     timestamp: string;
     price?: any;
     payload?: any;

@@ -1,19 +1,42 @@
 <div fxLayout="row" class="full-height" *ngIf="publisher$ | async; let publisher">
 
-    <app-publisher-info-bar fxFlex="25" [(publisher)]="publisher" (change)="onPublisherChange($event)">
+    <app-publisher-info-bar *ngxPermissionsOnly="['ADMIN']" fxFlex="20"
+                            [(publisher)]="publisher" (change)="onPublisherChange($event)">
 
     </app-publisher-info-bar>
 
     <div fxFlex fxLayout="column">
+
         <div fxLayout="row" fxLayoutAlign="start center" class="app-toolbar">
             <span fxFlex></span>
             <app-campaign-create-button (create)="onCreateCampaign($event)"></app-campaign-create-button>
         </div>
-        <app-campaign-panels fxFlex *ngIf="campaigns$ | async as campagins;"
-                             [(campaigns)]="campagins"
-                             (edit)="onEditCampaign($event)"
-                             (delete)="OnDeleteCampaign($event)">
-        </app-campaign-panels>
+
+        <div fxFlex fxLayout="row">
+
+            <div fxFlex fxLayout="column">
+                <app-campaign-panels fxFlex *ngIf="campaigns$ | async as campagins; else empty_state"
+                                     [(campaigns)]="campagins"
+                                     (edit)="onEditCampaign($event)"
+                                     (delete)="OnDeleteCampaign($event)"
+                                     (open)="onSelectedCampaign($event)">
+                </app-campaign-panels>
+
+                <ng-template #empty_state>
+                    <app-empty-state text="No Campaigns Found"
+                                     src="/assets/empty_states/empty_state_campaigns.png"></app-empty-state>
+                </ng-template>
+            </div>
+
+            <div fxFlex fxLayout="column">
+
+                <app-leads-panels fxFlex *ngIf="leads$ | async as leads;"
+                                  [(leads)]="leads">
+
+                </app-leads-panels>
+
+            </div>
+        </div>
     </div>
 </div>
 

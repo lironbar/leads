@@ -12,6 +12,7 @@ import {CreateCampaignDialogComponent} from '../../../campaigns/components/dialo
 import {SendLeadDialogComponent} from '../../../campaigns/components/dialogs/send-lead-dialog/send-lead-dialog.component';
 import { InterfaceService } from '../../../interface/interface.service';
 import {LeadService} from '../../../leads/services/lead.service';
+import {Lead} from '../../../leads/leads.model';
 
 @Component({
     selector: 'app-affiliate-view',
@@ -23,6 +24,8 @@ export class AffiliateViewComponent implements OnInit {
     affiliateId: string;
     affiliate$: Observable<Affiliate>;
     campaigns$: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
+    leads$: BehaviorSubject<Lead[]> = new BehaviorSubject([]);
+    selectedCampaignId: string;
     user: User;
     constructor(
         public affiliateService: AffiliateService,
@@ -89,6 +92,19 @@ export class AffiliateViewComponent implements OnInit {
                 },
                 error => this._onError('Failed to leave campaign', error)
             );
+    }
+
+    onSelectedCampaign(campaign: Campaign) {
+        if (!this.selectedCampaignId || campaign._id !== this.selectedCampaignId) {
+            this.selectedCampaignId = campaign._id;
+            this.leadService.getLeadsByCampaign(campaign._id, 'false')
+                .subscribe(leads => {
+                    this.leads$.next(leads);
+                })
+        } else {
+            this.selectedCampaignId = undefined;
+            this.leads$.next([]);
+        }
     }
 
     _onError(message, error) {

@@ -11,6 +11,8 @@ import {AuthenticationService} from '../../../../core/authentication/authenticat
 import {User} from '../../../../core/user/user.model';
 import {CreateCampaignDialogComponent} from '../../../campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
 import {SnackBarService} from '../../../commons/services/snack-bar.service';
+import {LeadService} from '../../../leads/services/lead.service';
+import {Lead} from '../../../leads/leads.model';
 
 @Component({
     selector: 'app-publisher-view',
@@ -21,6 +23,7 @@ import {SnackBarService} from '../../../commons/services/snack-bar.service';
 export class PublisherViewComponent implements OnInit {
     constructor(public publisherService: PublisherService,
                 public campaignService: CampaignService,
+                public leadService: LeadService,
                 public dialog: MatDialog,
                 private route: ActivatedRoute,
                 private UserService: AuthenticationService,
@@ -30,7 +33,9 @@ export class PublisherViewComponent implements OnInit {
     publisherId: string;
     publisher$: Observable<Publisher>;
     campaigns$: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
+    leads$: BehaviorSubject<Lead[]> = new BehaviorSubject([]);
     user: User;
+    selectedCampaignId: string;
 
     ngOnInit() {
         // this.user = this.UserService.currentUserValue;
@@ -110,6 +115,19 @@ export class PublisherViewComponent implements OnInit {
                     )
             }
         });
+    }
+
+    onSelectedCampaign(campaign: Campaign) {
+        if (!this.selectedCampaignId || campaign._id !== this.selectedCampaignId) {
+            this.selectedCampaignId = campaign._id;
+            this.leadService.getLeadsByCampaign(campaign._id, 'false')
+                .subscribe(leads => {
+                    this.leads$.next(leads);
+                })
+        } else {
+            this.selectedCampaignId = undefined;
+            this.leads$.next([]);
+        }
     }
 
     _onError(message, error) {

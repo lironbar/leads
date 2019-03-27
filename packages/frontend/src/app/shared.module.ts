@@ -5,11 +5,16 @@ import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {NgxPermissionsModule} from 'ngx-permissions';
 
+import {LeadsPanelsComponent} from './modules/leads/components/leads-panels/leads-panels.component';
+import {LeadStatusBoxComponent} from './modules/leads/components/lead-status-box/lead-status-box.component';
 import {CampaignListComponent} from './modules/campaigns/components/campaign-list/campaign-list.component';
 import {CampaignPanelsComponent} from './modules/campaigns/components/campaign-panels/campaign-panels.component';
 import {CampaignCreateButtonComponent} from './modules/campaigns/components/campaign-create-button/campaign-create-button.component';
 import {CreateCampaignDialogComponent} from './modules/campaigns/components/dialogs/create-campaign-dialog/create-campaign-dialog.comonent';
 import {SendLeadDialogComponent} from './modules/campaigns/components/dialogs/send-lead-dialog/send-lead-dialog.component';
+
+import {BooleanPipe} from './modules/commons/boolean.pipe';
+
 import {
     MatAutocompleteModule,
     MatButtonModule,
@@ -48,13 +53,16 @@ import {EmptyStateComponent} from './modules/commons/components/empty-state/empt
 
 @NgModule({
     declarations: [
+        LeadsPanelsComponent,
+        LeadStatusBoxComponent,
         CampaignListComponent,
         CampaignPanelsComponent,
         CampaignCreateButtonComponent,
         CreateCampaignDialogComponent,
         SendLeadDialogComponent,
         ConfirmDialogComponent,
-        EmptyStateComponent
+        EmptyStateComponent,
+        BooleanPipe
     ],
     imports: [
         CommonModule,
@@ -131,6 +139,8 @@ import {EmptyStateComponent} from './modules/commons/components/empty-state/empt
         MatToolbarModule,
         MatTooltipModule,
         MatStepperModule,
+        LeadsPanelsComponent,
+        LeadStatusBoxComponent,
         CampaignListComponent,
         CampaignPanelsComponent,
         CampaignCreateButtonComponent,

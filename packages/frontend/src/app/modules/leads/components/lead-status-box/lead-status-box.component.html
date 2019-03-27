@@ -1,0 +1,4 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="full-height container"
+     [ngClass]="{'green': approved === true, 'red': approved === false}">
+    <span>{{approved === true ? 'Approved' : 'Not Approved'}}</span>
+</div>
