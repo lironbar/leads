@@ -8,6 +8,7 @@
     "install": "lerna bootstrap --no-ci --loglevel=verbose",
     "bootstrap": "lerna bootstrap --ci --loglevel=verbose",
     "fe": "cd ./packages/frontend/ && npm start",
+    "fe-prod": "cd ./packages/frontend/ && ng serve --prod",
     "be": "cd ./packages/backend/ && npm start",
     "start": "lerna run start"
   },
