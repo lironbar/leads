@@ -12,13 +12,16 @@ class LeadModule extends MongooseEntity {
         return 'Lead';
     }
 
-    async findByParams({ leadId, campaignId, publisherIds, affiliateIds, success }) {
+    async findByParams({ leadId, campaignId, publisherIds, affiliateIds, success, approved }) {
         const lookup = {};
         if (leadId) {
             lookup._id = leadId;
         }
-        if (success === true) {
-            lookup.success = true;
+        if (success) {
+            lookup.success = success === 'true';
+        }
+        if (approved) {
+            lookup.approved = approved === 'true';
         }
         if (publisherIds) {
             lookup.publisher = { $in: publisherIds };

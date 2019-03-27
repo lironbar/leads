@@ -26,8 +26,16 @@ export class LeadService {
     }
 
     public sendLead(campaignId: string, affiliateId: string, lead: any) {
-        const path = `${this.apiUrl}/${campaignId}`;
+        const path = `${this.apiUrl}/campaign/${campaignId}`;
         return this.http.post<Campaign>(path, {affiliateId: affiliateId, lead: lead});
+    }
+
+    public getLeadsByCampaign(campaignId: string, approved: string) {
+        const path = `${this.apiUrl}/campaign/${campaignId}`;
+        let params = new HttpParams();
+        params = params.append('approved', approved);
+        params = params.append('success', 'true');
+        return this.http.get<Lead[]>(path, {params: params});
     }
 
 

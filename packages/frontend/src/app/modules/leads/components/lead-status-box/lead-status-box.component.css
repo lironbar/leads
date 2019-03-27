@@ -1,0 +1,15 @@
+.container {
+    min-width: 100px;
+    padding: 5px;
+    color: white;
+    font-size: 10px;
+    border-radius: 15%;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}

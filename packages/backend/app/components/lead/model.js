@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const LeadSchema = new Schema({
     success: { type: Boolean, default: false },
+    approved: { type: Boolean, default: false },
     timestamp: { type: Number, required: () => this.success === true },
     payload: { type: Object, required: true },
     response: { type: Object },
