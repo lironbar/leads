@@ -2,28 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ba05107-cb9c-4feb-9d27-35eabbaf4df9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/commons/boolean.pipe.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/leads/components/lead-status-box/lead-status-box.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/leads/components/lead-status-box/lead-status-box.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/leads/components/lead-status-box/lead-status-box.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/leads/components/leads-panels/leads-panels.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/leads/components/leads-panels/leads-panels.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/leads/components/leads-panels/leads-panels.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/backend/app/components/lead/lead.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/backend/app/components/lead/lead.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/backend/app/components/lead/model.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/backend/app/components/lead/model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-reports-view/affiliate-reports-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-reports-view/affiliate-reports-view.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/campaigns/components/campaign-panels/campaign-panels.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/campaigns/components/campaign-panels/campaign-panels.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/campaigns/components/campaign-panels/campaign-panels.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/campaigns/components/campaign-panels/campaign-panels.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/leads/leads.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/leads/leads.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/leads/services/lead.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/leads/services/lead.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-info-bar/publisher-info-bar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-info-bar/publisher-info-bar.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-view/publisher-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-view/publisher-view.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-view/publisher-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-view/publisher-view.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/shared.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/frontend/src/app/modules/commons/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/app/modules/commons/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/frontend/src/environments/environment.prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/environments/environment.prod.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/frontend/src/environments/environment.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -109,47 +91,47 @@
         <counts>
           <entry key="css" value="100" />
           <entry key="gitignore" value="2" />
-          <entry key="html" value="311" />
+          <entry key="html" value="312" />
           <entry key="jpg" value="1" />
           <entry key="js" value="72" />
-          <entry key="json" value="39" />
+          <entry key="json" value="41" />
           <entry key="png" value="13" />
           <entry key="svg" value="2" />
-          <entry key="ts" value="572" />
+          <entry key="ts" value="583" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="100" />
           <entry key="Enforced Plain Text" value="5" />
-          <entry key="HTML" value="306" />
+          <entry key="HTML" value="307" />
           <entry key="Image" value="14" />
-          <entry key="JSON" value="39" />
+          <entry key="JSON" value="41" />
           <entry key="JavaScript" value="72" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="SVG" value="2" />
-          <entry key="TypeScript" value="572" />
+          <entry key="TypeScript" value="583" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="JavaScript Console" value="6" />
           <entry key="css" value="1352" />
-          <entry key="html" value="12990" />
+          <entry key="html" value="12991" />
           <entry key="js" value="2215" />
           <entry key="json" value="390" />
-          <entry key="ts" value="17854" />
-          <entry key="txt" value="464" />
+          <entry key="ts" value="17897" />
+          <entry key="txt" value="477" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="1352" />
-          <entry key="HTML" value="12989" />
+          <entry key="HTML" value="12990" />
           <entry key="JSON" value="390" />
           <entry key="JavaScript" value="2222" />
-          <entry key="PLAIN_TEXT" value="464" />
-          <entry key="TypeScript" value="17854" />
+          <entry key="PLAIN_TEXT" value="477" />
+          <entry key="TypeScript" value="17897" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -164,59 +146,53 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.ts">
+        <entry file="file://$PROJECT_DIR$/packages/frontend/src/environments/environment.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="99" column="28" selection-start-line="99" selection-start-column="17" selection-end-line="99" selection-end-column="28" />
+            <state relative-caret-position="138">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/packages/frontend/src/environments/environment.prod.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/packages/frontend/src/main.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
               <folding>
-                <element signature="e#0#48#0" expanded="true" />
-                <element signature="n#!!block;n#ngOnInit#0;n#AffiliateViewComponent#0" />
-                <element signature="n#!!block;n#onAffiliateChange#0;n#AffiliateViewComponent#0" />
-                <element signature="n#!!block;n#onSendLead#0;n#AffiliateViewComponent#0" />
-                <element signature="n#!!block;n#onLeaveCampaign#0;n#AffiliateViewComponent#0" />
-                <element signature="n#!!block;n#_onError#0;n#AffiliateViewComponent#0" />
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/packages/frontend/angular.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+              <folding>
+                <element signature="n#!!block;n#production#0;n#!!block;n#configurations#0;n#!!block;n#build#0;n#!!block;n#architect#0;n#!!block;n#mean-app#0;n#!!block;n#projects#0;n#!!top" />
+                <element signature="n#!!block;n#mean-app-e2e#0;n#!!block;n#projects#0;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.html">
+        <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/commons/constants.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="17" column="73" lean-forward="true" selection-start-line="17" selection-start-column="73" selection-end-line="17" selection-end-column="73" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-view/publisher-view.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="35" selection-start-line="35" selection-end-line="36" />
-              <folding>
-                <element signature="e#0#48#0" expanded="true" />
-                <element signature="n#!!block;n#ngOnInit#0;n#PublisherViewComponent#0" />
-                <element signature="n#!!block;n#onPublisherChange#0;n#PublisherViewComponent#0" />
-                <element signature="n#!!block;n#onCreateCampaign#0;n#PublisherViewComponent#0" />
-                <element signature="n#!!block;n#OnDeleteCampaign#0;n#PublisherViewComponent#0" />
-                <element signature="n#!!block;n#onEditCampaign#0;n#PublisherViewComponent#0" />
-                <element signature="n#!!block;n#_onError#0;n#PublisherViewComponent#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-view/publisher-view.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="14" selection-start-line="14" selection-end-line="38" selection-end-column="14" />
-              <folding>
-                <element signature="n#div#0;n#div#0;n#div#0;n#!!top" />
-                <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
-                <element signature="n#ng-template#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
-              </folding>
+            <state relative-caret-position="161">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
@@ -234,9 +210,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>logout</find>
-      <find>.logout</find>
-      <find>this.http.post</find>
       <find>avatar-large</find>
       <find>permission</find>
       <find>onSelectedCampaign</find>
@@ -263,6 +236,9 @@
       <find>app-lead-status-box</find>
       <find>getLeadsByCampaign</find>
       <find>let params = new HttpParams()</find>
+      <find>Constants</find>
+      <find>environment</find>
+      <find>fileReplacements</find>
       <find>selectedCampaignId</find>
     </findStrings>
     <replaceStrings>
@@ -288,8 +264,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/interface/components/interface-campaign-view/interface-campaign-view.component.html" />
-        <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-info-bar/publisher-info-bar.component.ts" />
         <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.css" />
         <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/publisher.service.ts" />
         <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-info-bar/publisher-info-bar.component.html" />
@@ -311,7 +285,6 @@
         <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/interface/interface.service.ts" />
         <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-reports-view/publisher-reports-view.component.css" />
         <option value="$PROJECT_DIR$/packages/frontend/angular.json" />
-        <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/commons/constants.ts" />
         <option value="$PROJECT_DIR$/packages/frontend/src/app/core/Interceptoers/httpconfig.interceptor.ts" />
         <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-reports-view/publisher-reports-view.component.html" />
         <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-reports-view/publisher-reports-view.component.ts" />
@@ -339,6 +312,9 @@
         <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.ts" />
         <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-view/publisher-view.component.html" />
         <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.html" />
+        <option value="$PROJECT_DIR$/packages/frontend/src/environments/environment.prod.ts" />
+        <option value="$PROJECT_DIR$/packages/frontend/src/environments/environment.ts" />
+        <option value="$PROJECT_DIR$/packages/frontend/src/app/modules/commons/constants.ts" />
       </list>
     </option>
   </component>
@@ -392,53 +368,6 @@
               <item name="leads" type="b2602c69:ProjectViewProjectNode" />
               <item name="leads" type="462c0819:PsiDirectoryNode" />
               <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="lead" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -473,63 +402,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="affiliates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="affiliates" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="affiliates" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="affiliate-view" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="publishers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="publishers" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="leads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="leads" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="publishers" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="publisher-view" type="462c0819:PsiDirectoryNode" />
+              <item name="commons" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -539,7 +412,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="SearchEverywhereHistoryKey" value="lead.js&#9;FILE&#9;file:///Users/lironbarkalifa/Desktop/My-Apps/leads/packages/backend/app/api/controllers/lead.js&#10;lead.mo&#9;FILE&#9;file:///Users/lironbarkalifa/Desktop/My-Apps/leads/packages/frontend/src/app/modules/leads/leads.model.ts&#10;angular-cli&#9;FILE&#9;file:///Users/lironbarkalifa/Desktop/My-Apps/leads/node_modules/@angular-devkit/build-angular/src/angular-cli-files" />
+    <property name="SearchEverywhereHistoryKey" value="environments&#9;FILE&#9;file:///Users/lironbarkalifa/Desktop/My-Apps/leads/packages/frontend/src/environments&#10;lead.js&#9;FILE&#9;file:///Users/lironbarkalifa/Desktop/My-Apps/leads/packages/backend/app/api/controllers/lead.js&#10;lead.mo&#9;FILE&#9;file:///Users/lironbarkalifa/Desktop/My-Apps/leads/packages/frontend/src/app/modules/leads/leads.model.ts&#10;angular-cli&#9;FILE&#9;file:///Users/lironbarkalifa/Desktop/My-Apps/leads/node_modules/@angular-devkit/build-angular/src/angular-cli-files" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -645,7 +518,7 @@
       <workItem from="1550757463431" duration="4154000" />
       <workItem from="1552737657739" duration="20148000" />
       <workItem from="1552989669938" duration="1434000" />
-      <workItem from="1553629199116" duration="21144000" />
+      <workItem from="1553629199116" duration="24835000" />
     </task>
     <task id="LOCAL-00001" summary="Publisher Drilldown working with campaigns">
       <created>1544801306702</created>
@@ -801,11 +674,25 @@
       <option name="project" value="LOCAL" />
       <updated>1553631842581</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="frontend changes1">
+      <created>1553719601617</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1553719601618</updated>
+    </task>
+    <task id="LOCAL-00024" summary="frontend changes ready 1">
+      <created>1553719747305</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1553719747305</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="344203000" />
+    <option name="totallyTimeSpent" value="347894000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="726" extended-state="0" />
@@ -888,61 +775,10 @@
     <MESSAGE value="frontend work2" />
     <MESSAGE value="frontend changes" />
     <MESSAGE value="frontend changes1" />
-    <option name="LAST_COMMIT_MESSAGE" value="frontend changes1" />
+    <MESSAGE value="frontend changes ready 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="frontend changes ready 1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/affiliates-routing.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/pages/pages.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/pages/pages.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="67" column="53" lean-forward="true" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/publishers-routing.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="23" column="66" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/frontend/angular.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1541">
-          <caret line="67" column="13" selection-start-line="67" selection-start-column="13" selection-end-line="67" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/core/Interceptoers/httpconfig.interceptor.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/commons/constants.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-reports-view/affiliate-reports-view.component.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
@@ -1018,13 +854,6 @@
             <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#src#0;n#img#0;n#div#1;n#div#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/header/header.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1230,20 +1059,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/leads/services/lead.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="35" column="53" lean-forward="true" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/leads/components/leads-panels/leads-panels.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="9" column="55" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-view/publisher-view.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="59" lean-forward="true" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="59" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#ng-template#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1263,6 +1094,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
@@ -1278,22 +1116,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/publishers/components/publisher-view/publisher-view.component.html">
+    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/leads/services/lead.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="14" selection-start-line="14" selection-end-line="38" selection-end-column="14" />
+        <state relative-caret-position="-214">
+          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/header/header.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="41" lean-forward="true" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/header/header.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/app-routing.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
           <folding>
-            <element signature="n#div#0;n#div#0;n#div#0;n#!!top" />
-            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
-            <element signature="n#ng-template#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/affiliates/components/affiliate-view/affiliate-view.component.html">
+    <entry file="file://$PROJECT_DIR$/packages/frontend/src/main.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="17" column="73" lean-forward="true" selection-start-line="17" selection-start-column="73" selection-end-line="17" selection-end-column="73" />
+        <state relative-caret-position="161">
+          <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/frontend/angular.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+          <folding>
+            <element signature="n#!!block;n#production#0;n#!!block;n#configurations#0;n#!!block;n#build#0;n#!!block;n#architect#0;n#!!block;n#mean-app#0;n#!!block;n#projects#0;n#!!top" />
+            <element signature="n#!!block;n#mean-app-e2e#0;n#!!block;n#projects#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/frontend/src/environments/environment.prod.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/frontend/src/environments/environment.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/frontend/src/app/modules/commons/constants.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
