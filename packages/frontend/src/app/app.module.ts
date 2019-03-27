@@ -46,6 +46,7 @@ import {LoginViewComponent} from './core/login/components/login-view.component';
 import {RegisterViewComponent} from './core/register/components/register-view.component';
 import {PagesComponent} from './pages/pages.component';
 import {LoaderComponent} from './modules/commons/components/loader/loader.component';
+import {LeadViewComponent} from './modules/leads/components/lead-view/lead-view.component';
 
 import {PageForbiddenComponent} from './core/error-pages/components/page-forbidden/page-forbidden.component';
 import {PageNotFoundComponent} from './core/error-pages/components/page-not-found/page-not-found.component';
@@ -72,6 +73,7 @@ import { LoaderInterceptorService} from './core/Interceptoers/httpconfig.interce
         RegisterViewComponent,
         PagesComponent,
         LoaderComponent,
+        LeadViewComponent,
         PageForbiddenComponent,
         PageNotFoundComponent,
         PageServerErrorComponent

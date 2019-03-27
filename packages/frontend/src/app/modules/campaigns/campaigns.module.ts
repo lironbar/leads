@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CampaignsRoutingModule} from './campaigns-routing.module';
-import {CoreModule} from '@angular/flex-layout';
+// import {CoreModule} from '@angular/flex-layout';
 
 import {SharedModule} from '../../shared.module';
 import {CampaignService} from './campaign.service';
@@ -17,7 +17,7 @@ import {CampaignImageUrlComponent} from './components/campaign-image-url/campaig
     ],
     imports: [
         SharedModule,
-        CoreModule,
+        // CoreModule,
         CampaignsRoutingModule
     ],
     providers: [CampaignService],
