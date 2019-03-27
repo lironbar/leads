@@ -1,5 +1,4 @@
 {
-    "port": 8080,
     "mongo": {
         "url": "mongodb://mongo:27017/leads",
         "options": {
@@ -9,6 +8,12 @@
             "reconnectInterval": 2000,
             "connectTimeoutMS": 1500,
             "socketTimeoutMS": 45000
+        }
+    },
+    "sessionStore": {
+        "name": "session-file-store",
+        "options": {
+            "path": "/packages/backend/.sessions"
         }
     }
 }
