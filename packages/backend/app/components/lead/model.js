@@ -8,9 +8,9 @@ const LeadSchema = new Schema({
     response: { type: Object },
     price: { type: Number, required: true },
     interfaceId: { type: Schema.Types.ObjectId, required: true },
-    affiliateId: { type: Schema.Types.ObjectId, required: true },
-    publisherId: { type: Schema.Types.ObjectId, required: true },
+    publisher: { type: Schema.Types.ObjectId, ref: 'user', required: true },
     campaign: { type: Schema.Types.ObjectId, ref: 'campaign', required: true },
+    affiliate: { type: Schema.Types.ObjectId, ref: 'user', required: true },
     updated: { type: Number, default: Date.now, select: false }
 });
 

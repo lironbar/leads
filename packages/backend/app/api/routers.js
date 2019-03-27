@@ -20,7 +20,7 @@ module.exports = {
         const router = express.Router();
         router.get('/:leadId', lead.findOne);
         router.get('/campaign/:campaignId', lead.findByCampaign);
-        router.post('/campaign/:campaignId', lead.sendForCampaign);
+        router.post('/campaign/:campaignId', lead.send);
         return router;
     },
     campaign: () => {

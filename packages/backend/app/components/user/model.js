@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     name: { type: String, required: true },
-    password: { type: String, required: true },
+    password: { type: String, required: true, select: false },
     email: {
         type: String, unique: true, required: true,
         validate: value => new RegExp('.+\@.+\..+').test(value)

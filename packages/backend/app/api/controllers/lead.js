@@ -1,4 +1,5 @@
 const { Lead } = global.App.Components;
+const { enums } = global.App.Utils;
 
 module.exports.findOne = async (req, res) => {
     try {
@@ -14,11 +15,22 @@ module.exports.findOne = async (req, res) => {
 module.exports.findByCampaign = async (req, res) => {
     try {
         const params = { ...req.params, ...req.query };
-        if (params.affiliateIds) {
-            params.affiliateIds = params.affiliateIds.split(',');
-        }
-        if (params.publisherIds) {
-            params.publisherIds = params.publisherIds.split(',');
+        const userRole = req.session.user.role;
+        switch (userRole) {
+            case enums.userRoles.admin:
+                if (params.affiliateIds) {
+                    params.affiliateIds = params.affiliateIds.split(',');
+                }
+                if (params.publisherIds) {
+                    params.publisherIds = params.publisherIds.split(',');
+                }
+                break;
+            case enums.userRoles.affiliate:
+                params.affiliateIds = [req.session.user._id];
+                break;
+            case enums.userRoles.publisher:
+                params.publisherIds = [req.session.user._id];
+                break;
         }
         const leads = await Lead.findByParams(params);
         res.status(200);
@@ -29,9 +41,9 @@ module.exports.findByCampaign = async (req, res) => {
     }
 };
 
-module.exports.sendForCampaign = async (req, res) => {
+module.exports.send = async (req, res) => {
     try {
-        const result = await Lead.findByParams(req.params.campaignId, req.body);
+        const result = await Lead.send(req.params.campaignId, req.body);
         res.status(200);
         res.json(result);
     } catch (err) {

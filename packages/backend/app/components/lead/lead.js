@@ -21,15 +21,15 @@ class LeadModule extends MongooseEntity {
             lookup.success = true;
         }
         if (publisherIds) {
-            lookup.publisherId = { $in: publisherIds };
+            lookup.publisher = { $in: publisherIds };
         }
         if (affiliateIds) {
-            lookup.affiliateId = { $in: affiliateIds };
+            lookup.affiliate = { $in: affiliateIds };
         }
         if (campaignId) {
             lookup.campaign = campaignId;
         }
-        return super.findAndPopulate(lookup, null, 'campaign');
+        return Lead.find(lookup).populate({ path: 'affiliate', select: { _id: 1, name: 1, email: 1 } });
     }
 
     async send(campaignId, { affiliateId, lead: payload }) {
@@ -37,24 +37,24 @@ class LeadModule extends MongooseEntity {
         const campaign = await Campaign.findOne({ _id: campaignId });
 
         // validate max leads
-        const sentLeadsCount = await this.estimatedDocumentCount({ success: true, campaignId });
+        const sentLeadsCount = await super.estimatedDocumentCount({ success: true, campaignId });
         if (sentLeadsCount >= campaign.maxLeads) {
             throw 'max leads for campaign';
         }
 
         // validate daily max leads
-        const dailySentLeadsCount = await this.estimatedDocumentCount({ success: true, campaignId, timestamp: { $gt: date.startOfDay() } });
+        const dailySentLeadsCount = await super.estimatedDocumentCount({ success: true, campaignId, timestamp: { $gt: date.startOfDay() } });
         if (dailySentLeadsCount >= campaign.maxDailyLeads) {
             throw 'max daily leads for campaign';
         }
 
         // create lead
-        const lead = await this.create({
+        const lead = await super.create({
             payload,
             price: campaign.price,
             interfaceId: iface._id,
-            affiliateId,
-            publisherId: campaign.publisherId,
+            affiliate: affiliateId,
+            publisher: campaign.publisherId,
             campaign: campaignId
         });
 
@@ -81,7 +81,7 @@ class LeadModule extends MongooseEntity {
         }
 
         // handle results
-        await this.updateOne({ _id: lead._id }, { success, response: results, timestamp: Date.now() });
+        await super.updateOne({ _id: lead._id }, { success, response: results, timestamp: Date.now() });
         if (success) {
             return message;
         }
