@@ -1,6 +1,7 @@
 <div fxLayout="row" class="full-height" *ngIf="affiliate$ | async; let affiliate">
 
-    <app-affiliate-info-bar fxFlex="25" [(affiliate)]="affiliate" (change)="onAffiliateChange($event)">
+    <app-affiliate-info-bar fxFlex="25" *ngxPermissionsOnly="['ADMIN']"
+                            [(affiliate)]="affiliate" (change)="onAffiliateChange($event)">
 
     </app-affiliate-info-bar>
 
