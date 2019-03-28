@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class CampaignPanelsComponent implements OnInit {
     isAffiliateActions: boolean;
     @Input() campaigns: Campaign[];
+    @Input() isMulti: boolean;
     @Output() open: EventEmitter<any> = new EventEmitter<any>();
     @Output() send: EventEmitter<any> = new EventEmitter<any>();
     @Output() delete: EventEmitter<any> = new EventEmitter();

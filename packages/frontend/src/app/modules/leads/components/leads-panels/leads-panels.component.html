@@ -1,43 +1,33 @@
-<div fxLayout="column" class="full-height" *ngIf="leads.length">
-    <div fxFlex fxLayout="column" class="overflow-auto">
-        <mat-accordion fxFlex>
+<div fxLayout="column" class="full-height">
+    <div fxFlex fxLayout="column" class="overflow-auto" *ngIf="leads.length; else empty_state_leads">
+        <mat-accordion fxFlex [multi]="isMulti || false">
             <mat-expansion-panel *ngFor="let lead of leads; index as i">
                 <mat-expansion-panel-header>
-                    <span class="mat-body-2 margin-right-5">{{i + 1}}.</span>
-                    <app-lead-status-box [(approved)]="lead.approved"></app-lead-status-box>
-                    <span class="mat-body-2 margin-right-5"></span>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <span class="mat-body-2 margin-right-5">{{i + 1}}.</span>
+                        <app-lead-status-box [(leadId)]="lead._id" [(approved)]="lead.approved"></app-lead-status-box>
+                        <!--<span class="mat-body-2 margin-right-5"></span>-->
+                    </div>
                 </mat-expansion-panel-header>
-                <div fxLayout="row" fxLayoutAlign="start center">
-                    <span class="mat-body-2 margin-right-10" *ngFor="let item of lead.payload | keyvalue">
-                        {{item.key}}: {{item.value}}
-                    </span>
-                    <!--<img fxFlex [src]="campaign.imageUrl" id="campaign-image"/>-->
-                    <!--<div fxFlex class="padding-10">-->
-                        <!--<p>Description: {{campaign.description}}</p>-->
-                        <!--<p>Price: {{campaign.price}}</p>-->
-                        <!--<p>Hedge Percentage: {{campaign.hedgePercentage}}</p>-->
-                        <!--<p>Max Leads: {{campaign.maxLeads}}</p>-->
-                        <!--<p>Max Daily Leads: {{campaign.maxDailyLeads}}</p>-->
-                        <!--<p>Marketing Text: {{campaign.marketingText}}</p>-->
-                    <!--</div>-->
+                <div fxLayout="column">
+                    <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let item of lead.payload | keyvalue">
+                        <span class="mat-body-2 margin-right-10">{{item.key}}:</span>
+                        <span class="mat-caption">{{item.value}}</span>
+                    </div>
+                    <div *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']" fxLayout="row" fxLayoutAlign="start center">
+                        <span class="mat-body-2 margin-right-10">{{'Affiliate'}}:</span>
+                        <span class="mat-caption">{{lead.affiliate.name}}</span>
+                    </div>
                 </div>
-
-                <!--<mat-action-row *ngIf="joinEnabled">-->
-                <!--<button mat-button-->
-                <!--*ngxPermissionsOnly="['ADMIN','AFFILIATE']"-->
-                <!--color="warn" (click)="onLeave(campaign)">{{'LEAVE'}}</button>-->
-                <!--</mat-action-row>-->
-
-                <!--<mat-action-row *ngIf="!joinEnabled">-->
-                <!--<button mat-button-->
-                <!--*ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"-->
-                <!--color="primary" (click)="onEdit(campaign)">{{'EDIT'}}</button>-->
-                <!--<button mat-button-->
-                <!--*ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"-->
-                <!--color="warn" (click)="onDelete(campaign)">{{'DELETE'}}</button>-->
-                <!--</mat-action-row>-->
             </mat-expansion-panel>
         </mat-accordion>
     </div>
+
+    <ng-template #empty_state_leads>
+        <div fxFlex fxLayout="column" fxLayoutAlign="center center" class="overflow-auto">
+            <app-empty-state text="No Leads Found"
+                             src="/assets/empty_states/empty_state_stats.png"></app-empty-state>
+        </div>
+    </ng-template>
 </div>
 

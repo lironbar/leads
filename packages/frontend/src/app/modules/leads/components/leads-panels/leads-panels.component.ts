@@ -8,6 +8,7 @@ import {Lead} from '../../leads.model';
 
 export class LeadsPanelsComponent {
     @Input() leads: Lead[];
+    @Input() isMulti: boolean;
     objectKeys = Object.keys;
 
 }

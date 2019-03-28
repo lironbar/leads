@@ -1,63 +1,86 @@
-<div fxLayout="column" class="full-height" *ngIf="campaigns.length">
-    <div fxFlex fxLayout="column" class="overflow-auto">
-        <mat-accordion fxFlex>
+<div fxLayout="column" class="full-height">
+    <!--Campaigns Panel-->
+    <div fxFlex fxLayout="column" class="overflow-auto" *ngIf="campaigns.length; else empty_state">
+        <mat-accordion fxFlex [multi]="isMulti || false">
             <mat-expansion-panel *ngFor="let campaign of campaigns; index as i">
                 <mat-expansion-panel-header (click)="onClicked(campaign)">
-                    <span class="mat-body-2 margin-right-5">{{i + 1}}.</span>
-                    <span class="mat-body-2 opacity-8  ">{{campaign.name}}</span>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <span class="mat-body-2 margin-right-5">{{i + 1}}.</span>
+                        <span class="mat-body-1">{{campaign.name}}</span>
+                    </div>
                 </mat-expansion-panel-header>
-                <div fxLayout="row" fxLayoutAlign="start center">
-                    <img fxFlex [src]="campaign.imageUrl" id="campaign-image"/>
-                    <div fxFlex class="padding-10">
-                        <p>Description: {{campaign.description}}</p>
-                        <p>Price: {{campaign.price}}</p>
-                        <p>Hedge Percentage: {{campaign.hedgePercentage}}</p>
-                        <p>Max Leads: {{campaign.maxLeads}}</p>
-                        <p>Max Daily Leads: {{campaign.maxDailyLeads}}</p>
-                        <p>Marketing Text: {{campaign.marketingText}}</p>
+                <div fxLayout="column">
+
+                    <!--Image Row-->
+                    <div fxFlex fxLayout="row" fxLayoutAlign="center center" class="margin-40">
+                        <img fxFlex [src]="campaign.imageUrl" id="campaign-image"/>
+                    </div>
+
+                    <!--Text Section-->
+                    <div fxFlex fxLayout="column" class="padding-10">
+                        <div fxLayout="column" class="margin-bottom-10">
+                            <span class="mat-body-2">{{'Description'}}</span>
+                            <span class="mat-caption">{{campaign.description}}</span>
+                        </div>
+                        <!--<p>Description: {{campaign.description}}</p>-->
+                        <div fxLayout="row" class="margin-bottom-10">
+                            <div fxFlex fxLayout="column">
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <span class="mat-body-2 margin-right-5">{{'Price'}}:</span>
+                                    <span class="mat-caption">{{campaign.price}}</span>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <span class="mat-body-2">{{'Hedge Percentage'}}:</span>
+                                    <span class="mat-caption">{{campaign.hedgePercentage}}</span>
+                                </div>
+                            </div>
+                            <div fxFlex fxLayout="column">
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <span class="mat-body-2 margin-right-5">{{'Max Leads'}}:</span>
+                                    <span class="mat-caption">{{campaign.maxLeads}}</span>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <span class="mat-body-2">{{'Max Daily Leads'}}:</span>
+                                    <span class="mat-caption">{{campaign.maxDailyLeads}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div fxLayout="column">
+                            <span class="mat-body-2">{{'Marketing Text'}}</span>
+                            <span class="mat-caption">{{campaign.marketingText}}</span>
+                        </div>
+                        <!--<p>Marketing Text: {{campaign.marketingText}}</p>-->
                     </div>
                 </div>
                 <mat-action-row>
                     <div *ngIf="!isAffiliateActions">
                         <button mat-button
                                 *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
-                                color="primary" (click)="onEdit(campaign)">{{'EDIT'}}</button>
+                                color="warn" (click)="onDelete(campaign)">{{'DELETE'}}</button>
                         <button mat-button
                                 *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
-                                color="warn" (click)="onDelete(campaign)">{{'DELETE'}}</button>
+                                color="primary" (click)="onEdit(campaign)">{{'EDIT'}}</button>
                     </div>
                     <div *ngIf="isAffiliateActions" fxLayout="row" fxLayoutAlign="start center">
                         <button mat-button
                                 *ngxPermissionsOnly="['ADMIN','AFFILIATE']"
-                                color="primary" (click)="onSend(campaign)">{{'Send Lead'}}</button>
-                        <span fxFlex></span>
+                                color="warn" (click)="onLeave(campaign)">{{'LEAVE'}}</button>
                         <button mat-button
                                 *ngxPermissionsOnly="['ADMIN','AFFILIATE']"
-                                color="warn" (click)="onLeave(campaign)">{{'LEAVE'}}</button>
+                                color="primary" (click)="onSend(campaign)">{{'Send Lead'}}</button>
+                        <span fxFlex></span>
                     </div>
                 </mat-action-row>
-
-                <!--<mat-action-row *ngIf="joinEnabled">-->
-                    <!--<button mat-button-->
-                            <!--*ngxPermissionsOnly="['ADMIN','AFFILIATE']"-->
-                            <!--color="warn" (click)="onLeave(campaign)">{{'LEAVE'}}</button>-->
-                <!--</mat-action-row>-->
-
-                <!--<mat-action-row *ngIf="!joinEnabled">-->
-                    <!--<button mat-button-->
-                            <!--*ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"-->
-                            <!--color="primary" (click)="onEdit(campaign)">{{'EDIT'}}</button>-->
-                    <!--<button mat-button-->
-                            <!--*ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"-->
-                            <!--color="warn" (click)="onDelete(campaign)">{{'DELETE'}}</button>-->
-                <!--</mat-action-row>-->
             </mat-expansion-panel>
         </mat-accordion>
     </div>
-</div>
 
-<!--<ng-template #empty_state>-->
-    <!--<app-empty-state text="No Campaigns Found"-->
-                     <!--src="/assets/empty_states/empty_state_campaigns.png"></app-empty-state>-->
-<!--</ng-template>-->
+    <!--Empty State-->
+    <ng-template #empty_state>
+        <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+            <app-empty-state text="No Campaigns Found"
+                             src="/assets/empty_states/empty_state_campaigns.png"></app-empty-state>
+        </div>
+    </ng-template>
+</div>
 

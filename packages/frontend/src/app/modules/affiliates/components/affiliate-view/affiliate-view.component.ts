@@ -89,6 +89,7 @@ export class AffiliateViewComponent implements OnInit {
                     let campaigns = this.campaigns$.getValue().filter(c => c._id !== campaign._id);
                     this.campaigns$.next(campaigns);
                     this.snackBar.success('Left campaign successfully');
+                    this.selectedCampaignId = undefined;
                 },
                 error => this._onError('Failed to leave campaign', error)
             );

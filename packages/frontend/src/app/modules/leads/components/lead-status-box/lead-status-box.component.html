@@ -1,4 +1,15 @@
-<div fxLayout="row" fxLayoutAlign="center center" class="full-height container"
-     [ngClass]="{'green': approved === true, 'red': approved === false}">
-    <span>{{approved === true ? 'Approved' : 'Not Approved'}}</span>
+<div fxLayout="column" class="full-height">
+
+    <mat-chip-list aria-label="Lead Status Chip">
+        <mat-chip [color]="approved ? 'primary' : 'warn'" selected>
+            <span class="mat-caption">{{approved ? 'Approved' :'Not Approved'}}</span>
+            <button *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']" mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+        </mat-chip>
+    </mat-chip-list>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onChangeApproved(approved)">{{approved ? 'Not Approved' :'Approved'}}</button>
+    </mat-menu>
 </div>

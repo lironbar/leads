@@ -6,8 +6,8 @@ export interface Lead {
     price?: any;
     payload?: any;
     response?: any;
-    publisherId?: any;
-    affiliateId?: any;
+    publisher?: any;
+    affiliate?: any;
     campaignId?: any;
     updated?: any;
 }
