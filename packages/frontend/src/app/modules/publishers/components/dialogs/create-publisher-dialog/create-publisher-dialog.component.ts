@@ -13,6 +13,8 @@ import {NgForm} from '@angular/forms';
 export class CreatePublisherDialogComponent implements OnInit{
     publisher;
     type: string;
+    header: string;
+    action: string;
 
     constructor(
         public dialogRef: MatDialogRef<CreatePublisherDialogComponent>,
@@ -21,7 +23,8 @@ export class CreatePublisherDialogComponent implements OnInit{
 
     ngOnInit() {
         this.publisher = this.data ? {...this.data} : {};
-        this.type = this.data ? 'edit' : 'create';
+        this.header = `${this.data ? 'Edit' : 'Create'} Publisher`;
+        this.action = this.data ? 'UPDATE' : 'CREATE';
     }
 
     public onCancel() {

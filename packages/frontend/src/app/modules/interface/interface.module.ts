@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {SharedModule} from '../../shared.module';
+import {SharedComponentModule} from '../../shared-components.module';
 
 import {InterfaceRoutingModule} from './interface-routing.module';
 
@@ -13,6 +14,7 @@ import {InterfaceCampaignViewComponent} from './components/interface-campaign-vi
     ],
     imports: [
         SharedModule,
+        SharedComponentModule,
         InterfaceRoutingModule
     ],
     providers: [],

@@ -15,7 +15,7 @@
                         <span class="mat-caption">{{item.value}}</span>
                     </div>
                     <div *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']" fxLayout="row" fxLayoutAlign="start center">
-                        <span class="mat-body-2 margin-right-10">{{'Affiliate'}}:</span>
+                        <span class="mat-body-2 margin-right-10">{{'Affiliate' | translate}}:</span>
                         <span class="mat-caption">{{lead.affiliate.name}}</span>
                     </div>
                 </div>

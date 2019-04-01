@@ -3,13 +3,13 @@
 
         <!-- Index Column -->
         <ng-container matColumnDef="index">
-            <th mat-header-cell *matHeaderCellDef>No.</th>
+            <th mat-header-cell *matHeaderCellDef>#</th>
             <td mat-cell *matCellDef="let publisher; let i = index;"> {{i + 1}}</td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <th mat-header-cell *matHeaderCellDef>{{'Name' | translate}}</th>
             <td mat-cell *matCellDef="let publisher">
                 <a mat-button [routerLink]="['/publishers', publisher._id]">{{publisher.name}}</a>
             </td>
@@ -17,25 +17,25 @@
 
         <!-- Phone Column -->
         <ng-container matColumnDef="phone">
-            <th mat-header-cell *matHeaderCellDef>Phone</th>
+            <th mat-header-cell *matHeaderCellDef>{{'Phone' | translate}}</th>
             <td mat-cell *matCellDef="let publisher"> {{publisher.phone}}</td>
         </ng-container>
 
         <!-- Email Column -->
         <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <th mat-header-cell *matHeaderCellDef>{{'Email' | translate}}</th>
             <td mat-cell *matCellDef="let publisher"> {{publisher.email}}</td>
         </ng-container>
 
         <!-- Address Column -->
         <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef>Address</th>
+            <th mat-header-cell *matHeaderCellDef>{{'Address' | translate}}</th>
             <td mat-cell *matCellDef="let publisher"> {{publisher.address}}</td>
         </ng-container>
 
         <!-- Campaigns Column -->
         <ng-container matColumnDef="campaigns">
-            <th mat-header-cell *matHeaderCellDef>Campaigns</th>
+            <th mat-header-cell *matHeaderCellDef>{{'Campaigns' | translate}}</th>
             <td mat-cell *matCellDef="let publisher">{{publisher.campaigns.length}}</td>
         </ng-container>
 

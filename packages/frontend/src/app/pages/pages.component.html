@@ -8,7 +8,7 @@
             <mat-nav-list *ngxPermissionsOnly="['PUBLISHER']">
                 <button fxFlex
                         class="nav-btn" mat-icon-button color="primary"
-                        matTooltip="Home"
+                        matTooltip="{{'Home' | translate}}"
                         [matTooltipPosition]="tooltipDirection"
                         [routerLink]="['/publishers', currentUser._id]">
                     <mat-icon class="margin-right-5">home</mat-icon>
@@ -19,7 +19,7 @@
             <mat-nav-list *ngxPermissionsOnly="['AFFILIATE']">
                 <button fxFlex
                         class="nav-btn" mat-icon-button color="primary"
-                        matTooltip="Home"
+                        matTooltip="{{'Home' | translate}}"
                         [matTooltipPosition]="tooltipDirection"
                         [routerLink]="['/affiliates', currentUser._id]">
                     <mat-icon class="margin-right-5">home</mat-icon>
@@ -30,7 +30,7 @@
             <mat-nav-list *ngxPermissionsOnly="['ADMIN']">
                 <button fxFlex
                         class="nav-btn" mat-icon-button color="primary"
-                        matTooltip="Publishers"
+                        matTooltip="{{'Publishers' | translate}}"
                         [matTooltipPosition]="tooltipDirection"
                         routerLink="/publishers/list">
                     <mat-icon class="margin-right-5">person_pin</mat-icon>
@@ -41,7 +41,7 @@
             <mat-nav-list *ngxPermissionsOnly="['ADMIN']">
                 <button fxFlex
                         class="nav-btn" mat-icon-button color="primary"
-                        matTooltip="Affiliates"
+                        matTooltip="{{'Affiliates' | translate}}"
                         [matTooltipPosition]="tooltipDirection"
                         routerLink="/affiliates/list">
                     <mat-icon class="margin-right-5">group</mat-icon>
@@ -52,7 +52,7 @@
             <mat-nav-list *ngxPermissionsOnly="['ADMIN', 'AFFILIATE']">
                 <button fxFlex
                         class="nav-btn" mat-icon-button color="primary"
-                        matTooltip="Campaigns"
+                        matTooltip="{{'Campaigns' | translate}}"
                         [matTooltipPosition]="tooltipDirection"
                         routerLink="/campaigns">
                     <mat-icon class="margin-right-5">ballot</mat-icon>
@@ -74,7 +74,7 @@
             <mat-nav-list *ngxPermissionsOnly="['ADMIN']">
                 <button fxFlex
                         class="nav-btn" mat-icon-button color="primary"
-                        matTooltip="Interface"
+                        matTooltip="{{'Interface' | translate}}"
                         [matTooltipPosition]="tooltipDirection"
                         routerLink="/interface">
                     <mat-icon class="margin-right-5">settings_ethernet</mat-icon>

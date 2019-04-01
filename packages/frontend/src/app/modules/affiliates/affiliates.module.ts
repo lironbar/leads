@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {SharedModule} from '../../shared.module';
+import {SharedComponentModule} from '../../shared-components.module';
 import {AffiliatesRoutingModule} from './affiliates-routing.module';
 import {AffiliatesViewComponent} from './components/affiliates-view/affiliates-view.component';
 import {AffiliateService} from './affiliates.service';
@@ -20,10 +21,11 @@ import {AffiliateReportsViewComponent} from './components/affiliate-reports-view
         AffiliatesTableComponent,
         AffiliateViewComponent,
         AffiliateInfoBarComponent,
-        AffiliateReportsViewComponent
+        AffiliateReportsViewComponent,
     ],
     imports: [
         SharedModule,
+        SharedComponentModule,
         AffiliatesRoutingModule
     ],
     providers: [AffiliateService],

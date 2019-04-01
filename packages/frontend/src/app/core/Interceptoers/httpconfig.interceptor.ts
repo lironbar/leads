@@ -26,6 +26,9 @@ export class LoaderInterceptorService implements HttpInterceptor {
             (err: any) => {
                 this.hideLoader();
 
+                if (err.status === 401) {
+                    this.navigateTo('401');
+                }
                 if (err.status === 403) {
                     this.navigateTo('403');
                 }

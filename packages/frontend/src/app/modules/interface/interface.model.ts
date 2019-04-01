@@ -1,7 +1,7 @@
 export interface Interface {
     _id?: string;
     campaignId?: string;
-    type: string;
+    type?: string;
     email?: string;
     url?: string;
     method?: string; // POST/GET

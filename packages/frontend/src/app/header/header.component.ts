@@ -1,8 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthenticationService} from '../core/authentication/authentication.service';
 import {Router} from '@angular/router';
 import {NgxPermissionsService} from 'ngx-permissions';
+import {TranslateService} from '@ngx-translate/core';
+import {LanguageService} from '../modules/commons/services/language.service';
+import {SnackBarService} from '../modules/commons/services/snack-bar.service';
 import {User} from '../core/user/user.model';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-header',
@@ -10,35 +14,43 @@ import {User} from '../core/user/user.model';
     styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy{
     title = 'Leads';
-    rolesConstants = [
-        {icon: 'work', roleValue: 'ADMIN', value: 'admin'},
-        {icon: 'person_pin', roleValue: 'PUBLISHER', value: 'publishers'},
-        {icon: 'group', roleValue: 'AFFILIATE', value: 'affiliates'}
-    ];
-    roles: any[];
+    private languageSubscription: Subscription;
+    languages: string[] = [];
+    currentLanguage: string;
     user: User;
     selected: string;
 
     constructor(
         public authenticationService: AuthenticationService,
         private router: Router,
-        private permissionsService: NgxPermissionsService
+        private permissionsService: NgxPermissionsService,
+        private translate: TranslateService,
+        private languageService: LanguageService,
+        private snackBar: SnackBarService
     ) {
     }
 
     ngOnInit() {
         this.user = this.authenticationService.currentUserValue;
-        // this.roles = this.rolesConstants.filter(r => {
-        //    return this.user.members[r.value] && this.user.members[r.value].length > 0;
-        // });
+        this.languages = this.translate.getLangs();
+        this.languageSubscription = this.languageService.getCurrentLanguage().subscribe(updatedLanguage => {
+            if (this.currentLanguage) {
+                this.snackBar.success('Language changed successfully')
+            }
+            this.currentLanguage = updatedLanguage;
+        });
     }
-    onChangeRole(selectedRole) {
-        this.permissionsService.flushPermissions();
-        this.permissionsService.loadPermissions([selectedRole.roleValue]);
+    onChangeLanguage(lang) {
+        this.languageService.useLanguage(lang);
     }
     onSignOut() {
         this.authenticationService.logout();
     }
+    ngOnDestroy() {
+        this.languageSubscription.unsubscribe();
+    }
+
+
 }

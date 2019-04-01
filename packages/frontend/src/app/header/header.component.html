@@ -2,18 +2,32 @@
     <mat-toolbar-row fxLayout="row">
         <img src="/assets/images/logo.png" alt="Logo" class="logo">
         <span fxFlex></span>
-        <mat-icon class="margin-right-10" matBadge="4" matBadgeColor="accent">notifications_active</mat-icon>
-        <!--<mat-icon>portrait</mat-icon>-->
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>portrait</mat-icon>
+        <!--<mat-icon class="margin-right-10" matBadge="0" matBadgeColor="accent">notifications_active</mat-icon>-->
+        <button mat-icon-button>
+            <mat-icon>notifications_active</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
-            <!--<button mat-menu-item *ngFor="let role of roles" (click)="onChangeRole(role)">-->
-                <!--<mat-icon>{{role.icon}}</mat-icon>-->
-                <!--<span>{{role.value | titlecase}}</span>-->
-            <!--</button>-->
-            <!--<mat-divider></mat-divider>-->
-            <button mat-menu-item (click)="onSignOut()">{{'Sign Out'}}</button>
+
+        <button mat-icon-button [matMenuTriggerFor]="langmenu">
+            <mat-icon>public</mat-icon>
+        </button>
+        <mat-menu #langmenu="matMenu">
+            <button mat-menu-item
+                    (click)="onChangeLanguage(lang)"
+                    [disabled]="lang === currentLanguage"
+                    *ngFor="let lang of languages">
+                {{lang | translate}}
+            </button>
+        </mat-menu>
+
+        <!--<button mat-icon-button [matMenuTriggerFor]="usermenu">-->
+            <!--<mat-icon>portrait</mat-icon>-->
+        <!--</button>-->
+        <button mat-button class="padding-left-5" [matMenuTriggerFor]="usermenu">
+            <mat-icon class="margin-right-5">account_circle</mat-icon>
+            <span>{{user.name}}</span>
+        </button>
+        <mat-menu #usermenu="matMenu">
+            <button mat-menu-item (click)="onSignOut()">{{'Sign Out' | translate}}</button>
         </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>

@@ -3,8 +3,8 @@
         <mat-radio-group fxLayout="row" fxLayoutAlign="space-around center"
                          (change)="onTypeChange(type)"
                          class="padding-5" [(ngModel)]="type">
-            <mat-radio-button color="primary" value="http">API</mat-radio-button>
-            <mat-radio-button color="primary" value="email">Email</mat-radio-button>
+            <mat-radio-button color="primary" value="http">{{'API' | translate}}</mat-radio-button>
+            <mat-radio-button color="primary" value="email">{{'Email' | translate}}</mat-radio-button>
         </mat-radio-group>
 
         <div fxLayout="column" class="z-depth-1 padding-10" >
@@ -12,13 +12,13 @@
             <div fxLayout="column" *ngIf="type === 'http'">
 
                 <div fxLayout="row" fxLayoutAlign="start center">
-                    <span class="md-body-2 margin-right-5">{{'URL'}}:</span>
+                    <span class="md-body-2 margin-right-5">{{'URL' | translate}}:</span>
                     <mat-form-field fxFlex>
                         <input matInput [(ngModel)]="interface.url">
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-select [(ngModel)]="interface.method" placeholder="Method">
+                        <mat-select [(ngModel)]="interface.method" placeholder="{{'Method' | translate}}">
                             <mat-option *ngFor="let method of methods" [value]="method">
                                 {{method}}
                             </mat-option>
@@ -29,7 +29,7 @@
 
             <!--Email Row-->
             <div fxLayout="row" fxLayoutAlign="start center" *ngIf="type === 'email'">
-                <span class="md-body-2 margin-right-5">{{'Email'}}:</span>
+                <span class="md-body-2 margin-right-5">{{'Email' | translate}}:</span>
                 <mat-form-field>
                     <input matInput [(ngModel)]="interface.email">
                 </mat-form-field>
@@ -38,11 +38,11 @@
             <!--Add Field Row-->
             <div fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field >
-                    <input matInput [(ngModel)]="field.name" placeholder="Field Name">
+                    <input matInput [(ngModel)]="field.name" placeholder="{{'Field Name' | translate}}">
                 </mat-form-field>
 
                 <mat-form-field >
-                    <input matInput [(ngModel)]="field.defaultValue" placeholder="Default Value">
+                    <input matInput [(ngModel)]="field.defaultValue" placeholder="{{'Default Value' | translate}}">
                 </mat-form-field>
 
                 <span fxFlex></span>
@@ -58,12 +58,12 @@
         <div fxFlex fxLayout="column" class="overflow-auto">
             <mat-list role="list">
                 <mat-list-item *ngFor="let property of interface.properties; let $index = index" role="listitem">
-                    <span class="md-body-2 margin-right-5">{{'Field Name'}}:</span>
+                    <span class="md-body-2 margin-right-5">{{'Field Name' | translate}}:</span>
                     <mat-form-field >
                         <input matInput [(ngModel)]="property.name">
                     </mat-form-field>
 
-                    <span class="md-body-2 margin-left-10 margin-right-5">{{'Default Value'}}:</span>
+                    <span class="md-body-2 margin-left-10 margin-right-5">{{'Default Value' | translate}}:</span>
                     <mat-form-field >
                         <input matInput [(ngModel)]="property.defaultValue">
                     </mat-form-field>
@@ -78,10 +78,20 @@
         </div>
 
         <mat-toolbar fxLayout="row" fxLayoutAlign="start center">
-            <button mat-button color="warn" (click)="onDelete()" *ngIf="interface._id">{{'DELETE'}}</button>
+            <button mat-button color="warn" (click)="onDelete()" *ngIf="interface._id">{{'DELETE' | translate}}</button>
             <span fxFlex></span>
-            <button mat-button color="primary" (click)="onUpdate()" *ngIf="interface._id">{{'UPDATE'}}</button>
-            <button mat-button color="primary" (click)="onCreate()" *ngIf="!interface._id">{{'CREATE'}}</button>
+            <button *ngIf="interface._id; else create" mat-button color="primary"
+                    (click)="onUpdate()"
+                    [disabled]="!interface.properties.length">
+                {{'UPDATE' | translate}}
+            </button>
+            <ng-template #create>
+                <button mat-button color="primary"
+                        (click)="onCreate()"
+                        [disabled]="!interface.properties.length">
+                    {{'CREATE' | translate}}
+                </button>
+            </ng-template>
         </mat-toolbar>
 
     </mat-card>
@@ -91,79 +101,3 @@
                          src="/assets/empty_states/empty_state_interface.png"></app-empty-state>
     </ng-template>
 </div>
-
-
-
-
-
-
-
-
-<!--<div fxFlex fxLayout="column" *ngIf="type === 'http'">-->
-
-    <!--<div fxLayout="column" class="z-depth-1 padding-10">-->
-
-        <!--<div fxLayout="row" fxLayoutAlign="start center">-->
-            <!--<span class="md-body-2 margin-right-5">{{'URL'}}:</span>-->
-            <!--<mat-form-field fxFlex>-->
-                <!--<input matInput [(ngModel)]="interface.url">-->
-            <!--</mat-form-field>-->
-
-            <!--<mat-form-field>-->
-                <!--<mat-select [(ngModel)]="interface.method" placeholder="Method">-->
-                    <!--<mat-option *ngFor="let method of methods" [value]="method">-->
-                        <!--{{method}}-->
-                    <!--</mat-option>-->
-                <!--</mat-select>-->
-            <!--</mat-form-field>-->
-        <!--</div>-->
-
-        <!--<div fxLayout="row" fxLayoutAlign="start center">-->
-            <!--<mat-form-field >-->
-                <!--<input matInput [(ngModel)]="field.name" placeholder="Field Name">-->
-            <!--</mat-form-field>-->
-
-            <!--<mat-form-field >-->
-                <!--<input matInput [(ngModel)]="field.defaultValue" placeholder="Default Value">-->
-            <!--</mat-form-field>-->
-
-            <!--<span fxFlex></span>-->
-            <!--<button mat-mini-fab color="primary"-->
-                    <!--[disabled]="!field.name"-->
-                    <!--(click)="onAddField(field)">-->
-                <!--<mat-icon aria-label="Create Campaign">add</mat-icon>-->
-            <!--</button>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div fxFlex fxLayout="column" class="overflow-auto">-->
-        <!--<mat-list role="list">-->
-            <!--<mat-list-item *ngFor="let property of interface.properties; let $index = index" role="listitem">-->
-                <!--<span class="md-body-2 margin-right-5">{{'Field Name'}}:</span>-->
-                <!--<mat-form-field >-->
-                    <!--<input matInput [(ngModel)]="property.name">-->
-                <!--</mat-form-field>-->
-
-                <!--<span class="md-body-2 margin-left-10 margin-right-5">{{'Default Value'}}:</span>-->
-                <!--<mat-form-field >-->
-                    <!--<input matInput [(ngModel)]="property.defaultValue">-->
-                <!--</mat-form-field>-->
-
-                <!--<span fxFlex></span>-->
-                <!--<button mat-mini-fab color="warn"-->
-                        <!--(click)="onRemoveField($index)">-->
-                    <!--<mat-icon aria-label="Create Campaign">remove</mat-icon>-->
-                <!--</button>-->
-            <!--</mat-list-item>-->
-        <!--</mat-list>-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<div fxFlex fxLayout="column" *ngIf="type === 'email'">-->
-    <!--<div fxLayout="row" fxLayoutAlign="start center" class="padding-10">-->
-        <!--<span class="md-body-2 margin-right-5">{{'Email'}}:</span>-->
-        <!--<mat-form-field>-->
-            <!--<input matInput [(ngModel)]="interface.email">-->
-        <!--</mat-form-field>-->
-    <!--</div>-->
-<!--</div>-->

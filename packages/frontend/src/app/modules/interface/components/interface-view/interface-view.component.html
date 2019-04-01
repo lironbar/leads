@@ -3,7 +3,7 @@
     <!--Campaign List-->
     <mat-card fxFlex="25" fxLayout="column" class="overflow-auto padding-0">
         <mat-list *ngIf="campaigns$ | async as campaigns">
-            <h3 mat-subheader>{{'Campaigns'}}</h3>
+            <h3 mat-subheader>{{'Campaigns' | translate}}</h3>
             <mat-nav-list *ngFor="let campaign of campaigns"
                           (click)="onCampaignClicked(campaign)" class="padding-0">
                 <a mat-list-item

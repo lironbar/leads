@@ -8,6 +8,7 @@ import {CampaignsViewComponent} from './components/campaigns-view/campaigns-view
 // import { CampaignCreateButtonComponent } from './components/campaign-create-button/campaign-create-button.component';
 import {CampaignImageUrlComponent} from './components/campaign-image-url/campaign-image-url.comonent';
 
+import {SharedComponentModule} from '../../shared-components.module';
 
 @NgModule({
     declarations: [
@@ -17,11 +18,11 @@ import {CampaignImageUrlComponent} from './components/campaign-image-url/campaig
     ],
     imports: [
         SharedModule,
+        SharedComponentModule,
         // CoreModule,
         CampaignsRoutingModule
     ],
     providers: [CampaignService],
     entryComponents: []
 })
-export class CampaignsModule {
-}
+export class CampaignsModule {}

@@ -29,7 +29,9 @@ export class InterfaceCampaignViewComponent implements OnInit{
     type: string;
     methods: any[];
     field: {name?: string, defaultValue?: string};
-    interface: Interface;
+    interface: Interface = {
+        properties: []
+    };
 
     constructor(
         private route: ActivatedRoute,

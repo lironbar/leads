@@ -4,7 +4,8 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" class="padding-10">
         <span fxFlex="none" class="mat-title margin-0 weight-300">{{affiliate.name}}</span>
-        <button mat-icon-button matTooltip="Edit Info" class="margin-left-5"
+        <button mat-icon-button
+                matTooltip="{{'Edit Info' | translate}}" class="margin-left-5"
                 (click)="onEditInfo(affiliate)">
             <mat-icon>edit</mat-icon>
         </button>
@@ -15,17 +16,17 @@
         <div fxLayout="column" class="padding-right-20 padding-left-20">
             <!--Email-->
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">
-                <mat-icon matTooltip="Email" class="info-icon">email</mat-icon>
+                <mat-icon matTooltip="{{'Email' | translate}}" class="info-icon">email</mat-icon>
                 <span class="mat-body-1">{{affiliate.email || 'No Email'}}</span>
             </div>
             <!--Phone-->
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">
-                <mat-icon matTooltip="Phone" class="info-icon">phone</mat-icon>
+                <mat-icon matTooltip="{{'Phone' | translate}}" class="info-icon">phone</mat-icon>
                 <span class="mat-body-1">{{affiliate.phone || 'No Phone'}}</span>
             </div>
             <!--Address-->
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="margin-5">
-                <mat-icon matTooltip="Address" class="info-icon">place</mat-icon>
+                <mat-icon matTooltip="{{'Address' | translate}}" class="info-icon">place</mat-icon>
                 <span class="mat-body-1">{{affiliate.address || 'No Address'}}</span>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {SharedModule} from '../../shared.module';
+import {SharedComponentModule} from '../../shared-components.module';
 import {PublishersRoutingModule} from './publishers-routing.module';
 
 import {PublishersViewComponent} from './components/publishers-view/publishers-view.component';
@@ -21,10 +22,11 @@ import {CreatePublisherDialogComponent} from './components/dialogs/create-publis
         PublisherCreateButtonComponent,
         PublisherViewComponent,
         PublisherInfoBarComponent,
-        PublisherReportsViewComponent
+        PublisherReportsViewComponent,
     ],
     imports: [
         SharedModule,
+        SharedComponentModule,
         PublishersRoutingModule
     ],
     providers: [],

@@ -33,7 +33,7 @@
                                <!--ngModel-->
                                <!--placeholder="Name" required/>-->
                     <!--</div>-->
-                    <!--<mat-error *ngIf="submitted && name.invalid">*This field is required.</mat-error>-->
+                    <!--<mat-error *ngIf="submitted && name.invalid">*{{'This field is required' | translate}}.</mat-error>-->
 
                     <!--<div fxFlex>-->
                         <!--<label for="icon-mail">-->
@@ -45,7 +45,7 @@
                                <!--ngModel-->
                                <!--placeholder="Email" required/>-->
                     <!--</div>-->
-                    <!--<mat-error *ngIf="submitted && email.invalid">*This field is required.</mat-error>-->
+                    <!--<mat-error *ngIf="submitted && email.invalid">*{{'This field is required' | translate}}.</mat-error>-->
 
                     <!--<div fxFlex>-->
                         <!--<label for="icon-password">-->
@@ -57,7 +57,7 @@
                                <!--ngModel-->
                                <!--placeholder="Password" required/>-->
                     <!--</div>-->
-                    <!--<mat-error *ngIf="submitted && password.invalid">*This field is required.</mat-error>-->
+                    <!--<mat-error *ngIf="submitted && password.invalid">*{{'This field is required' | translate}}.</mat-error>-->
                 <!--</div>-->
                 <!--&lt;!&ndash;<label class="icon-mail" for="icon-mail"><mat-icon class="icon field-icon">account_circle</mat-icon></label>&ndash;&gt;-->
                 <!--&lt;!&ndash;<input type="text" name="name" id="icon-mail" placeholder="Email" required/>&ndash;&gt;-->
@@ -98,7 +98,7 @@
                                <!--&lt;!&ndash;title="User Name" type="text"&ndash;&gt;-->
                                <!--&lt;!&ndash;#name="ngModel"&ndash;&gt;-->
                                <!--&lt;!&ndash;ngModel name="name" required>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<mat-error *ngIf="name.invalid">*This field is required.</mat-error>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<mat-error *ngIf="name.invalid">*{{'This field is required' | translate}}.</mat-error>&ndash;&gt;-->
                     <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
                 <!--&lt;!&ndash;</div>&ndash;&gt;-->
                 <!--&lt;!&ndash;<div fxLayout="row">&ndash;&gt;-->
@@ -108,7 +108,7 @@
                                <!--&lt;!&ndash;title="User Email" type="text"&ndash;&gt;-->
                                <!--&lt;!&ndash;#email="ngModel"&ndash;&gt;-->
                                <!--&lt;!&ndash;ngModel name="email" required>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<mat-error *ngIf="email.invalid">*This field is required.</mat-error>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<mat-error *ngIf="email.invalid">*{{'This field is required' | translate}}.</mat-error>&ndash;&gt;-->
                     <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
                 <!--&lt;!&ndash;</div>&ndash;&gt;-->
                 <!--&lt;!&ndash;<div fxLayout="row">&ndash;&gt;-->
@@ -118,7 +118,7 @@
                                <!--&lt;!&ndash;title="User Password" type="password"&ndash;&gt;-->
                                <!--&lt;!&ndash;#password="ngModel"&ndash;&gt;-->
                                <!--&lt;!&ndash;ngModel name="password" required>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<mat-error *ngIf="password.invalid">*This field is required.</mat-error>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<mat-error *ngIf="password.invalid">*{{'This field is required' | translate}}.</mat-error>&ndash;&gt;-->
                     <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
                 <!--&lt;!&ndash;</div>&ndash;&gt;-->
             <!--&lt;!&ndash;</div>&ndash;&gt;-->
@@ -152,11 +152,11 @@
     <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center" class="toolbar">
         <img src="/assets/images/logo.png" alt="Logo" class="logo">
         <span fxFlex></span>
-        <button mat-button routerLink="/register">{{'Register'}}</button>
+        <button mat-button routerLink="/register">{{'Register' }}</button>
     </div>
     <mat-card class="form-container">
         <mat-card-header fxLayout="row" fxLayoutAlign="center center">
-            <mat-card-title fxFlex>{{'Sign In'}}</mat-card-title>
+            <mat-card-title fxFlex>{{'Sign In' }}</mat-card-title>
         </mat-card-header>
         <form (submit)="onSignIn(signInForm)" #signInForm="ngForm">
             <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
@@ -172,7 +172,7 @@
                                ngModel
                                placeholder="Email" required/>
                     </div>
-                    <mat-error *ngIf="submitted && email.invalid">*This field is required.</mat-error>
+                    <mat-error *ngIf="submitted && email.invalid">*{{'This field is required' | translate}}.</mat-error>
 
                     <div fxFlex>
                         <label for="sign-in-password">
@@ -184,7 +184,7 @@
                                ngModel
                                placeholder="Password" required/>
                     </div>
-                    <mat-error *ngIf="submitted && password.invalid">*This field is required.</mat-error>
+                    <mat-error *ngIf="submitted && password.invalid">*{{'This field is required' | translate}}.</mat-error>
                 </div>
             </mat-card-content>
             <mat-card-actions fxLayout="row" fxLayoutAlign="center center">

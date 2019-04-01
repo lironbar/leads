@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {SharedModule} from './shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {MatButtonModule} from '@angular/material/button';
@@ -35,10 +36,12 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatDialogModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
@@ -51,10 +54,12 @@ import {LeadViewComponent} from './modules/leads/components/lead-view/lead-view.
 import {PageForbiddenComponent} from './core/error-pages/components/page-forbidden/page-forbidden.component';
 import {PageNotFoundComponent} from './core/error-pages/components/page-not-found/page-not-found.component';
 import {PageServerErrorComponent} from './core/error-pages/components/page-server-error/page-server-error.component';
+import {PageUnauthorizedComponent} from './core/error-pages/components/page-unauthorized/page-unauthorized.component';
 
 import {AuthenticationService} from './core/authentication/authentication.service';
 import {LoaderService} from './modules/commons/services/loader.service';
 import {SnackBarService} from './modules/commons/services/snack-bar.service';
+import {LanguageService} from './modules/commons/services/language.service';
 import { AuthGuard } from './core/auth-guard/auth-guard.service';
 import {CampaignService} from './modules/campaigns/campaign.service';
 import {PublisherService} from './modules/publishers/publisher.service';
@@ -62,8 +67,14 @@ import {UsersService} from './modules/users/services/users.service';
 import {LeadService} from './modules/leads/services/lead.service';
 import {InterfaceService} from './modules/interface/interface.service';
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import { LoaderInterceptorService} from './core/Interceptoers/httpconfig.interceptor';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}
 
 @NgModule({
     declarations: [
@@ -76,7 +87,8 @@ import { LoaderInterceptorService} from './core/Interceptoers/httpconfig.interce
         LeadViewComponent,
         PageForbiddenComponent,
         PageNotFoundComponent,
-        PageServerErrorComponent
+        PageServerErrorComponent,
+        PageUnauthorizedComponent
     ],
     imports: [
         FlexLayoutModule,
@@ -116,18 +128,37 @@ import { LoaderInterceptorService} from './core/Interceptoers/httpconfig.interce
         MatToolbarModule,
         MatTooltipModule,
         MatStepperModule,
+        MatDialogModule,
         FormsModule,
         MatBadgeModule,
-        NgxPermissionsModule.forRoot()
+        SharedModule,
+        NgxPermissionsModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })
     ],
     exports: [FlexLayoutModule, LoaderComponent],
     // Services
     providers: [
+        CampaignService,
+        PublisherService,
+        InterfaceService,
+        AuthenticationService,
+        UsersService,
+        LeadService,
+        LoaderService,
+        SnackBarService,
+        LanguageService,
+        AuthGuard,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: LoaderInterceptorService,
             multi: true
-        }, CampaignService, PublisherService, InterfaceService,  AuthenticationService, UsersService, LeadService, LoaderService, SnackBarService, AuthGuard
+        },
     ],
     bootstrap: [AppComponent],
     entryComponents: []

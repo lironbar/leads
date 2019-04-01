@@ -7,8 +7,9 @@
                 <!--<div mat-card-avatar class="example-header-image"></div>-->
                 <mat-card-title>{{campaign.name}}</mat-card-title>
                 <mat-card-subtitle>
-                    <span class="margin-right-10">Price: {{campaign.price}}</span>
-                    <span>Score: {{campaign.score}}</span>
+                    <div fxFlex="row" fxLayoutAlign="start center">
+                        <span>{{'Price' | translate}}: {{campaign.price || '---'}} | {{'Score' | translate}}: {{campaign.score || '---'}}</span>
+                    </div>
                 </mat-card-subtitle>
             </mat-card-header>
             <img mat-card-image class="campaign-img" src="{{campaign.imageUrl || defaultImageUrl}}"
@@ -22,10 +23,10 @@
                 <span fxFlex></span>
                 <button mat-button color="warn"
                         *ngxPermissionsOnly="['ADMIN']"
-                        (click)="onDelete(campaign)">Delete</button>
+                        (click)="onDelete(campaign)">{{'DELETE' | translate}}</button>
                 <button mat-button color="primary"
                         *ngxPermissionsOnly="['AFFILIATE']"
-                        (click)="onJoin(campaign)">Join</button>
+                        (click)="onJoin(campaign)">{{'JOIN' | translate}}</button>
                 <!--<button mat-button>SHARE</button>-->
             </mat-card-actions>
         </mat-card>

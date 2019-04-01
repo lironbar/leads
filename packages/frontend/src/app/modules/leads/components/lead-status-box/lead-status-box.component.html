@@ -2,7 +2,11 @@
 
     <mat-chip-list aria-label="Lead Status Chip">
         <mat-chip [color]="approved ? 'primary' : 'warn'" selected>
-            <span class="mat-caption">{{approved ? 'Approved' :'Not Approved'}}</span>
+            <!--<span class="mat-caption">{{approved ? 'Approved' :'Not Approved'}}</span>-->
+            <span class="mat-caption" *ngIf="approved; else notApproved">{{'Approved'| translate}}</span>
+            <ng-template #notApproved>
+                <span class="mat-caption">{{'Not Approved'| translate}}</span>
+            </ng-template>
             <button *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']" mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
@@ -10,6 +14,11 @@
     </mat-chip-list>
 
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="onChangeApproved(approved)">{{approved ? 'Not Approved' :'Approved'}}</button>
+        <button mat-menu-item (click)="onChangeApproved(approved)">
+            <span *ngIf="approved; else notApprovedMenu">{{'Not Approved'| translate}}</span>
+            <ng-template #notApprovedMenu>
+                <span>{{'Approved'| translate}}</span>
+            </ng-template>
+        </button>
     </mat-menu>
 </div>

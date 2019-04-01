@@ -1,0 +1,98 @@
+{
+
+  "Edit Info": "Edit Info",
+  "Contact Name": "Contact Name",
+  "Missing Email": "Missing Email",
+  "Missing Phone": "Missing Phone",
+  "Missing Address": "Missing Address",
+  "Missing Contact Name": "Missing Contact Name",
+  "Missing PHC": "Missing PHC",
+  "Create Campaign": "Create Campaign",
+  "Image Url": "Image Url",
+
+  "No Affiliates Found": "No Affiliates Found",
+  "No Publishers Found": "No Publishers Found",
+  "No Interface Found": "No Interface Found",
+  "No Campaigns Found": "No Campaigns Found",
+  "No Leads Found": "No Leads Found",
+
+  "Edit Affiliate": "Edit Affiliate",
+
+  "Language changed successfully": "Language changed successfully",
+  "No interface found": "No interface found",
+  "Campaign have been successfully created": "Campaign have been successfully deleted",
+  "Campaign have been successfully updated": "Campaign have been successfully deleted",
+  "Campaign have been successfully deleted": "Campaign have been successfully deleted",
+  "Interface have been successfully created": "Campaign have been successfully deleted",
+  "Interface have been successfully updated": "Campaign have been successfully deleted",
+  "Interface have been successfully deleted": "Campaign have been successfully deleted",
+  "Joined campaign successfully": "Joined campaign successfully",
+  "Left campaign successfully": "Left campaign successfully",
+  "Lead send successfully": "Lead send successfully",
+  "Score": "Score",
+  "API": "API",
+  "Method": "Method",
+  "Approved": "Approved",
+  "Not Approved": "Not Approved",
+  "JOIN": "Join",
+
+
+
+
+
+
+
+
+
+  "en": "English",
+  "he": "עברית",
+
+  "Campaigns": "Campaigns",
+  "Affiliate": "Affiliate",
+  "Affiliates": "Affiliates",
+  "Publisher": "Publisher",
+  "Publishers": "Publishers",
+
+  "URL": "URL",
+  "Field Name": "Field Name",
+  "Default Value": "Default Value",
+  "Description": "Description",
+  "Price": "Price",
+  "Hedge Percentage": "Hedge Percentage",
+  "Max Leads": "Max Leads",
+  "Max Daily Leads": "Max Daily Leads",
+  "Marketing Text": "Marketing Text",
+  "Send Lead": "Send Lead",
+  "Select a campaign for more info": "Select a campaign for more info",
+
+  "This field is required": "This field is required",
+
+  "Create Publisher": "Create Publisher",
+  "Edit Publisher": "Edit Publisher",
+  "Name": "Name",
+  "PHC": "PHC",
+  "Phone": "Phone",
+  "Email": "Email",
+  "Address": "Address",
+
+  "Interface": "Interface",
+  "Register": "Register",
+  "Sign In": "Sign In",
+  "Sign Out": "Sign Out",
+  "UPDATE": "UPDATE",
+  "CREATE": "CREATE",
+  "DELETE": "DELETE",
+  "Submit": "Submit",
+  "Cancel": "Cancel",
+  "CANCEL": "CANCEL",
+  "EDIT": "EDIT",
+  "LEAVE": "LEAVE",
+  "Send": "Send",
+  "CONFIRM": "CONFIRM",
+
+  "Delete Publisher": "Delete Publisher",
+  "Delete Affiliate": "Delete Affiliate",
+  "Are you sure you want to delete this campaign?": "Are you sure you want to delete this campaign?",
+  "Are you sure you want to delete this publisher?": "Are you sure you want to delete this publisher?",
+  "Are you sure you want to delete this affiliate?": "Are you sure you want to delete this affiliate?"
+}

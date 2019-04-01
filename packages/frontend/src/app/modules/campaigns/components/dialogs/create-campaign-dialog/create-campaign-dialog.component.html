@@ -1,25 +1,30 @@
-<form (submit)="onCreateCampaign(campaignForm)" #campaignForm="ngForm">
-  <h1 mat-dialog-title>Create Campaign</h1>
+<form (submit)="onCreateCampaign(campaignForm)" #campaignForm="ngForm" class="medium-dialog">
+  <h1 mat-dialog-title class="margin-bottom-10">{{'Create Campaign' | translate}}</h1>
+  <mat-divider></mat-divider>
   <div mat-dialog-content>
 
     <!--Name && Description Row-->
     <div fxLayout="row" fxLayoutAlign="start center">
       <!--Name-->
-      <mat-form-field fxFlex="50">
-        <input matInput placeholder="Name"
+      <mat-form-field fxFlex>
+        <input matInput
+               placeholder="{{'Name' | translate}}"
                title="campaign name" type="text"
                #name="ngModel"
                [(ngModel)]="campaign.name" name="name" required>
-        <mat-error *ngIf="name.invalid">*This field is required.</mat-error>
+        <mat-error *ngIf="name.invalid">*{{'This field is required' | translate}}.</mat-error>
       </mat-form-field>
 
+      <span fxFlex="10"></span>
+
       <!--Description-->
-      <mat-form-field fxFlex="50">
-        <input matInput placeholder="Description"
+      <mat-form-field fxFlex>
+        <input matInput
+               placeholder="{{'Description' | translate}}"
                title="campaign description" type="text"
                #description="ngModel"
                [(ngModel)]="campaign.description" name="description" required>
-        <mat-error *ngIf="description.invalid">*This field is required.</mat-error>
+        <mat-error *ngIf="description.invalid">*{{'This field is required' | translate}}.</mat-error>
       </mat-form-field>
     </div>
 
@@ -27,21 +32,25 @@
     <div fxLayout="row" fxLayoutAlign="start center">
 
       <!--Price-->
-      <mat-form-field fxFlex="50">
-        <input matInput placeholder="Price"
+      <mat-form-field fxFlex>
+        <input matInput
+               placeholder="{{'Price' | translate}}"
                title="Price" type="number"
                #price="ngModel"
                [(ngModel)]="campaign.price" name="price" required>
-        <mat-error *ngIf="price.invalid">*This field is required.</mat-error>
+        <mat-error *ngIf="price.invalid">*{{'This field is required' | translate}}.</mat-error>
       </mat-form-field>
 
+      <span fxFlex="10"></span>
+
       <!--Hedge Percentage-->
-      <mat-form-field fxFlex="50">
-        <input matInput placeholder="Hedge Percentage"
+      <mat-form-field fxFlex>
+        <input matInput
+               placeholder="{{'Hedge Percentage' | translate}}"
                title="hedgePercentage" type="number"
                #hedgePercentage="ngModel"
                [(ngModel)]="campaign.hedgePercentage" name="hedgePercentage" required>
-        <mat-error *ngIf="hedgePercentage.invalid">*This field is required.</mat-error>
+        <mat-error *ngIf="hedgePercentage.invalid">*{{'This field is required' | translate}}.</mat-error>
       </mat-form-field>
 
     </div>
@@ -50,21 +59,25 @@
     <div fxLayout="row" fxLayoutAlign="start center">
 
       <!--Max Leads-->
-      <mat-form-field fxFlex="50">
-        <input matInput placeholder="Max Leads"
+      <mat-form-field fxFlex>
+        <input matInput
+               placeholder="{{'Max Leads' | translate}}"
                title="maxLeads" type="number"
                #maxLeads="ngModel"
                [(ngModel)]="campaign.maxLeads" name="maxLeads" required>
-        <mat-error *ngIf="maxLeads.invalid">*This field is required.</mat-error>
+        <mat-error *ngIf="maxLeads.invalid">*{{'This field is required' | translate}}.</mat-error>
       </mat-form-field>
 
+      <span fxFlex="10"></span>
+
       <!--Max Daily Leads-->
-      <mat-form-field fxFlex="50">
-        <input matInput placeholder="Max Daily Leads"
+      <mat-form-field fxFlex>
+        <input matInput
+               placeholder="{{'Max Daily Leads' | translate}}"
                title="maxDailyLeads" type="number"
                #maxDailyLeads="ngModel"
                [(ngModel)]="campaign.maxDailyLeads" name="maxDailyLeads" required>
-        <mat-error *ngIf="maxDailyLeads.invalid">*This field is required.</mat-error>
+        <mat-error *ngIf="maxDailyLeads.invalid">*{{'This field is required' | translate}}.</mat-error>
       </mat-form-field>
 
     </div>
@@ -73,11 +86,12 @@
     <div fxLayout="row">
       <!--Marketing Text-->
       <mat-form-field fxFlex>
-        <input matInput placeholder="Marketing Text"
+        <input matInput
+               placeholder="{{'Marketing Text' | translate}}"
                title="marketingText" type="text"
                #marketingText="ngModel"
                [(ngModel)]="campaign.marketingText" name="marketingText" required>
-        <mat-error *ngIf="marketingText.invalid">*This field is required.</mat-error>
+        <mat-error *ngIf="marketingText.invalid">*{{'This field is required' | translate}}.</mat-error>
       </mat-form-field>
     </div>
 
@@ -86,18 +100,19 @@
 
       <!--Image Url-->
       <mat-form-field fxFlex>
-        <input matInput placeholder="Image Url"
+        <input matInput
+               placeholder="{{'Image Url' | translate}}"
                title="imageUrl" type="text"
                #imageUrl="ngModel"
                [(ngModel)]="campaign.imageUrl" name="imageUrl" required>
-        <mat-error *ngIf="imageUrl.invalid">*This field is required.</mat-error>
+        <mat-error *ngIf="imageUrl.invalid">*{{'This field is required' | translate}}.</mat-error>
       </mat-form-field>
     </div>
   </div>
 
   <div mat-dialog-actions fxLayout="row">
     <span fxFlex></span>
-    <button mat-button type="button" mat-dialog-close>{{'Cancel'}}</button>
-    <button mat-button mat-raised-button color="primary" type="submit">{{'Submit'}}</button>
+    <button mat-button type="button" (click)="onClose()">{{'Cancel' | translate}}</button>
+    <button mat-button mat-raised-button color="primary" type="submit">{{'Submit' | translate}}</button>
   </div>
 </form>

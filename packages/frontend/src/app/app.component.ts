@@ -3,6 +3,8 @@ import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {AuthenticationService} from './core/authentication/authentication.service';
+import {TranslateService} from '@ngx-translate/core';
+import {LanguageService} from './modules/commons/services/language.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
@@ -12,8 +14,13 @@ import { trigger, style, animate, transition } from '@angular/animations';
 })
 export class AppComponent implements OnInit {
 
-    constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer,
-                private permissionsService: NgxPermissionsService, public authenticationService: AuthenticationService) {
+    constructor(private matIconRegistry: MatIconRegistry,
+                private domSanitizer: DomSanitizer,
+                private permissionsService: NgxPermissionsService,
+                private translate: TranslateService,
+                private languageService: LanguageService,
+                public authenticationService: AuthenticationService
+    ) {
         this.matIconRegistry.addSvgIcon(
             'affiliate-join', this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/affiliate-join.svg'));
         this.matIconRegistry.addSvgIcon(
@@ -21,9 +28,6 @@ export class AppComponent implements OnInit {
 
     }
     ngOnInit() {
-        // const user = this.authenticationService.currentUserValue;
-        // if (user) {
-        //     this.permissionsService.loadPermissions(user.roles);
-        // }
+        this.languageService.initTranslations();
     }
 }

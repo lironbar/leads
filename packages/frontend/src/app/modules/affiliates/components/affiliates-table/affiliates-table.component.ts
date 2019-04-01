@@ -14,7 +14,7 @@ import { Affiliate } from '../../affiliate.model';
 export class AffiliatesTableComponent {
   @Input() affiliates: Affiliate[];
   // displayedColumns: string[] = ['index', 'name', 'phone', 'address', 'campaigns', 'actions'];
-    displayedColumns: string[] = ['index', 'name', 'actions'];
+    displayedColumns: string[] = ['index', 'name', 'phone', 'email', 'actions'];
 
   constructor(public affiliateService: AffiliateService, public dialog: MatDialog) {}
 

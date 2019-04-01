@@ -1,0 +1,99 @@
+{
+
+  "Edit Info": "עריכת מידע",
+  "Contact Name": "שם איש קשר",
+  "Missing Email": "אי-מייל חסר",
+  "Missing Phone": "טלפון חסר",
+  "Missing Address": "כתובת חסרה",
+  "Missing Contact Name": "חסר שם איש קשר",
+  "Missing PHC": "Missing PHC",
+  "Create Campaign": "יצירת קמפיין",
+  "Image Url": "קישור לתמונה",
+
+  "No Affiliates Found": "לא נמצאו שותפים",
+  "No Publishers Found": "לא נמצאו מפרסמים",
+  "No Interface Found": "לא נמצאו ממשקים",
+  "No Campaigns Found": "לא נמצאו קמפיינים",
+  "No Leads Found": "לא נמצאו לידים",
+
+  "Edit Affiliate": "עריכת שותף",
+
+  "Language changed successfully": "השפה שונתה בהצלחה",
+  "No interface found": "לא נמצא ממשק",
+  "Campaign have been successfully created": "הקמפיין נוצר בהצלחה",
+  "Campaign have been successfully updated": "הקמפיין עודכן בהצלחה",
+  "Campaign have been successfully deleted": "הקמפיין נמחק בהצלחה",
+  "Interface have been successfully created": "הממשק נוצר בהצלחה",
+  "Interface have been successfully updated": "הממשק עודכן בהצלחה",
+  "Interface have been successfully deleted": "הממשק נמחק בהצלחה",
+  "Joined campaign successfully": "ההצטרפות לקמפיין בוצעה בהצלחה",
+  "Left campaign successfully": "עזיבת הקמפיין בוצעה בהצלחה",
+  "Lead send successfully": "הליד נשלח בהצלחה",
+  "Score": "ניקוד",
+  "API": "API",
+  "Method": "מתודה",
+  "Approved": "אושר",
+  "Not Approved": "לא אושר",
+  "JOIN": "הצטרף",
+
+
+
+
+
+
+
+
+
+
+  "en": "English",
+  "he": "עברית",
+
+  "Campaigns": "קמפיינים",
+  "Affiliate": "שותף",
+  "Affiliates": "שותפים",
+  "Publisher": "מפרסם",
+  "Publishers": "מפרסמים",
+
+  "URL": "כתובת",
+  "Field Name": "ערך קלט",
+  "Default Value": "ערך דיפולטיבי",
+  "Description": "תיאור",
+  "Price": "מחיר",
+  "Hedge Percentage": "Hedge Percentage",
+  "Max Leads": "מספר לידים מקסימילי",
+  "Max Daily Leads": "מספר לידים מקסימלי ליום",
+  "Marketing Text": "טקסט שיווקי",
+  "Send Lead": "שליחת ליד",
+  "Select a campaign for more info": "בחר קמפיין לקבלת מידע נוסף",
+
+  "This field is required": "שדה זה הינו חובה",
+
+  "Create Publisher": "יצירת מפרסם",
+  "Edit Publisher": "עריכת מפרסם",
+  "Name": "שם",
+  "PHC": "PHC",
+  "Phone": "טלפון",
+  "Email": "אי-מייל",
+  "Address": "כתובת",
+
+  "Interface": "ממשק",
+  "Register": "הרשמה",
+  "Sign In": "התחברות",
+  "Sign Out": "התנתקות",
+  "UPDATE": "עדכון",
+  "CREATE": "יצירה",
+  "DELETE": "מחיקה",
+  "Submit": "אישור",
+  "Cancel": "ביטול",
+  "CANCEL": "ביטול",
+  "EDIT": "עריכה",
+  "LEAVE": "עזיבה",
+  "Send": "שליחה",
+  "CONFIRM": "אישור",
+
+  "Delete Publisher": "מחיקת מפרסם",
+  "Delete Affiliate": "מחיקת שותף",
+  "Are you sure you want to delete this campaign?": "האם הינך בטוח במחיקת קמפיין זה?",
+  "Are you sure you want to delete this publisher?": "האם הינך בטוח במחיקת מפרסם זה?",
+  "Are you sure you want to delete this affiliate?": "האם הינך בטוח במחיקת שותף זה?"
+}

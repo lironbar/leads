@@ -12,7 +12,8 @@ import {NgForm} from '@angular/forms';
 
 export class CreateAffiliateDialogComponent {
     affiliate;
-    type: string;
+    header: string;
+    action: string;
 
     constructor(
         public dialogRef: MatDialogRef<CreateAffiliateDialogComponent>,
@@ -21,7 +22,8 @@ export class CreateAffiliateDialogComponent {
 
     ngOnInit() {
         this.affiliate = this.data ? {...this.data} : {};
-        this.type = this.data ? 'edit' : 'create';
+        this.header = this.data ? 'Edit Affiliate' : 'Create Affiliate';
+        this.action = this.data ? 'UPDATE' : 'CREATE';
     }
 
     public onCancel() {

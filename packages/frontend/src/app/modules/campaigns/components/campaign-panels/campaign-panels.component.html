@@ -19,34 +19,34 @@
                     <!--Text Section-->
                     <div fxFlex fxLayout="column" class="padding-10">
                         <div fxLayout="column" class="margin-bottom-10">
-                            <span class="mat-body-2">{{'Description'}}</span>
+                            <span class="mat-body-2">{{'Description' | translate}}</span>
                             <span class="mat-caption">{{campaign.description}}</span>
                         </div>
                         <!--<p>Description: {{campaign.description}}</p>-->
                         <div fxLayout="row" class="margin-bottom-10">
                             <div fxFlex fxLayout="column">
                                 <div fxLayout="row" fxLayoutAlign="start center">
-                                    <span class="mat-body-2 margin-right-5">{{'Price'}}:</span>
+                                    <span class="mat-body-2 margin-right-5">{{'Price' | translate}}:</span>
                                     <span class="mat-caption">{{campaign.price}}</span>
                                 </div>
                                 <div fxLayout="row" fxLayoutAlign="start center">
-                                    <span class="mat-body-2">{{'Hedge Percentage'}}:</span>
+                                    <span class="mat-body-2">{{'Hedge Percentage' | translate}}:</span>
                                     <span class="mat-caption">{{campaign.hedgePercentage}}</span>
                                 </div>
                             </div>
                             <div fxFlex fxLayout="column">
                                 <div fxLayout="row" fxLayoutAlign="start center">
-                                    <span class="mat-body-2 margin-right-5">{{'Max Leads'}}:</span>
+                                    <span class="mat-body-2 margin-right-5">{{'Max Leads' | translate}}:</span>
                                     <span class="mat-caption">{{campaign.maxLeads}}</span>
                                 </div>
                                 <div fxLayout="row" fxLayoutAlign="start center">
-                                    <span class="mat-body-2">{{'Max Daily Leads'}}:</span>
+                                    <span class="mat-body-2">{{'Max Daily Leads' | translate}}:</span>
                                     <span class="mat-caption">{{campaign.maxDailyLeads}}</span>
                                 </div>
                             </div>
                         </div>
                         <div fxLayout="column">
-                            <span class="mat-body-2">{{'Marketing Text'}}</span>
+                            <span class="mat-body-2">{{'Marketing Text' | translate}}</span>
                             <span class="mat-caption">{{campaign.marketingText}}</span>
                         </div>
                         <!--<p>Marketing Text: {{campaign.marketingText}}</p>-->
@@ -56,18 +56,18 @@
                     <div *ngIf="!isAffiliateActions">
                         <button mat-button
                                 *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
-                                color="warn" (click)="onDelete(campaign)">{{'DELETE'}}</button>
+                                color="warn" (click)="onDelete(campaign)">{{'DELETE' | translate}}</button>
                         <button mat-button
                                 *ngxPermissionsOnly="['ADMIN', 'PUBLISHER']"
-                                color="primary" (click)="onEdit(campaign)">{{'EDIT'}}</button>
+                                color="primary" (click)="onEdit(campaign)">{{'EDIT' | translate}}</button>
                     </div>
                     <div *ngIf="isAffiliateActions" fxLayout="row" fxLayoutAlign="start center">
                         <button mat-button
                                 *ngxPermissionsOnly="['ADMIN','AFFILIATE']"
-                                color="warn" (click)="onLeave(campaign)">{{'LEAVE'}}</button>
+                                color="warn" (click)="onLeave(campaign)">{{'LEAVE' | translate}}</button>
                         <button mat-button
                                 *ngxPermissionsOnly="['ADMIN','AFFILIATE']"
-                                color="primary" (click)="onSend(campaign)">{{'Send Lead'}}</button>
+                                color="primary" (click)="onSend(campaign)">{{'Send Lead' | translate}}</button>
                         <span fxFlex></span>
                     </div>
                 </mat-action-row>
