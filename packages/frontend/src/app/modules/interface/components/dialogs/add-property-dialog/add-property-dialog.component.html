@@ -1,0 +1,99 @@
+<form (submit)="onAdd(form)" #form="ngForm" class="medium-dialog">
+    <h1 mat-dialog-title>{{'Add Field' | translate}}</h1>
+    <div mat-dialog-content fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+            <!--Type Filed-->
+            <mat-form-field fxFlex class="margin-right-20">
+                <mat-select [(value)]="property.type"  placeholder="{{'Type' | translate}}" (selectionChange)="onTypeChange(property.type)">
+                    <mat-option *ngFor="let type of types" [value]="type">
+                        {{type | translate}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!--Name Filed-->
+            <mat-form-field fxFlex>
+                <input matInput
+                       placeholder="{{'Field Name' | translate}}"
+                       title="Field Name"
+                       type="text"
+                       #name="ngModel"
+                       [(ngModel)]="property.name" name="name" required>
+                <mat-error *ngIf="name.invalid">*{{'This field is required' | translate}}.</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!--String Input Field -->
+        <mat-form-field *ngIf="property.type === 'string'"
+                        class="margin-right-5">
+            <input matInput
+                   placeholder="{{'Value' | translate}}"
+                   title="Value"
+                   type="text"
+                   #value="ngModel"
+                   [(ngModel)]="property.value" name="value">
+        </mat-form-field>
+
+        <!--Select-->
+        <div *ngIf="property.type === 'select'">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <span fxFlex></span>
+                <button mat-mini-fab color="primary"
+                        (click)="onAddOption()">
+                    <mat-icon aria-label="Add Option">add</mat-icon>
+                </button>
+            </div>
+            <mat-list role="list">
+                <mat-list-item *ngFor="let option of property.options; let $index = index" role="listitem" class="padding-10">
+
+                    <mat-form-field class="margin-right-5">
+                        <input matInput
+                               placeholder="{{'Display Name' | translate}}"
+                               title="Display Name"
+                               type="text"
+                               #displayName="ngModel"
+                               [(ngModel)]="option.displayName" name="displayName" required>
+                        <mat-error *ngIf="displayName.invalid">*{{'This field is required' | translate}}.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="margin-right-5">
+                        <input matInput
+                               placeholder="{{'Value' | translate}}"
+                               title="Display Name"
+                               type="text"
+                               #Value="ngModel"
+                               [(ngModel)]="option.value" name="Value" required>
+                        <mat-error *ngIf="Value.invalid">*{{'This field is required' | translate}}.</mat-error>
+                    </mat-form-field>
+
+                    <span fxFlex></span>
+                    <button mat-mini-fab color="warn"
+                            (click)="onRemoveOption($index)">
+                        <mat-icon aria-label="Create Campaign">remove</mat-icon>
+                    </button>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+
+    </div>
+    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="start center">
+        <mat-checkbox *ngIf="property.type === 'string'"
+                class="margin-right-10"
+                name="isStatic"
+                color="primary"
+                [(ngModel)]="property.isStatic">
+            {{'Static' | translate}}
+        </mat-checkbox>
+        <mat-checkbox
+                name="isStatic"
+                color="primary"
+                [(ngModel)]="property.required">
+            {{'Required' | translate}}
+        </mat-checkbox>
+        <span fxFlex></span>
+        <button mat-button (click)="onCancel()">{{'Cancel' | translate}}</button>
+        <button mat-button mat-raised-button color="primary" type="submit">{{'Add' }}</button>
+    </div>
+</form>
