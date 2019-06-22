@@ -39,6 +39,26 @@ class LeadModule extends MongooseEntity {
         const iface = await Interface.getByCampaign(campaignId);
         const campaign = await Campaign.findOne({ _id: campaignId });
 
+        const leadFields = {};
+        const fieldsSchema = iface.fields;
+
+        fieldsSchema.forEach(schema => {
+            if (schema.isStatic) {
+                return leadFields[schema.name] = schema.value;
+            }
+
+            const field = payload[schema.name];
+            if (!field && schema.required) {
+                throw new Error(`missing required field ${schema.name} for lead`);
+            }
+
+            if (field.length > 250) {
+                throw new Error(`field ${schema.name} is over 250 characters`);
+            }
+
+            leadFields[schema.name] = field;
+        });
+
         // validate max leads
         const sentLeadsCount = await super.estimatedDocumentCount({ success: true, campaignId });
         if (sentLeadsCount >= campaign.maxLeads) {
@@ -53,7 +73,8 @@ class LeadModule extends MongooseEntity {
 
         // create lead
         const lead = await super.create({
-            payload,
+            raw: payload, // raw payload provided by the affiliate
+            payload: leadFields, // validated payload to send to campaign owner
             price: campaign.price,
             interfaceId: iface._id,
             affiliate: affiliateId,

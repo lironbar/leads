@@ -17,10 +17,12 @@ const InterfaceSchema = new Schema({
         type: String, enum: ['GET', 'POST', 'PUT'],
         required: () => this.type === 'http'
     },
-    properties: {
-        type: Object,
-        required: () => this.type === 'http'
-    },
+    fields: [{
+        name: { required: true, type: String },
+        isStatic: { required: true, type: Boolean, default: false },
+        type: { required: true, type: String, enum: ['string', 'number', 'select'] },
+        value: { required: true, type: String }
+    }],
     campaignId: { type: Schema.Types.ObjectId, required: true },
     updated: { type: Number, default: Date.now, select: false }
 });

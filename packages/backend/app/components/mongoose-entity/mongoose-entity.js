@@ -50,10 +50,10 @@ class MongooseEntity {
     parseError(mongooseError) {
         switch (mongooseError.name) {
             case 'CastError':
-                mongooseError.appError = { code: '400', message: 'invalid data' };
+                mongooseError.appError = { code: '400', message: 'bad request' };
                 break;
             default:
-                debugger
+               console.error(`mongoose error ${mongooseError}`);
         }
     }
 }

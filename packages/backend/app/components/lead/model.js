@@ -5,6 +5,7 @@ const LeadSchema = new Schema({
     success: { type: Boolean, default: false },
     approved: { type: Boolean, default: false },
     timestamp: { type: Number, required: () => this.success === true },
+    raw: { type: Object, required: true },
     payload: { type: Object, required: true },
     response: { type: Object },
     price: { type: Number, required: true },
