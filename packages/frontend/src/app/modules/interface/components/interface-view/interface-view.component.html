@@ -4,25 +4,24 @@
     <mat-card fxFlex="25" fxLayout="column" class="overflow-auto padding-0">
         <mat-list *ngIf="campaigns$ | async as campaigns">
             <h3 mat-subheader>{{'Campaigns' | translate}}</h3>
-            <mat-nav-list *ngFor="let campaign of campaigns"
+            <mat-list-item *ngFor="let campaign of campaigns"
+                           [ngClass]="{'selected': selectedCampaignId === campaign._id}"
                           (click)="onCampaignClicked(campaign)" class="padding-0">
-                <a mat-list-item
-                   [ngClass]="{'selected': selectedCampaignId === campaign._id}"
-                   [routerLink]="['./campaign', campaign._id]">
-                    <img matListAvatar [src]="campaign.imageUrl" alt="...">
-                    <h3 matLine> {{campaign.name}} </h3>
-                    <p matLine>
-                        <span> {{campaign.description}} </span>
-                    </p>
-                </a>
+
+                <img matListAvatar [src]="campaign.imageUrl" alt="...">
+                <h3 matLine> {{campaign.name}} </h3>
+                <p matLine>
+                    <span> {{campaign.description}} </span>
+                </p>
                 <mat-divider></mat-divider>
-            </mat-nav-list>
+            </mat-list-item>
         </mat-list>
     </mat-card>
 
     <!--Interface View-->
-    <div fxFlex>
-        <router-outlet></router-outlet>
+    <div fxFlex fxLayout="column">
+        <app-interface-campaign-view fxFlex *ngIf="selectedCampaignId"
+                                     [(campaignId)]="selectedCampaignId"></app-interface-campaign-view>
     </div>
 
 </div>

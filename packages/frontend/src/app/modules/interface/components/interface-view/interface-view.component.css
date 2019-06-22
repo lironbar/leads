@@ -1,3 +1,7 @@
+mat-list-item {
+    cursor: pointer;
+}
+
 .selected {
     background: #eae9e9 !important;
 }

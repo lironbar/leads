@@ -1,6 +1,11 @@
 <form (submit)="onAdd(form)" #form="ngForm" class="medium-dialog">
+
+    <!--Dialog Title-->
     <h1 mat-dialog-title>{{'Add Field' | translate}}</h1>
+
+    <!--Dialog Content-->
     <div mat-dialog-content fxLayout="column">
+
         <div fxLayout="row" fxLayoutAlign="start center">
 
             <!--Type Filed-->
@@ -12,6 +17,10 @@
                 </mat-select>
             </mat-form-field>
 
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="property.type === 'string'">
+
             <!--Name Filed-->
             <mat-form-field fxFlex>
                 <input matInput
@@ -22,28 +31,43 @@
                        [(ngModel)]="property.name" name="name" required>
                 <mat-error *ngIf="name.invalid">*{{'This field is required' | translate}}.</mat-error>
             </mat-form-field>
+
+            <!--String Input Field -->
+            <mat-form-field fxFlex>
+                <input matInput
+                       placeholder="{{'Value' | translate}}"
+                       title="Value"
+                       type="text"
+                       #value="ngModel"
+                       [(ngModel)]="property.value" name="value">
+            </mat-form-field>
         </div>
 
-        <!--String Input Field -->
-        <mat-form-field *ngIf="property.type === 'string'"
-                        class="margin-right-5">
-            <input matInput
-                   placeholder="{{'Value' | translate}}"
-                   title="Value"
-                   type="text"
-                   #value="ngModel"
-                   [(ngModel)]="property.value" name="value">
-        </mat-form-field>
+        <div fxLayout="column" *ngIf="property.type === 'select'">
 
-        <!--Select-->
-        <div *ngIf="property.type === 'select'">
+            <!--Name Field Row-->
             <div fxLayout="row" fxLayoutAlign="start center">
+
+                <!--Name Filed-->
+                <mat-form-field fxFlex>
+                    <input matInput
+                           placeholder="{{'Field Name' | translate}}"
+                           title="Field Name"
+                           type="text"
+                           #name="ngModel"
+                           [(ngModel)]="property.name" name="name" required>
+                    <mat-error *ngIf="name.invalid">*{{'This field is required' | translate}}.</mat-error>
+                </mat-form-field>
                 <span fxFlex></span>
+
+                <!--Add Option Button-->
                 <button mat-mini-fab color="primary"
                         (click)="onAddOption()">
                     <mat-icon aria-label="Add Option">add</mat-icon>
                 </button>
             </div>
+
+            <!--Option List-->
             <mat-list role="list">
                 <mat-list-item *ngFor="let option of property.options; let $index = index" role="listitem" class="padding-10">
 
@@ -75,7 +99,6 @@
                 </mat-list-item>
             </mat-list>
         </div>
-
 
     </div>
     <div mat-dialog-actions fxLayout="row" fxLayoutAlign="start center">

@@ -20,8 +20,9 @@ const InterfaceSchema = new Schema({
     fields: [{
         name: { required: true, type: String },
         isStatic: { required: true, type: Boolean, default: false },
+        required: { required: true, type: Boolean, default: false },
         type: { required: true, type: String, enum: ['string', 'number', 'select'] },
-        value: { required: true, type: String }
+        value: { required: false, type: String }
     }],
     campaignId: { type: Schema.Types.ObjectId, required: true },
     updated: { type: Number, default: Date.now, select: false }

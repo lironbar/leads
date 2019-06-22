@@ -7,14 +7,20 @@ import {InterfaceCampaignViewComponent} from './components/interface-campaign-vi
 
 
 const routes: Routes = [
+    {path: '', redirectTo: 'campaign/'},
+    {path: 'campaign', redirectTo: 'campaign/'},
     {
-        path: '',
-        component: InterfaceViewComponent,
-        children: [
-            // {path: '', pathMatch: 'full', redirectTo: 'create'},
-            {path: 'campaign/:id', component: InterfaceCampaignViewComponent}
-        ]
-    },
+        path: 'campaign/:id',
+        component: InterfaceViewComponent
+    }
+    // {
+    //     path: '',
+    //     component: InterfaceViewComponent,
+    //     children: [
+    //         // {path: '', pathMatch: 'full', redirectTo: 'create'},
+    //         {path: 'campaign/:id', component: InterfaceCampaignViewComponent}
+    //     ]
+    // },
 ];
 
 @NgModule({

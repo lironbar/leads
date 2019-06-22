@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CampaignService} from '../../../campaigns/campaign.service';
 import {BehaviorSubject} from 'rxjs';
 import {Campaign} from '../../../campaigns/campaign.model';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
     selector: 'app-interface-view',
@@ -15,6 +15,7 @@ export class InterfaceViewComponent implements OnInit{
     selectedCampaignId: string;
     constructor(
         private router: Router,
+        private activatedRoute: ActivatedRoute,
         public campaignsService: CampaignService
     ){}
 
@@ -22,14 +23,34 @@ export class InterfaceViewComponent implements OnInit{
         this.campaignsService.getCampaigns()
             .subscribe(campaigns => {
                 this.campaigns$.next(campaigns);
-                if (campaigns.length) {
-                    this.selectedCampaignId = campaigns[0]._id;
-                    this.router.navigate(['interface/campaign', campaigns[0]._id]);
-                }
+                this.activatedRoute.params.subscribe((params: Params) => {
+                    let campaignId = params['id'];
+
+                    if (!campaignId) {
+                        campaignId= campaigns.length ? campaigns[0]._id : undefined;
+                    }
+
+                    this.selectedCampaignId = campaignId;
+
+                    if (this.selectedCampaignId) {
+                        this.router.navigate(
+                            [],
+                            {
+                                relativeTo: this.activatedRoute,
+                                queryParams: { id: this.selectedCampaignId }
+                            });
+                    }
+                });
             })
     }
 
     onCampaignClicked(campaign: Campaign) {
         this.selectedCampaignId = campaign._id;
+        this.router.navigate(
+            [],
+            {
+                relativeTo: this.activatedRoute,
+                queryParams: { id: campaign._id }
+            });
     }
 }

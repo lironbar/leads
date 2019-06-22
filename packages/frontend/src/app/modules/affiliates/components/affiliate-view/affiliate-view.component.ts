@@ -59,7 +59,7 @@ export class AffiliateViewComponent implements OnInit {
             .subscribe(
                 campaignInterface => {
                     if (campaignInterface) {
-                        const dialogRef = this.dialog.open(SendLeadDialogComponent, {data: campaignInterface.properties}); // fields
+                        const dialogRef = this.dialog.open(SendLeadDialogComponent, {data: campaignInterface.fields});
                         dialogRef.afterClosed().subscribe(lead => {
                             if (lead) {
                                 this.leadService.sendLead(campaign._id, this.affiliateId, lead)

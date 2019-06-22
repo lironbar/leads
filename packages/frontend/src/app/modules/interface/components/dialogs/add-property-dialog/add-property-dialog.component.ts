@@ -21,24 +21,24 @@ export class AddPropertyDialogComponent implements OnInit{
     ngOnInit() {
         this.types = ['string', 'select'];
         this.property = {
-            required: false,
             type: 'string',
             name: undefined,
             options: undefined,
-            isStatic: undefined,
+            isStatic: false,
+            required: false
         };
     }
 
     public onTypeChange(type) {
-        this.property.options = type === 'select' ? [] : undefined;
-
+        this.property.options = type === 'select' ? [this._getEmptyOption()] : undefined;
     }
 
     public onAddOption() {
-        this.property.options.push({
+        let emptyOption = {
             displayName: undefined,
             value: undefined
-        })
+        };
+        this.property.options.push(emptyOption)
     }
 
     public onRemoveOption(index) {
@@ -52,6 +52,15 @@ export class AddPropertyDialogComponent implements OnInit{
     public onAdd(form: NgForm) {
         if (form.valid) {
             this.dialogRef.close(this.property);
+        }
+    }
+    /////////////////////////////
+    //     Private Methods    //
+    /////////////////////////////
+    private _getEmptyOption() {
+        return {
+            displayName: undefined,
+            value: undefined
         }
     }
 }
