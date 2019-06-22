@@ -7,14 +7,14 @@
             <mat-radio-button color="primary" value="email">{{'Email' | translate}}</mat-radio-button>
         </mat-radio-group>
 
-        <div fxLayout="column" class="z-depth-1 padding-10" >
-            <!--Http Column-->
-            <div fxLayout="column" *ngIf="type === 'http'">
+        <div fxLayout="column" class="z-depth-1 padding-10">
 
-                <div fxLayout="row" fxLayoutAlign="start center">
-                    <span class="md-body-2 margin-right-5">{{'URL' | translate}}:</span>
-                    <mat-form-field fxFlex>
-                        <input matInput [(ngModel)]="interface.url">
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <!--Http Row-->
+                <div fxFlex fxLayout="row" fxLayoutAlign="start center" *ngIf="type === 'http'">
+                    <mat-form-field fxFlex class="margin-right-5">
+                        <input matInput [(ngModel)]="interface.url" placeholder="{{'URL' | translate}}">
                     </mat-form-field>
 
                     <mat-form-field>
@@ -25,55 +25,72 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-            </div>
 
-            <!--Email Row-->
-            <div fxLayout="row" fxLayoutAlign="start center" *ngIf="type === 'email'">
-                <span class="md-body-2 margin-right-5">{{'Email' | translate}}:</span>
-                <mat-form-field>
-                    <input matInput [(ngModel)]="interface.email">
-                </mat-form-field>
-            </div>
+                <!--Email Row-->
+                <div fxFlex fxLayout="row" fxLayoutAlign="start center" *ngIf="type === 'email'">
+                    <mat-form-field fxFlex>
+                        <input matInput [(ngModel)]="interface.email" placeholder="{{'Email' | translate}}">
+                    </mat-form-field>
+                </div>
 
-            <!--Add Field Row-->
-            <div fxLayout="row" fxLayoutAlign="start center">
-                <mat-form-field >
-                    <input matInput [(ngModel)]="field.name" placeholder="{{'Field Name' | translate}}">
-                </mat-form-field>
-
-                <mat-form-field >
-                    <input matInput [(ngModel)]="field.defaultValue" placeholder="{{'Default Value' | translate}}">
-                </mat-form-field>
-
-                <span fxFlex></span>
-                <button mat-mini-fab color="primary"
-                        [disabled]="!field.name"
+                <button mat-mini-fab color="primary" class="margin-left-10"
                         (click)="onAddField(field)">
-                    <mat-icon aria-label="Create Campaign">add</mat-icon>
+                    <mat-icon aria-label="Add Feield">add</mat-icon>
                 </button>
             </div>
         </div>
 
         <!--DATA-->
         <div fxFlex fxLayout="column" class="overflow-auto">
+
+            <!--field List-->
             <mat-list role="list">
-                <mat-list-item *ngFor="let property of interface.properties; let $index = index" role="listitem">
-                    <span class="md-body-2 margin-right-5">{{'Field Name' | translate}}:</span>
-                    <mat-form-field >
-                        <input matInput [(ngModel)]="property.name">
-                    </mat-form-field>
+                <!--field Item-->
+                <mat-list-item *ngFor="let field of interface.fields; let $index = index" role="listitem">
 
-                    <span class="md-body-2 margin-left-10 margin-right-5">{{'Default Value' | translate}}:</span>
-                    <mat-form-field >
-                        <input matInput [(ngModel)]="property.defaultValue">
-                    </mat-form-field>
+                    <!--String Item-->
+                    <div fxFlex fxLayout="row" fxLayoutAlign="start center" *ngIf="filed.type === 'string'">
+                        <mat-form-field class="margin-right-5">
+                            <input matInput [(ngModel)]="filed.name" placeholder="{{'Field Name' | translate}}">
+                        </mat-form-field>
 
-                    <span fxFlex></span>
-                    <button mat-mini-fab color="warn"
-                            (click)="onRemoveField($index)">
-                        <mat-icon aria-label="Create Campaign">remove</mat-icon>
-                    </button>
+                        <mat-form-field class="margin-right-5">
+                            <input matInput [(ngModel)]="filed.value" placeholder="{{'Value' | translate}}">
+                        </mat-form-field>
+
+                        <mat-checkbox color="primary" [(ngModel)]="field.isStatic">
+                            {{'Static' | translate}}
+                        </mat-checkbox>
+
+                        <span fxFlex></span>
+                        <button mat-mini-fab color="warn"
+                                (click)="onRemoveField($index)">
+                            <mat-icon aria-label="Create Campaign">remove</mat-icon>
+                        </button>
+                    </div>
+
+                    <!--Select Item-->
+                    <div fxFlex fxLayout="row" fxLayoutAlign="start center" *ngIf="field.type === 'select'">
+                        <!--Select Name-->
+                        <mat-form-field class="margin-right-5">
+                            <input matInput [(ngModel)]="field.name" placeholder="{{'Field Name' | translate}}">
+                        </mat-form-field>
+
+                        <!--Select Options-->
+                        <div *ngFor="let option of field.options" class="margin-right-5">
+                            <span class="mat-body-2">{{option.displayName}}: </span>
+                            <span class="mat-body-1">{{option.value}}</span>
+                        </div>
+
+                        <span fxFlex></span>
+                        <button mat-mini-fab color="warn"
+                                (click)="onRemoveField($index)">
+                            <mat-icon aria-label="Create Campaign">remove</mat-icon>
+                        </button>
+                    </div>
+
                 </mat-list-item>
+
             </mat-list>
         </div>
 
@@ -82,13 +99,13 @@
             <span fxFlex></span>
             <button *ngIf="interface._id; else create" mat-button color="primary"
                     (click)="onUpdate()"
-                    [disabled]="!interface.properties.length">
+                    [disabled]="!interface.fields.length">
                 {{'UPDATE' | translate}}
             </button>
             <ng-template #create>
                 <button mat-button color="primary"
                         (click)="onCreate()"
-                        [disabled]="!interface.properties.length">
+                        [disabled]="!interface.fields.length">
                     {{'CREATE' | translate}}
                 </button>
             </ng-template>

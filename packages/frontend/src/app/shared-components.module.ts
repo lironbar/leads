@@ -10,6 +10,7 @@ import {EmptyStateComponent} from './modules/commons/components/empty-state/empt
 import {CampaignPanelsComponent} from './modules/campaigns/components/campaign-panels/campaign-panels.component';
 import {LeadsPanelsComponent} from './modules/leads/components/leads-panels/leads-panels.component';
 import {ConfirmDialogComponent} from './modules/commons/components/dialogs/confirm-dialog/confirm-dialog.component';
+import {AddPropertyDialogComponent} from './modules/interface/components/dialogs/add-property-dialog/add-property-dialog.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import {ConfirmDialogComponent} from './modules/commons/components/dialogs/confi
         CreateCampaignDialogComponent,
         SendLeadDialogComponent,
         EmptyStateComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        AddPropertyDialogComponent
     ],
     imports: [
         SharedModule
@@ -35,8 +37,9 @@ import {ConfirmDialogComponent} from './modules/commons/components/dialogs/confi
         CreateCampaignDialogComponent,
         SendLeadDialogComponent,
         EmptyStateComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        AddPropertyDialogComponent
     ],
-    entryComponents: [CreateCampaignDialogComponent, SendLeadDialogComponent, ConfirmDialogComponent]
+    entryComponents: [CreateCampaignDialogComponent, SendLeadDialogComponent, ConfirmDialogComponent, AddPropertyDialogComponent]
 })
 export class SharedComponentModule { }

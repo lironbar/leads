@@ -1,3 +1,12 @@
+export interface InterfaceField {
+    name: string,
+    type: string,
+    value?: string,
+    options?: any[],
+    isStatic?: boolean,
+    required?: boolean
+}
+
 export interface Interface {
     _id?: string;
     campaignId?: string;
@@ -5,5 +14,6 @@ export interface Interface {
     email?: string;
     url?: string;
     method?: string; // POST/GET
-    properties?: any[]; // {name: string, defaultValue?: any}
+    fields?: InterfaceField[]; // {name: string, value?: any}
+    properties?: InterfaceField[]; // OLD USAGE - {name: string, value?: any}
 }

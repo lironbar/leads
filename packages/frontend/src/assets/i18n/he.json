@@ -56,7 +56,7 @@
 
   "URL": "כתובת",
   "Field Name": "ערך קלט",
-  "Default Value": "ערך דיפולטיבי",
+  "Value": "ערך דיפולטיבי",
   "Description": "תיאור",
   "Price": "מחיר",
   "Hedge Percentage": "Hedge Percentage",

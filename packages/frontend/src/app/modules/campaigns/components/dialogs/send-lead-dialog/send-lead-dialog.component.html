@@ -1,20 +1,41 @@
 <form (submit)="onSendLead(leadForm)" #leadForm="ngForm" class="large-dialog">
     <!--<h1 mat-dialog-title>{{'Send Lead'}}</h1>-->
-    <div mat-dialog-content fxLayout="column">
-        <div fxLayout="column" class="campaign-img overflow-auto">
-            <img fxFlex src="/assets/images/campaign-example.jpg"/>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="space-around center">
-            <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let property of properties">
-                <!--<mat-icon class="margin-right-5">account_box</mat-icon>-->
-                <mat-form-field>
-                    <input matInput [placeholder]="property.name" type="text"
-                           [(ngModel)]="lead[property.name]"
-                           [name]="property.name" required>
-                    <mat-error *ngIf="!lead[property.name]">*{{'This field is required' | translate}}.</mat-error>
+    <div mat-dialog-content fxLayout="row">
+
+        <!--Lead Inputs Section-->
+        <div fxFlex="50" fxLayout="row wrap" class="overflow-auto">
+            <div fxFlex="50" fxLayout="row" *ngFor="let field of fields">
+
+                <!--String Input-->
+                <mat-form-field *ngIf="field.type === 'string'">
+                    <input matInput [(ngModel)]="lead[field.name]"
+                           [placeholder]="field.name"
+                           type="text"
+                           [name]="field.name" required>
+                    <mat-error *ngIf="!lead[field.name]">*{{'This field is required' | translate}}.</mat-error>
                 </mat-form-field>
+
+                <!--Select List-->
+                <mat-form-field *ngIf="field.type === 'select'">
+                    <mat-select matInput
+                                [(ngModel)]="lead[field.name]"
+                                [name]="field.name"
+                                [placeholder]="field.name" required>
+                        <mat-option *ngFor="let option of field.options" [value]="option.value">
+                            {{option.displayName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!lead[field.name]">*{{'This field is required' | translate}}.</mat-error>
+                </mat-form-field>
+
             </div>
         </div>
+
+        <!--Lead Image Section-->
+        <div fxFlex="50" fxLayout="column" class="campaign-img overflow-auto">
+            <img fxFlex src="/assets/images/campaign-example.jpg"/>
+        </div>
+
     </div>
     <div mat-dialog-actions fxLayout="row" fxLayoutAlign="start center">
         <span fxFlex></span>

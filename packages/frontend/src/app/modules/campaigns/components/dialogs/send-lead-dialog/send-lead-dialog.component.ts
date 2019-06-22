@@ -14,13 +14,13 @@ export class SendLeadDialogComponent implements OnInit{
 
     constructor(
         public dialogRef: MatDialogRef<SendLeadDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public properties: { properties: any[] }
+        @Inject(MAT_DIALOG_DATA) public fields: { field: any[] }
     ) {}
 
     ngOnInit() {}
 
     public onCancel() {
-        this.dialogRef.close();
+        this.dialogRef.close(false);
     }
 
     public onSendLead(form: NgForm) {
