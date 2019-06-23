@@ -40,7 +40,7 @@ class LeadModule extends MongooseEntity {
         const campaign = await Campaign.findOne({ _id: campaignId });
 
         const leadFields = {};
-        const fieldsSchema = iface.fields;
+        const fieldsSchema = iface.fields.toObject();
 
         fieldsSchema.forEach(schema => {
             if (schema.isStatic) {
@@ -90,7 +90,7 @@ class LeadModule extends MongooseEntity {
                 const options = { headers: { 'Content-Type': 'application/json', 'Content-Length': payload.length } };
                 const { statusCode, statusMessage } = await http.request(iface.url, options, payload);
 
-                success = (statusCode >= 200 && statusCode <= 399);
+                success = (statusCode >= 200 && statusCode <= 299);
                 message = statusMessage;
                 results = { statusCode, statusMessage };
                 break;

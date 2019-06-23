@@ -22,7 +22,7 @@ class InterfaceModule extends MongooseEntity {
     }
 
     updateOne(id, obj) {
-        return Interface.updateOne({ _id: id }, obj, { new: true });
+        return Interface.findOneAndUpdate({ _id: id }, obj, { new: true });
     }
 
     deleteOne(id) {
