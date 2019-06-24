@@ -7,6 +7,7 @@ export interface Affiliate {
   name: string;
   phone: string;
   email: string;
+  password?: string;
   address: string;
   campaignIds?: Campaign[];
 }

@@ -28,6 +28,16 @@
         <mat-error *ngIf="email.invalid">*{{'This field is required' | translate}}.</mat-error>
       </mat-form-field>
     </div>
+    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="passwordRequired">
+      <mat-form-field fxFlex="100">
+        <input matInput
+               placeholder="{{'Password' | translate}}"
+               title="affiliate email" type="password"
+               #password="ngModel"
+               [(ngModel)]="affiliate.password" name="password" required>
+        <mat-error *ngIf="password.invalid">*{{'This field is required' | translate}}.</mat-error>
+      </mat-form-field>
+    </div>
     <div fxLayout="row">
       <mat-form-field fxFlex>
         <input matInput
