@@ -1,5 +1,21 @@
 const User = require('../models/user');
 
+module.exports.create = async (req, res) => {
+    try {
+        if (req.session.user.role !== 'ADMIN') {
+            return res.end(403);
+        }
+
+        const id = await new User({ role: 'AFFILIATE', ...req.body }).save()._id;
+        const affiliate = User.findOne({ _id: id }, { _id: 1, name: 1, email: 1, phone: 1, address: 1 }).populate('campaigns');
+        res.status(200);
+        res.json(affiliate);
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
+};
+
 module.exports.find = async (req, res) => {
     try {
         const affiliates = await User.find({ role: 'AFFILIATE' }, { _id: 1, name: 1, email: 1, phone: 1, address: 1 }).populate('campaigns');

@@ -58,6 +58,7 @@ module.exports = {
     },
     affiliate: () => {
         const router = express.Router();
+        router.post('/', affiliate.create);
         router.get('/', affiliate.find);
         router.get('/:id', affiliate.findOne);
         router.get('/:id/campaigns', affiliate.getCampaigns);
@@ -65,6 +66,7 @@ module.exports = {
     },
     publisher: () => {
         const router = express.Router();
+        router.post('/', publisher.create);
         router.get('/', publisher.find);
         router.get('/:id', publisher.findOne);
         router.put('/:id', publisher.update);
