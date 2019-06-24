@@ -15,6 +15,7 @@ export class CreatePublisherDialogComponent implements OnInit{
     type: string;
     header: string;
     action: string;
+    passwordRequired: boolean;
 
     constructor(
         public dialogRef: MatDialogRef<CreatePublisherDialogComponent>,
@@ -23,6 +24,7 @@ export class CreatePublisherDialogComponent implements OnInit{
 
     ngOnInit() {
         this.publisher = this.data ? {...this.data} : {};
+        this.passwordRequired = !this.data;
         this.header = `${this.data ? 'Edit' : 'Create'} Publisher`;
         this.action = this.data ? 'UPDATE' : 'CREATE';
     }
