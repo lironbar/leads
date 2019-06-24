@@ -6,8 +6,9 @@ module.exports.create = async (req, res) => {
             return res.end(403);
         }
 
-        const id = await new User({ role: 'AFFILIATE', ...req.body }).save()._id;
-        const affiliate = User.findOne({ _id: id }, { _id: 1, name: 1, email: 1, phone: 1, address: 1 }).populate('campaigns');
+        let affiliate = new User({ role: 'AFFILIATE', ...req.body });
+        await affiliate.save();
+        affiliate = await User.findOne({ _id: affiliate._id }, { _id: 1, name: 1, email: 1, phone: 1, address: 1 }).populate('campaigns');
         res.status(200);
         res.json(affiliate);
     } catch (err) {
@@ -29,6 +30,7 @@ module.exports.find = async (req, res) => {
 
 module.exports.findOne = async (req, res) => {
     try {
+        const id = req.params.id;
         const affiliate = await User.findOne({ _id: id, role: 'AFFILIATE' }, { _id: 1, name: 1, email: 1, phone: 1, address: 1 }).populate('campaigns');
         res.status(200);
         res.json(affiliate);
@@ -40,8 +42,9 @@ module.exports.findOne = async (req, res) => {
 
 module.exports.joinCampaign = async (req, res) => {
     try {
-        const id = req.body.affiliateId, campaignId = req.params.id;
-        const results = await User.update({ _id: id, role: 'AFFILIATE', campaigns: { $nin: [campaignId] } }, { $push: { campaigns: campaignId } });
+        const id = req.body.affiliateId;
+        const campaignId = req.params.id;
+        const results = await User.updateOne({ _id: id, role: 'AFFILIATE', campaigns: { $nin: [campaignId] } }, { $push: { campaigns: campaignId } });
         if (!results.nModified) {
             throw 'Failed to join campaign';
         }
@@ -56,7 +59,7 @@ module.exports.joinCampaign = async (req, res) => {
 module.exports.leaveCampaign = async (req, res) => {
     try {
         const id = req.body.affiliateId, campaignId = req.params.id;
-        const results = await User.update({ _id: id, role: 'AFFILIATE' }, { $pull: { campaigns: campaignId } });
+        const results = await User.updateOne({ _id: id, role: 'AFFILIATE' }, { $pull: { campaigns: campaignId } });
         if (!results.nModified) {
             throw 'Failed to leave campaign';
         }

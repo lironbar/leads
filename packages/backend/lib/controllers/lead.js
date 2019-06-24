@@ -1,7 +1,7 @@
 const Lead = require('../models/lead');
+const Interface = require('../models/interface');
+const Campaign = require('../models/campaign');
 const { http, email, date, enums } = require('../utils');
-const Interface = require('./interface');
-const Campaign = require('./campaign');
 
 async function findByParams({ leadId, campaignId, publisherIds, affiliateIds, success, approved }) {
     const lookup = {};
@@ -69,8 +69,10 @@ module.exports.findByCampaign = async (req, res) => {
 module.exports.send = async (req, res) => {
     try {
         const campaignId = req.params.campaignId;
-        const { affiliateId, lead: payload } = req.body;
-        const iface = await Interface.getByCampaign(campaignId);
+        const affiliateId = req.body.affiliateId;
+        let payload = req.body.lead;
+
+        const iface = await Interface.findOne({ campaignId });
         const campaign = await Campaign.findOne({ _id: campaignId });
 
         const leadFields = {};
@@ -95,18 +97,18 @@ module.exports.send = async (req, res) => {
 
         // validate max leads
         const sentLeadsCount = await Lead.estimatedDocumentCount({ success: true, campaignId });
-        if (sentLeadsCount >= campaign.maxLeads) {
-            throw 'max leads for campaign';
-        }
+        // if (sentLeadsCount >= campaign.maxLeads) {
+        //     throw 'max leads for campaign';
+        // }
 
         // validate daily max leads
         const dailySentLeadsCount = await Lead.estimatedDocumentCount({ success: true, campaignId, timestamp: { $gt: date.startOfDay() } });
-        if (dailySentLeadsCount >= campaign.maxDailyLeads) {
-            throw 'max daily leads for campaign';
-        }
+        // if (dailySentLeadsCount >= campaign.maxDailyLeads) {
+        //     throw 'max daily leads for campaign';
+        // }
 
         // create lead
-        const lead = await new Lead({
+        const lead = new Lead({
             raw: payload, // raw payload provided by the affiliate
             payload: leadFields, // validated payload to send to campaign owner
             price: campaign.price,
@@ -114,14 +116,15 @@ module.exports.send = async (req, res) => {
             affiliate: affiliateId,
             publisher: campaign.publisherId,
             campaign: campaignId
-        }).save();
+        })
+        await lead.save();
 
         // send the lead
         let success = false, message = "", results = {};
         switch (iface.type) {
             case 'http':
                 payload = JSON.stringify(payload);
-                const options = { headers: { 'Content-Type': 'application/json', 'Content-Length': payload.length } };
+                const options = { headers: { 'Content-Type': 'application/json', 'Content-Length': payload.length }, timeout: 5000 };
                 const { statusCode, statusMessage } = await http.request(iface.url, options, payload);
 
                 success = (statusCode >= 200 && statusCode <= 299);
