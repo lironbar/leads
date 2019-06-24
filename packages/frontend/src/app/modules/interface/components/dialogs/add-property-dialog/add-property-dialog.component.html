@@ -102,17 +102,20 @@
 
     </div>
     <div mat-dialog-actions fxLayout="row" fxLayoutAlign="start center">
+
+
+
         <mat-checkbox *ngIf="property.type === 'string'"
                 class="margin-right-10"
-                name="isStatic"
                 color="primary"
-                [(ngModel)]="property.isStatic">
+                      [checked]="property.isStatic"
+                      (change)="onIsStaticChange($event, i, property)">
             {{'Static' | translate}}
         </mat-checkbox>
         <mat-checkbox
-                name="isStatic"
                 color="primary"
-                [(ngModel)]="property.required">
+                [checked]="property.isRequired"
+                (change)="onIsRequiredChange($event, i, property)">
             {{'Required' | translate}}
         </mat-checkbox>
         <span fxFlex></span>

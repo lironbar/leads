@@ -25,7 +25,7 @@ export class AddPropertyDialogComponent implements OnInit{
             name: undefined,
             options: undefined,
             isStatic: false,
-            required: false
+            isRequired: false
         };
     }
 
@@ -54,6 +54,21 @@ export class AddPropertyDialogComponent implements OnInit{
             this.dialogRef.close(this.property);
         }
     }
+
+    public onIsRequiredChange(event, index, property) {
+        property.isRequired = !property.isRequired;
+        if (property.isRequired) {
+            property.isStatic = false;
+        }
+    }
+
+    public onIsStaticChange(event, index, property) {
+        property.isStatic = !property.isStatic;
+        if (property.isStatic) {
+            property.isRequired = false;
+        }
+    }
+
     /////////////////////////////
     //     Private Methods    //
     /////////////////////////////

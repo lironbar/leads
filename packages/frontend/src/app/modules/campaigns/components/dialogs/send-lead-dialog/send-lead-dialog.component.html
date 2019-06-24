@@ -7,11 +7,11 @@
             <div fxFlex="50" fxLayout="row" *ngFor="let field of fields">
 
                 <!--String Input-->
-                <mat-form-field *ngIf="field.type === 'string'">
+                <mat-form-field *ngIf="field.type === 'string' && !field.isStatic">
                     <input matInput [(ngModel)]="lead[field.name]"
                            [placeholder]="field.name"
                            type="text"
-                           [name]="field.name" required>
+                           [name]="field.name" [required]="field.isRequired">
                     <mat-error *ngIf="!lead[field.name]">*{{'This field is required' | translate}}.</mat-error>
                 </mat-form-field>
 
@@ -20,7 +20,7 @@
                     <mat-select matInput
                                 [(ngModel)]="lead[field.name]"
                                 [name]="field.name"
-                                [placeholder]="field.name" required>
+                                [placeholder]="field.name" [required]="field.isRequired">
                         <mat-option *ngFor="let option of field.options" [value]="option.value">
                             {{option.displayName}}
                         </mat-option>
@@ -37,7 +37,7 @@
         </div>
 
     </div>
-    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="start center">
+    <div mat-dialog-actions fxLayout="row" fxLaNo Campaigns FoundyoutAlign="start center">
         <span fxFlex></span>
         <button mat-button (click)="onCancel()">{{'Cancel' | translate}}</button>
         <button mat-button mat-raised-button color="primary" type="submit">{{'Send' }}</button>

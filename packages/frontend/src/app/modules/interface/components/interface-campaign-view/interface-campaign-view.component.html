@@ -76,10 +76,15 @@
 
                     <span fxFlex></span>
                     <div fxLayout="column" class="margin-right-5">
-                        <mat-checkbox color="primary" [(ngModel)]="field.required">
+                        <mat-checkbox color="primary"
+                                      [checked]="field.isRequired"
+                                      [(ngModel)]="field.isRequired"
+                                      (change)="onFieldIsRequiredChange($event, i, field)">
                             {{'Required' | translate}}
                         </mat-checkbox>
                         <mat-checkbox *ngIf="field.type === 'string'"
+                                      [checked]="field.isStatic"
+                                      (change)="onFieldIsStaticdChange($event, i, field)"
                                       color="primary" [(ngModel)]="field.isStatic">
                             {{'Static' | translate}}
                         </mat-checkbox>

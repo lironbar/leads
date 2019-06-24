@@ -4,7 +4,7 @@ export interface InterfaceField {
     value?: string,
     options?: any[],
     isStatic?: boolean,
-    required?: boolean
+    isRequired?: boolean
 }
 
 export interface Interface {

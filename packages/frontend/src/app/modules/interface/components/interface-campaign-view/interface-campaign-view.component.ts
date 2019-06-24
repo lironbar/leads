@@ -60,6 +60,18 @@ export class InterfaceCampaignViewComponent implements OnInit, OnChanges{
         });
     }
 
+    public onFieldIsRequiredChange(event, index, field) {
+        if (field.isRequired) {
+            field.isStatic = false;
+        }
+    }
+
+    public onFieldIsStaticdChange(event, index, field) {
+        if (field.isStatic) {
+            field.isRequired = false;
+        }
+    }
+
     public onRemoveField(index) {
         this.interface.fields.splice(index, 1);
     }

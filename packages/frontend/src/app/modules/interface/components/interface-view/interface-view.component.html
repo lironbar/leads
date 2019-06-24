@@ -2,7 +2,7 @@
 
     <!--Campaign List-->
     <mat-card fxFlex="25" fxLayout="column" class="overflow-auto padding-0">
-        <mat-list *ngIf="campaigns$ | async as campaigns">
+        <mat-list *ngIf="campaigns$ | async as campaigns; else empty_state">
             <h3 mat-subheader>{{'Campaigns' | translate}}</h3>
             <mat-list-item *ngFor="let campaign of campaigns"
                            [ngClass]="{'selected': selectedCampaignId === campaign._id}"
@@ -16,12 +16,24 @@
                 <mat-divider></mat-divider>
             </mat-list-item>
         </mat-list>
+
+        <ng-template #empty_state>
+            <app-empty-state text="No Campaigns Found"
+                             src="/assets/empty_states/empty_state_campaigns.png"></app-empty-state>
+        </ng-template>
     </mat-card>
 
     <!--Interface View-->
     <div fxFlex fxLayout="column">
-        <app-interface-campaign-view fxFlex *ngIf="selectedCampaignId"
+        <app-interface-campaign-view fxFlex *ngIf="selectedCampaignId else empty_state_campaign_selected"
                                      [(campaignId)]="selectedCampaignId"></app-interface-campaign-view>
+
+        <ng-template #empty_state_campaign_selected>
+            <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+                <span class="mat-title opacity-5">{{'Select a campaign for more info' | translate}}</span>
+            </div>
+        </ng-template>
+
     </div>
 
 </div>
