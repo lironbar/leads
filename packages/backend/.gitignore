@@ -1,4 +1,4 @@
 .vscode
 .idea
-/app/api/.sessions
+/lib/.sessions
 node_modules
