@@ -69,6 +69,7 @@ module.exports = {
         router.get('/:id', publisher.findOne);
         router.put('/:id', publisher.update);
         router.get('/:id/campaigns', publisher.getCampaigns);
+        router.delete('/:id', publisher.delete);
         return router;
     }
 };

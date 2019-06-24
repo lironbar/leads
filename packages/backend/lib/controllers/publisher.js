@@ -47,3 +47,18 @@ module.exports.getCampaigns = async (req, res) => {
         res.send(err);
     }
 };
+
+module.exports.delete = async (req, res) => {
+    try {
+        const id = req.params.id;
+        if (req.session.user.role !== 'ADMIN') {
+            return res.end(403);
+        }
+
+        await User.deleteOne({ _id: id, role: 'PUBLISHER' });
+        res.end(200);
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
+};

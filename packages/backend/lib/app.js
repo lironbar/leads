@@ -81,7 +81,7 @@
         if (err) {
             throw err;
         }
-        console.info('API listening on port', port);
+        console.info('listening on port', port);
     });
 
 })();
