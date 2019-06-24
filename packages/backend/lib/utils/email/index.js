@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const config = global.App.Config.mailer;
+const { mailer: config } = require('../../config');
 
 // create transporters
 const transporters = {};

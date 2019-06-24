@@ -1,8 +1,8 @@
-const { User } = global.App.Components;
+const User = require('../models/user');
 
 module.exports.create = async (req, res) => {
     try {
-        const user = await User.create(req.body);
+        const user = await new User(req.body).save();
         res.status(200);
         res.json(user);
     } catch (err) {
@@ -24,7 +24,8 @@ module.exports.find = async (req, res) => {
 
 module.exports.findOne = async (req, res) => {
     try {
-        const user = await User.findOne(req.params.id);
+        const id = req.params.id;
+        const user = await User.findOne({ _id: id });
         res.status(200);
         res.json(user);
     } catch (err) {

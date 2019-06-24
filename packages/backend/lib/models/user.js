@@ -9,6 +9,7 @@ const UserSchema = new Schema({
         validate: value => new RegExp('.+\@.+\..+').test(value)
     },
     phone: { type: String, required: true },
+    address: { type: String, required: true },
     role: {
         type: { enum: ['ADMIN', 'PUBLISHER', 'AFFILIATE'] },
         default: 'AFFILIATE',

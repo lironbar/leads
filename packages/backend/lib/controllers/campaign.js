@@ -1,8 +1,9 @@
-const { Campaign, Lead } = global.App.Components;
+const Campaign = require('../models/campaign');
 
 module.exports.create = async (req, res) => {
     try {
-        const campaign = await Campaign.create(req.body);
+        const campaign = new Campaign(req.body);
+        await campaign.save();
         res.status(200);
         res.json(campaign);
     } catch (err) {
@@ -13,7 +14,7 @@ module.exports.create = async (req, res) => {
 
 module.exports.find = async (req, res) => {
     try {
-        const campaigns = await Campaign.find();
+        const campaigns = await Campaign.find().populate('affiliates');
         res.status(200);
         res.json(campaigns);
     } catch (err) {
@@ -24,7 +25,7 @@ module.exports.find = async (req, res) => {
 
 module.exports.findOne = async (req, res) => {
     try {
-        const campaign = await Campaign.findOne(req.params.id);
+        const campaign = await Campaign.findOne({ _id: req.params.id }).populate('affiliates');
         res.status(200);
         res.json(campaign);
     } catch (err) {
@@ -35,7 +36,7 @@ module.exports.findOne = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     try {
-        const campaign = await Campaign.updateOne({ _id: req.params.id }, req.body);
+        const campaign = await Campaign.updateOne({ _id: req.params.id }, req.body, { new: true });
         res.status(200);
         res.json(campaign);
     } catch (err) {
@@ -57,9 +58,13 @@ module.exports.deleteOne = async (req, res) => {
 
 module.exports.findUnassigned = async (req, res) => {
     try {
-        const campaigns = await Campaign.findUnassigned(req.params.affiliateId);
+        const id = req.params.affiliateId;
+        const campaigns = await Campaign.find().populate('affiliates');
+        const unassigned = campaigns.filter(campaign => {
+            return !campaign.affiliates.find(a => a._id.toString() === id);
+        });
         res.status(200);
-        res.json(campaigns);
+        res.json(unassigned);
     } catch (err) {
         res.status(500);
         res.send(err);

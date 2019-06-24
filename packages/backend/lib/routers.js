@@ -1,5 +1,12 @@
 const express = require('express');
-const { auth, user, campaign, register, interface, affiliate, publisher, lead } = global.API.controllers;
+const auth = require('./controllers/auth'),
+    user = require('./controllers/user'),
+    campaign = require('./controllers/campaign'),
+    register = require('./controllers/register'),
+    interface = require('./controllers/interface'),
+    affiliate = require('./controllers/affiliate'),
+    publisher = require('./controllers/publisher'),
+    lead = require('./controllers/lead');
 
 module.exports = {
     auth: () => {
@@ -60,6 +67,7 @@ module.exports = {
         const router = express.Router();
         router.get('/', publisher.find);
         router.get('/:id', publisher.findOne);
+        router.put('/:id', publisher.update);
         router.get('/:id/campaigns', publisher.getCampaigns);
         return router;
     }

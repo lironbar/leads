@@ -20,7 +20,7 @@ const InterfaceSchema = new Schema({
     fields: [{
         name: { required: true, type: String },
         isStatic: { required: true, type: Boolean, default: false },
-        required: { required: true, type: Boolean, default: false },
+        isRequired: { required: true, type: Boolean, default: false },
         type: { required: true, type: String, enum: ['string', 'number', 'select'] },
         value: { required: false, type: String }
     }],

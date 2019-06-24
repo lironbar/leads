@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { mongo } = global.App.Config;
 
 mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true);
@@ -7,7 +6,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('bufferCommands', false);
 mongoose.set('useFindAndModify', false);
 
-module.exports.boot = () => {
+async function connect(url, options) {
     const connection = mongoose.connection;
 
     connection.on('connecting', () => {
@@ -23,5 +22,13 @@ module.exports.boot = () => {
         console.error('MongoDB connection error', err);
     });
 
-    return mongoose.connect(mongo.url, mongo.options);
+    try {
+        await mongoose.connect(url, options);
+    } catch (err) {
+        console.error(`mongodb failed to connect to ${url}`);
+        throw err;
+    }
+    return connection;
 }
+
+module.exports.connect = connect;
