@@ -1,5 +1,5 @@
 {
-  "name": "leads-backend",
+  "name": "@leads/backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
