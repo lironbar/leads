@@ -5,18 +5,28 @@ module.exports = {
         return new Promise((resolve, reject) => {
             let { protocol } = Url.parse(url);
             let handler;
-            if (protocol === 'http') {
+
+            if (protocol === 'http:') {
                 handler = require('http');
-            } else if (protocol === 'https') {
+            } else if (protocol === 'https:') {
                 handler = require('https');
             } else {
                 throw new Error(`Unsupported protocol ${protocol}`);
             }
-            const req = handler.request(url, options, resolve);
+
+            const req = handler.request(url, options, () => {
+                let data = '';
+                res.on('data', (chunk) => {
+                    data += chunk;
+                });
+                res.on('end', () => {
+                    resolve(data);
+                });
+            });
+
             req.on('error', reject);
-            if (data) {
-                req.write(data);
-            }
+
+            req.write(data);
             req.end();
         });
     }

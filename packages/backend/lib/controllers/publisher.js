@@ -6,9 +6,10 @@ module.exports.create = async (req, res) => {
         if (req.session.user.role !== 'ADMIN') {
             return res.end(403);
         }
-        
-        const id = await new User({ role: 'PUBLISHER', ...req.body }).save()._id;
-        const publisher = User.findOne({ _id: id }, { _id: 1, name: 1, email: 1, phone: 1, address: 1, phc: 1, contact: 1 }).populate('campaigns');
+
+        let publisher = new User({ role: 'PUBLISHER', ...req.body });
+        await publisher.save();
+        publisher = await User.findOne({ _id: publisher._id }, { _id: 1, name: 1, email: 1, phone: 1, address: 1, phc: 1, contact: 1 }).populate('campaigns');
         res.status(200);
         res.json(publisher);
     } catch (err) {
@@ -43,7 +44,7 @@ module.exports.findOne = async (req, res) => {
 module.exports.update = async (req, res) => {
     try {
         const id = req.params.id;
-        const publisher = await User.findOneAndUpdate({ _id: id, role: 'PUBLISHER' }, req.body, { new: true }).populate('campaigns');
+        const publisher = await User.updateOne({ _id: id, role: 'PUBLISHER' }, req.body, { new: true }).populate('campaigns');
         res.status(200);
         res.json(publisher);
     } catch (err) {
