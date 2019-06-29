@@ -76,7 +76,7 @@ module.exports.send = async (req, res) => {
     const affiliateId = req.body.affiliateId;
     let payload = req.body.lead;
 
-    console.log(`handling new lead "${JSON.stringify(payload).substr(0, 50)}..." by ${req.session.user.name}`);
+    console.log(`handling new lead "${JSON.stringify(payload).substr(0, 50)}..." by ${req.session.user.name} for campaign ${campaignId}`);
 
     let iface, campaign;
     try {
@@ -187,11 +187,11 @@ module.exports.send = async (req, res) => {
     }
 
     if (success) {
-        console.log(`sent lead "${JSON.stringify(leadFields, 2, 2)}" by ${req.session.user.name}`);
+        console.log(`sent lead ${lead._id} by ${req.session.user.name} for campaign ${campaignId}`);
         res.status(200);
         res.json(result);
     } else {
-        console.error(`failed to send lead - "${JSON.stringify(results, 2, 2)}"`);
+        console.error(`failed to send lead ${lead._id} - ${JSON.stringify(results)}`);
         res.status(500);
         res.end();
     }
@@ -200,6 +200,6 @@ module.exports.send = async (req, res) => {
     try {
         await Lead.updateOne({ _id: lead._id }, { success, response: results, timestamp: Date.now() });
     } catch (err) {
-        console.error(`failed to update results for lead ${lead._id} results "${JSON.stringify({ success, response: results, timestamp: Date.now() }, 2, 2)}" - "${err}"`);
+        console.error(`failed to update results for lead ${lead._id} - success: "${success}" - results: "${JSON.stringify(results)}" - error: "${err}"`);
     }
 };
