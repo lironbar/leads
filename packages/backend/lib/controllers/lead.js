@@ -1,7 +1,7 @@
 const Lead = require('../models/lead');
 const Interface = require('../models/interface');
 const Campaign = require('../models/campaign');
-const { http, email, date, enums } = require('../utils');
+const { http, email, date } = require('../utils');
 
 async function findByParams({ leadId, campaignId, publisherIds, affiliateIds, success, approved }) {
     const lookup = {};
@@ -29,55 +29,75 @@ async function findByParams({ leadId, campaignId, publisherIds, affiliateIds, su
 module.exports.findOne = async (req, res) => {
     try {
         const lead = await Lead.findOne({ _id: req.params });
+
+        if (!lead) {
+            res.status(404);
+            return res.end();
+        }
+
         res.status(200);
         res.json(lead);
     } catch (err) {
+        console.error(`error finding lead - ${err}`);
         res.status(500);
-        res.send(err);
+        res.send();
     }
 };
 
 module.exports.findByCampaign = async (req, res) => {
     try {
         const params = { ...req.params, ...req.query };
-        const userRole = req.session.user.role;
-        switch (userRole) {
-            case enums.userRoles.admin:
-                if (params.affiliateIds) {
-                    params.affiliateIds = params.affiliateIds.split(',');
-                }
-                if (params.publisherIds) {
-                    params.publisherIds = params.publisherIds.split(',');
-                }
-                break;
-            case enums.userRoles.affiliate:
-                params.affiliateIds = [req.session.user._id];
-                break;
-            case enums.userRoles.publisher:
-                params.publisherIds = [req.session.user._id];
-                break;
+
+        if (req.session.isAffiliate) {
+            params.affiliateIds = [req.session.user._id];
+        } else if (req.session.isPublisher) {
+            params.publisherIds = [req.session.user._id];
+        } else if (req.session.isAdmin) {
+            if (params.affiliateIds) {
+                params.affiliateIds = params.affiliateIds.split(',');
+            }
+            if (params.publisherIds) {
+                params.publisherIds = params.publisherIds.split(',');
+            }
         }
+
         const leads = await findByParams(params);
         res.status(200);
         res.json(leads);
     } catch (err) {
+        console.error(`error finding lead by campaign - ${err}`);
         res.status(500);
-        res.send(err);
+        return res.send();
     }
 };
 
 module.exports.send = async (req, res) => {
+    const campaignId = req.params.campaignId;
+    const affiliateId = req.body.affiliateId;
+    let payload = req.body.lead;
+
+    console.log(`handling new lead "${JSON.stringify(payload).substr(0, 50)}..." by ${req.session.user.name}`);
+
+    let iface, campaign;
     try {
-        const campaignId = req.params.campaignId;
-        const affiliateId = req.body.affiliateId;
-        let payload = req.body.lead;
+        campaign = await Campaign.findOne({ _id: campaignId });
+        iface = await Interface.findOne({ campaignId });
+    } catch (err) {
+        console.error(`failed to send lead - error loading campaign ${campaignId}`, err);
+        res.status(500);
+        return res.end();
+    }
 
-        const iface = await Interface.findOne({ campaignId });
-        const campaign = await Campaign.findOne({ _id: campaignId });
+    if (!campaign || !iface) {
+        console.error(`failed to send lead - campaign not found ${campaignId}`);
+        res.status(400);
+        return res.end(`campaign not found`);
+    }
 
-        const leadFields = {};
-        const fieldsSchema = iface.fields.toObject();
+    const leadFields = {};
+    const fieldsSchema = iface.fields.toObject();
 
+    try {
         fieldsSchema.forEach(schema => {
             if (schema.isStatic) {
                 return leadFields[schema.name] = schema.value;
@@ -85,7 +105,7 @@ module.exports.send = async (req, res) => {
 
             const field = payload[schema.name];
             if (!field && schema.isRequired) {
-                throw new Error(`missing required field ${schema.name} for lead`);
+                throw new Error(`missing required field ${schema.name}`);
             }
 
             if (field.length > 250) {
@@ -94,21 +114,33 @@ module.exports.send = async (req, res) => {
 
             leadFields[schema.name] = field;
         });
+    } catch (err) {
+        console.log(`refused to send invalid lead - ${err}`);
+        res.status(400);
+        return res.end(err);
+    }
 
-        // validate max leads
-        const sentLeadsCount = await Lead.estimatedDocumentCount({ success: true, campaignId });
-        // if (sentLeadsCount >= campaign.maxLeads) {
-        //     throw 'max leads for campaign';
-        // }
 
-        // validate daily max leads
-        const dailySentLeadsCount = await Lead.estimatedDocumentCount({ success: true, campaignId, timestamp: { $gt: date.startOfDay() } });
-        // if (dailySentLeadsCount >= campaign.maxDailyLeads) {
-        //     throw 'max daily leads for campaign';
-        // }
+    // validate max leads
+    const sentLeadsCount = await Lead.estimatedDocumentCount({ success: true, campaignId });
+    if (sentLeadsCount >= campaign.maxLeads) {
+        console.log(`refused to send lead - max leads for campaigns`);
+        res.status(400);
+        return res.end('max leads for campaign');
+    }
 
-        // create lead
-        const lead = new Lead({
+    // validate daily max leads
+    const dailySentLeadsCount = await Lead.estimatedDocumentCount({ success: true, campaignId, timestamp: { $gt: date.startOfDay() } });
+    if (dailySentLeadsCount >= campaign.maxDailyLeads) {
+        console.log(`refused to send lead - max daily leads for campaigns`);
+        res.status(400);
+        return res.end('max daily leads for campaign');
+    }
+
+    // create lead
+    let lead;
+    try {
+        lead = new Lead({
             raw: payload, // raw payload provided by the affiliate
             payload: leadFields, // validated payload to send to campaign owner
             price: campaign.price,
@@ -118,21 +150,31 @@ module.exports.send = async (req, res) => {
             campaign: campaignId
         })
         await lead.save();
+    } catch (err) {
+        console.error(`failed to create lead - ${err}`);
+        res.status(500);
+        return res.send(`creation failed`);
+    }
 
-        // send the lead
-        let success = false, message = "", results = {};
+    // send the lead
+    let success = false, message = "", results = {};
+    try {
         switch (iface.type) {
             case 'http':
-                payload = JSON.stringify(payload);
-                const options = { headers: { 'Content-Type': 'application/json', 'Content-Length': payload.length }, timeout: 5000 };
-                const { statusCode, statusMessage } = await http.request(iface.url, options, payload);
+                const { statusCode, statusMessage } = await http.request({
+                    url: iface.url,
+                    method: iface.method,
+                    body: leadFields,
+                    json: true,
+                    timeout: 5000
+                });
 
                 success = (statusCode >= 200 && statusCode <= 299);
                 message = statusMessage;
                 results = { statusCode, statusMessage };
                 break;
             case 'email':
-                const text = Object.keys(payload).map(k => `${k}: ${payload[k]}`).join('\n');
+                const text = Object.keys(leadFields).map(k => `${k}: ${leadFields[k]}`).join('\n');
                 const { response, messageId, messageSize, accepted, rejected } = await email.send(iface.email, `New lead for campaign ${campaign.name}`, text);
 
                 success = response.startsWith('250');
@@ -140,17 +182,24 @@ module.exports.send = async (req, res) => {
                 results = { response, messageId, messageSize, accepted, rejected };
                 break;
         }
+    } catch (err) {
+        console.error(`interface error while sending lead by ${req.session.user.name}`, err);
+    }
 
-        // handle results
-        await Lead.updateOne({ _id: lead._id }, { success, response: results, timestamp: Date.now() });
-        if (!success) {
-            throw `failed with message ${message}`;
-        }
-
+    if (success) {
+        console.log(`sent lead "${JSON.stringify(leadFields, 2, 2)}" by ${req.session.user.name}`);
         res.status(200);
         res.json(result);
-    } catch (err) {
+    } else {
+        console.error(`failed to send lead - "${JSON.stringify(results, 2, 2)}"`);
         res.status(500);
-        res.send(err);
+        res.end();
+    }
+
+    // update the lead with the results
+    try {
+        await Lead.updateOne({ _id: lead._id }, { success, response: results, timestamp: Date.now() });
+    } catch (err) {
+        console.error(`failed to update results for lead ${lead._id} results "${JSON.stringify({ success, response: results, timestamp: Date.now() }, 2, 2)}" - "${err}"`);
     }
 };

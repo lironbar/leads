@@ -10,7 +10,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             const transporter = transporters[service];
             if (!transporter) {
-                return reject(`Unkown service ${service}`);
+                return reject(`unkown service ${service}`);
             }
             transporter.sendMail({ to, subject, text }, function (error, info) {
                 if (error) {
