@@ -80,6 +80,11 @@
             }
             console.log('dev mode super admin:', user.email, user.password);
         });
+
+        // setup a mock for http interfaces
+        const ifaceMockPort = 9000, ifaceMockServer = require('./interface.mock');
+        ifaceMockServer.listen(9000);
+        console.debug(`interface mock server listening on port ${ifaceMockPort}`);
     }
 
     // listen
@@ -87,7 +92,7 @@
         if (err) {
             throw err;
         }
-        console.info('listening on port', port);
+        console.info('api server listening on port', port);
     });
 
 })();
