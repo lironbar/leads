@@ -68,7 +68,7 @@ export class AffiliateViewComponent implements OnInit {
                                         response => {
                                             this.snackBar.success('Lead sent successfully');
                                         },
-                                        error => this._onError('Failed to get campaigns', error)
+                                        error => this._onError('Failed to send lead', error)
                                     )
                             } else {
                                 console.log('Dialog Closed');
