@@ -3,10 +3,5 @@ module.exports = {
     email: require('./email'),
     date: require('./date'),
     enums: {
-        userRoles: {
-            admin: 'ADMIN',
-            publisher: 'PUBLISHER',
-            affiliate: 'AFFILIATE'
-        }
     }
 };

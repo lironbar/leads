@@ -1,4 +1,5 @@
 const express = require('express');
+const config = require('./config');
 const auth = require('./controllers/auth'),
     user = require('./controllers/user'),
     campaign = require('./controllers/campaign'),
@@ -13,7 +14,14 @@ module.exports = {
         const router = express.Router();
         router.post('/login', auth.login);
         router.post('/logout', auth.logout);
-        router.use('/', auth.isLoggedIn);
+        router.use('/', auth.verifyLogin);
+        router.use('/', auth.setRole);
+        if (config.env === 'dev') {
+            router.use('/', (req, res, next) => {
+                console.debug(`got request (${req.method}) ${req.url} by user ${req.session.user.name} from origin ${req.origin}`);
+                next();
+            });
+        }
         return router;
     },
     user: () => {

@@ -44,6 +44,12 @@
     api.use(bodyParser.json());
     api.use(cookieParser());
 
+    // set request origin
+    api.use('/', (req, res, next) => {
+        req.origin = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        next();
+    });
+
     // registration
     api.use('/register', routers.register());
 
