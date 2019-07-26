@@ -4,7 +4,7 @@ module.exports.create = async (req, res) => {
     try {
         const interface = new Interface(req.body);
         await interface.save();
-        console.log(`created interface ${req.params.id}`);
+        console.log(`created interface of type ${req.body.type} for campaign ${req.body.campaignId}`);
         res.status(200);
         res.json(interface);
     } catch (err) {

@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const LeadSchema = new Schema({
+    meta: {
+        name: { required: true, type: String },
+        phoneNumber: { required: true, type: String }
+    },
     success: { type: Boolean, default: false },
     approved: { type: Boolean, default: false },
     timestamp: { type: Number, required: () => this.success === true },

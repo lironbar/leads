@@ -6,7 +6,7 @@
         "allowedHeaders": "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
     },
     "session": {
-        "name": "app.sid",
+        "name": "leads.sid",
         "secret": "abc123",
         "cookie": {
             "path": "/",

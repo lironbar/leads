@@ -20,9 +20,18 @@ const InterfaceSchema = new Schema({
     fields: [{
         name: { required: true, type: String },
         isStatic: { required: true, type: Boolean, default: false },
-        isRequired: { required: true, type: Boolean, default: false },
+        isRequired: { required: true, type: Boolean, default: () => this.isPhoneNumber || this.isName },
+        isPhoneNumber: { required: true, type: Boolean, default: false },
+        isName: { required: true, type: Boolean, default: false },
         type: { required: true, type: String, enum: ['string', 'number', 'select'] },
-        value: { required: false, type: String }
+        options: {
+            type: [{
+                name: { required: true, type: String },
+                value: { required: true, type: String }
+            }],
+            required: () => this.type === 'select'
+        },
+        value: { type: String, default: "" }
     }],
     campaignId: { type: Schema.Types.ObjectId, required: true },
     updated: { type: Number, default: Date.now, select: false }

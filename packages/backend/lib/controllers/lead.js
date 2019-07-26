@@ -26,6 +26,89 @@ async function findByParams({ leadId, campaignId, publisherIds, affiliateIds, su
     return await Lead.find(lookup).populate({ path: 'affiliate', select: { _id: 1, name: 1, email: 1 } });
 }
 
+async function isCampaignAcceptingLeads(campaign, phoneNumber) {
+    const id = campaign._id;
+
+    // is campaign active
+    if (!campaign.active) {
+        return 'campaign is not active';
+    }
+    // validate max leads
+    const sentLeadsCount = await Lead.estimatedDocumentCount({ success: true, id });
+    if (sentLeadsCount >= campaign.maxLeads) {
+        return 'max leads for campaign';
+    }
+    // validate daily max leads
+    const dailySentLeadsCount = await Lead.estimatedDocumentCount({ success: true, id, timestamp: { $gt: date.startOfDay() } });
+    if (dailySentLeadsCount >= campaign.maxDailyLeads) {
+        return 'max daily leads for campaigns';
+    }
+    // phone already sent to this campaign
+    const phoneAlreadySent = Boolean(await Lead.findOne({ 'meta.phoneNumber': phoneNumber, success: true }));
+    if (phoneAlreadySent) {
+        return 'phone number already sent to campaign';
+    }
+
+    return true;
+}
+
+async function composeLead(raw, fieldsSchema) {
+    const composed = {};
+    const phoneNumber = raw[fieldsSchema.find(f => f.isPhoneNumber).name];
+    if (!phoneNumber) {
+        throw new Error(`no phone number found in lead`);
+    }
+    const name = raw[fieldsSchema.find(f => f.isName).name];
+    if (!name) {
+        throw new Error(`no name found in lead`);
+    }
+    fieldsSchema.forEach(schema => {
+        if (schema.isStatic) {
+            return composed[schema.name] = schema.value;
+        }
+        const fieldName = schema.name, field = raw[fieldName];
+        if (schema.isRequired && !field) {
+            throw new Error(`missing required field ${fieldName}`);
+        }
+        if (field.length > 250) {
+            throw new Error(`field ${fieldName} is over 250 characters`);
+        }
+        composed[fieldName] = field;
+    });
+    return {
+        meta: { name, phoneNumber },
+        composed
+    };
+}
+
+async function sendLead(iface, payload) {
+    switch (iface.type) {
+        case 'http':
+            const { statusCode, statusMessage } = await http.request({
+                url: iface.url,
+                method: iface.method,
+                body: payload,
+                json: true,
+                timeout: 5000
+            });
+
+            return {
+                success: (statusCode >= 200 && statusCode <= 299),
+                message: statusMessage,
+                info: { statusMessage, statusCode }
+            };
+        case 'email':
+            const text = Object.keys(payload).map(k => `${k}: ${payload[k]}`).join('\n');
+            const { response, messageId, messageSize, accepted, rejected } = await email.send(iface.email, `New lead for campaign ${campaign.name}`, text);
+
+            return {
+                success: (response.startsWith('250')),
+                message: response,
+                info: { response, messageId, messageSize, accepted, rejected }
+            };
+    }
+}
+
 module.exports.findOne = async (req, res) => {
     try {
         const lead = await Lead.findOne({ _id: req.params });
@@ -94,61 +177,45 @@ module.exports.send = async (req, res) => {
         return res.end(`campaign not found`);
     }
 
-    const leadFields = {};
-    const fieldsSchema = iface.fields.toObject();
-
+    // create a validated and ready-to-send lead object
+    let meta, composed;
     try {
-        fieldsSchema.forEach(schema => {
-            if (schema.isStatic) {
-                return leadFields[schema.name] = schema.value;
-            }
-
-            const field = payload[schema.name];
-            if (!field && schema.isRequired) {
-                throw new Error(`missing required field ${schema.name}`);
-            }
-
-            if (field.length > 250) {
-                throw new Error(`field ${schema.name} is over 250 characters`);
-            }
-
-            leadFields[schema.name] = field;
-        });
+        const results = await composeLead(payload, iface.fields.toObject());
+        meta = results.meta;
+        composed = results.composed
     } catch (err) {
-        console.log(`refused to send invalid lead - ${err}`);
+        console.log(`refused to send lead - composing and validations error "${err}"`);
         res.status(400);
         return res.end(err);
     }
 
-
-    // validate max leads
-    const sentLeadsCount = await Lead.estimatedDocumentCount({ success: true, campaignId });
-    if (sentLeadsCount >= campaign.maxLeads) {
-        console.log(`refused to send lead - max leads for campaigns`);
-        res.status(400);
-        return res.end('max leads for campaign');
-    }
-
-    // validate daily max leads
-    const dailySentLeadsCount = await Lead.estimatedDocumentCount({ success: true, campaignId, timestamp: { $gt: date.startOfDay() } });
-    if (dailySentLeadsCount >= campaign.maxDailyLeads) {
-        console.log(`refused to send lead - max daily leads for campaigns`);
-        res.status(400);
-        return res.end('max daily leads for campaign');
+    // verify leads can be sent to this campaign
+    try {
+        const isAcceptingLeadsResult = await isCampaignAcceptingLeads(campaign, meta.phoneNumber);
+        if (isAcceptingLeadsResult !== true) {
+            console.info(`refused to send lead - ${isAcceptingLeadsResult}`);
+            res.status(400);
+            return res.end(isAcceptingLeadsResult);
+        }
+    } catch (err) {
+        console.error(`failed to send lead - is campaign accepting leads check error`, err);
+        res.status(500);
+        return res.end();
     }
 
     // create lead
     let lead;
     try {
         lead = new Lead({
+            meta,
             raw: payload, // raw payload provided by the affiliate
-            payload: leadFields, // validated payload to send to campaign owner
+            payload: composed, // validated payload to send to campaign owner
             price: campaign.price,
             interfaceId: iface._id,
             affiliate: affiliateId,
             publisher: campaign.publisherId,
             campaign: campaignId
-        })
+        });
         await lead.save();
     } catch (err) {
         console.error(`failed to create lead - ${err}`);
@@ -157,41 +224,20 @@ module.exports.send = async (req, res) => {
     }
 
     // send the lead
-    let success = false, message = "", results = {};
+    let results;
     try {
-        switch (iface.type) {
-            case 'http':
-                const { statusCode, statusMessage } = await http.request({
-                    url: iface.url,
-                    method: iface.method,
-                    body: leadFields,
-                    json: true,
-                    timeout: 5000
-                });
-
-                success = (statusCode >= 200 && statusCode <= 299);
-                message = statusMessage;
-                results = { statusCode, statusMessage };
-                break;
-            case 'email':
-                const text = Object.keys(leadFields).map(k => `${k}: ${leadFields[k]}`).join('\n');
-                const { response, messageId, messageSize, accepted, rejected } = await email.send(iface.email, `New lead for campaign ${campaign.name}`, text);
-
-                success = response.startsWith('250');
-                message = response;
-                results = { response, messageId, messageSize, accepted, rejected };
-                break;
-        }
+        results = await sendLead(iface, composed);
     } catch (err) {
         console.error(`interface error while sending lead by ${req.session.user.name}`, err);
     }
 
+    const success = (results && results.success);
     if (success) {
         console.log(`sent lead ${lead._id} by ${req.session.user.name} for campaign ${campaignId}`);
         res.status(200);
-        res.json(result);
+        res.json(results);
     } else {
-        console.error(`failed to send lead ${lead._id} - ${JSON.stringify(results)}`);
+        console.error(`failed to send lead ${lead._id} - results "${JSON.stringify(results)}"`);
         res.status(500);
         res.end();
     }
