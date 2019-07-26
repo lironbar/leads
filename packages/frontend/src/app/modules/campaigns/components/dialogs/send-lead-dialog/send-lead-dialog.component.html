@@ -22,7 +22,7 @@
                                 [name]="field.name"
                                 [placeholder]="field.name" [required]="field.isRequired">
                         <mat-option *ngFor="let option of field.options" [value]="option.value">
-                            {{option.displayName}}
+                            {{option.name}}
                         </mat-option>
                     </mat-select>
                     <mat-error *ngIf="!lead[field.name]">*{{'This field is required' | translate}}.</mat-error>

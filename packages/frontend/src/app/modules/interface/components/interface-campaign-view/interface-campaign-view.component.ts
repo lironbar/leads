@@ -1,11 +1,10 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import {InterfaceService} from '../../interface.service';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {Interface} from '../../interface.model';
 import {SnackBarService} from '../../../commons/services/snack-bar.service';
 import {MatDialog} from '@angular/material';
-import {AddPropertyDialogComponent} from '../dialogs/add-property-dialog/add-property-dialog.component';
+import {AddFieldDialogComponent} from '../dialogs/add-field-dialog/add-field-dialog.component';
 
 @Component({
     selector: 'app-interface-campaign-view',
@@ -49,13 +48,23 @@ export class InterfaceCampaignViewComponent implements OnInit, OnChanges{
     }
 
     public onAddField() {
-        const dialogRef = this.dialog.open(AddPropertyDialogComponent);
+        const dialogRef = this.dialog.open(AddFieldDialogComponent);
         dialogRef.afterClosed().subscribe(field => {
            if (field) {
                if (!this.interface.fields) {
                    this.interface.fields = [];
                }
-               this.interface.fields.push(field);
+               if (field.isName) {
+                   this.interface.fields.forEach(f => {
+                       f.isName = undefined;
+                   })
+               }
+               if (field.isPhoneNumber) {
+                   this.interface.fields.forEach(f => {
+                       f.isPhoneNumber = undefined;
+                   })
+               }
+               this.interface.fields.unshift(field);
            }
         });
     }
@@ -69,6 +78,26 @@ export class InterfaceCampaignViewComponent implements OnInit, OnChanges{
     public onFieldIsStaticdChange(event, index, field) {
         if (field.isStatic) {
             field.isRequired = false;
+        }
+    }
+
+    public onFieldIsNameChange(event, index, field) {
+        if (field.isName) {
+            this.interface.fields.forEach(f => {
+                f.isName = undefined;
+            });
+            field.isName = true;
+            field.isPhoneNumber = undefined;
+        }
+    }
+
+    public onFieldisPhoneNumberChange(event, index, field) {
+        if (field.isPhoneNumber) {
+            this.interface.fields.forEach(f => {
+                f.isPhoneNumber = undefined;
+            });
+            field.isPhoneNumber = true;
+            field.isName = undefined;
         }
     }
 

@@ -12,5 +12,7 @@
     "be": "cd ./packages/backend/ && npm start",
     "start": "lerna run start"
   },
-  "dependencies": {}
+  "dependencies": {
+    "convert-excel-to-json": "^1.6.1"
+  }
 }

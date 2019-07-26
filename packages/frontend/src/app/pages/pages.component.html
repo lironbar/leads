@@ -2,6 +2,7 @@
     <app-header></app-header>
 
     <mat-sidenav-container fxFlex fxLayout="column" class="main">
+
         <mat-sidenav class="padding-5" #sidenavright position="{{sidNavPosition}}" mode="side" opened>
 
             <!--Publishers Home-->
@@ -26,13 +27,14 @@
                 </button>
             </mat-nav-list>
 
+
             <!--Publishers-->
             <mat-nav-list *ngxPermissionsOnly="['ADMIN']">
                 <button fxFlex
                         class="nav-btn" mat-icon-button color="primary"
                         matTooltip="{{'Publishers' | translate}}"
                         [matTooltipPosition]="tooltipDirection"
-                        routerLink="/publishers/list">
+                        routerLink="/publishers">
                     <mat-icon class="margin-right-5">person_pin</mat-icon>
                 </button>
             </mat-nav-list>
@@ -43,7 +45,7 @@
                         class="nav-btn" mat-icon-button color="primary"
                         matTooltip="{{'Affiliates' | translate}}"
                         [matTooltipPosition]="tooltipDirection"
-                        routerLink="/affiliates/list">
+                        routerLink="/affiliates">
                     <mat-icon class="margin-right-5">group</mat-icon>
                 </button>
             </mat-nav-list>
@@ -59,17 +61,6 @@
                 </button>
             </mat-nav-list>
 
-            <!--Reports-->
-            <!--<mat-nav-list *ngxPermissionsOnly="['AFFILIATE', 'PUBLISHER']">-->
-                <!--<button fxFlex-->
-                        <!--class="nav-btn" mat-icon-button color="primary"-->
-                        <!--matTooltip="Reports"-->
-                        <!--[matTooltipPosition]="tooltipDirection"-->
-                        <!--[routerLink]="[reportsLinkRef, currentUser._id]">-->
-                    <!--<mat-icon class="margin-right-5">bar_chart</mat-icon>-->
-                <!--</button>-->
-            <!--</mat-nav-list>-->
-
             <!--Interface-->
             <mat-nav-list *ngxPermissionsOnly="['ADMIN']">
                 <button fxFlex
@@ -81,27 +72,19 @@
                 </button>
             </mat-nav-list>
 
-            <!--&lt;!&ndash;Publisher Reports&ndash;&gt;-->
-            <!--<mat-nav-list *ngxPermissionsOnly="['PUBLISHER']">-->
-                <!--<button fxFlex-->
-                        <!--class="nav-btn" mat-icon-button color="primary"-->
-                        <!--matTooltip="Reports"-->
-                        <!--[matTooltipPosition]="tooltipDirection"-->
-                        <!--[routerLink]="['/publishers/reports', currentUserRole.data]">-->
-                    <!--<mat-icon class="margin-right-5">assessment</mat-icon>-->
-                <!--</button>-->
+            <!--Reports-->
+            <!--<mat-nav-list *ngxPermissionsOnly="['AFFILIATE', 'PUBLISHER']">-->
+            <!--<button fxFlex-->
+            <!--class="nav-btn" mat-icon-button color="primary"-->
+            <!--matTooltip="Reports"-->
+            <!--[matTooltipPosition]="tooltipDirection"-->
+            <!--[routerLink]="[reportsLinkRef, currentUser._id]">-->
+            <!--<mat-icon class="margin-right-5">bar_chart</mat-icon>-->
+            <!--</button>-->
             <!--</mat-nav-list>-->
-            <!--&lt;!&ndash;Affiliate Reports&ndash;&gt;-->
-            <!--<mat-nav-list *ngxPermissionsOnly="['AFFILIATE']">-->
-                <!--<button fxFlex-->
-                        <!--class="nav-btn" mat-icon-button color="primary"-->
-                        <!--matTooltip="Reports"-->
-                        <!--[matTooltipPosition]="tooltipDirection"-->
-                        <!--[routerLink]="['/affiliates/reports', currentUserRole.data]">-->
-                    <!--<mat-icon class="margin-right-5">assessment</mat-icon>-->
-                <!--</button>-->
-            <!--</mat-nav-list>-->
+
         </mat-sidenav>
+
         <router-outlet fxFlex></router-outlet>
     </mat-sidenav-container>
 

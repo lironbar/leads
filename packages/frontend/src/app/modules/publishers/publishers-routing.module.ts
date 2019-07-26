@@ -8,9 +8,9 @@ import {NgxPermissionsGuard} from 'ngx-permissions';
 
 
 const routes: Routes = [
-    {path: '', redirectTo: '/publishers/list', pathMatch: 'full'},
+    // {path: '', redirectTo: '/publishers/list', pathMatch: 'full'},
     {
-        path: 'list',
+        path: '',
         component: PublishersViewComponent,
         canActivate: [NgxPermissionsGuard],
         data: {

@@ -10,7 +10,7 @@
 
             <!--Type Filed-->
             <mat-form-field fxFlex class="margin-right-20">
-                <mat-select [(value)]="property.type"  placeholder="{{'Type' | translate}}" (selectionChange)="onTypeChange(property.type)">
+                <mat-select [(value)]="field.type"  placeholder="{{'Type' | translate}}" (selectionChange)="onTypeChange(field.type)">
                     <mat-option *ngFor="let type of types" [value]="type">
                         {{type | translate}}
                     </mat-option>
@@ -19,31 +19,47 @@
 
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="property.type === 'string'">
+        <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="field.type === 'string'">
 
             <!--Name Filed-->
-            <mat-form-field fxFlex>
+            <mat-form-field>
                 <input matInput
                        placeholder="{{'Field Name' | translate}}"
                        title="Field Name"
                        type="text"
                        #name="ngModel"
-                       [(ngModel)]="property.name" name="name" required>
+                       [(ngModel)]="field.name" name="name" required>
                 <mat-error *ngIf="name.invalid">*{{'This field is required' | translate}}.</mat-error>
             </mat-form-field>
 
             <!--String Input Field -->
-            <mat-form-field fxFlex>
+            <mat-form-field>
                 <input matInput
                        placeholder="{{'Value' | translate}}"
                        title="Value"
                        type="text"
                        #value="ngModel"
-                       [(ngModel)]="property.value" name="value">
+                       [(ngModel)]="field.value" name="value">
             </mat-form-field>
+
+            <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+                <mat-checkbox fxFlex
+                        color="primary"
+                        [checked]="field.isName"
+                        (change)="onIsNameChange($event, i, field)">
+                    {{'Name' | translate}}
+                </mat-checkbox>
+
+                <mat-checkbox fxFlex
+                        color="primary"
+                        [checked]="field.isPhoneNumber"
+                        (change)="onisPhoneNumberChange($event, i, field)">
+                    {{'Phone' | translate}}
+                </mat-checkbox>
+            </div>
         </div>
 
-        <div fxLayout="column" *ngIf="property.type === 'select'">
+        <div fxLayout="column" *ngIf="field.type === 'select'">
 
             <!--Name Field Row-->
             <div fxLayout="row" fxLayoutAlign="start center">
@@ -55,7 +71,7 @@
                            title="Field Name"
                            type="text"
                            #name="ngModel"
-                           [(ngModel)]="property.name" name="name" required>
+                           [(ngModel)]="field.name" name="name" required>
                     <mat-error *ngIf="name.invalid">*{{'This field is required' | translate}}.</mat-error>
                 </mat-form-field>
                 <span fxFlex></span>
@@ -69,16 +85,16 @@
 
             <!--Option List-->
             <mat-list role="list">
-                <mat-list-item *ngFor="let option of property.options; let $index = index" role="listitem" class="padding-10">
+                <mat-list-item *ngFor="let option of field.options; let $index = index" role="listitem" class="padding-10">
 
                     <mat-form-field class="margin-right-5">
                         <input matInput
-                               placeholder="{{'Display Name' | translate}}"
-                               title="Display Name"
+                               placeholder="{{'Name' | translate}}"
+                               title="Name"
                                type="text"
-                               #displayName="ngModel"
-                               [(ngModel)]="option.displayName" name="displayName" required>
-                        <mat-error *ngIf="displayName.invalid">*{{'This field is required' | translate}}.</mat-error>
+                               #name="ngModel"
+                               [(ngModel)]="option.name" name="name" required>
+                        <mat-error *ngIf="name.invalid">*{{'This field is required' | translate}}.</mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="margin-right-5">
@@ -103,17 +119,17 @@
     </div>
     <div mat-dialog-actions fxLayout="row" fxLayoutAlign="start center">
 
-        <mat-checkbox *ngIf="property.type === 'string'"
+        <mat-checkbox *ngIf="field.type === 'string'"
                 class="margin-right-10"
                 color="primary"
-                      [checked]="property.isStatic"
-                      (change)="onIsStaticChange($event, i, property)">
+                      [checked]="field.isStatic"
+                      (change)="onIsStaticChange($event, i, field)">
             {{'Static' | translate}}
         </mat-checkbox>
         <mat-checkbox
                 color="primary"
-                [checked]="property.isRequired"
-                (change)="onIsRequiredChange($event, i, property)">
+                [checked]="field.isRequired"
+                (change)="onIsRequiredChange($event, i, field)">
             {{'Required' | translate}}
         </mat-checkbox>
         <span fxFlex></span>

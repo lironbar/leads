@@ -7,9 +7,8 @@ import {NgxPermissionsGuard} from 'ngx-permissions';
 
 
 const routes: Routes = [
-    {path: '', redirectTo: '/affiliates/list', pathMatch: 'full'},
     {
-        path: 'list',
+        path: '',
         component: AffiliatesViewComponent,
         canActivate: [NgxPermissionsGuard],
         data: {

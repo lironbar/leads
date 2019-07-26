@@ -1,7 +1,7 @@
 <div fxLayout="column" class="full-height">
     <mat-card fxFlex fxLayout="column" class="padding-0" *ngIf="interface; else empty_state">
         <mat-radio-group fxLayout="row" fxLayoutAlign="space-around center"
-                         (change)="onTypeChange(type)"
+                         (change)="onTypeChange(interface.type)"
                          class="padding-5" [(ngModel)]="interface.type">
             <mat-radio-button color="primary" value="http">{{'API' | translate}}</mat-radio-button>
             <mat-radio-button color="primary" value="email">{{'Email' | translate}}</mat-radio-button>
@@ -51,6 +51,7 @@
 
                     <!--String Item-->
                     <div fxLayout="row" *ngIf="field.type === 'string'">
+
                         <mat-form-field class="margin-right-5">
                             <input matInput [(ngModel)]="field.name" placeholder="{{'Field Name' | translate}}">
                         </mat-form-field>
@@ -62,6 +63,7 @@
 
                     <!--Select Item-->
                     <div fxLayout="row" *ngIf="field.type === 'select'">
+
                         <!--Select Name-->
                         <mat-form-field class="margin-right-5">
                             <input matInput [(ngModel)]="field.name" placeholder="{{'Field Name' | translate}}">
@@ -69,12 +71,27 @@
 
                         <!--Select Options-->
                         <div *ngFor="let option of field.options" class="margin-right-5">
-                            <span class="mat-body-2">{{option.displayName}}: </span>
+                            <span class="mat-body-2">{{option.name}}: </span>
                             <span class="mat-body-1">{{option.value}}</span>
                         </div>
                     </div>
 
                     <span fxFlex></span>
+
+                    <div fxLayout="column" class="margin-right-5">
+                        <mat-checkbox color="primary"
+                                      [checked]="field.isName"
+                                      [(ngModel)]="field.isName"
+                                      (change)="onFieldIsNameChange($event, i, field)">
+                            {{'Name' | translate}}
+                        </mat-checkbox>
+                        <mat-checkbox [checked]="field.isPhoneNumber"
+                                      (change)="onFieldisPhoneNumberChange($event, i, field)"
+                                      color="primary" [(ngModel)]="field.isPhoneNumber">
+                            {{'Phone' | translate}}
+                        </mat-checkbox>
+                    </div>
+
                     <div fxLayout="column" class="margin-right-5">
                         <mat-checkbox color="primary"
                                       [checked]="field.isRequired"

@@ -16,7 +16,7 @@ export class PagesComponent implements OnInit {
     constructor(public authenticationService: AuthenticationService) {}
     ngOnInit() {
         this.currentUser = this.authenticationService.currentUserValue;
-        this.rulePath = this.currentUser.role === 'PUBLISHER' ? 'publishers' : 'affiliates';
-        this.reportsLinkRef = `/${this.rulePath}/reports`
+        // this.rulePath = this.currentUser.role === 'PUBLISHER' ? 'publishers' : 'affiliates';
+        // this.reportsLinkRef = `/${this.rulePath}/reports`
     }
 }

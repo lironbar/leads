@@ -13,6 +13,7 @@ import {PageUnauthorizedComponent} from './core/error-pages/components/page-unau
 const routes: Routes = [
     {path: 'sign-in', component: LoginViewComponent},
     {path: 'register', component: RegisterViewComponent},
+
     {
         path: '',
         component: PagesComponent,
@@ -65,6 +66,7 @@ const routes: Routes = [
             {path: '', redirectTo: '/publishers', pathMatch: 'full'},
         ]
     },
+
     {path: '401', component: PageUnauthorizedComponent},
     {path: '403', component: PageForbiddenComponent},
     {path: '404', component: PageNotFoundComponent},
@@ -76,5 +78,4 @@ const routes: Routes = [
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
