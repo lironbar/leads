@@ -13,6 +13,7 @@
     "start": "lerna run start"
   },
   "dependencies": {
-    "convert-excel-to-json": "^1.6.1"
+    "convert-excel-to-json": "^1.6.1",
+    "xlsx": "^0.14.4"
   }
 }

@@ -1,0 +1,38 @@
+<div fxLayout="column" class="full-height">
+
+    <!--Action Row-->
+    <div fxLayout="row" fxLayoutAlign="start center" class="app-toolbar">
+        <span fxFlex></span>
+        <app-campaign-create-button (create)="onCreateCampaign($event)"></app-campaign-create-button>
+    </div>
+
+    <!--Main Content-->
+    <div fxFlex fxLayout="row" class="overflow-auto">
+
+        <!--Campaign Panels-->
+        <app-campaign-panels fxFlex
+                             *ngIf="campaigns$ | async as campagins"
+                             [(campaigns)]="campagins"
+                             (edit)="onEditCampaign($event)"
+                             (delete)="OnDeleteCampaign($event)"
+                             (open)="onSelectedCampaign($event)">
+        </app-campaign-panels>
+
+        <!--Leads Sections-->
+        <div fxFlex fxLayout="column">
+            <div fxFlex fxLayout="column" *ngIf="selectedCampaignId; else empty_state_leads">
+                <app-leads-panels fxFlex *ngIf="leads$ | async as leads;"
+                                  [(leads)]="leads" [isMulti]="true">
+
+                </app-leads-panels>
+            </div>
+
+            <ng-template #empty_state_leads>
+                <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+                    <span class="mat-title opacity-5">{{'Select a campaign for more info' | translate}}</span>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+
+</div>

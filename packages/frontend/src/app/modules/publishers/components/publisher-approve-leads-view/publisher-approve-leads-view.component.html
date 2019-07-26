@@ -1,0 +1,116 @@
+<div fxLayout="column" class="full-height">
+
+    <!--Action Row-->
+    <div fxLayout="row" fxLayoutAlign="start center" class="app-toolbar">
+        <button  *ngxPermissionsOnly="['ADMIN']"
+                 mat-button
+                 [routerLink]="['../campaigns']">
+            {{'Back' | translate}}
+        </button>
+        <span fxFlex></span>
+        <div *ngIf="stats" fxLayout="row" fxLayoutAlign="start center">
+            <mat-card class="stats-box">
+                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                    <span class="mat-body-1">{{'Approved'}}</span>
+                    <span class="mat-body-2">{{stats.approved}}</span>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="stats-box">
+                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                    <span class="mat-body-1">{{'Rejected'}}</span>
+                    <span class="mat-body-2">{{stats.rejected}}</span>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="stats-box">
+                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                    <span class="mat-body-1">{{'Total'}}</span>
+                    <span class="mat-body-2">{{stats.approved + stats.rejected}}</span>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!--Main Content-->
+    <div fxFlex fxLayout="column" class="overflow-auto">
+
+        <div *ngIf="leads.length; else upload"
+             fxFlex fxLayout="column">
+            <div fxFlex fxLayout="column" class="overflow-auto">
+                <div fxFlex="none" fxLayout="row" fxLayoutAlign="space-around center"
+                     *ngFor="let lead of leads; index as i">
+
+                    <!--Name-->
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="margin-right-5">account_circle</mat-icon>
+                        <mat-form-field floatLabel="never">
+                            <input matInput [(ngModel)]="lead.name" placeholder="{{'Name' | translate}}">
+                        </mat-form-field>
+                    </div>
+
+                    <!--Phone-->
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="margin-right-5">phone</mat-icon>
+                        <mat-form-field floatLabel="never">
+                            <input matInput [(ngModel)]="lead.phone" placeholder="{{'Phone' | translate}}">
+                        </mat-form-field>
+                    </div>
+
+                    <!--isApproved-->
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="margin-right-5">more</mat-icon>
+                        <mat-form-field floatLabel="never">
+                            <input matInput [(ngModel)]="lead.isApproved" placeholder="{{'Is Approved' | translate}}">
+                        </mat-form-field>
+                    </div>
+
+                    <!--Extra Info-->
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="margin-right-5">info</mat-icon>
+                        <mat-form-field floatLabel="never">
+                            <input matInput [(ngModel)]="lead.info" placeholder="{{'Extra Info' | translate}}">
+                        </mat-form-field>
+                    </div>
+
+                    <button mat-mini-fab color="warn"
+                            (click)="onRemoveLead(i)">
+                        <mat-icon aria-label="Create Campaign">remove</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div fxLayout="row" fxLayoutAlign="end center" class="padding-5">
+                <button *ngxPermissionsOnly="['ADMIN']"
+                        (click)="onCancel()"
+                        mat-button>
+                    {{'Cancel' | translate}}
+                </button>
+                <button *ngxPermissionsOnly="['ADMIN']"
+                        (click)="onDone()"
+                        mat-button color="primary">
+                    {{'Done' | translate}}
+                </button>
+            </div>
+
+        </div>
+
+        <ng-template #upload>
+            <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+                <app-empty-state text="Upload excel to approve leads"
+                                 src="/assets/empty_states/empty_state_stats.png"></app-empty-state>
+                <button *ngxPermissionsOnly="['ADMIN']"
+                        (click)="fileInput.click()"
+                        mat-button color="primary">
+                    {{'Upload' | translate}}
+                </button>
+                <input #fileInput type="file" (change)="onFileChange($event)" style="display:none;"/>
+            </div>
+        </ng-template>
+
+
+    </div>
+
+</div>
