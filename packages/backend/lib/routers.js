@@ -36,6 +36,7 @@ module.exports = {
         router.get('/:leadId', lead.findOne);
         router.get('/campaign/:campaignId', lead.findByCampaign);
         router.post('/campaign/:campaignId', lead.send);
+        router.post('/approve/:publisherId', lead.approve);
         return router;
     },
     campaign: () => {
