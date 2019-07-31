@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {LeadService} from '../../../leads/services/lead.service';
 import * as XLSX from 'xlsx';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
     selector: 'app-publisher-approve-leads-view',
@@ -11,11 +13,17 @@ export class PublisherApproveLeadsViewComponent implements OnInit {
 
     leads = [];
     stats: {};
+    publisherId: string;
 
-    constructor() {}
+    constructor(
+        private leadService: LeadService,
+        private route: ActivatedRoute
+    ) {}
 
     ngOnInit() {
-
+        this.route.parent.params.subscribe((params: Params) => {
+            this.publisherId = params.id;
+        });
     }
 
     onFileChange(ev) {
@@ -45,7 +53,10 @@ export class PublisherApproveLeadsViewComponent implements OnInit {
     }
 
     onDone() {
+        this.leadService.approve(this.leads, this.publisherId)
+            .subscribe(res => {
 
+            })
     }
 
     onCancel() {

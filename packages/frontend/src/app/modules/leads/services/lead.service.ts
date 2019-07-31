@@ -43,6 +43,11 @@ export class LeadService {
         return this.http.post<boolean>(path, {approved: isApproved});
     }
 
+    public approve(leads: Lead[], publisherId: string) {
+        const path = `${this.apiUrl}/approve/${publisherId}`;
+        return this.http.post<Campaign>(path, leads);
+    }
+
 
     // submit(campaignId: string, lead: Lead) {
     //     return this.http.post(`${this.apiUrl}/${campaignId}`, lead)
