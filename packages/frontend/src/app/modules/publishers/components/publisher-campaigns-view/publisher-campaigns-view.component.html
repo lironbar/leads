@@ -21,6 +21,19 @@
         <!--Leads Sections-->
         <div fxFlex fxLayout="column">
             <div fxFlex fxLayout="column" *ngIf="selectedCampaignId; else empty_state_leads">
+
+                <div fxLayout="row" class="padding-left-10 padding-right-10">
+                    <mat-form-field>
+                        <mat-select [(ngModel)]="isApprovedLeads"
+                                    (selectionChange)="onLeadStatusChange($event)"
+                                    placeholder="{{'Status' | translate}}">
+                            <mat-option *ngFor="let status of leadStatuses" [value]="status.key">
+                                {{status.value | translate}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
                 <app-leads-panels fxFlex *ngIf="leads$ | async as leads;"
                                   [(leads)]="leads" [isMulti]="true">
 

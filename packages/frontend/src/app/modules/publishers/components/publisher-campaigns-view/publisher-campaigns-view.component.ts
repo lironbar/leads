@@ -21,6 +21,12 @@ export class PublisherCampaignsViewComponent implements OnInit {
 
     publisherId: string;
     selectedCampaignId: string;
+    isApprovedLeads: string;
+    leadStatuses = [
+        {key: 'false', value: 'Not Approved'},
+        {key: 'true', value: 'Approved'},
+        {key: '', value: 'All'},
+    ];
     campaigns$: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
     leads$: BehaviorSubject<Lead[]> = new BehaviorSubject([]);
 
@@ -108,19 +114,28 @@ export class PublisherCampaignsViewComponent implements OnInit {
     }
 
     onSelectedCampaign(campaign: Campaign) {
+        this.isApprovedLeads = 'false';
         if (!this.selectedCampaignId || campaign._id !== this.selectedCampaignId) {
             this.selectedCampaignId = campaign._id;
-            this.leadService.getLeadsByCampaign(campaign._id, 'false')
-                .subscribe(leads => {
-                    this.leads$.next(leads);
-                })
+            this.getLeads(campaign._id, this.isApprovedLeads);
         } else {
             this.selectedCampaignId = undefined;
             this.leads$.next([]);
         }
     }
 
-    _onError(message, error) {
+    getLeads(campaignId, isApproved) {
+        this.leadService.getLeadsByCampaign(campaignId, isApproved)
+            .subscribe(leads => {
+                this.leads$.next(leads);
+            })
+    }
+
+    onLeadStatusChange(event) {
+        this.getLeads(this.selectedCampaignId, event.value);
+    }
+
+    private _onError(message, error) {
         console.error(message, error);
         this.snackBar.error(message);
     }
