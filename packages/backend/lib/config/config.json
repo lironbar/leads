@@ -18,7 +18,7 @@
         "saveUninitialized": true
     },
     "mongo": {
-        "url": "mongodb://localhost:27017/leads",
+        "url": "mongodb://127.0.0.1:27017/leads",
         "options": {
             "poolSize": 4,
             "autoReconnect": true,

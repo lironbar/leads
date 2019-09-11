@@ -45,7 +45,7 @@ async function isCampaignAcceptingLeads(campaign, phoneNumber) {
     }
     // validate 3Mths elpased since phone sent to publisher (3Mths should be configurable)
     const threeMonthsAgo = Date.now() - (1000 * 60 * 60 * 24 * 30 * 3);
-    const inFreezePeriod = (await Lead.findOne({ 'meta.phoneNumber': phoneNumber, publisherId, timestamp: { $gt: threeMonthsAgo }, success: true }));
+    const inFreezePeriod = Boolean(await Lead.findOne({ 'meta.phoneNumber': phoneNumber, publisher: publisherId, timestamp: { $gt: threeMonthsAgo }, success: true }));
     if (inFreezePeriod) {
         return 'the publisher is currently not accepting this phone number';
     }
@@ -230,22 +230,17 @@ module.exports.send = async (req, res) => {
         results = await sendLead(iface, campaign, composed);
     } catch (err) {
         console.error(`interface error while sending lead by ${req.session.user.name}`, err);
+        res.status(424);
+        return res.send(`interface error`);
     }
 
-    const success = (results && results.success);
-    if (success) {
-        console.log(`sent lead ${lead._id} by ${req.session.user.name} for campaign ${campaignId}`);
-        res.status(200);
-        res.json(results);
-    } else {
-        console.error(`failed to send lead ${lead._id} - results "${JSON.stringify(results)}"`);
-        res.status(500);
-        res.end();
-    }
+    console.log(`sent lead ${lead._id} by ${req.session.user.name} for campaign ${campaignId}  sucess=${results.sucess}`);
+    res.status(200);
+    res.json(results);
 
     // update the lead with the results
     try {
-        await Lead.updateOne({ _id: lead._id }, { success, response: results, timestamp: Date.now() });
+        await Lead.updateOne({ _id: lead._id }, { success: results.success, response: results, timestamp: Date.now() });
     } catch (err) {
         console.error(`failed to update results for lead ${lead._id} - success: "${success}" - results: "${JSON.stringify(results)}" - error: "${err}"`);
     }
@@ -259,75 +254,128 @@ module.exports.approve = async (req, res) => {
         return;
     }
 
-    const publisher = req.params.publisherId;
-    const leads = req.body;
+    const { leadId } = req.params;
+    const { isApproved } = req.body;
+    if (!leadId) {
+        res.status(400);
+        return res.end('missing lead id');
+    }
+    if (typeof isApproved !== 'boolean') {
+        res.status(400);
+        return res.end(`invalid approval state "${isApproved}"`);
+    }
+    try {
+        const updated = Boolean(await Lead.findOneAndUpdate({ _id: leadId, success: true }, { approved: isApproved }));
+        if (!updated) {
+            console.log(`no matching lead found when trying to approve ${leadId}`);
+            res.status(404);
+            return res.end();
+        }
+        console.log(`set lead ${leadId} approval state to ${isApproved}`);
+        res.status(200);
+        res.send(isApproved);
+    } catch (err) {
+        console.error(`failed to approve lead ${leadId}`, err);
+        res.status(500);
+        res.end('failed to approve lead');
+    }
+}
 
-    if (!publisher || !leads || (leads instanceof Array && !leads.length)) {
+module.exports.approveByReport = async (req, res) => {
+    if (req.session.isAdmin !== true) {
+        console.warn(`rejecting request to approve leads by a forbidden user ${req.session.user.name}`);
+        res.status(403);
+        res.end();
+        return;
+    }
+
+    const publisher = req.params.publisherId;
+    const approvals = req.body;
+
+    if (!publisher || !approvals || (approvals instanceof Array && !approvals.length)) {
         res.status(400);
         res.end();
         return;
     }
 
-    console.log(`starting update of leads approval status for publisher ${publisher}`);
-    const results = { success: false, message: '', data: null };
+    console.log(`starting update of approvals status for publisher ${publisher}`);
 
-    // work with array
-    if (!leads instanceof Array) {
-        leads = [leads];
-    }
+    // find invalid approvals which don't have a proper name and phone
+    const candidates = [], rejected = [], approved = [];
 
-    // find invalid leads which don't have a proper name and phone
-    const invalidLeads = leads.filter(lead => {
-        return (!lead.name || !lead.phone ||
-            typeof lead.name !== 'string' ||
-            (typeof lead.phone !== 'string' && typeof lead.phone !== 'number'));
+    approvals.forEach(approval => {
+        if (typeof approval.name !== 'string' || typeof approval.phone !== 'string') {
+            return rejected.push({
+                approval,
+                status: 'rejected',
+                reason: 'name and phone number must be a string'
+            });
+        }
+        // trim fields
+        Object.keys(approval).forEach(k => typeof approval[k] === 'string' ? approval[k] = approval[k].trim() : null);
+        if (!approval.name || !approval.phone) {
+            return rejected.push({
+                approval,
+                status: 'rejected',
+                reason: 'missing name or phone number'
+            });
+        }
+        candidates.push(approval);
     });
-    if (invalidLeads.length) {
-        console.log(`rejecting due to invalid leads`);
-        results.message = 'invalid leads';
-        results.data = invalidLeads;
-        res.status(400);
-        res.json(results);
-        return;
+
+    // verify unapproved leads exists for the reported approvals
+    // reject if more than one is awaiting, wouldn't know which to update
+    for (let i = 0, len = candidates.length; i < len; i++) {
+        const candidate = candidates[i];
+        const leads = await Lead.find({ success: true, publisher, 'meta.phoneNumber': candidate.phone }, { approvalReported: 1 });
+        const unapproved = leads.filter(lead => lead.approvalReported === false).length;
+        if (!leads.length || unapproved === 0) {
+            rejected.push({
+                approval: candidate,
+                status: 'rejected',
+                reason: 'no leads awaiting approval'
+            });
+            continue;
+        }
+        if (unapproved > 1) {
+            rejected.push({
+                approval: candidate,
+                status: 'rejected',
+                reason: `${leads.length} leads awaiting approval for this phone number`
+            });
+            continue;
+        }
+        approved.push(candidate);
     }
 
-    // trim fields
-    leads.forEach(lead => Object.keys(lead).forEach(k => typeof lead[k] === 'string' ? lead[k] = lead[k].trim() : null));
-
-    // check if any phone exists for yet to be reported leads
-    const phones = leads.map(lead => lead.phone);
-    const unreported = Lead.find({ approvalReported: null, 'meta.phoneNumber': { $in: phones } });
-    if (unreported && unreported.length) {
-        console.log(`rejecting due to yet to reported leads`);
-        results.message = 'leads sent to phones provided are yet to be reported';
-        results.data = unreported;
-        res.status(400);
-        res.json(results);
-        return;
-    }
-
-    // update leads with reported data
-    const bulkOps = leads.map(lead => {
+    // update leads with reported approvals
+    const bulkOps = approved.map(approval => {
         return {
             updateOne: {
                 filter: {
+                    publisher,
                     approvalReported: false,
-                    'meta.name': lead.name,
-                    'meta.phoneNumber': lead.phone,
+                    'meta.phoneNumber': approval.phone
                 },
                 update: {
                     approvalReported: true,
-                    approved: (lead.isApproved === true || lead.isApproved === "true"),
-                    'meta.info': lead.info
+                    approved: (approval.isApproved === true || approval.isApproved === "true"),
+                    'meta.info': approval.info
                 }
             }
         };
     });
+    if (bulkOps.length) {
+        try {
+            await Lead.bulkWrite(bulkOps);
+        } catch (err) {
+            console.error(`saving approval results failed`, err);
+            res.status(500);
+            return res.end('failed to complete leads approval');
+        }
+    }
 
-    const { modifiedCount } = await Lead.bulkWrite(bulkOps);
-    results.success = true;
-    results.message = `updated ${modifiedCount} leads`;
     res.status(200);
-    res.end();
-    console.log(results.message);
+    res.json({ approved, rejected });
+    console.log(`completed leads approval status for publisher ${publisher}`, `approved: ${approved.length} rejected: ${rejected.length}`);
 };

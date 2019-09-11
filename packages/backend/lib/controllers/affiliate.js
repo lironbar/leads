@@ -57,6 +57,20 @@ module.exports.findOne = async (req, res) => {
     }
 };
 
+module.exports.update = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const affiliate = await User.findOneAndUpdate({ _id: id, role: 'AFFILIATE' }, req.body, { new: true }).populate('campaigns');
+        console.log(`updated affiliate ${affiliate.name} by user ${req.session.user.name}`);
+        res.status(200);
+        res.json(affiliate);
+    } catch (err) {
+        console.error(`error updating affiliate - ${err}`);
+        res.status(500);
+        res.end();
+    }
+};
+
 module.exports.joinCampaign = async (req, res) => {
     try {
         const id = req.body.affiliateId;

@@ -36,7 +36,8 @@ module.exports = {
         router.get('/:leadId', lead.findOne);
         router.get('/campaign/:campaignId', lead.findByCampaign);
         router.post('/campaign/:campaignId', lead.send);
-        router.post('/approve/:publisherId', lead.approve);
+        router.put('/:leadId/approve', lead.approve);
+        router.post('/approve/:publisherId', lead.approveByReport);
         return router;
     },
     campaign: () => {
@@ -70,6 +71,7 @@ module.exports = {
         router.post('/', affiliate.create);
         router.get('/', affiliate.find);
         router.get('/:id', affiliate.findOne);
+        router.put('/:id', affiliate.update);
         router.get('/:id/campaigns', affiliate.getCampaigns);
         return router;
     },

@@ -10,7 +10,13 @@
     const { env, port, session, sessionStore, cors: corsOpt, mongo } = require('./config');
 
     // connect to mongodb
-    await mongoConnection.connect(mongo.url, mongo.options);
+    try {
+        await mongoConnection.connect(mongo.url, mongo.options);
+    } catch (err) {
+        console.error(`failed to connect to mongodb`, err);
+        process.exit(1);
+    }
+
 
     // create express application
     const api = express();
@@ -65,26 +71,31 @@
     api.use('/interface', routers.interface());
 
     // create super admin user
-    if (env === 'dev') {
-        const User = require('./models/user');
-        const user = {
-            name: 'super admin',
-            password: '123',
-            email: 'admin@test.com',
-            phone: '010101010',
-            role: 'ADMIN'
-        };
-        await User.findOneAndUpdate({ name: user.name }, user, { upsert: true }, (upsertError) => {
-            if (upsertError) {
-                return console.error('boot.createSuperAdmin', upsertError);
-            }
-            console.log('dev mode super admin:', user.email, user.password);
-        });
+    try {
+        if (env === 'dev') {
+            const User = require('./models/user');
+            const user = {
+                name: 'super admin',
+                password: '123',
+                email: 'admin@test.com',
+                phone: '010101010',
+                role: 'ADMIN'
+            };
+            await User.findOneAndUpdate({ name: user.name }, user, { upsert: true }, (upsertError) => {
+                if (upsertError) {
+                    return console.error('boot.createSuperAdmin', upsertError);
+                }
+                console.log('dev mode super admin:', user.email, user.password);
+            });
 
-        // setup a mock for http interfaces
-        const ifaceMockPort = 9000, ifaceMockServer = require('./interface.mock');
-        ifaceMockServer.listen(9000);
-        console.debug(`interface mock server listening on port ${ifaceMockPort}`);
+            // setup a mock for http interfaces
+            const ifaceMockPort = 9000, ifaceMockServer = require('./interface.mock');
+            ifaceMockServer.listen(9000);
+            console.debug(`interface mock server listening on port ${ifaceMockPort}`);
+        }
+    } catch (err) {
+        console.error(`dev env init failed`, err);
+        process.exit(1);
     }
 
     // listen

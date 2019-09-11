@@ -22,12 +22,7 @@ async function connect(url, options) {
         console.error('MongoDB connection error', err);
     });
 
-    try {
-        await mongoose.connect(url, options);
-    } catch (err) {
-        console.error(`mongodb failed to connect to ${url}`);
-        throw err;
-    }
+    await mongoose.connect(url, options);
     return connection;
 }
 
