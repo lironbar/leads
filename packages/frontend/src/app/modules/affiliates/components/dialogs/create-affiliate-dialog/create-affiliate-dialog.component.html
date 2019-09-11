@@ -51,7 +51,7 @@
   </div>
   <div mat-dialog-actions fxLayout="row">
     <span fxFlex></span>
-    <button mat-button (click)="onCancel()">{{'CANCEL' | translate}}</button>
+    <button mat-button (click)="onCancel($event)">{{'CANCEL' | translate}}</button>
     <button mat-button mat-raised-button color="primary" type="submit">{{action | translate}}</button>
   </div>
 </form>

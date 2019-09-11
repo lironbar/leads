@@ -2,6 +2,7 @@
   <h1 mat-dialog-title class="margin-bottom-10">{{header | translate}}</h1>
   <mat-divider></mat-divider>
   <div mat-dialog-content>
+
     <div fxLayout="row">
       <mat-form-field fxFlex>
         <input matInput placeholder="{{'Name' | translate}}"
@@ -18,13 +19,24 @@
         <mat-error *ngIf="phc.invalid">*{{'This field is required' | translate}}</mat-error>
       </mat-form-field>
     </div>
-    <mat-form-field>
-      <input matInput placeholder="{{'Phone' | translate}}"
-             title="publisher phone" type="text"
-             #phone="ngModel"
-             [(ngModel)]="publisher.phone" name="phone" required>
-      <mat-error *ngIf="phone.invalid">*{{'This field is required' | translate}}</mat-error>
-    </mat-form-field>
+
+    <div fxLayout="row">
+      <mat-form-field>
+        <input matInput placeholder="{{'Contact Name' | translate}}"
+               title="contact name" type="text"
+               #contact="ngModel"
+               [(ngModel)]="publisher.contact" name="contact" required>
+        <mat-error *ngIf="contact.invalid">*{{'This field is required' | translate}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="{{'Phone' | translate}}"
+               title="publisher phone" type="text"
+               #phone="ngModel"
+               [(ngModel)]="publisher.phone" name="phone" required>
+        <mat-error *ngIf="phone.invalid">*{{'This field is required' | translate}}</mat-error>
+      </mat-form-field>
+    </div>
+
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex="100">
         <input matInput placeholder="{{'Email' | translate}}"
@@ -34,6 +46,7 @@
         <mat-error *ngIf="email.invalid">*{{'This field is required' | translate}}</mat-error>
       </mat-form-field>
     </div>
+
     <div fxLayout="row" fxLayoutAlign="start center" *ngIf="passwordRequired">
       <mat-form-field fxFlex="100">
         <input matInput
@@ -44,6 +57,7 @@
         <mat-error *ngIf="password.invalid">*{{'This field is required' | translate}}.</mat-error>
       </mat-form-field>
     </div>
+
     <div fxLayout="row">
       <mat-form-field fxFlex>
         <input matInput placeholder="{{'Address' | translate}}"
@@ -53,10 +67,11 @@
         <mat-error *ngIf="address.invalid">*{{'This field is required' | translate}}</mat-error>
       </mat-form-field>
     </div>
+
   </div>
   <div mat-dialog-actions fxLayout="row">
     <span fxFlex></span>
-    <button mat-button (click)="onCancel()">{{'CANCEL' | translate}}</button>
+    <button mat-button (click)="onCancel($event)">{{'CANCEL' | translate}}</button>
     <button mat-button mat-raised-button color="primary" type="submit">{{action | translate}}</button>
   </div>
 </form>

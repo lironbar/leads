@@ -1,0 +1,34 @@
+<form class="medium-dialog">
+
+    <!--Dialog Title-->
+    <h1 mat-dialog-title>{{'Approve Leads' | translate}}</h1>
+
+    <!--Dialog Content-->
+    <div mat-dialog-content fxLayout="column">
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <span class="mat-body-1 margin-right-10">{{'Approved' | translate}}:</span>
+            <span class="mat-body-1">{{results.approved.length}}</span>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <span class="mat-body-1 margin-right-10">{{'Rejected' | translate}}:</span>
+            <span class="mat-body-1">{{results.rejected.length}}</span>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center center" class="margin-bottom-40">
+            <div fxLayout="column" fxLayoutAlign="center center" *ngIf="results.rejected.length">
+                <span class="mat-body-1">{{results.rejected.length}} {{'Leads have been rejected' | translate}}</span>
+                <span class="mat-body-1">{{'How would you like to continue?' | translate}}</span>
+            </div>
+            <span class="mat-body-1" *ngIf="!results.rejected.length" >{{'All leads have been approved successfully' | translate}}</span>
+        </div>
+
+    </div>
+    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex></span>
+        <button *ngIf="results.rejected.length" mat-button (click)="onCancel()">{{'Cancel' | translate}}</button>
+        <button *ngIf="!results.rejected.length" mat-button mat-raised-button color="primary" (click)="onDone()">{{'Done' }}</button>
+        <button *ngIf="results.rejected.length" mat-button mat-raised-button color="primary" (click)="onDone(results.rejected)">{{'Fix Rejected' }}</button>
+    </div>
+</form>

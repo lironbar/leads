@@ -3,7 +3,7 @@ import {AffiliateService} from '../../affiliates.service';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Affiliate} from '../../affiliate.model';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {Campaign} from '../../../campaigns/campaign.model';
 import {User} from '../../../../core/user/user.model';
 import {CampaignService} from '../../../campaigns/campaign.service';
@@ -13,6 +13,7 @@ import {SendLeadDialogComponent} from '../../../campaigns/components/dialogs/sen
 import { InterfaceService } from '../../../interface/interface.service';
 import {LeadService} from '../../../leads/services/lead.service';
 import {Lead} from '../../../leads/leads.model';
+import {catchError, map} from "rxjs/operators";
 
 @Component({
     selector: 'app-affiliate-view',
@@ -51,7 +52,17 @@ export class AffiliateViewComponent implements OnInit {
     }
 
     onAffiliateChange(affiliate) {
-        this.affiliate$ = this.affiliateService.update(affiliate._id, affiliate);
+        this.affiliate$ = this.affiliateService.update(affiliate._id, affiliate)
+            .pipe(
+                map((updatedPublisher: any) => {
+                    this.snackBar.success('Affiliate has been updated successfully');
+                    return updatedPublisher;
+                }),
+                catchError(err => {
+                    this.snackBar.error('Failed to update affiliate');
+                    return throwError(err);
+                })
+            );
     }
 
     onSendLead(campaign: Campaign) {

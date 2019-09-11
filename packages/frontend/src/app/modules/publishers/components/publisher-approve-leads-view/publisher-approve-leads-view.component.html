@@ -4,29 +4,14 @@
     <div fxLayout="row" fxLayoutAlign="start center" class="app-toolbar">
         <button  *ngxPermissionsOnly="['ADMIN']"
                  mat-button
-                 [routerLink]="['../campaigns']">
+                 (click)="onBack()">
             {{'Back' | translate}}
         </button>
         <span fxFlex></span>
         <div *ngIf="stats" fxLayout="row" fxLayoutAlign="start center">
-            <mat-card class="stats-box">
-                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-                    <span class="mat-body-1">{{'Approved'}}</span>
-                    <span class="mat-body-2">{{stats.approved}}</span>
-                </mat-card-content>
-            </mat-card>
-            <mat-card class="stats-box">
-                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-                    <span class="mat-body-1">{{'Rejected'}}</span>
-                    <span class="mat-body-2">{{stats.rejected}}</span>
-                </mat-card-content>
-            </mat-card>
-            <mat-card class="stats-box">
-                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-                    <span class="mat-body-1">{{'Total'}}</span>
-                    <span class="mat-body-2">{{stats.approved + stats.rejected}}</span>
-                </mat-card-content>
-            </mat-card>
+            <app-status-box [status]="'Approved'" [sum]="stats.approved"></app-status-box>
+            <app-status-box [status]="'Rejected'" [sum]="stats.rejected"></app-status-box>
+            <app-status-box [status]="'Total'" [sum]="stats.approved + stats.rejected"></app-status-box>
         </div>
     </div>
 

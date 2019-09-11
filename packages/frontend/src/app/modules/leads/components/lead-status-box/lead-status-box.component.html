@@ -14,11 +14,11 @@
     </mat-chip-list>
 
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="onChangeApproved(approved)">
-            <span *ngIf="approved; else notApprovedMenu">{{'Not Approved'| translate}}</span>
-            <ng-template #notApprovedMenu>
-                <span>{{'Approved'| translate}}</span>
-            </ng-template>
+        <button *ngIf="!approved" mat-menu-item (click)="onChangeApproved(true)">
+            <span>{{'Approved'| translate}}</span>
+        </button>
+        <button *ngIf="approved" mat-menu-item (click)="onChangeApproved(false)">
+            <span>{{'Not Approved'| translate}}</span>
         </button>
     </mat-menu>
 </div>

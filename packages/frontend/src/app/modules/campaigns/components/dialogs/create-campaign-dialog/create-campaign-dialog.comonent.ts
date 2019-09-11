@@ -27,7 +27,8 @@ export class CreateCampaignDialogComponent implements OnInit{
         }
     }
 
-    public onClose() {
+    public onClose(event) {
+        event.preventDefault();
         this.dialogRef.close();
     }
 }

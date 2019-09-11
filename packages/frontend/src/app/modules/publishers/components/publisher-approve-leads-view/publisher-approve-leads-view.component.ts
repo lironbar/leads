@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {LeadService} from '../../../leads/services/lead.service';
 import * as XLSX from 'xlsx';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {MatDialog} from '@angular/material';
+import {ApprovePublisherLeadsDialogComponent} from "../dialogs/approve-publisher-leads-dialog/approve-publisher-leads-dialog.component";
 
 @Component({
     selector: 'app-publisher-approve-leads-view',
@@ -16,8 +18,10 @@ export class PublisherApproveLeadsViewComponent implements OnInit {
     publisherId: string;
 
     constructor(
+        private router: Router,
         private leadService: LeadService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -55,8 +59,25 @@ export class PublisherApproveLeadsViewComponent implements OnInit {
     onDone() {
         this.leadService.approve(this.leads, this.publisherId)
             .subscribe(res => {
-
+                const dialogRef = this.dialog.open(ApprovePublisherLeadsDialogComponent, {data: res});
+                dialogRef.afterClosed().subscribe(leads => {
+                    if (leads && leads.length) {
+                        leads = leads.map(l => {
+                            return l.approval;
+                        });
+                        this.leads = leads;
+                        this._setStats(leads)
+                    } else {
+                        this.leads = [];
+                    }
+                });
             })
+    }
+
+    onBack() {
+        this.stats = undefined;
+        this.leads = [];
+        this.router.navigate(['../campaigns'], { relativeTo: this.route });
     }
 
     onCancel() {
@@ -64,7 +85,7 @@ export class PublisherApproveLeadsViewComponent implements OnInit {
         this.leads = [];
     }
 
-    _setStats(leads) {
+    private _setStats(leads) {
         let stats = {
             approved: 0,
             rejected: 0

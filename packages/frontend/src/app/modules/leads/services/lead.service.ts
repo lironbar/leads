@@ -40,7 +40,7 @@ export class LeadService {
 
     public changeLeadApproveStatus(leadId: string, isApproved: boolean) {
         const path = `${this.apiUrl}/${leadId}/approve`;
-        return this.http.post<boolean>(path, {approved: isApproved});
+        return this.http.put<boolean>(path, {isApproved: isApproved});
     }
 
     public approve(leads: Lead[], publisherId: string) {

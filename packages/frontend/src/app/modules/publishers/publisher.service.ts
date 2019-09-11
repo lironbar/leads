@@ -63,7 +63,7 @@ export class PublisherService {
       );
   }
 
-  update(id: string, publisher: Publisher) {
+  update(id: string, publisher: Publisher): Observable<Publisher> {
       const apiUrl = `${this.BASE_URL}/publisher/${id}`;
       return this.http.put<Publisher>(apiUrl, publisher);
   }

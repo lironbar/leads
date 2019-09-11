@@ -29,7 +29,8 @@ export class CreatePublisherDialogComponent implements OnInit{
         this.action = this.data ? 'UPDATE' : 'CREATE';
     }
 
-    public onCancel() {
+    public onCancel(event) {
+        event.preventDefault();
         this.dialogRef.close();
     }
 

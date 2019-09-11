@@ -15,8 +15,8 @@ export class LeadStatusBoxComponent {
 
     onChangeApproved(currentValue: boolean) {
         this.leadService.changeLeadApproveStatus(this.leadId, currentValue)
-            .subscribe(updatedStatus => {
-                this.approved = updatedStatus;
+            .subscribe(response => {
+                this.approved = response;
             })
     }
 }

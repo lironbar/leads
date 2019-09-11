@@ -38,7 +38,7 @@ export class LoaderInterceptorService implements HttpInterceptor {
                 //     this.navigateTo('404');
                 // }
                 if (err.status === 500) {
-                    this.snackBarService.error('500 - Server Interval Error');
+                    this.snackBarService.error('OOPS, Something went wrong');
                     console.error(err.message)
                     // this.navigateTo('500');
                 }

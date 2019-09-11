@@ -6,7 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
     providedIn: 'root'
 })
 export class SnackBarService {
-    defaultDuration = 2000;
+    defaultDuration = 3000;
     defaultVerticalPosition = 'top';
     defaultHorizontalPosition = 'end';
     constructor(

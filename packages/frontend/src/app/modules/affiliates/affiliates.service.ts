@@ -59,7 +59,7 @@ export class AffiliateService {
         );
     }
 
-    update(id: string, affiliate) {
+    update(id: string, affiliate): Observable<Affiliate> {
         const apiUrl = `${this.BASE_URL}/affiliate/${id}`;
         return this.http.put<Affiliate>(apiUrl, affiliate);
     }

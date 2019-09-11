@@ -27,7 +27,8 @@ export class CreateAffiliateDialogComponent {
         this.action = this.data ? 'UPDATE' : 'CREATE';
     }
 
-    public onCancel() {
+    public onCancel(event) {
+        event.preventDefault();
         this.dialogRef.close();
     }
 
